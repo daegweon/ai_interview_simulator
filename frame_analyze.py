@@ -6,8 +6,21 @@ import time
 import os, sys
 
 num = 0
+EmotionScore = {'anger': 0.0, 'contempt': 0.0, 'disgust': 0.0, 'fear': 0.0, 'happiness': 0.0, 'neutral': 0.0,
+                'sadness': 0.0, 'surprise': 0.0}
+EmotionCount = {'anger': 0, 'contempt': 0, 'disgust': 0, 'fear': 0, 'happiness': 0, 'neutral': 0, 'sadness': 0,
+                'surprise': 0}
 
-def analyze():   
+def set_emotion_value(em_data):
+    for key, value in em_data.items():
+        EmotionScore[key] += value
+    EmotionCount[max(em_data, key=em_data.get)] += 1
+
+def calc_average_value():
+    for key, value in EmotionScore.items():
+        EmotionScore[key] = value / num
+
+def analyze():
     body=""
     for i in range(1,num+1):
         filename='capture'+str(i)+'.jpg'
@@ -36,12 +49,14 @@ def analyze():
             data = response.read()
             m = json.loads(data)
             em_data = m[0]["faceAttributes"]["emotion"]
-            max_em_data=max(em_data,key=em_data.get)
+            set_emotion_value(em_data)
             print(em_data)
-            print(max_em_data)
             conn.close()
         except Exception as e:
             print("error")
+    calc_average_value()
+    print(EmotionScore)
+    print(max(EmotionCount, key=EmotionCount.get) + " is max count")
 
 # When everything done, release the capture
 
@@ -65,7 +80,7 @@ while(True):
     #cv2.putText(frame, emotion, (int(x), int(y)), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2)
     # Display the resulting frame
     cv2.imshow('frame',frame)
-    if(execute_time>3):
+    if(execute_time>2):
         num=num+1
         cv2.imwrite('capture'+str(num)+'.jpg',frame)
         start_time = time.time()
