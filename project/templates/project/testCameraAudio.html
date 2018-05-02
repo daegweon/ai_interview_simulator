@@ -1,0 +1,46 @@
+<!DOCTYPE>
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+    
+    <video style="border: 1px solid black; align-items: center" id="video" width="640" height="480" autoplay></video>
+    <!--<button id="snap">Snap Photo</button>
+    <canvas style="border: 1px solid black" id="canvas" width="640" height="480"></canvas>-->
+
+
+    <script>
+        /// Grab elements, create settings, etc.
+        var video = document.getElementById('video');
+
+        // Get access to the camera and microphone!
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({
+                video: true,
+                audio: true
+            }).then(function(stream) {
+                video.src = window.URL.createObjectURL(stream);
+                video.play();
+            });
+        }
+    </script>
+
+    <!--<script>
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+        var video = document.getElementById('video');
+
+        // Trigger photo take
+        document.getElementById("snap").addEventListener("click", function() {
+            //canvas의 기능으로 동영상을 재생하도록
+            context.drawImage(video, 0, 0, 640, 480);
+        });
+    </script>-->
+
+</body>
+
+</html>
