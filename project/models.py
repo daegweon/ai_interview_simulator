@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class User(models.Model):
-    groupId = models.IntegerField()
+    groupId = models.IntegerField(default=0)
     userId = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
     firstName = models.CharField(max_length=20)
