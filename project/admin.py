@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User
+from .models import Users
 from .models import Interview
 from .models import Question
 
@@ -8,18 +8,18 @@ from .models import Question
 class QuestionAdmin(admin.ModelAdmin):
     list_per_page = 5
     list_display = (
-        'id', 'question', 'questionType', 
+        'id', 'question', 'question_type',
     )
     #list_editable = ('questionType', )
-    list_filter = ('questionType', )
+    list_filter = ('question_type', )
     search_fields = ('question', )
     odering = ('id', 'question', )
     #fields = ('question', 'questionType', )
     fieldsets = [
-        ('질문 유형', {'fields': ['questionType']}),
+        ('질문 유형', {'fields': ['question_type']}),
         ('질문 내용', {'fields': ['question']}),
     ]
 
-admin.site.register(User)
+admin.site.register(Users)
 admin.site.register(Interview)
 admin.site.register(Question, QuestionAdmin)
