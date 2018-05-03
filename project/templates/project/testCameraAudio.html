@@ -7,14 +7,28 @@
 
 <body>
 
-    
-    <video style="border: 1px solid black; align-items: center" id="video" width="640" height="480" autoplay></video>
+    <div style="position: absolute; left : 50%; top: 10%">
+        <p> 셀프 점검 </p>
+    </div>
+
+
+    <div style="position: absolute; top: 25%;left: 35%">
+        <video style="border: 1px solid black; align-items: center" id="video" width="640" height="480" autoplay></video>
+    </div>
+
+
+    <div style="position: absolute; left : 40%; bottom: 5%;">
+        <p> 0. 웹캠과 마이크를 연결해주세요. </p>
+        <p> 1. 화면에 본인의 모습이 잘 나오는지 확인해주세요. </p>
+        <p> 2. 마이크 체크! 본인의 목소리가 잘 들리는지 확인해주세요. </p>
+        <p> 3. 캠코더와 마이크가 잘 나오면 다음 단계로 이동해주세요. </p>
+    </div>
+
     <!--<button id="snap">Snap Photo</button>
     <canvas style="border: 1px solid black" id="canvas" width="640" height="480"></canvas>-->
 
-
     <script>
-        /// Grab elements, create settings, etc.
+        // Grab elements, create settings, etc.
         var video = document.getElementById('video');
 
         // Get access to the camera and microphone!
