@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/Users/godaegwon/anaconda3/envs/ai_interview_simulator/bin/python"
+    "python.pythonPath": "/Users/godaegwon/anaconda3/envs/ai_interview_simulator/bin/python",
+    "python.linting.pylintEnabled": false
 }

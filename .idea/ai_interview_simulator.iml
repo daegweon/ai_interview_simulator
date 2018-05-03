@@ -8,7 +8,10 @@
         <option name="manageScript" value="$MODULE_DIR$/manage.py" />
         <option name="environment" value="&lt;map/&gt;" />
         <option name="doNotUseTestRunner" value="false" />
+<<<<<<< HEAD
         <option name="trackFilePattern" value="migrations" />
+=======
+>>>>>>> afc7435b3b7ea51837c896ad7f74e90633a23c5c
       </configuration>
     </facet>
   </component>
