@@ -12,7 +12,7 @@ def signin(request):
     return render(request,'project/main.html',{})
 
 def getInterviewPage(request):
-    return render(request,'project/main.html',{})
+    return render(request,'project/testCameraAudio.html',{})
 
 def trainingInterview(request):
     return render(request,'project/main.html',{}) 

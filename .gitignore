@@ -6,6 +6,8 @@
 *.pot
 *.pyc
 __pycache__/
+ai_interview_simulator/__pycache__/
+project/__pycache__/
 local_settings.py
 db.sqlite3
 media
