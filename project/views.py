@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
-from project.forms import SignUpForm
+from project.forms import SignUpForm, LoginForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from project.models import Users
-
+from django.http import HttpResponse
+from django.template import RequestContext
 
 # Create your views here.
 
@@ -32,3 +33,19 @@ def signup(request):
     else:
         form = SignUpForm()
         return render(request, 'project/adduser.html', {'form': form})
+
+
+def signin(request):
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username = username, password = password)
+        if user is not None:
+            login(request, user)
+            return redirect('/../')
+        else:
+            return HttpResponse('로그인 실패. 다시 시도 해보세요.')
+    else:
+        form = LoginForm()
+        return render(request, 'project/login.html', {'form': form})
