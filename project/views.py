@@ -9,8 +9,7 @@ from django.template import RequestContext
 # Create your views here.
 
 def main(request):
-    return render(request, 'project/main.html', {})
-
+    return render(request,'project/index.html',{})
 
 def signup(request):
     if request.method == "POST":
