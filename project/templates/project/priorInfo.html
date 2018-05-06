@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href='{%static "css/priorInfo.css" %}' rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    
+</head>
+
+<body>
+    <div class="container">
+
+        <form class="well form-horizontal" action=" " method="post" id="contact_form">
+            <fieldset>
+
+                <!-- Form Name -->
+                <legend>Info</legend>
+
+                <!-- Select Basic -->
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Career</label>
+                    <div class="col-md-4 selectContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-list"></i>
+                            </span>
+                            <select name="state" class="form-control selectpicker">
+                                <option value=" ">Please select your Career</option>
+                                <option>신입</option>
+                                <option>경력</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!--checks -->
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
+                        <div class="panel panel-default">
+                            <!-- Default panel contents -->
+                            <div class="panel-heading">Ban Emotions</div>
+
+                            <!-- List group -->
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    Anger
+                                    <div class="material-switch pull-right">
+                                        <input id="BanAnger" name="BanAnger" type="checkbox" />
+                                        <label for="BanAnger" class="label-default"></label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    Contempt
+                                    <div class="material-switch pull-right">
+                                        <input id="BanContempt" name="BanContempt" type="checkbox" />
+                                        <label for="BanContempt" class="label-primary"></label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    Disgust
+                                    <div class="material-switch pull-right">
+                                        <input id="BanDisgust" name="BanDisgust" type="checkbox" />
+                                        <label for="BanDisgust" class="label-success"></label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    Fear
+                                    <div class="material-switch pull-right">
+                                        <input id="BanFear" name="BanFear" type="checkbox" />
+                                        <label for="BanFear" class="label-info"></label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    Happiness
+                                    <div class="material-switch pull-right">
+                                        <input id="BanHappiness" name="BanHappiness" type="checkbox" />
+                                        <label for="BanHappiness" class="label-warning"></label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    Neutral
+                                    <div class="material-switch pull-right">
+                                        <input id="BanNeutral" name="BanNeutral" type="checkbox" />
+                                        <label for="BanNeutral" class="label-danger"></label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    Sadness
+                                    <div class="material-switch pull-right">
+                                        <input id="BanSadness" name="BanSadness" type="checkbox" />
+                                        <label for="BanSadness" class="label-danger"></label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    Surprise
+                                    <div class="material-switch pull-right">
+                                        <input id="BanSurprise" name="BanSurprise" type="checkbox" />
+                                        <label for="BanSurprise" class="label-danger"></label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Text area -->
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Ban Word</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            </span>
+                            <textarea class="form-control" name="comment" placeholder="Ban Word"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Success message -->
+                <div class="alert alert-success" role="alert" id="success_message">Success
+                    <i class="glyphicon glyphicon-thumbs-up"></i> ㅇㅅㅇ</div>
+
+                <!-- Button -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label"></label>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-warning">Next
+                            <span class="glyphicon glyphicon-send"></span>
+                        </button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+    </div>
+    <!-- /.container -->
+</body>
+
+</html>
