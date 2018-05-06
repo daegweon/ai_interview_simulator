@@ -38,34 +38,51 @@
         Menu
         <i class="fa fa-bars"></i>
       </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#introduction">Introduction</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#interview">Interview</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#results">Results</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" data-toggle="modal" data-target="#login-modal" data-keyboard="true" href="#">Sign In</a>
-                    </li>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav text-uppercase ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#introduction">Introduction</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#interview">Interview</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#results">Results</a>
+          </li>
 
-                </ul>
-            </div>
-        </div>
-    </nav>
+          <!-- 로그인에 성공하면 sign in은 안보이게 바뀐다 -->
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" data-toggle="modal" data-target="#login-modal" href="#">Sign In</a>
+          </li>
 
-    <!-- Header -->
-    <header class="masthead">
-        <div class="container">
-            <div class="intro-text">
-                <div class="intro-heading text-uppercase">A.I &nbsp;Interview &nbsp;Simulator</div>
-                <div class="intro-lead-in">Project &nbsp;by &nbsp;Human Learning</div>
-                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#introduction">Learn More</a>
-            </div>
+          <!-- 로그인에 성공하면 사용자의 이름으로 바뀐다 -->
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" id="name"></a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="masthead">
+    <div class="container">
+      <div class="intro-text">
+        <div class="intro-heading text-uppercase">A.I &nbsp;Interview &nbsp;Simulator</div>
+        <div class="intro-lead-in">Project &nbsp;by &nbsp;Human Learning</div>
+        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/interviews/">지금 시작하기</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Introduction -->
+  <section id="introduction">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading text-uppercase">Services</h2>
+          <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
         </div>
     </header>
 

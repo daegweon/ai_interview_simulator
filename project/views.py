@@ -63,7 +63,7 @@ def signin(request):
         return render(request, 'project/login.html', {'form': form})
 
 def getInterviewPage(request):
-    return render(request,'project/testCameraAudio.html',{})
+    return render(request,'project/main.html',{})
 
 def trainingInterviewHwCheck(request):
     return render(request,'project/testCam.html',{}) 
@@ -90,4 +90,4 @@ def getTestResultPage(request):
     return render(request,'project/main.html',{})  
 
 def getRecordPage(request):
-    return render(request,'project/main.html',{})
+    return render(request,'project/record.html',{})      
