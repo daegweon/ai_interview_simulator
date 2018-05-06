@@ -1,10 +1,10 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto);
+
 
 /****** LOGIN MODAL ******/
 .loginmodal-container {
   padding: 30px;
   max-width: 350px;
-  width: 100% !important;
+  width: 100% ;
   background-color: #F7F7F7;
   margin: 0 auto;
   border-radius: 2px;
@@ -56,9 +56,9 @@
   font-weight: 700;
   height: 36px;
   padding: 0 8px;
-/* border-radius: 3px; */
-/* -webkit-user-select: none;
-  user-select: none; */
+ border-radius: 3px;
+ /*-webkit-user-select: none;
+  user-select: none;*/
 }
 
 .loginmodal-submit {

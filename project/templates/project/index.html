@@ -23,7 +23,8 @@
 
   <!-- Custom styles for this template -->
   <link href='{%static "css/agency.min.css" %}' rel="stylesheet">
-  <link rel="stylesheet"  href='{% static "css/login.css" %}'>
+    <link href='{%static "css/login.css" %}' rel="stylesheet">
+
 
 </head>
 
@@ -679,8 +680,8 @@
   </div>
 
   <!-- Modal 7 -->
-  <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
+  <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="dialog" style="width: 400px; height: 400px; align-content: center; position: absolute; left: 36%; top: 30%;">
       <div class="loginmodal-container">
         <button type="button" class="close" data-dismiss="modal">
           <span aria-hidden="true">×</span>
@@ -688,13 +689,40 @@
         </button>
         <h1>회원 로그인</h1>
         <br>
-        <form>
-          <input type="text" name="user" placeholder="Username">
-          <input type="password" name="pass" placeholder="Password">
+        <form name = "loginForm" method = "post">
+            {% csrf_token %}
+          <input type="text" name="username" placeholder="Username">
+          <input type="password" name="password" placeholder="Password">
           <input type="submit" name="login" class="login loginmodal-submit" value="로그인">
         </form>
 
         <div class="login-help">
+          <a href="/join">회원이 아니신가요?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- testModal -->
+  <div class="modal fade" id="test-modal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">로그인</h4>
+            <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
+        <div class="modal-body">
+            <form name = "loginForm" method = "post">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Username">
+                <br>
+                <input type="password" name="password" placeholder="Password">
+                <input type="submit" name="login" class="login loginmodal-submit" value="로그인">
+            </form>
+        </div>
+        <div class="modal-footer">
           <a href="/join">회원이 아니신가요?</a>
         </div>
       </div>
