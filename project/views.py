@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render, redirect
 from project.forms import SignUpForm, LoginForm
 from django.contrib.auth.models import User
