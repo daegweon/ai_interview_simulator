@@ -10,6 +10,18 @@ from django.template import RequestContext
 
 
 def main(request):
+    if request.method == "POST" and request.POST.get("login") == "로그인":
+
+        form = LoginForm(request.POST)
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username = username, password = password)
+        if user is not None:
+            login(request, user)
+            print('로그인 되었습니다')
+            return redirect('/../')
+        else:
+            return HttpResponse('로그인 실패. 다시 시도 해보세요.')
     return render(request,'project/index.html',{})
 
 def signup(request):

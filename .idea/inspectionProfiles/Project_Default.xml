@@ -4,8 +4,6 @@
     <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoredPackages">
         <value>
-<<<<<<< HEAD
-<<<<<<< HEAD
           <list size="21">
             <item index="0" class="java.lang.String" itemvalue="Bottleneck" />
             <item index="1" class="java.lang.String" itemvalue="clyent" />
@@ -28,9 +26,6 @@
             <item index="18" class="java.lang.String" itemvalue="datashape" />
             <item index="19" class="java.lang.String" itemvalue="appscript" />
             <item index="20" class="java.lang.String" itemvalue="gmpy2" />
-=======
-=======
->>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
           <list size="126">
             <item index="0" class="java.lang.String" itemvalue="numba" />
             <item index="1" class="java.lang.String" itemvalue="greenlet" />
@@ -158,10 +153,6 @@
             <item index="123" class="java.lang.String" itemvalue="jupyterlab-launcher" />
             <item index="124" class="java.lang.String" itemvalue="ply" />
             <item index="125" class="java.lang.String" itemvalue="openpyxl" />
-<<<<<<< HEAD
->>>>>>> afc7435b3b7ea51837c896ad7f74e90633a23c5c
-=======
-=======
           <list size="21">
             <item index="0" class="java.lang.String" itemvalue="Bottleneck" />
             <item index="1" class="java.lang.String" itemvalue="clyent" />
@@ -184,8 +175,6 @@
             <item index="18" class="java.lang.String" itemvalue="datashape" />
             <item index="19" class="java.lang.String" itemvalue="appscript" />
             <item index="20" class="java.lang.String" itemvalue="gmpy2" />
->>>>>>> 42ea9db6b386fe1104006e6f6fa250988f20f9fe
->>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
           </list>
         </value>
       </option>
