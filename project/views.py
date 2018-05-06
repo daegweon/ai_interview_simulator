@@ -51,14 +51,24 @@ def signin(request):
         return render(request, 'project/login.html', {'form': form})
 
 def getInterviewPage(request):
-    frame_analyze.main()
     return render(request,'project/testCameraAudio.html',{})
 
-def trainingInterview(request):
-    webfacekeras.main()
+def trainingInterviewHwCheck(request):
+    return render(request,'project/testCam.html',{}) 
+    
+def trainingInterviewPriorInfo(request):
+    return render(request,'project/priorInfo.html',{}) 
+
+def trainingInterviewOnAir(request):
     return render(request,'project/main.html',{}) 
 
-def testInterview(request):
+def testInterviewHwCheck(request):
+    return render(request,'project/testCam.html',{})   
+
+def testInterviewPriorInfo(request):
+    return render(request,'project/priorInfo.html',{})   
+
+def testInterviewOnAir(request):
     return render(request,'project/main.html',{})   
 
 def getTrainingResultPage(request):
@@ -68,4 +78,4 @@ def getTestResultPage(request):
     return render(request,'project/main.html',{})  
 
 def getRecordPage(request):
-    return render(request,'project/main.html',{})      
+    return render(request,'project/main.html',{})
