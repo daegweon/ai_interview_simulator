@@ -3,10 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="84df3b15-b106-4329-87b4-4a4f226cc920" name="Default" comment="">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/models.py" afterPath="$PROJECT_DIR$/project/models.py" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+>>>>>>> daegweon
+=======
+>>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
       <change beforePath="$PROJECT_DIR$/.idea/ai_interview_simulator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ai_interview_simulator.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/templates/project/testCameraAudio.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/templates/project/testCameraAudio.html" afterDir="false" />
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/models.py" afterPath="$PROJECT_DIR$/project/models.py" />
@@ -14,6 +25,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
 >>>>>>> daegweon
 >>>>>>> afc7435b3b7ea51837c896ad7f74e90633a23c5c
+=======
+>>>>>>> 42ea9db6b386fe1104006e6f6fa250988f20f9fe
+>>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -41,6 +55,7 @@
   </component>
   <component name="FileEditorManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="manage.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/manage.py">
@@ -48,6 +63,8 @@
             <state relative-caret-position="247">
               <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
 =======
+=======
+>>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
 <<<<<<< HEAD
     <leaf>
       <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
@@ -72,7 +89,18 @@
             <state relative-caret-position="48">
               <caret line="4" column="25" lean-forward="true" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
               <folding />
+<<<<<<< HEAD
 >>>>>>> afc7435b3b7ea51837c896ad7f74e90633a23c5c
+=======
+=======
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="manage.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/manage.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+>>>>>>> 42ea9db6b386fe1104006e6f6fa250988f20f9fe
+>>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
             </state>
           </provider>
         </entry>
@@ -80,7 +108,10 @@
     </leaf>
   </component>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
 =======
     </leaf>
   </component>
@@ -98,7 +129,12 @@
     </findStrings>
   </component>
 >>>>>>> daegweon
+<<<<<<< HEAD
 >>>>>>> afc7435b3b7ea51837c896ad7f74e90633a23c5c
+=======
+=======
+>>>>>>> 42ea9db6b386fe1104006e6f6fa250988f20f9fe
+>>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -106,8 +142,11 @@
     <option name="CHANGED_PATHS">
       <list>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/project/views.py" />
 =======
+=======
+>>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
 <<<<<<< HEAD
         <option value="$PROJECT_DIR$/project/models.py" />
 =======
@@ -118,7 +157,13 @@
         <option value="$PROJECT_DIR$/project/EmotionTest.py" />
         <option value="$PROJECT_DIR$/frame_analyze.py" />
 >>>>>>> daegweon
+<<<<<<< HEAD
 >>>>>>> afc7435b3b7ea51837c896ad7f74e90633a23c5c
+=======
+=======
+        <option value="$PROJECT_DIR$/project/views.py" />
+>>>>>>> 42ea9db6b386fe1104006e6f6fa250988f20f9fe
+>>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
       </list>
     </option>
   </component>
@@ -129,6 +174,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="553" />
 =======
@@ -136,6 +182,16 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="747" />
 >>>>>>> afc7435b3b7ea51837c896ad7f74e90633a23c5c
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+  <component name="ProjectFrameBounds">
+    <option name="x" value="747" />
+=======
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="553" />
+>>>>>>> 42ea9db6b386fe1104006e6f6fa250988f20f9fe
+>>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
     <option name="y" value="23" />
     <option name="width" value="693" />
     <option name="height" value="877" />
@@ -152,10 +208,17 @@
     </navigator>
     <panes>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       <pane id="Scope" />
       <pane id="Scratches" />
 >>>>>>> afc7435b3b7ea51837c896ad7f74e90633a23c5c
+=======
+      <pane id="Scope" />
+      <pane id="Scratches" />
+=======
+>>>>>>> 42ea9db6b386fe1104006e6f6fa250988f20f9fe
+>>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -174,6 +237,10 @@
               <item name="project" type="462c0819:PsiDirectoryNode" />
             </path>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
             <path>
               <item name="ai_interview_simulator" type="b2602c69:ProjectViewProjectNode" />
               <item name="ai_interview_simulator" type="462c0819:PsiDirectoryNode" />
@@ -187,8 +254,12 @@
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="project" type="462c0819:PsiDirectoryNode" />
             </path>
+<<<<<<< HEAD
 =======
 >>>>>>> afc7435b3b7ea51837c896ad7f74e90633a23c5c
+=======
+>>>>>>> 42ea9db6b386fe1104006e6f6fa250988f20f9fe
+>>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
           </expand>
           <select />
         </subPane>
@@ -255,6 +326,7 @@
   </component>
   <component name="ToolWindowManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -281,6 +353,8 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
 =======
+=======
+>>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
 <<<<<<< HEAD
     <frame x="747" y="23" width="693" height="877" extended-state="0" />
     <editor active="true" />
@@ -325,7 +399,37 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
 >>>>>>> afc7435b3b7ea51837c896ad7f74e90633a23c5c
+=======
+=======
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <layout>
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.500625" side_tool="true" weight="0.32894737" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.499375" visible="true" weight="0.32894737" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10625" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="manage.py@ai_interview_simulator" order="7" visible="true" weight="0.32919255" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" id="Data View" order="3" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
+>>>>>>> 42ea9db6b386fe1104006e6f6fa250988f20f9fe
+>>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
