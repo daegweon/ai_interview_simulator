@@ -2,32 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84df3b15-b106-4329-87b4-4a4f226cc920" name="Default" comment="">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/models.py" afterPath="$PROJECT_DIR$/project/models.py" />
-=======
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
->>>>>>> daegweon
-=======
->>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
       <change beforePath="$PROJECT_DIR$/.idea/ai_interview_simulator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ai_interview_simulator.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/templates/project/testCameraAudio.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/templates/project/testCameraAudio.html" afterDir="false" />
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/models.py" afterPath="$PROJECT_DIR$/project/models.py" />
-=======
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
->>>>>>> daegweon
->>>>>>> afc7435b3b7ea51837c896ad7f74e90633a23c5c
-=======
->>>>>>> 42ea9db6b386fe1104006e6f6fa250988f20f9fe
->>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -54,26 +36,16 @@
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
   <component name="FileEditorManager">
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="manage.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/manage.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="247">
               <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
-=======
-=======
->>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
-<<<<<<< HEAD
-    <leaf>
-      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/admin.py">
-=======
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/project/views.py">
->>>>>>> daegweon
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -82,37 +54,25 @@
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
+
       <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/project/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="48">
               <caret line="4" column="25" lean-forward="true" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
               <folding />
-<<<<<<< HEAD
->>>>>>> afc7435b3b7ea51837c896ad7f74e90633a23c5c
-=======
-=======
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="manage.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/manage.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="247">
               <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
->>>>>>> 42ea9db6b386fe1104006e6f6fa250988f20f9fe
->>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
-=======
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -128,42 +88,15 @@
       <find>arr</find>
     </findStrings>
   </component>
->>>>>>> daegweon
-<<<<<<< HEAD
->>>>>>> afc7435b3b7ea51837c896ad7f74e90633a23c5c
-=======
-=======
->>>>>>> 42ea9db6b386fe1104006e6f6fa250988f20f9fe
->>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-<<<<<<< HEAD
-<<<<<<< HEAD
         <option value="$PROJECT_DIR$/project/views.py" />
-=======
-=======
->>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
-<<<<<<< HEAD
         <option value="$PROJECT_DIR$/project/models.py" />
-=======
-        <option value="$PROJECT_DIR$/project/test.py" />
-        <option value="$PROJECT_DIR$/project/templates/camtest.py" />
-        <option value="$PROJECT_DIR$/project/EmotionRecognizeTest.py" />
-        <option value="$PROJECT_DIR$/project/WebcamTest.py" />
-        <option value="$PROJECT_DIR$/project/EmotionTest.py" />
-        <option value="$PROJECT_DIR$/frame_analyze.py" />
->>>>>>> daegweon
-<<<<<<< HEAD
->>>>>>> afc7435b3b7ea51837c896ad7f74e90633a23c5c
-=======
-=======
         <option value="$PROJECT_DIR$/project/views.py" />
->>>>>>> 42ea9db6b386fe1104006e6f6fa250988f20f9fe
->>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
       </list>
     </option>
   </component>
@@ -173,52 +106,31 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-<<<<<<< HEAD
-<<<<<<< HEAD
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="553" />
-=======
-<<<<<<< HEAD
   <component name="ProjectFrameBounds">
     <option name="x" value="747" />
->>>>>>> afc7435b3b7ea51837c896ad7f74e90633a23c5c
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
   <component name="ProjectFrameBounds">
     <option name="x" value="747" />
-=======
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="553" />
->>>>>>> 42ea9db6b386fe1104006e6f6fa250988f20f9fe
->>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
     <option name="y" value="23" />
     <option name="width" value="693" />
     <option name="height" value="877" />
-=======
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="952" />
     <option name="width" value="976" />
     <option name="height" value="1038" />
->>>>>>> daegweon
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
       <pane id="Scope" />
       <pane id="Scratches" />
->>>>>>> afc7435b3b7ea51837c896ad7f74e90633a23c5c
-=======
       <pane id="Scope" />
       <pane id="Scratches" />
-=======
->>>>>>> 42ea9db6b386fe1104006e6f6fa250988f20f9fe
->>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -236,11 +148,6 @@
               <item name="ai_interview_simulator" type="462c0819:PsiDirectoryNode" />
               <item name="project" type="462c0819:PsiDirectoryNode" />
             </path>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
             <path>
               <item name="ai_interview_simulator" type="b2602c69:ProjectViewProjectNode" />
               <item name="ai_interview_simulator" type="462c0819:PsiDirectoryNode" />
@@ -254,12 +161,6 @@
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="project" type="462c0819:PsiDirectoryNode" />
             </path>
-<<<<<<< HEAD
-=======
->>>>>>> afc7435b3b7ea51837c896ad7f74e90633a23c5c
-=======
->>>>>>> 42ea9db6b386fe1104006e6f6fa250988f20f9fe
->>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
           </expand>
           <select />
         </subPane>
@@ -325,8 +226,6 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-<<<<<<< HEAD
-<<<<<<< HEAD
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -352,18 +251,8 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
-=======
-=======
->>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
-<<<<<<< HEAD
-    <frame x="747" y="23" width="693" height="877" extended-state="0" />
-    <editor active="true" />
-    <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25108224" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-=======
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
->>>>>>> daegweon
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32707182" sideWeight="0.50208336" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -399,10 +288,6 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-<<<<<<< HEAD
->>>>>>> afc7435b3b7ea51837c896ad7f74e90633a23c5c
-=======
-=======
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -428,8 +313,6 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
->>>>>>> 42ea9db6b386fe1104006e6f6fa250988f20f9fe
->>>>>>> b77492ec5629749ea35ba3a1ff9bce8dfb47896b
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -476,9 +359,6 @@
     </entry>
   </component>
   <component name="editorHistoryManager">
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/project/admin.py">
-=======
     <entry file="file://$PROJECT_DIR$/project/templates/project/main.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -538,7 +418,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/project/views.py">
->>>>>>> daegweon
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -546,12 +425,6 @@
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/project/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="4" column="25" lean-forward="true" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-=======
     <entry file="file://$PROJECT_DIR$/project/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -690,13 +563,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
->>>>>>> daegweon
           <folding />
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
-=======
     <entry file="file://$PROJECT_DIR$/project/templates/camtest.py" />
     <entry file="file://$PROJECT_DIR$/project/test.py" />
     <entry file="file://$PROJECT_DIR$/project/capture.jpg" />
@@ -720,6 +590,5 @@
         </state>
       </provider>
     </entry>
->>>>>>> daegweon
   </component>
 </project>
