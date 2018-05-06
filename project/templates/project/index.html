@@ -23,7 +23,7 @@
 
     <!-- Custom styles for this template -->
     <link href='{%static "css/agency.min.css" %}' rel="stylesheet">
-
+      <link rel="stylesheet"  href='{% static "css/login.css" %}'>
   </head>
 
   <body id="page-top">
@@ -49,6 +49,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#team">Tips</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="button" data-toggle="modal" data-target="#login-modal" data-backdrop="static">로그인</a>
             </li>
           </ul>
         </div>
@@ -647,6 +650,25 @@
         </div>
       </div>
     </div>
+
+        <!-- Modal 7 -->
+    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    	  <div class="modal-dialog">
+				<div class="loginmodal-container">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h1>회원 로그인</h1><br>
+				  <form>
+					<input type="text" name="user" placeholder="Username">
+					<input type="password" name="pass" placeholder="Password">
+					<input type="submit" name="login" class="login loginmodal-submit" value="로그인">
+				  </form>
+
+				  <div class="login-help">
+					<a href="#" data-toggle="modal" data-target="#signUp-modal">회원이 아니신가요?</a>
+				  </div>
+				</div>
+          </div>
+	</div>
 
     <!-- Bootstrap core JavaScript -->
     <script src='{%static "vendor/jquery/jquery.min.js" %}'></script>
