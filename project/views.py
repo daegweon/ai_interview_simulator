@@ -78,4 +78,4 @@ def getTestResultPage(request):
     return render(request,'project/main.html',{})  
 
 def getRecordPage(request):
-    return render(request,'project/fluid.html',{})      
+    return render(request,'project/record.html',{})      

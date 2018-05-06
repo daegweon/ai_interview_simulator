@@ -33,9 +33,9 @@
   <body class="axs">
 
   <nav class="ci pl adm ps tn app-navbar">
-      <a class="pg" href="../fluid.html">
+      <a class="pg" href="#record">
         <span class="bv bhc axt"></span>
-        Dashboard
+        Interview Record
       </a>
 
       <button
@@ -52,16 +52,16 @@
       <div class="collapse pi" id="navbarResponsive">
         <ul class="nav navbar-nav ahm">
           <li class="pa">
-            <a class="oy" href="../order-history/index.html">Order History</a>
+            <a class="oy" href="#introduction">Introduction</a>
           </li>
           <li class="pa active">
-            <a class="oy" href="../fluid/index.html">Fluid layout</a>
+            <a class="oy" href="#interview">Interview</a>
           </li>
           <li class="pa">
-            <a class="oy" href="../icon-nav/index.html">Icon nav</a>
+            <a class="oy" href="#result">Result</a>
           </li>
           <li class="pa">
-            <a class="oy" href="../docs/index.html">Docs</a>
+            <a class="oy" href="#signin">Sign In</a>
           </li>
         </ul>
 
@@ -74,8 +74,8 @@
   <div class="dg ayk">
     <div class="bqn afg">
       <div class="bqo">
-        <h6 class="bqq">Dashboards</h6>
-        <h2 class="bqp">Overview</h2>
+        <h6 class="bqq">Interviews</h6>
+        <h2 class="bqp">Record</h2>
       </div>
 
     <div class="on bqr">
@@ -178,14 +178,13 @@
 <div class="pe">
   <div role="tabpanel" class="pf active" id="sales">
     <div class="bst">
-       <canvas
+      <canvas
         class="bpt"
         width="600" height="350"
         data-chart="line"
         data-dataset="[[2500, 3300, 2512, 2775, 2498, 3512, 2925, 4275, 3507, 3825, 3445, 3985]]"
         data-labels="['','Aug 29','','','Sept 5','','','Sept 12','','','Sept 19','']"
-        data-dark="true">
-      </canvas>
+        data-dark="true"></canvas>
     </div>
   </div>
 
@@ -198,8 +197,7 @@
         data-dark="true"
         data-labels="['August','September','October','November','December','January','February']"
         data-dataset="[[65, 59, 80, 81, 56, 55, 40], [28, 48, 40, 19, 86, 27, 90]]"
-        data-dataset-options="[{label: 'First dataset'}, {label: 'Second dataset'}]">
-      </canvas>
+        data-dataset-options="[{label: 'First dataset'}, {label: 'Second dataset'}]"></canvas>
     </div>
   </div>
 
@@ -210,12 +208,10 @@
           <canvas
             class="bps"
             width="200" height="200"
-
             data-chart="doughnut"
             data-dataset="[230, 130]"
             data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }"
-            data-labels="['Returning', 'New']">
-          </canvas>
+            data-labels="['Returning', 'New']"></canvas>
         </div>
         <strong class="awy">Traffic</strong>
         <h3>New vs Returning</h3>
@@ -228,8 +224,7 @@
             data-chart="doughnut"
             data-dataset="[330,30]"
             data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }"
-            data-labels="['Returning', 'New']">
-          </canvas>
+            data-labels="['Returning', 'New']"></canvas>
         </div>
         <strong class="awy">Revenue</strong>
         <h3>New vs Recurring</h3>
@@ -242,8 +237,7 @@
             data-chart="doughnut"
             data-dataset="[100,260]"
             data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }"
-            data-labels="['Referrals', 'Direct']">
-          </canvas>
+            data-labels="['Referrals', 'Direct']"></canvas>
         </div>
         <strong class="awy">Traffic</strong>
         <h3>Direct vs Referrals</h3>
@@ -445,11 +439,9 @@
     <a href="#" class="ce nr ags">View all pages</a>
   </div>
 </div>
-
   </div>
-
     <script src="../../static/js/jquery.min.js"></script>
-    <script src="../../js/popper.min.js"></script>
+    <script src="../../static/js/popper.min.js"></script>
     <script src="../../static/js/chart.js"></script>
     <script src="../../static/js/tablesorter.min.js"></script>
     <script src="../../static/js/toolkit.js"></script>
