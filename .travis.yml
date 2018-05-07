@@ -1,5 +1,13 @@
 language: python
 python:
   - "3.6"
+services:
+  - mysql
+env:
+  -DJANGO=1.11.11 DB=mysql
+install:
+  - pip install -r requirements.txt
+before_script:
+  - mysql -e 'create database humandb;' -u root     
 script:
-  - pytest
+  - python manage.py test
