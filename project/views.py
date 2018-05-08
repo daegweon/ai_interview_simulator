@@ -64,7 +64,7 @@ def signin(request):
         return render(request, 'project/login.html', {'form': form})
 
 def getInterviewPage(request):
-    return render(request,'project/main.html',{})
+    return render(request,'project/mainpagetest.html',{})
 
 def trainingInterviewHwCheck(request):
     return render(request,'project/testCam.html',{}) 
