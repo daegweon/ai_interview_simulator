@@ -6,6 +6,7 @@ from django.contrib.auth import login, authenticate
 from project.models import Users
 from django.http import HttpResponse
 from django.template import RequestContext
+from django.contrib import messages
 
 # Create your views here.
 
@@ -22,7 +23,29 @@ def main(request):
             print('로그인 되었습니다')
             return redirect('/../')
         else:
-            return HttpResponse('로그인 실패. 다시 시도 해보세요.')
+            messages.error(request, '아이디 혹은 비밀번호가 잘못되었습니다.', extra_tags='loginError')
+            return render(request,'project/index.html',{'loginForm' : form})
+    elif request.method == "POST" and request.POST.get("register") == "가입하기":
+        form = SignUpForm(request.POST)
+        print(form)
+        if form.is_valid():
+            user = form.save()
+            user.refresh_from_db()
+            user.profile.lastName = request.POST['lastName']
+            user.profile.firstName = request.POST['firstName']
+            if request.POST['gender'] == '남자' :
+                user.profile.gender = True
+            else :
+                user.profile.gender = False
+            user.profile.birthDate = request.POST['birthDate']
+            user.save()
+            username = request.POST['username']
+            raw_password = request.POST['password1']
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('/../')
+        messages.error(request, '회원가입에 실패하였습니다. 입력 정보를 확인하세요.', extra_tags='registerError')
+        return render(request, 'project/index.html',{'registerForm': form})
     return render(request,'project/index.html',{})
 
 def signup(request):

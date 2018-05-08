@@ -502,14 +502,63 @@
                         <input type="password" name="password" placeholder="Password">
                         <input type="submit" name="login" class="login loginmodal-submit" value="로그인">
                     </form>
-
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.extra_tags == "loginError" %}
+                                <div class="alert alert-danger" role="alert"> 
+                                    <div class="{{ message.tags }}" style = "font-size : 10pt">{{ message }}</div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                     <div class="login-help">
-                        <a href="/join">회원가입</a>
+                        <a class="close" data-dismiss="modal" data-toggle="modal" data-target="#register-modal">
+                            <span aria-hidden = "true" style = "font-size : 12px">회원가입</span>
+                            <span class ="sr-only">Close</span>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+<!-- Register Modal -->
+<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="-webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+        <div class="modal-content" style="max-width: 350px">
+            <div class="loginmodal-container">
+                <button type="button" class="close" data-dismiss="modal">
+      <span aria-hidden="true">×</span>
+      <span class="sr-only">Close</span>
+    </button>
+                <h1>회원가입</h1>
+                <br>
+                <form name="registerForm" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="username" placeholder="아이디">
+                    <input type="password" name="password1" placeholder="패스워드">
+                    <input type="password" name="password2" placeholder="패스워드 확인">
+                    <input type="text" name="email" placeholder="e-mail (example@domain.com)">
+                    <input type="text" name="lastName" placeholder="성">
+                    <input type="text" name="firstName" placeholder="이름">
+                    <a>&nbsp;&nbsp;성별 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><input type="radio" name="gender" value="남자"><a>남자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    <input type="radio" name="gender" value="여자"><a>여자</a><br>
+                    <a>&nbsp;&nbsp;생일 &nbsp;</a><input type="date" name="birthDate" style="width : 210px"><br><br>
+                    <input type="submit" name="register" class="login loginmodal-submit" value="가입하기">
+                </form>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.extra_tags == "registerError" %}
+                            <div class="alert alert-danger" role="alert"> 
+                                <div class="{{ message.tags }}" style = "font-size : 10pt">{{ message }}</div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
 
 
     <!-- Bootstrap core JavaScript -->
