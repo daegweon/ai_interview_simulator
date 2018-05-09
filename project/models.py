@@ -6,27 +6,13 @@ from django.dispatch import receiver
 
 # Create your models here.
 
-class Users(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name ='profile')
-    groupId = models.IntegerField(default=5, null=True)
-    firstName = models.CharField(max_length=20, null=True)
-    lastName = models.CharField(max_length=10, null=True)
-    gender = models.NullBooleanField(default=True)
-    birthDate = models.DateField(default=None, null=True)
-    loginDate = models.DateTimeField(auto_now=True, blank=True)
-
-@receiver(post_save, sender=User)
-def update_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Users.objects.create(user=instance)
-    instance.profile.save()
 
 class Question(models.Model):
     question = models.CharField(max_length=100)
     question_type = models.CharField(max_length=10) 
 
 class Interview(models.Model):
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     emotion = models.CharField(max_length=500)
     speech = models.CharField(max_length=2000)

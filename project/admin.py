@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from .models import Users
 from .models import Interview
 from .models import Question
+from django.contrib.auth.models import User
 
 # Register your models here.
 
@@ -21,6 +21,5 @@ class QuestionAdmin(admin.ModelAdmin):
         ('질문 내용', {'fields': ['question']}),
     ]
 
-admin.site.register(Users)
 admin.site.register(Interview)
 admin.site.register(Question, QuestionAdmin)
