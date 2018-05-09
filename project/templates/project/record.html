@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +10,7 @@
 
     <title>
       
-        Fluid &middot; Dashboard theme &middot; Official Bootstrap Themes
+        AIS &middot; Interview Record
       
     </title>
 
@@ -323,57 +323,11 @@
   <div class="fc afr">
     <div class="by afd">
       <h6 class="aya">
-        Most visited pages
+        사용자 면접 결과 내역
       </h6>
       
-        <a class="pu rs xj ux" href="#">
-          <span>/ (Logged out)</span>
+        <a class="pu rs xj ux" id="record" href="#">
           <span class="awy">3,929,481</span>
-        </a>
-      
-        <a class="pu rs xj ux" href="#">
-          <span>/ (Logged in)</span>
-          <span class="awy">1,143,393</span>
-        </a>
-      
-        <a class="pu rs xj ux" href="#">
-          <span>/tour</span>
-          <span class="awy">938,287</span>
-        </a>
-      
-        <a class="pu rs xj ux" href="#">
-          <span>/features/something</span>
-          <span class="awy">749,393</span>
-        </a>
-      
-        <a class="pu rs xj ux" href="#">
-          <span>/features/another-thing</span>
-          <span class="awy">695,912</span>
-        </a>
-      
-        <a class="pu rs xj ux" href="#">
-          <span>/users/username</span>
-          <span class="awy">501,938</span>
-        </a>
-      
-        <a class="pu rs xj ux" href="#">
-          <span>/page-title</span>
-          <span class="awy">392,842</span>
-        </a>
-      
-        <a class="pu rs xj ux" href="#">
-          <span>/some/page-slug</span>
-          <span class="awy">298,183</span>
-        </a>
-      
-        <a class="pu rs xj ux" href="#">
-          <span>/another/directory/and/page-title</span>
-          <span class="awy">193,129</span>
-        </a>
-      
-        <a class="pu rs xj ux" href="#">
-          <span>/one-more/page/directory/file-name</span>
-          <span class="awy">93,382</span>
         </a>
       
     </div>
@@ -446,9 +400,17 @@
     <script src="../../static/js/tablesorter.min.js"></script>
     <script src="../../static/js/toolkit.js"></script>
     <script src="../../static/js/application.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
       // execute/clear BS loaders for docs
-      $(function(){while(window.BS&&window.BS.loader&&window.BS.loader.length){(window.BS.loader.pop())()}})
+      $(function(){while(window.BS&&window.BS.loader&&window.BS.loader.length){(window.BS.loader.pop())()}});
+      var recordList = document.getElementById('record');
+      var spanTag = document.createElement('span');
+      var spanText = {{ record|safe }}
+      console.log(spanText);
+      spanTag.appendChild(spanText);
+      recordList.appendChild(spanTag);
+      console.log(recordList);
     </script>
   </body>
 </html>

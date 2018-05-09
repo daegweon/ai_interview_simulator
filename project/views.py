@@ -3,28 +3,29 @@ from django.shortcuts import render, redirect
 from project.forms import SignUpForm, LoginForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
-from project.models import Users
-from django.http import HttpResponse
+from project.models import Users,Interview
+from django.http import HttpResponse,HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib import messages
-
+import pymysql
 # Create your views here.
 
+connection = pymysql.connect(host='localhost', user='root', password='humanroot',db='humandb',charset='utf8')
 
 def main(request):
-    if request.method == "POST" and request.POST.get("login") == "로그인":
-
-        form = LoginForm(request.POST)
+    print(request.POST)
+    if request.method == "POST" and request.POST['mode']=="login":
         username = request.POST['username']
         password = request.POST['password']
+        print(username,password)
         user = authenticate(username = username, password = password)
         if user is not None:
             login(request, user)
             print('로그인 되었습니다')
             return redirect('/../')
         else:
-            messages.error(request, '아이디 혹은 비밀번호가 잘못되었습니다.', extra_tags='loginError')
-            return render(request,'project/index.html',{'loginForm' : form})
+            print("wrong id or password")
+            return HttpResponse('loginerror')  
     elif request.method == "POST" and request.POST.get("register") == "가입하기":
         form = SignUpForm(request.POST)
         print(form)
@@ -45,7 +46,7 @@ def main(request):
             login(request, user)
             return redirect('/../')
         messages.error(request, '회원가입에 실패하였습니다. 입력 정보를 확인하세요.', extra_tags='registerError')
-        return render(request, 'project/index.html',{'registerForm': form})
+        #return render(request, 'project/index.html',{'registerForm': form})
     return render(request,'project/index.html',{})
 
 def signup(request):
@@ -114,4 +115,14 @@ def getTestResultPage(request):
     return render(request,'project/main.html',{})  
 
 def getRecordPage(request):
-    return render(request,'project/record.html',{})      
+    #cursor = connection.cursor()
+    #sql = "insert into project_interview(emotion,speech,tendency,interview_date) values('a','b','c','2018/01/01');"
+    #cursor.execute(sql)
+    #rows = cursor.fetchall()
+    #print(rows)
+    #sql = "select * from project_interview;"
+    #cursor.execute(sql)
+    #rows = cursor.fetchall()
+    #print(rows)
+    #cursor.close()
+    return render(request,'project/record.html',{'record':rows})      
