@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from .models import Interview
-from .models import Question
-from django.contrib.auth.models import User
+from .models import *
 
 # Register your models here.
 
