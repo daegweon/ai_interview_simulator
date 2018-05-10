@@ -57,7 +57,7 @@ function getCookie(name) {
             }
             else{
                 alert("회원가입에 성공하였습니다. 가입한 계정으로 로그인됩니다.");
-                window.location.replace('/');
+                window.location.replace('/interviews');
             }
         });
     });
