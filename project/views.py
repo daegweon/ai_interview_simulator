@@ -90,7 +90,7 @@ def getInterviewPage(request):
     return render(request,'project/mainpagetest.html',{})
 
 def trainingInterviewHwCheck(request):
-    return render(request,'project/testCam.html',{}) 
+    return render(request,'project/interview_test.html',{}) 
     
 def trainingInterviewPriorInfo(request):
     return render(request,'project/priorInfo.html',{}) 
@@ -114,4 +114,12 @@ def getTestResultPage(request):
     return render(request,'project/main.html',{})  
 
 def getRecordPage(request):
-    return render(request,'project/record.html',{})      
+    return render(request,'project/record.html',{})
+
+def testsave(request):
+    if request.method == "POST":
+        f = open("testvideo.webm", 'wb')
+        f.write(request.FILES['file'].read())
+        f.close()
+        return HttpResponse('good')
+        #return redirect('/')
