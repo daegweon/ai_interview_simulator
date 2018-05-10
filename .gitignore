@@ -5,6 +5,7 @@
 *.log
 *.pot
 *.pyc
+*.wav
 *.webm
 __pycache__/
 ai_interview_simulator/__pycache__/

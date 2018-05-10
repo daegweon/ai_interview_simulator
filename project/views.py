@@ -78,8 +78,11 @@ def testRecord(request):
 
 def testsave(request):
     if request.method == "POST":
-        f = open("testvideo.webm", 'wb')
-        f.write(request.FILES['file'].read())
-        f.close()
+        video_stream = request.FILES['file'].read()
+        audio_stream = request.FILES['file_audio'].read()
+        with open('testvideo.webm', 'wb') as f_vid:
+            f_vid.write(video_stream)
+
+        with open('testaudio.wav', 'wb') as f_aud:
+            f_aud.write(video_stream)
         return HttpResponse('good')
-        #return redirect('/')

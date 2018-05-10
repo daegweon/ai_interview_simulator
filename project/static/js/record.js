@@ -57,7 +57,7 @@ function handleError(error) {
 }
 
 navigator.mediaDevices.getUserMedia(constraints).
-    then(handleSuccess).catch(handleError);
+  then(handleSuccess).catch(handleError);
 
 function handleSourceOpen(event) {
   console.log('MediaSource opened');
@@ -88,16 +88,16 @@ function toggleRecording() {
 
 function startRecording() {
   recordedBlobs = [];
-  var options = {mimeType: 'video/webm;codecs=vp9'};
+  var options = { mimeType: 'video/webm;codecs=vp9' };
   if (!MediaRecorder.isTypeSupported(options.mimeType)) {
     console.log(options.mimeType + ' is not Supported');
-    options = {mimeType: 'video/webm;codecs=vp8'};
+    options = { mimeType: 'video/webm;codecs=vp8' };
     if (!MediaRecorder.isTypeSupported(options.mimeType)) {
       console.log(options.mimeType + ' is not Supported');
-      options = {mimeType: 'video/webm'};
+      options = { mimeType: 'video/webm' };
       if (!MediaRecorder.isTypeSupported(options.mimeType)) {
         console.log(options.mimeType + ' is not Supported');
-        options = {mimeType: 'video/mp4'};
+        options = { mimeType: 'video/mp4' };
       }
     }
   }
@@ -125,17 +125,21 @@ function stopRecording() {
 
 
 function download() {
-  var blob = new Blob(recordedBlobs, {type: 'video/webm'});
-
+  var blob = new Blob(recordedBlobs, { type: 'video/webm' });
   var file = new File([blob], 'filename.webm', {
     type: 'video/webm'
-});
+  });
 
-var csrftoken = getCookie('csrftoken');
+  var blob_audio = new Blob(recordedBlobs, { type: 'audio/wav' });
+  var file_audio = new File([blob_audio], 'filename.wav', {
+    type: 'audio/wav'
+  });
+
+  var csrftoken = getCookie('csrftoken');
 
   var formData = new FormData();
   formData.append('file', file);
-
+  formData.append('file_audio',file_audio);
   formData.append('csrfmiddlewaretoken', csrftoken);
   uploadToServer(formData);
 }
@@ -143,15 +147,15 @@ var csrftoken = getCookie('csrftoken');
 function uploadToServer(formData) {
 
   $.ajax({
-      url: '/interviews/save',
-      type: 'POST',
-      data: formData,
-      processData: false,
-      contentType: false,
-      async: false,
-      success: function (data) {
-          alert('complete');
-      }
+    url: '/interviews/save',
+    type: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    async: false,
+    success: function (data) {
+      alert('complete');
+    }
   });
   return false;
 }
