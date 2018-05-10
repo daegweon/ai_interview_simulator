@@ -321,15 +321,10 @@
     <a href="#" class="ce nr ags">All countries</a>
   </div>
   <div class="fc afr">
-    <div class="by afd">
+    <div class="by afd" id="recordlist">
       <h6 class="aya">
         사용자 면접 결과 내역
       </h6>
-      
-        <a class="pu rs xj ux" id="record" href="#">
-          <span class="awy">3,929,481</span>
-        </a>
-      
     </div>
     <a href="#" class="ce nr ags">View all pages</a>
   </div>
@@ -404,14 +399,24 @@
     <script>
       // execute/clear BS loaders for docs
       $(function(){while(window.BS&&window.BS.loader&&window.BS.loader.length){(window.BS.loader.pop())()}});
-      var recordList = document.getElementById('record');
-      var spanTag = document.createElement('span');
-      var spanText = {{ record|safe }}
-      console.log(spanText);
-      spanTag.appendChild(spanText);
-      recordList.appendChild(spanTag);
-      console.log(recordList);
-    </script>
+      var dateText = document.createTextNode("{{ date|safe }}"); //면접 실시 날짜
+      var recordCount = {{date|safe}}.length; //데이터의 갯수, for문을 몇 번돌지 결정
+      for(var i=0;i<recordCount;i++){ //면접 내역 생성
+        var divclass = document.getElementById('recordlist');
+        var atag = document.createElement('a');
+        atag.className ="pu rs xj ux";
+        atag.id = "record"
+        atag.href = "#"
+        divclass.appendChild(atag);
+        var countspanTag = document.createElement('span');
+        countspanTag.appendChild(document.createTextNode(i+1));
+        atag.appendChild(countspanTag);
+        var recordspanTag = document.createElement('span');
+        recordspanTag.className='awy';
+        recordspanTag.appendChild(document.createTextNode(dateText.data.replace('[','').replace(']','').split(',')[i]));
+        atag.appendChild(recordspanTag);
+      }
+      </script>
   </body>
 </html>
 
