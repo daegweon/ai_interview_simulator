@@ -3,8 +3,6 @@ from . import views
 
 urlpatterns = [
     url(r'^$',views.main,name='main'),
-    url(r'^login$', views.signin, name='login'),
-    url(r'^register$',views.signup,name='register'),
     url(r'^interviews/?$',views.getInterviewPage,name='interview'),
     url(r'^interviews/training/hw-check$',views.trainingInterviewHwCheck,name='trainingHwCheck'),
     url(r'^interviews/training/prior-info$',views.trainingInterviewPriorInfo,name='trainingPriorInfo'),
