@@ -17,6 +17,6 @@ class Interview(models.Model):
     speech = models.CharField(max_length=2000)
     tendency = models.CharField(max_length=500)
     interview_date = models.DateField()
-    interview_type = models.CharField(max_length=10)
+    interview_type = models.CharField(default=None,max_length=10)
 
 

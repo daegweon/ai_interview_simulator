@@ -9,15 +9,12 @@ from django.contrib.auth.models import User
 class QuestionAdmin(admin.ModelAdmin):
     list_per_page = 5
     list_display = (
-        'id', 'question', 'question_type',
+        'id', 'question',
     )
-    #list_editable = ('questionType', )
-    list_filter = ('question_type', )
+    #list_filter = ('question_type', )
     search_fields = ('question', )
     odering = ('id', 'question', )
-    #fields = ('question', 'questionType', )
     fieldsets = [
-        ('질문 유형', {'fields': ['question_type']}),
         ('질문 내용', {'fields': ['question']}),
     ]
 
