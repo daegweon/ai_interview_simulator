@@ -9,6 +9,7 @@ from django.template import RequestContext
 from django.contrib import messages
 import pymysql
 import os
+from threading import Thread
 # Create your views here.
 
 connection = pymysql.connect(host='localhost', user='root', password='humanroot',db='humandb',charset='utf8')
@@ -86,6 +87,6 @@ def testsave(request):
 
         #with open('testaudio.wav', 'wb') as f_aud:
             #f_aud.write(audio_stream)
-        os.system('ffmpeg -i testvideo.webm testaudio.m4a')   
-        os.system('ffmpeg -i testvideo.webm -vf fps=1/3 img%03d.jpg') #3초마다 이미지 추출 만약 1초마다 추출하려면 fps = 1 
+        os.system('ffmpeg -i testvideo.webm -vf fps=1/3 img%03d.jpg')    
+        os.system('ffmpeg -y -i testvideo.webm -vn testaudio.m4a') #옵션 설명 : y : 같은 이름 overwrite , -vn : 음성에 비디오를 포함하지 않겠다. 음성을 포함할 경우 변환시간 오래걸림
         return HttpResponse('good')
