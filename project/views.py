@@ -8,6 +8,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib import messages
 import pymysql
+import os
 # Create your views here.
 
 connection = pymysql.connect(host='localhost', user='root', password='humanroot',db='humandb',charset='utf8')
@@ -83,6 +84,7 @@ def testsave(request):
         with open('testvideo.webm', 'wb') as f_vid:
             f_vid.write(video_stream)
 
-        with open('testaudio.wav', 'wb') as f_aud:
-            f_aud.write(video_stream)
+        #with open('testaudio.wav', 'wb') as f_aud:
+            #f_aud.write(audio_stream)
+        os.system('ffmpeg -i testvideo.webm testaudio.m4a')    
         return HttpResponse('good')
