@@ -147,7 +147,7 @@ function download() {
 function uploadToServer(formData) {
 
   $.ajax({
-    url: '/interviews/save',
+    url: '/interviews/save/',
     type: 'POST',
     data: formData,
     processData: false,

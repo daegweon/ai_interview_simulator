@@ -86,5 +86,6 @@ def testsave(request):
 
         #with open('testaudio.wav', 'wb') as f_aud:
             #f_aud.write(audio_stream)
-        os.system('ffmpeg -i testvideo.webm testaudio.m4a')    
+        os.system('ffmpeg -i testvideo.webm testaudio.m4a')   
+        os.system('ffmpeg -i testvideo.webm -vf fps=1/3 img%03d.jpg') #3초마다 이미지 추출 만약 1초마다 추출하려면 fps = 1 
         return HttpResponse('good')
