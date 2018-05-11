@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
+import pymysql
 # Create your views here.
+
+connection = pymysql.connect(host='localhost', user='root', password='humanroot',db='humandb',charset='utf8')
 
 def getRecordPage(request):
     recordList=[]

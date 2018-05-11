@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'',include('project.interview.urls')),
     url(r'',include('project.interview.test.urls')),
     url(r'',include('project.interview.training.urls')),
+    url(r'',include('project.interview.record.urls')),
 ]

@@ -20,9 +20,8 @@ function getCookie(name) {
         var form = $("#loginForm")[0];
         var formData = new FormData(form);
         formData.append('csrfmiddlewaretoken',csrftoken);
-        formData.append('mode','login');
         $.ajax({
-        url:'/', //this is the submit URL
+        url:'/member/signin/', //this is the submit URL
         type: 'POST', //or POST
         processData: false,
         contentType:false,
@@ -43,10 +42,9 @@ function getCookie(name) {
         e.preventDefault();
         var form = $("#registerForm")[0];
         var formData = new FormData(form);
-        formData.append('mode','register');
         formData.append('csrfmiddlewaretoken',csrftoken);
         $.ajax({
-        url:'/', //this is the submit URL
+        url:'/member/signup/', //this is the submit URL
         type: 'POST', //or POST
         processData: false,
         contentType:false,
