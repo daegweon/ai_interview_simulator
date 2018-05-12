@@ -9,7 +9,7 @@ def testInterviewPriorInfo(request):
     return render(request,'project/priorInfo.html',{})   
 
 def testInterviewOnAir(request):
-    return render(request,'project/main.html',{})
+    return render(request,'project/mictest.html',{})
 
 def getTestResultPage(request):
     return render(request,'project/main.html',{})

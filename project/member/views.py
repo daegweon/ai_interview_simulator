@@ -4,26 +4,26 @@ from project.member.forms import SignUpForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponse
+from django.views.decorators.http import require_http_methods
 import pymysql
-# Create your views here.
+
+@require_http_methods("POST")
 
 def signin(request):
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username = username, password = password)
-        if user is not None:
-            login(request, user)
-            return redirect('/../')
-        else:
-            return HttpResponse('loginerror')
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username = username, password = password)
+    if user is not None:
+        login(request, user)
+        return redirect('/../')
+    else:
+        return HttpResponse('loginerror')
 
 def signup(request):
-    if request.method == "POST":
-        form = SignUpForm(request.POST)
-        if form.is_valid() and request.POST['password']==request.POST['passwordConfirm']:
-            new_user = User.objects.create_user(**form.cleaned_data)
-            login(request, new_user)
-            return redirect('/')
-        else :
-            return HttpResponse('registerError')
+    form = SignUpForm(request.POST)
+    if form.is_valid() and request.POST['password']==request.POST['passwordConfirm']:
+        new_user = User.objects.create_user(**form.cleaned_data)
+        login(request, new_user)
+        return redirect('/')
+    else :
+        return HttpResponse('registerError')
