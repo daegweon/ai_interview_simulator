@@ -130,16 +130,10 @@ function download() {
     type: 'video/webm'
   });
 
-  var blob_audio = new Blob(recordedBlobs, { type: 'audio/wav' });
-  var file_audio = new File([blob_audio], 'filename.wav', {
-    type: 'audio/wav'
-  });
-
   var csrftoken = getCookie('csrftoken');
 
   var formData = new FormData();
   formData.append('file', file);
-  formData.append('file_audio',file_audio);
   formData.append('csrfmiddlewaretoken', csrftoken);
   uploadToServer(formData);
 }
@@ -147,7 +141,7 @@ function download() {
 function uploadToServer(formData) {
 
   $.ajax({
-    url: '/interviews/save/',
+    url: '/interviews/video-Processing/',
     type: 'POST',
     data: formData,
     processData: false,

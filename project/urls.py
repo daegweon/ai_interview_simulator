@@ -15,5 +15,5 @@ urlpatterns = [
     url(r'^interviews/test/result/$',views.getTestResultPage,name='testResult'),
 
     url(r'^interviews/record/$',views.getRecordPage,name='interviewRecord'),
-    url(r'^interviews/save/$',views.testsave,name='save'),
+    url(r'^interviews/video-Processing/$',views.videoProcessing,name='videoProcessing'),
 ]

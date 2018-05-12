@@ -75,18 +75,12 @@ def getRecordPage(request):
     #cursor.close()
     return render(request,'project/record.html',{'record':rows})      
 
-def testRecord(request):
-    return render(request,'project/mictest.html',{})
-
-def testsave(request):
+def videoProcessing(request):
     if request.method == "POST":
         video_stream = request.FILES['file'].read()
-        audio_stream = request.FILES['file_audio'].read()
         with open('testvideo.webm', 'wb') as f_vid:
             f_vid.write(video_stream)
 
-        #with open('testaudio.wav', 'wb') as f_aud:
-            #f_aud.write(audio_stream)
         os.system('ffmpeg -i testvideo.webm -vf fps=1/3 img%03d.jpg')    
         os.system('ffmpeg -y -i testvideo.webm -vn testaudio.m4a') #옵션 설명 : y : 같은 이름 overwrite , -vn : 음성에 비디오를 포함하지 않겠다. 음성을 포함할 경우 변환시간 오래걸림
         return HttpResponse('good')
