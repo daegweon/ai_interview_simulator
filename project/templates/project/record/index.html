@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,13 +10,13 @@
 
     <title>
       
-        Fluid &middot; Dashboard theme &middot; Official Bootstrap Themes
+        AIS &middot; Interview Record
       
     </title>
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet">
-    <link href="../../static/css/toolkit-inverse.css" rel="stylesheet">
-    <link href="../../static/css/application.css" rel="stylesheet">
+    <link href="../../../static/css/toolkit-light.css" rel="stylesheet">
+    <link href="../../../static/css/application.css" rel="stylesheet">
 
     <style>
       /* note: this is a hack for ios iframe for bootstrap themes shopify page */
@@ -321,61 +321,10 @@
     <a href="#" class="ce nr ags">All countries</a>
   </div>
   <div class="fc afr">
-    <div class="by afd">
+    <div class="by afd" id="recordlist">
       <h6 class="aya">
-        Most visited pages
+        사용자 면접 결과 내역
       </h6>
-      
-        <a class="pu rs xj ux" href="#">
-          <span>/ (Logged out)</span>
-          <span class="awy">3,929,481</span>
-        </a>
-      
-        <a class="pu rs xj ux" href="#">
-          <span>/ (Logged in)</span>
-          <span class="awy">1,143,393</span>
-        </a>
-      
-        <a class="pu rs xj ux" href="#">
-          <span>/tour</span>
-          <span class="awy">938,287</span>
-        </a>
-      
-        <a class="pu rs xj ux" href="#">
-          <span>/features/something</span>
-          <span class="awy">749,393</span>
-        </a>
-      
-        <a class="pu rs xj ux" href="#">
-          <span>/features/another-thing</span>
-          <span class="awy">695,912</span>
-        </a>
-      
-        <a class="pu rs xj ux" href="#">
-          <span>/users/username</span>
-          <span class="awy">501,938</span>
-        </a>
-      
-        <a class="pu rs xj ux" href="#">
-          <span>/page-title</span>
-          <span class="awy">392,842</span>
-        </a>
-      
-        <a class="pu rs xj ux" href="#">
-          <span>/some/page-slug</span>
-          <span class="awy">298,183</span>
-        </a>
-      
-        <a class="pu rs xj ux" href="#">
-          <span>/another/directory/and/page-title</span>
-          <span class="awy">193,129</span>
-        </a>
-      
-        <a class="pu rs xj ux" href="#">
-          <span>/one-more/page/directory/file-name</span>
-          <span class="awy">93,382</span>
-        </a>
-      
     </div>
     <a href="#" class="ce nr ags">View all pages</a>
   </div>
@@ -440,16 +389,34 @@
   </div>
 </div>
   </div>
-    <script src="../../static/js/jquery.min.js"></script>
-    <script src="../../static/js/popper.min.js"></script>
-    <script src="../../static/js/chart.js"></script>
-    <script src="../../static/js/tablesorter.min.js"></script>
-    <script src="../../static/js/toolkit.js"></script>
-    <script src="../../static/js/application.js"></script>
+    <script src="../../../static/js/jquery.min.js"></script>
+    <script src="../../../static/js/popper.min.js"></script>
+    <script src="../../../static/js/chart.js"></script>
+    <script src="../../../static/js/tablesorter.min.js"></script>
+    <script src="../../../static/js/toolkit.js"></script>
+    <script src="../../../static/js/application.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
       // execute/clear BS loaders for docs
-      $(function(){while(window.BS&&window.BS.loader&&window.BS.loader.length){(window.BS.loader.pop())()}})
-    </script>
+      $(function(){while(window.BS&&window.BS.loader&&window.BS.loader.length){(window.BS.loader.pop())()}});
+      var dateText = document.createTextNode("{{ date|safe }}"); //면접 실시 날짜
+      var recordCount = {{date|safe}}.length; //데이터의 갯수, for문을 몇 번돌지 결정
+      for(var i=0;i<recordCount;i++){ //면접 내역 생성
+        var divclass = document.getElementById('recordlist');
+        var atag = document.createElement('a');
+        atag.className ="pu rs xj ux";
+        atag.id = "record"
+        atag.href = "#"
+        divclass.appendChild(atag);
+        var countspanTag = document.createElement('span');
+        countspanTag.appendChild(document.createTextNode(i+1));
+        atag.appendChild(countspanTag);
+        var recordspanTag = document.createElement('span');
+        recordspanTag.className='awy';
+        recordspanTag.appendChild(document.createTextNode(dateText.data.replace('[','').replace(']','').split(',')[i]));
+        atag.appendChild(recordspanTag);
+      }
+      </script>
   </body>
 </html>
 

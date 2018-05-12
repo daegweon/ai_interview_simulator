@@ -16,6 +16,7 @@
 
   <!-- Custom fonts for this template -->
   <link href='{%static "vendor/font-awesome/css/font-awesome.min.css" %}' rel="stylesheet" type="text/css">
+  <link href='{%static "css/guide_modal.css" %}' rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
   <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -99,12 +100,12 @@
         </div>
         <div class="col-lg-4 col-sm-6 portfolio-item">
           <div class="card h-100">
-            <a href="#">
+            <a href="/interviews/record">
               <img class="card-img-top" src="http://placehold.it/700x400" alt="">
             </a>
             <div class="card-body">
               <h4 class="card-title text-md-center">
-                <a href="#">면접 내역</a>
+                <a href="/interviews/record">면접 내역</a>
               </h4>
               <p class="card-text text-md-center">그동안 해온 면접 어쩌구</p>
             </div>
@@ -113,7 +114,23 @@
       </div>
     </div>
   </section>
-
+    
+  <div class="modal-wrapper open">
+    <div class="modal">
+      <div class="head">
+        <a class="btn-close trigger" href="#">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </a>
+        <h6 class="modal-title"> 모의 면접 유의사항 </h6>
+      </div>
+      <div class="content">
+          <p>1. 카메라 장비가 필요합니다. 얼굴 촬영을 위해 PC에서는 외장 카메라를 준비하여 주시고, 노트북에서는 내장되어있는 웹캠을 사용하실 수 있습니다.</p>
+          <p>2. 음성 녹화를 위한 마이크가 필요합니다. 헤드셋 또는 내장 마이크를 준비해주십시오.</p>
+          <p>3. 본 서비스는 크롬 브라우저 환경만 지원하고 있습니다.</p>
+          <p>4. 조용한 환경에서 서비스를 이용할 시 더 정확한 결과를 얻으실 수 있습니다.</p>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer>
@@ -164,7 +181,13 @@
 
   <!-- Custom scripts for this template -->
   <script src='{%static "js/agency.min.js" %}'></script>
-
+  <script>
+  $( document ).ready(function() {
+      $('.btn-close').click(function(){
+        $(".modal-wrapper").toggleClass("open");
+      });
+  });
+  </script>
 </body>
 
 </html>

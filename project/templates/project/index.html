@@ -496,21 +496,12 @@
         </button>
                     <h1>로그인</h1>
                     <br>
-                    <form name="loginForm" method="post">
+                    <form name="loginForm" id="loginForm">
                         {% csrf_token %}
-                        <input type="text" name="username" placeholder="Username">
-                        <input type="password" name="password" placeholder="Password">
-                        <input type="submit" name="login" class="login loginmodal-submit" value="로그인">
+                        <input type="text" name="username" id="login_user" placeholder="Username">
+                        <input type="password" name="password" id="login_pw" placeholder="Password">
+                        <input type="submit" name="login" id="login" class="login loginmodal-submit" value="로그인">
                     </form>
-                    {% if messages %}
-                        {% for message in messages %}
-                            {% if message.extra_tags == "loginError" %}
-                                <div class="alert alert-danger" role="alert"> 
-                                    <div class="{{ message.tags }}" style = "font-size : 10pt">{{ message }}</div>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
                     <div class="login-help">
                         <a class="close" data-dismiss="modal" data-toggle="modal" data-target="#register-modal">
                             <span aria-hidden = "true" style = "font-size : 12px">회원가입</span>
@@ -533,28 +524,15 @@
     </button>
                 <h1>회원가입</h1>
                 <br>
-                <form name="registerForm" method="post">
+                <form name="registerForm" id="registerForm">
                     {% csrf_token %}
-                    <input type="text" name="username" placeholder="아이디">
-                    <input type="password" name="password1" placeholder="패스워드">
-                    <input type="password" name="password2" placeholder="패스워드 확인">
-                    <input type="text" name="email" placeholder="e-mail (example@domain.com)">
-                    <input type="text" name="lastName" placeholder="성">
-                    <input type="text" name="firstName" placeholder="이름">
-                    <a>&nbsp;&nbsp;성별 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a><input type="radio" name="gender" value="남자"><a>남자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                    <input type="radio" name="gender" value="여자"><a>여자</a><br>
-                    <a>&nbsp;&nbsp;생일 &nbsp;</a><input type="date" name="birthDate" style="width : 210px"><br><br>
-                    <input type="submit" name="register" class="login loginmodal-submit" value="가입하기">
+                    <input type="text" name="username" placeholder="아이디" id="registerUsername">
+                    <input type="password" name="password" placeholder="패스워드 (최소8자)" id="registerPassword1">
+                    <input type="password" name="passwordConfirm" placeholder="패스워드 확인" id="registerPassword2">
+                    <input type="text" name="last_name" placeholder="성" id="registerLastName">
+                    <input type="text" name="first_name" placeholder="이름" id="registerFirstName">
+                    <input type="submit" name="register" id="register" class="login loginmodal-submit" value="가입하기">
                 </form>
-                {% if messages %}
-                    {% for message in messages %}
-                        {% if message.extra_tags == "registerError" %}
-                            <div class="alert alert-danger" role="alert"> 
-                                <div class="{{ message.tags }}" style = "font-size : 10pt">{{ message }}</div>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
             </div>
         </div>
     </div>
@@ -570,7 +548,7 @@
 
     <!-- Custom scripts for this template -->
     <script src='{%static "js/agency.min.js" %}'></script>
-
+    <script src='{%static "js/authentication.js" %}'></script>
 </body>
 
 </html>
