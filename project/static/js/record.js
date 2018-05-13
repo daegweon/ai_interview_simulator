@@ -146,7 +146,7 @@ function uploadToServer(formData) {
     data: formData,
     processData: false,
     contentType: false,
-    async: false,
+    async: true,
     success: function (data) {
       alert('complete');
     }
