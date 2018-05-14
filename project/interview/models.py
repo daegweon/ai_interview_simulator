@@ -11,9 +11,10 @@ class Question(models.Model):
 class Interview(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    emotion = models.CharField(max_length=500)
+    emotion = models.TextField()
     speech = models.CharField(max_length=2000)
     tendency = models.CharField(max_length=500)
+    interview_count = models.IntegerField(default=0)
     interview_date = models.DateField()
     interview_type = models.CharField(default=None,max_length=10)
 
