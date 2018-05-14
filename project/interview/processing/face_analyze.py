@@ -4,13 +4,13 @@ import aiohttp
 import json
 import os, sys
 
-num = 0
+reqCnt = 0
 EmotionScore = {'anger': 0.0, 'contempt': 0.0, 'disgust': 0.0, 'fear': 0.0, 'happiness': 0.0, 'neutral': 0.0,
             'sadness': 0.0, 'surprise': 0.0}
 EmotionCount = {'anger': 0, 'contempt': 0, 'disgust': 0, 'fear': 0, 'happiness': 0, 'neutral': 0, 'sadness': 0,
             'surprise': 0}
 
-url = 'westcentralus.api.cognitive.microsoft.com'
+url = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect' # Request URL
 
 headers = {
     # Request headers
@@ -25,45 +25,48 @@ params = urllib.parse.urlencode({
     'returnFaceAttributes': 'emotion',
 })
 
-def setEmotionValue(EmotionCount,em_data):
+def initEmotionData():
+    reqCnt = 0
+    EmotionScore = {'anger': 0.0, 'contempt': 0.0, 'disgust': 0.0, 'fear': 0.0, 'happiness': 0.0, 'neutral': 0.0,
+            'sadness': 0.0, 'surprise': 0.0}
+    EmotionCount = {'anger': 0, 'contempt': 0, 'disgust': 0, 'fear': 0, 'happiness': 0, 'neutral': 0, 'sadness': 0,
+            'surprise': 0}
+
+def setEmotionValue(EmotionScore,em_data):
     for key, value in em_data.items():
-        EmotionCount[key] += value
+        EmotionScore[key] += value
     EmotionCount[max(em_data, key=em_data.get)] += 1
 
-def Calc_AverageValue(EmotionScore,num):
+def Calc_AverageValue(EmotionScore,reqCnt):
     for key, value in EmotionScore.items():
-        EmotionScore[key] = value / num
+        EmotionScore[key] = value / reqCnt
+    reqCnt = 0 #initailze api request cnt
 
-async def analyze():
+async def analyze(filename):
     body=""
-    filename='img003'+'.jpg'
-    with open(filename, 'rb') as img:
-        body = img.read()
+    try:
+        with open(img_dir + filename, 'rb') as img:
+            body = img.read()
 
-    print("is here?")
+        async with aiohttp.ClientSession() as session:
+            async with session.post(url, data=body, headers=headers, params=params) as resp:
+                res = await resp.json()
+                setEmotionValue(EmotionScore, res[0]["faceAttributes"]["emotion"])
+                print("res text: "+ str(res))
+                reqCnt += 1
 
-    async with aiohttp.ClientSession() as session:
-        async with session.post("westcentralus.api.cognitive.microsoft.com/face/v1.0/detect", data=body, headers=headers, params=params) as resp:
-            print(resp)
-            text = await resp.json()
-            print("res text: " + text)
-
-    #try:
-    #    conn = http.client.HTTPSConnection('westcentralus.api.cognitive.microsoft.com')
-    #    conn.request("POST", "/face/v1.0/detect?%s" % params,body,headers)
-    #    response = conn.getresponse()
-    #    data = response.read()
-    #    m = json.loads(data)
-    #    em_data = m[0]["faceAttributes"]["emotion"]
-    #    #set_emotion_value(EmotionCount,em_data)
-    #    print(em_data)
-    #    conn.close()
-    #except Exception as e:
-    #    print('error: '+str(e))
-#calc_average_value(EmotionScore,num)
+    except Exception as e:
+        print('error: '+str(e))
+#calc_average_value(EmotionScore,reqCnt)
 #print(max(EmotionCount, key=EmotionCount.get) + " is max count")
 
-def callAsync():
+def ReqAnalyze():
+    directory = os.listdir('./frames')
+    tasks = [analyze(file) for file in directory]
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
-    loop.run_until_complete(asyncio.wait([analyze()]))
+    loop.run_until_complete(asyncio.wait(tasks))
+
+    #TODO DB에 어떤식으로 값을 저장할 것인지
+
+    initEmotionData()
