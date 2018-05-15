@@ -1,60 +1,96 @@
-{% load static %}
+{%load static%}
 <!DOCTYPE html>
-<!--
- *  Copyright (c) 2015 The WebRTC project authors. All Rights Reserved.
- *
- *  Use of this source code is governed by a BSD-style license
- *  that can be found in the LICENSE file in the root of the source
- *  tree.
--->
-<html>
+<html lang="en">
+
 <head>
-
-  <meta charset="utf-8">
-  <meta name="description" content="WebRTC code samples">
-  <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta id="theme-color" name="theme-color" content="#ffffff">
-
-  <base target="_blank">
-
-  <title>MediaStream Recording</title>
-
-  <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
-  <link href='{%static "css/records.css" %}' rel="stylesheet">
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+    <title>AIS - A.I Interview Simulator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href='{%static "css/records.css" %}' rel="stylesheet">
 </head>
 
 <body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Logo</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="#">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Projects</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-log-in"></span> Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-  <div id="container">
+    <div class="container-fluid text-center">
+        <div class="row content">
+            <div class="col-sm-1 sidenav">
+                <p>
+                    <a href="#">여기다</a>
+                </p>
+                <p>
+                    <a href="#">메뉴를</a>
+                </p>
+                <p>
+                    <a href="#">띄워야</a>
+                </p>
+            </div>
+            <div class="col-sm-7">
+                <br>
 
-    <video id="gum" autoplay muted></video>
+                <video id="gum" style="border: 1px solid black; align-items: center;" autoplay muted width="70%"></video>
 
-    <div>
-      <button id="record" disabled>면접 시작</button>
+                <br>
+                <br>
+                <h4 id="question">질문을 여기에?</h4>
+                <br>
+                <div>
+                    <button type="button" id="camOnOff" class="btn btn-warning">카메라 OFF</button>
+                    <button type="button" id="record" class="btn btn-primary" disabled>면접 시작</button>
+                </div>
+            </div>
+            <div class="col-sm-4 sidenav">
+                <div class="well">
+                    <p style="text-align: left">분석 같은걸 여기에?</p>
+                </div>
+                <div class="well">
+                    <p id="timer">00:00</p>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- include adapter for srcObject shim -->
-  <div data-type="countup" data-id="61890" class="tickcounter" style="width: 100%; position: relative; padding-bottom: 25%">
-    <a href="//www.tickcounter.com/countup/61890/count-up" title="count up">count up</a>
-    <a href="//www.tickcounter.com/countup" title="Countup">Countup</a>
-  </div>
-  <script>
-  (function(d, s, id) {
-    var js, pjs = d.getElementsByTagName(s)[0]; 
-     if (d.getElementById(id))
-      return;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "//www.tickcounter.com/static/js/loader.js";
-    pjs.parentNode.insertBefore(js, pjs);
-    }(document, "script", "tickcounter-sdk")
-  );</script>
-  <script src='{%static "js/record.js" %}'></script>
+    <footer class="container-fluid text-center">
+        <p>Footer Text</p>
+    </footer>
 
+    <script src='{%static "js/record.js" %}'></script>
 </body>
+
 </html>
