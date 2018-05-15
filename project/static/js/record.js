@@ -19,6 +19,7 @@ var mediaRecorder;
 var recordedBlobs;
 var sourceBuffer;
 var timer;
+var questionCount = 0;
 
 var gumVideo = document.querySelector('video#gum');
 
@@ -116,14 +117,23 @@ function handleStop(event) {
 }
 
 function toggleRecording() {
-  if (recordButton.textContent === '면접 시작') {
-    startTick();
-    startRecording();
-  } else {
-    stopTick();
-    stopRecording();
-    recordButton.textContent = '면접 시작';
+  if(questionCount == 2){
+      recordButton.disabled = true;
+      document.getElementById("finInterview").style.display="inline";
+      recordButton.textContent = '면접 종료';
   }
+  else{
+    if (recordButton.textContent === '면접 시작') {
+      startTick();
+      startRecording();
+      questionCount += 1;
+    } else {
+      stopTick();
+      stopRecording();
+      recordButton.textContent = '면접 시작';
+    }
+  }
+  
 }
 
 function startRecording() {
