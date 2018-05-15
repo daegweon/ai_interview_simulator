@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>AIS - A.I Interview Simulator</title>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <link href='{%static "css/interviewResult.css" %}' rel="stylesheet">
+    <script src='{%static "js/interviewResult.js" %}'></script>
+</head>    
+<body>
+    <div class="container demo">
+
+
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <i class="more-less glyphicon glyphicon-plus"></i>
+                                감정 분석 결과
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body" id="emotionresult">
+                            <ul id="angerul">화남</ul>
+                            <ul id="contemptul">경멸</ul>
+                            <ul id="disgustul">혐오</ul>
+                            <ul id="fearul">공포</ul>
+                            <ul id="happinessul">행복</ul>
+                            <ul id="neutralul">중립</ul>
+                            <ul id="sadnessul">슬픔</ul>
+                            <ul id="surpriseul">놀람</ul>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <i class="more-less glyphicon glyphicon-plus"></i>
+                                음성 인식 결과
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <i class="more-less glyphicon glyphicon-plus"></i>
+                                성향 분석 결과
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                    </div>
+                </div>
+        
+            </div><!-- panel-group -->
+            
+            
+        </div><!-- container -->
+    <script>
+        var angerList = [];
+        var contemptList = [];
+        var disgustList = [];
+        var fearList = [];
+        var happinessList = [];
+        var neutralList = [];
+        var sadnessList = [];
+        var surpriseList = [];
+        {% for emotion in emotionResult%}
+        var emotionList = JSON.parse({{emotion|safe}}["emotion"]);
+        console.log(emotionList.length);
+        for(var i=0;i<emotionList.length;i++){
+            angerList.push(emotionList[i][0]);
+            contemptList.push(emotionList[i][1]);
+            disgustList.push(emotionList[i][2]);
+            fearList.push(emotionList[i][3]);
+            happinessList.push(emotionList[i][4]);
+            neutralList.push(emotionList[i][5]);
+            sadnessList.push(emotionList[i][6]);
+            surpriseList.push(emotionList[i][7]);
+        }
+        console.log(angerList,contemptList,disgustList,fearList,happinessList,neutralList,sadnessList,surpriseList);
+        var angerli = document.createElement('li');
+        angerli.innerHTML = angerList;
+        document.getElementById("angerul").appendChild(angerli);
+        var contemptli = document.createElement('li');
+        contemptli.innerHTML = contemptList;
+        document.getElementById("contemptul").appendChild(contemptli);
+        var disgustli = document.createElement('li');
+        disgustli.innerHTML = disgustList;
+        document.getElementById("disgustul").appendChild(disgustli);
+        var fearli = document.createElement('li');
+        fearli.innerHTML = fearList;
+        document.getElementById("fearul").appendChild(fearli);
+        var happinessli = document.createElement('li');
+        happinessli.innerHTML = happinessList;
+        document.getElementById("happinessul").appendChild(happinessli);
+        var neutralli = document.createElement('li');
+        neutralli.innerHTML = neutralList;
+        document.getElementById("neutralul").appendChild(neutralli);
+        var sadnessli = document.createElement('li');
+        sadnessli.innerHTML = sadnessList;
+        document.getElementById("sadnessul").appendChild(sadnessli);
+        var surpriseli = document.createElement('li');
+        surpriseli.innerHTML = surpriseList;
+        document.getElementById("surpriseul").appendChild(surpriseli);
+    {% endfor %}
+    </script>
+</body>
+</html>
