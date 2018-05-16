@@ -18,11 +18,15 @@ mediaSource.addEventListener('sourceopen', handleSourceOpen, false);
 var mediaRecorder;
 var recordedBlobs;
 var sourceBuffer;
+var timer;
+var questionCount = 0;
 
 var gumVideo = document.querySelector('video#gum');
 
 var recordButton = document.querySelector('button#record');
+var camOnOffButton = document.querySelector('button#camOnOff');
 recordButton.onclick = toggleRecording;
+camOnOffButton.onclick = ToggleWebCam;
 
 function getCookie(name) {
   var cookieValue = null;
@@ -45,6 +49,42 @@ var constraints = {
   video: true
 };
 
+function pad(n, width) {
+  n = n + '';
+  return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
+}
+
+function startTick() {
+  var countDownDate = new Date().getTime();
+
+  // Update the count down every 1 second
+  timer = setInterval(function () {
+
+    // Get todays date and time
+    var now = new Date().getTime();
+
+    // Find the distance between now an the count down date
+    var distance = now - countDownDate;
+
+    // Time calculations for days, hours, minutes and seconds
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Output the result in an element with id="timer"
+    document.getElementById("timer").innerHTML = pad(minutes, 2) + ":" + pad(seconds, 2);
+
+    // If the count down is over, write some text 
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("timer").innerHTML = "EXPIRED";
+    }
+  }, 1000);
+}
+
+function stopTick(){
+  clearInterval(timer)
+}
+
 function handleSuccess(stream) {
   recordButton.disabled = false;
   console.log('getUserMedia() got stream: ', stream);
@@ -66,7 +106,6 @@ function handleSourceOpen(event) {
 }
 
 
-
 function handleDataAvailable(event) {
   if (event.data && event.data.size > 0) {
     recordedBlobs.push(event.data);
@@ -78,12 +117,24 @@ function handleStop(event) {
 }
 
 function toggleRecording() {
-  if (recordButton.textContent === '면접 시작') {
-    startRecording();
-  } else {
-    stopRecording();
-    recordButton.textContent = '면접 시작';
+  if(questionCount == 2){
+      recordButton.disabled = true;
+      document.getElementById("finInterview").style.display="inline";
+      recordButton.textContent = '면접 종료';
+      stopTick();
   }
+  else{
+    if (recordButton.textContent === '면접 시작') {
+      startTick();
+      startRecording();
+      questionCount += 1;
+    } else {
+      stopTick();
+      stopRecording();
+      recordButton.textContent = '면접 시작';
+    }
+  }
+  
 }
 
 function startRecording() {
@@ -152,4 +203,14 @@ function uploadToServer(formData) {
     }
   });
   return false;
+}
+
+function ToggleWebCam(){
+  if (camOnOffButton.textContent === '카메라 OFF') {
+    camOnOffButton.textContent = '카메라 ON';
+    document.getElementById("gum").style.visibility="hidden";
+  } else {
+    document.getElementById("gum").style.visibility="";
+    camOnOffButton.textContent = '카메라 OFF';
+  }
 }
