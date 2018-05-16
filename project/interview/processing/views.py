@@ -26,7 +26,8 @@ def videoProcessing(request):
        
     os.system('ffmpeg -i testvideo.webm -vf fps=1/3 ./frames/img%d.jpg')    
     os.system('ffmpeg -y -i testvideo.webm -vn testaudio.flac') #옵션 설명 : y : 같은 이름 overwrite , -vn : 음성에 비디오를 포함하지 않겠다. 음성을 포함할 경우 변환시간 오래걸림
-
+    print(request.POST)
+    '''
     print(request.user) #AnonymousUser 로그인안하면 이렇게 출력된다.
     user_id = User.objects.values_list('id', flat=True).get(username=request.user)
     count  = Question.objects.all().count()
@@ -48,5 +49,6 @@ def videoProcessing(request):
     face_analyze.ReqAnalyze(inter_id)
     speechResult = speechToText.speechProcessing('testaudio.flac','testupload.flac')
     personality.personality_insights(speechResult)
+    '''
     return HttpResponse('good')
 

@@ -117,7 +117,7 @@ function handleStop(event) {
 }
 
 function toggleRecording() {
-  if(questionCount == 2){
+  if(questionCount == 5){
       recordButton.disabled = true;
       document.getElementById("finInterview").style.display="inline";
       recordButton.textContent = '면접 종료';
@@ -125,6 +125,7 @@ function toggleRecording() {
   }
   else{
     if (recordButton.textContent === '면접 시작') {
+      document.getElementById("question").textContent = ques_text[questionCount]
       startTick();
       startRecording();
       questionCount += 1;
@@ -182,10 +183,12 @@ function download() {
   });
 
   var csrftoken = getCookie('csrftoken');
+  var quesId = ques_id[questionCount];
 
   var formData = new FormData();
   formData.append('file', file);
   formData.append('csrfmiddlewaretoken', csrftoken);
+  formData.append('questionId', quesId);
   uploadToServer(formData);
 }
 
@@ -204,6 +207,8 @@ function uploadToServer(formData) {
   });
   return false;
 }
+
+
 
 function ToggleWebCam(){
   if (camOnOffButton.textContent === '카메라 OFF') {

@@ -91,6 +91,10 @@
         <p>Footer Text</p>
     </footer>
 
+    <script>
+        var ques_id = {{ ques_id | safe }};
+        var ques_text = {{ ques_text | safe}};
+    </script>
     <script src='{%static "js/record.js" %}'></script>
 </body>
 
