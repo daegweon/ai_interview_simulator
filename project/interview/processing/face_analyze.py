@@ -8,10 +8,6 @@ import re
 from django.contrib.auth.models import User
 from project.interview.models import Question,Interview
 from random import randint
-'''
-class Global(object):
-    reqCnt = 0
-'''
 
 emotionList=[]
 
@@ -42,18 +38,8 @@ def initEmotionData():
     EmotionCount = {'anger': 0, 'contempt': 0, 'disgust': 0, 'fear': 0, 'happiness': 0, 'neutral': 0, 'sadness': 0,
             'surprise': 0}
     directory = os.listdir('./frames')
-'''
-def setEmotionValue(EmotionScore,em_data):
-    for key, value in em_data.items():
-        EmotionScore[key] += value
-    EmotionCount[max(em_data, key=em_data.get)] += 1
 
-def Calc_AverageValue(EmotionScore,reqCnt):
-    for key, value in EmotionScore.items():
-        EmotionScore[key] = value / Global.reqCnt
-    Global.reqCnt = 0 #initailze api request cnt
-'''
-async def analyze(filename,inter_id):
+async def analyze(filename,interview_id):
     tempList=[]
     body=""
     try:
@@ -64,7 +50,6 @@ async def analyze(filename,inter_id):
         async with aiohttp.ClientSession() as session:
             async with session.post(url, data=body, headers=headers, params=params) as resp:
                 res = await resp.json()
-                #setEmotionValue(EmotionScore, res[0]["faceAttributes"]["emotion"])
                 print(str(res[0]["faceAttributes"]["emotion"]))
                 tempList.append(res[0]["faceAttributes"]["emotion"]["anger"])
                 tempList.append(res[0]["faceAttributes"]["emotion"]["contempt"])
@@ -75,21 +60,18 @@ async def analyze(filename,inter_id):
                 tempList.append(res[0]["faceAttributes"]["emotion"]["sadness"])
                 tempList.append(res[0]["faceAttributes"]["emotion"]["surprise"])
                 emotionList.insert(int(regex.findall(filename)[0])-1,tempList)
-                print(emotionList)  
-                interview_emotion = Interview.objects.get(pk=inter_id[0])
+                print(interview_id)  
+                interview_emotion = Interview.objects.get(pk=interview_id)
                 interview_emotion.emotion = emotionList
                 interview_emotion.save()      
-                #Global.reqCnt += 1
 
     except Exception as e:
         print('error: '+str(e))
-#calc_average_value(EmotionScore,reqCnt)
-#print(max(EmotionCount, key=EmotionCount.get) + " is max count")
 
-def ReqAnalyze(inter_id):
+def ReqAnalyze(interview_id):
     initEmotionData()
     directory = os.listdir('./frames')
-    tasks = [analyze(file,inter_id) for file in directory]
+    tasks = [analyze(file,interview_id) for file in directory]
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
     loop.run_until_complete(asyncio.wait(tasks))
