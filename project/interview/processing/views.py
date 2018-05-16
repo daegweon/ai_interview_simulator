@@ -48,7 +48,6 @@ def videoProcessing(request):
     tendency = personality.personality_insights(speechResult)
     Interview.objects.filter(id=interview_id).update(speech=speechResult, tendency=tendency)
 
-    print('호에에')
     speechResult = speechToText.speechProcessing('testaudio.flac','testupload.flac')
     personality.personality_insights(speechResult)
     
