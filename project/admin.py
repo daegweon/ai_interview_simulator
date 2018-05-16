@@ -18,3 +18,4 @@ class QuestionAdmin(admin.ModelAdmin):
 
 admin.site.register(Interview)
 admin.site.register(Question, QuestionAdmin)
+admin.site.register(InterviewCount)

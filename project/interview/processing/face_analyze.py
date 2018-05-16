@@ -50,7 +50,6 @@ async def analyze(filename,interview_id):
         async with aiohttp.ClientSession() as session:
             async with session.post(url, data=body, headers=headers, params=params) as resp:
                 res = await resp.json()
-                print(str(res[0]["faceAttributes"]["emotion"]))
                 tempList.append(res[0]["faceAttributes"]["emotion"]["anger"])
                 tempList.append(res[0]["faceAttributes"]["emotion"]["contempt"])
                 tempList.append(res[0]["faceAttributes"]["emotion"]["disgust"])
@@ -59,8 +58,7 @@ async def analyze(filename,interview_id):
                 tempList.append(res[0]["faceAttributes"]["emotion"]["neutral"])
                 tempList.append(res[0]["faceAttributes"]["emotion"]["sadness"])
                 tempList.append(res[0]["faceAttributes"]["emotion"]["surprise"])
-                emotionList.insert(int(regex.findall(filename)[0])-1,tempList)
-                print(interview_id)  
+                emotionList.insert(int(regex.findall(filename)[0])-1,tempList)  
                 interview_emotion = Interview.objects.get(pk=interview_id)
                 interview_emotion.emotion = emotionList
                 interview_emotion.save()      

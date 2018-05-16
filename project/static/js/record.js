@@ -118,6 +118,7 @@ function handleStop(event) {
 
 function toggleRecording() {
   if(questionCount == 5){
+      questionCount = 0;
       recordButton.disabled = true;
       document.getElementById("finInterview").style.display="inline";
       recordButton.textContent = '면접 종료';
@@ -189,6 +190,11 @@ function download() {
   formData.append('file', file);
   formData.append('csrfmiddlewaretoken', csrftoken);
   formData.append('questionId', quesId);
+  formData.append('trigger',0);
+  console.log(questionCount);
+  if(questionCount==1){
+    formData.append('trigger',1);
+  }
   uploadToServer(formData);
 }
 
