@@ -25,7 +25,7 @@ def testInterviewOnAir(request):
             ques_text.append(random_question_text)
 
     print(ques_id)
-    return render(request,'project/mictest.html',{'ques_id': ques_id, 'ques_text' : ques_text})
+    return render(request,'project/interview/mictest.html',{'ques_id': ques_id, 'ques_text' : ques_text})
 
 def getTestResultPage(request):
     emotionResult = Interview.objects.values('emotion').all() #몇회차 면접인지 정보가 추가적으로 들어가야함.
