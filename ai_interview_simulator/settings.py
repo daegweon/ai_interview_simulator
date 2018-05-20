@@ -7,7 +7,7 @@ For more information on this file, see
 https://docs.djangoproject.com/en/1.11/topics/settings/
 
 For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.11/ref/settings/
+https://docs.djangoproject.com/en/1.11/ref/settings/1111
 """
 
 import os
@@ -25,8 +25,9 @@ SECRET_KEY = '!cp9%v6hbqwg4es4d(oal^$=@5s(4k*pr@r4xql09=ctu3+d&y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
-
+ALLOWED_HOSTS = ['127.0.0.1', 'ec2-13-125-217-227.ap-northeast-2.compute.amazonaws.com', '.pythonanywhere.com', '13.125.217.227','humanlearning.tk', 'www.humanlearning.tk']
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 # Application definition
 
