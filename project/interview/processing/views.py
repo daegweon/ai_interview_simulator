@@ -2,15 +2,15 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse,HttpResponseRedirect
-import os
-from . import face_analyze
 from django.contrib.auth.models import User
 from project.interview.models import Question,Interview,InterviewCount
 from datetime import datetime
 from random import randint
 from . import speechToText
 from . import personality
+from . import face_analyze
 import sys
+import os
 
 # Create your views here.
 
@@ -48,8 +48,8 @@ def videoProcessing(request):
     tendency = personality.personality_insights(speechResult)
     Interview.objects.filter(id=interview_id).update(speech=speechResult, tendency=tendency)
 
-    speechResult = speechToText.speechProcessing('testaudio.flac','testupload.flac')
-    personality.personality_insights(speechResult)
+    #speechResult = speechToText.speechProcessing('testaudio.flac','testupload.flac')
+    #personality.personality_insights(speechResult)
     
     return HttpResponse('good')
 

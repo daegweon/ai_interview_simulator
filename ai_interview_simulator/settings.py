@@ -26,7 +26,8 @@ SECRET_KEY = '!cp9%v6hbqwg4es4d(oal^$=@5s(4k*pr@r4xql09=ctu3+d&y'
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
-
+#CSRF_COOKIE_SECURE = True
+#SESSION_COOKIE_SECURE = True
 
 # Application definition
 
