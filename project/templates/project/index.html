@@ -34,6 +34,9 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand js-scroll-trigger" style="color: #205ec1" href="#page-top">AIS</a>
+            {% if user.is_authenticated %}
+            <a style="color:white">{{user.username}}님 환영합니다.</a>
+            {% endif %}
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fa fa-bars"></i>
@@ -52,7 +55,11 @@
 
                     <!-- 로그인에 성공하면 sign in은 안보이게 바뀐다 -->
                     <li class="nav-item">
+                        {% if user.is_authenticated %}
+                        <a class="nav-link js-scroll-trigger" href="/member/logout">Logout</a>
+                        {% else %}
                         <a class="nav-link js-scroll-trigger" data-toggle="modal" data-target="#login-modal" href="#">Sign In</a>
+                        {% endif %}
                     </li>
 
                     <!-- 로그인에 성공하면 사용자의 이름으로 바뀐다 -->
@@ -72,7 +79,11 @@
                 <div class="intro-heading text-uppercase">A.I &nbsp;Interview &nbsp;Simulator</div>
                 <div class="intro-lead-in">Project &nbsp;by &nbsp;Human Learning</div>
                 <br>
-                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/interviews/">지금 시작하기</a>
+                {% if user.is_authenticated %}
+                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" id="start_btn" href="/interviews/">지금 시작하기</a>
+                {% else %}
+                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" id="start_btn" data-toggle="modal" data-target="#login-modal" href="#">지금 시작하기</a>
+                {% endif %}
             </div>
         </div>
     </header>
