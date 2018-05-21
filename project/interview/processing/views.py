@@ -19,9 +19,11 @@ import time
 
 def videoProcessing(request):
 
-    video_filename = 'testvideo.webm'
-    audio_filename = 'testaudio.flac'
-    upload_filename = 'testupload.flac'
+    print(request.POST)
+
+    video_filename = 'video%s.webm'%request.POST["questionCount"]
+    audio_filename = 'audio%s.flac'%request.POST["questionCount"]
+    upload_filename = 'uploadAudio%s.flac'%request.POST["questionCount"]
 
     video_stream = request.FILES['file'].read()
     with open(video_filename, 'wb') as f_vid:
@@ -37,30 +39,44 @@ def videoProcessing(request):
     user_id = User.objects.values_list('id', flat=True).get(username=request.user)
     questionId = request.POST["questionId"]
     interviewObj = InterviewCount.objects.get(user_id=user_id)
-    if request.POST["trigger"]=="1":
+    if request.POST["questionCount"]=="1":
         interviewObj.interview_count += 1 
         interviewObj.save()
     
     Interview.objects.create(user_id=user_id,question_id=questionId,emotion='',speech='',tendency='',interview_count=interviewObj.interview_count,interview_date = datetime.now(), interview_type = '1')
     interview_id = Interview.objects.values_list('id', flat=True).get(question_id=questionId,interview_count = interviewObj.interview_count)
-    start_time = time.time()
-    p1 = Process(target=face,args=(interview_id,))
+    face_analyze.ReqAnalyze(interview_id)
+    '''speechResult = speechToText.speechProcessing(audio_filename, upload_filename)
+    tendency = personality.personality_insights(speechResult)  
+    Interview.objects.filter(id=interview_id).update(speech=speechResult, tendency=tendency)   '''  
+    speechToText.speechProcessing(audio_filename, upload_filename) 
+    '''p1 = Process(target=face,args=(interview_id,))
     p2 = Process(target=audio,args=(interview_id,audio_filename,upload_filename,))
     p1.start()
-    p2.start()
-    p1.join()
-    p2.join()
-    print("--- %s seconds ---" % (time.time() - start_time))
+    p2.start()'''
+
+    if request.POST["questionCount"]==5:
+        while True :
+            f=open('temp.txt','r')
+            speechId=f.readline().strip()
+            if not speechId: break;
+            speechResult = json.loads(subprocess.check_output("gcloud ml speech operations wait %s"%speechId,shell=True))
+            transcription = speechToText.speechParsing(speechResult)
+        f.close()
+        os.remove('temp.txt')
     #speechResult = speechToText.speechProcessing('testaudio.flac','testupload.flac')
     #personality.personality_insights(speechResult)
+    
+
     return HttpResponse('good')
 
 def face(interview_id):
     print("{0} - 프로세스 ID: {1} (부모 프로세스 ID: {2})".format(interview_id, os.getpid(), os.getppid()))
-    face_analyze.ReqAnalyze(interview_id)
+    
 
 def audio(interview_id,audio_filename,upload_filename):
     print("{0} - 프로세스 ID: {1} (부모 프로세스 ID: {2})".format(interview_id, os.getpid(), os.getppid())) 
-    speechResult = speechToText.speechProcessing(audio_filename, upload_filename)
+    '''speechResult = speechToText.speechProcessing(audio_filename, upload_filename)
     tendency = personality.personality_insights(speechResult)  
-    Interview.objects.filter(id=interview_id).update(speech=speechResult, tendency=tendency)      
+    Interview.objects.filter(id=interview_id).update(speech=speechResult, tendency=tendency)   '''  
+    speechToText.speechProcessing(audio_filename, upload_filename) 

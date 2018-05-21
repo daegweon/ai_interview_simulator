@@ -129,9 +129,9 @@ function toggleRecording() {
       document.getElementById("question").textContent = ques_text[questionCount]
       startTick();
       startRecording();
-      questionCount += 1;
     } else {
       stopTick();
+      questionCount += 1;
       stopRecording();
       recordButton.textContent = '면접 시작';
     }
@@ -190,11 +190,8 @@ function download() {
   formData.append('file', file);
   formData.append('csrfmiddlewaretoken', csrftoken);
   formData.append('questionId', quesId);
-  formData.append('trigger',0);
-  console.log(questionCount);
-  if(questionCount==1){
-    formData.append('trigger',1);
-  }
+  formData.append('questionCount',questionCount);
+
   uploadToServer(formData);
 }
 
