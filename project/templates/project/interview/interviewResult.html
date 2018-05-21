@@ -9,72 +9,8 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <link href='{%static "css/interviewResult.css" %}' rel="stylesheet">
     <script src='{%static "js/interviewResult.js" %}'></script>
-</head>    
-<body>
-    <div class="container demo">
-
-
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingOne">
-                        <h4 class="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <i class="more-less glyphicon glyphicon-plus"></i>
-                                감정 분석 결과
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                        <div class="panel-body" id="emotionresult">
-                            <ul id="angerul">화남</ul>
-                            <ul id="contemptul">경멸</ul>
-                            <ul id="disgustul">혐오</ul>
-                            <ul id="fearul">공포</ul>
-                            <ul id="happinessul">행복</ul>
-                            <ul id="neutralul">중립</ul>
-                            <ul id="sadnessul">슬픔</ul>
-                            <ul id="surpriseul">놀람</ul>
-                        </div>
-                    </div>
-                </div>
-        
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingTwo">
-                        <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                <i class="more-less glyphicon glyphicon-plus"></i>
-                                음성 인식 결과
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div>
-        
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingThree">
-                        <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                <i class="more-less glyphicon glyphicon-plus"></i>
-                                성향 분석 결과
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div>
-        
-            </div><!-- panel-group -->
-            
-            
-        </div><!-- container -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
     <script>
         var angerList = [];
         var contemptList = [];
@@ -84,10 +20,15 @@
         var neutralList = [];
         var sadnessList = [];
         var surpriseList = [];
-        {% for emotion in emotionResult%}
-        var emotionList = JSON.parse({{emotion|safe}}["emotion"]);
-        console.log(emotionList.length);
-        for(var i=0;i<emotionList.length;i++){
+        var xAxis = [];
+        var tempemotionFreq = [0, 0, 0, 0, 0, 0, 0, 0];
+        var emotionFreq = [];
+        {% for emotion in emotionResult %}
+        var emotionList = JSON.parse({{ emotion| safe }}["emotion"]);
+        var rowcount = {{ rowcount }}
+        for (var i = 0; i < emotionList.length; i++) {
+            xAxis.push(i + 1);
+            tempemotionFreq[emotionList[i].indexOf(Math.max.apply(null, emotionList[i]))] += 1;
             angerList.push(emotionList[i][0]);
             contemptList.push(emotionList[i][1]);
             disgustList.push(emotionList[i][2]);
@@ -97,32 +38,449 @@
             sadnessList.push(emotionList[i][6]);
             surpriseList.push(emotionList[i][7]);
         }
-        console.log(angerList,contemptList,disgustList,fearList,happinessList,neutralList,sadnessList,surpriseList);
-        var angerli = document.createElement('li');
-        angerli.innerHTML = angerList;
-        document.getElementById("angerul").appendChild(angerli);
-        var contemptli = document.createElement('li');
-        contemptli.innerHTML = contemptList;
-        document.getElementById("contemptul").appendChild(contemptli);
-        var disgustli = document.createElement('li');
-        disgustli.innerHTML = disgustList;
-        document.getElementById("disgustul").appendChild(disgustli);
-        var fearli = document.createElement('li');
-        fearli.innerHTML = fearList;
-        document.getElementById("fearul").appendChild(fearli);
-        var happinessli = document.createElement('li');
-        happinessli.innerHTML = happinessList;
-        document.getElementById("happinessul").appendChild(happinessli);
-        var neutralli = document.createElement('li');
-        neutralli.innerHTML = neutralList;
-        document.getElementById("neutralul").appendChild(neutralli);
-        var sadnessli = document.createElement('li');
-        sadnessli.innerHTML = sadnessList;
-        document.getElementById("sadnessul").appendChild(sadnessli);
-        var surpriseli = document.createElement('li');
-        surpriseli.innerHTML = surpriseList;
-        document.getElementById("surpriseul").appendChild(surpriseli);
-    {% endfor %}
+        emotionFreq.push(tempemotionFreq);
+        tempemotionFreq = [0, 0, 0, 0, 0, 0, 0, 0];
+        {% endfor %}
     </script>
+</head>
+
+<body>
+    <div class="container demo">
+
+
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <i class="more-less glyphicon glyphicon-plus"></i>
+                            감정 분석 결과
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body" id="linechart1"></div>
+                    <div class="panel-body" id="piechart1"></div>
+                    <div class="panel-body" id="linechart2"></div>
+                    <div class="panel-body" id="piechart2"></div>
+                    <div class="panel-body" id="linechart3"></div>
+                    <div class="panel-body" id="piechart3"></div>
+                    <div class="panel-body" id="linechart4"></div>
+                    <div class="panel-body" id="piechart4"></div>
+                    <div class="panel-body" id="linechart5"></div>
+                    <div class="panel-body" id="piechart5"></div>
+                    <script>
+                        var length = emotionList.length;
+                        console.log(emotionList);
+                        var anger = {
+                            x: xAxis.slice(0,length),
+                            y: angerList.slice(0,length),
+                            type: 'lines',
+                            name: '화남'
+                        };
+                        var contempt = {
+                            x: xAxis.slice(0,length),
+                            y: contemptList.slice(0,length),
+                            type: 'lines',
+                            name: '경멸'
+                        };
+                        var disgust = {
+                            x: xAxis.slice(0,length),
+                            y: disgustList.slice(0,length),
+                            type: 'lines',
+                            name: '역겨움'
+                        };
+                        var fear = {
+                            x: xAxis.slice(0,length),
+                            y: fearList.slice(0,length),
+                            type: 'lines',
+                            name: '공포'
+                        };
+                        var happiness = {
+                            x: xAxis.slice(0,length),
+                            y: happinessList.slice(0,length),
+                            type: 'lines',
+                            name: '행복'
+                        };
+                        var neutral = {
+                            x: xAxis.slice(0,length),
+                            y: neutralList.slice(0,length),
+                            type: 'lines',
+                            name: '중립'
+                        };
+                        var sadness = {
+                            x: xAxis.slice(0,length),
+                            y: sadnessList.slice(0,length),
+                            type: 'lines',
+                            name: '슬픔'
+                        };
+                        var surprise = {
+                            x: xAxis.slice(0,length),
+                            y: surpriseList.slice(0,length),
+                            type: 'lines',
+                            name: '놀람'
+                        };
+                        var layout = {
+                            title: '질문1 감정 변화 추이',
+                            xaxis: {
+                                title: '시간'
+                            },
+                            yaxis: {
+                                title: '감정 비중'
+                            }
+                        }
+                        var data = [anger, contempt, disgust, fear, happiness, neutral, sadness, surprise];
+                        Plotly.newPlot('linechart1', data, layout);
+                       
+                        var anger = {
+                            x: xAxis.slice(length,2*length),
+                            y: angerList.slice(length,2*length),
+                            type: 'lines',
+                            name: '화남'
+                        };
+                        var contempt = {
+                            x: xAxis.slice(length,2*length),
+                            y: contemptList.slice(length,2*length),
+                            type: 'lines',
+                            name: '경멸'
+                        };
+                        var disgust = {
+                            x: xAxis.slice(length,2*length),
+                            y: disgustList.slice(length,2*length),
+                            type: 'lines',
+                            name: '역겨움'
+                        };
+                        var fear = {
+                            x: xAxis.slice(length,2*length),
+                            y: fearList.slice(length,2*length),
+                            type: 'lines',
+                            name: '공포'
+                        };
+                        var happiness = {
+                            x: xAxis.slice(length,2*length),
+                            y: happinessList.slice(length,2*length),
+                            type: 'lines',
+                            name: '행복'
+                        };
+                        var neutral = {
+                            x: xAxis.slice(length,2*length),
+                            y: neutralList.slice(length,2*length),
+                            type: 'lines',
+                            name: '중립'
+                        };
+                        var sadness = {
+                            x: xAxis.slice(length,2*length),
+                            y: sadnessList.slice(length,2*length),
+                            type: 'lines',
+                            name: '슬픔'
+                        };
+                        var surprise = {
+                            x: xAxis.slice(length,2*length),
+                            y: surpriseList.slice(length,2*length),
+                            type: 'lines',
+                            name: '놀람'
+                        };
+                        var layout = {
+                            title: '질문2 감정 변화 추이',
+                            xaxis: {
+                                title: '시간'
+                            },
+                            yaxis: {
+                                title: '감정 비중'
+                            }
+                        }
+                        var data = [anger, contempt, disgust, fear, happiness, neutral, sadness, surprise];
+                        Plotly.newPlot('linechart2', data, layout);
+
+                        var anger = {
+                            x: xAxis.slice(2*length,3*length),
+                            y: angerList.slice(2*length,3*length),
+                            type: 'lines',
+                            name: '화남'
+                        };
+                        var contempt = {
+                            x: xAxis.slice(2*length,3*length),
+                            y: contemptList.slice(2*length,3*length),
+                            type: 'lines',
+                            name: '경멸'
+                        };
+                        var disgust = {
+                            x: xAxis.slice(2*length,3*length),
+                            y: disgustList.slice(2*length,3*length),
+                            type: 'lines',
+                            name: '역겨움'
+                        };
+                        var fear = {
+                            x: xAxis.slice(2*length,3*length),
+                            y: fearList.slice(2*length,3*length),
+                            type: 'lines',
+                            name: '공포'
+                        };
+                        var happiness = {
+                            x: xAxis.slice(2*length,3*length),
+                            y: happinessList.slice(2*length,3*length),
+                            type: 'lines',
+                            name: '행복'
+                        };
+                        var neutral = {
+                            x: xAxis.slice(2*length,3*length),
+                            y: neutralList.slice(2*length,3*length),
+                            type: 'lines',
+                            name: '중립'
+                        };
+                        var sadness = {
+                            x: xAxis.slice(2*length,3*length),
+                            y: sadnessList.slice(2*length,3*length),
+                            type: 'lines',
+                            name: '슬픔'
+                        };
+                        var surprise = {
+                            x: xAxis.slice(2*length,3*length),
+                            y: surpriseList.slice(2*length,3*length),
+                            type: 'lines',
+                            name: '놀람'
+                        };
+                        var layout = {
+                            title: '질문3 감정 변화 추이',
+                            xaxis: {
+                                title: '시간'
+                            },
+                            yaxis: {
+                                title: '감정 비중'
+                            }
+                        }
+                        var data = [anger, contempt, disgust, fear, happiness, neutral, sadness, surprise];
+                        Plotly.newPlot('linechart3', data, layout);
+
+                        var anger = {
+                            x: xAxis.slice(3*length,4*length),
+                            y: angerList.slice(3*length,4*length),
+                            type: 'lines',
+                            name: '화남'
+                        };
+                        var contempt = {
+                            x: xAxis.slice(3*length,4*length),
+                            y: contemptList.slice(3*length,4*length),
+                            type: 'lines',
+                            name: '경멸'
+                        };
+                        var disgust = {
+                            x: xAxis.slice(3*length,4*length),
+                            y: disgustList.slice(3*length,4*length),
+                            type: 'lines',
+                            name: '역겨움'
+                        };
+                        var fear = {
+                            x: xAxis.slice(3*length,4*length),
+                            y: fearList.slice(3*length,4*length),
+                            type: 'lines',
+                            name: '공포'
+                        };
+                        var happiness = {
+                            x: xAxis.slice(3*length,4*length),
+                            y: happinessList.slice(3*length,4*length),
+                            type: 'lines',
+                            name: '행복'
+                        };
+                        var neutral = {
+                            x: xAxis.slice(3*length,4*length),
+                            y: neutralList.slice(3*length,4*length),
+                            type: 'lines',
+                            name: '중립'
+                        };
+                        var sadness = {
+                            x: xAxis.slice(3*length,4*length),
+                            y: sadnessList.slice(3*length,4*length),
+                            type: 'lines',
+                            name: '슬픔'
+                        };
+                        var surprise = {
+                            x: xAxis.slice(3*length,4*length),
+                            y: surpriseList.slice(3*length,4*length),
+                            type: 'lines',
+                            name: '놀람'
+                        };
+                        var layout = {
+                            title: '질문4 감정 변화 추이',
+                            xaxis: {
+                                title: '시간'
+                            },
+                            yaxis: {
+                                title: '감정 비중'
+                            }
+                        }
+                        var data = [anger, contempt, disgust, fear, happiness, neutral, sadness, surprise];
+                        Plotly.newPlot('linechart4', data, layout);
+
+                        var anger = {
+                            x: xAxis.slice(4*length,5*length),
+                            y: angerList.slice(4*length,5*length),
+                            type: 'lines',
+                            name: '화남'
+                        };
+                        var contempt = {
+                            x: xAxis.slice(4*length,5*length),
+                            y: contemptList.slice(4*length,5*length),
+                            type: 'lines',
+                            name: '경멸'
+                        };
+                        var disgust = {
+                            x: xAxis.slice(4*length,5*length),
+                            y: disgustList.slice(4*length,5*length),
+                            type: 'lines',
+                            name: '역겨움'
+                        };
+                        var fear = {
+                            x: xAxis.slice(4*length,5*length),
+                            y: fearList.slice(4*length,5*length),
+                            type: 'lines',
+                            name: '공포'
+                        };
+                        var happiness = {
+                            x: xAxis.slice(4*length,5*length),
+                            y: happinessList.slice(4*length,5*length),
+                            type: 'lines',
+                            name: '행복'
+                        };
+                        var neutral = {
+                            x: xAxis.slice(4*length,5*length),
+                            y: neutralList.slice(4*length,5*length),
+                            type: 'lines',
+                            name: '중립'
+                        };
+                        var sadness = {
+                            x: xAxis.slice(4*length,5*length),
+                            y: sadnessList.slice(4*length,5*length),
+                            type: 'lines',
+                            name: '슬픔'
+                        };
+                        var surprise = {
+                            x: xAxis.slice(4*length,5*length),
+                            y: surpriseList.slice(4*length,5*length),
+                            type: 'lines',
+                            name: '놀람'
+                        };
+                        var layout = {
+                            title: '질문5 감정 변화 추이',
+                            xaxis: {
+                                title: '시간'
+                            },
+                            yaxis: {
+                                title: '감정 비중'
+                            }
+                        }
+                        var data = [anger, contempt, disgust, fear, happiness, neutral, sadness, surprise];
+                        Plotly.newPlot('linechart5', data, layout);
+
+                        var data = [{
+                            values: emotionFreq[0],
+                            labels: ['화남', '경멸', '역겨움', '공포', '행복', '중립', '슬픔', '놀람'],
+                            type: 'pie',
+                            hoverinfo: 'label+percent',
+                        }];
+                        var layout = {
+                            title: '질문1 감정 빈도',
+                        }
+                        Plotly.newPlot('piechart1', data, layout);
+                        
+                        var data = [{
+                            values: emotionFreq[1],
+                            labels: ['화남', '경멸', '역겨움', '공포', '행복', '중립', '슬픔', '놀람'],
+                            type: 'pie',
+                            hoverinfo: 'label+percent',
+                        }];
+                        var layout = {
+                            title: '질문2 감정 빈도',
+                        }
+                        Plotly.newPlot('piechart2', data, layout);
+
+                        var data = [{
+                            values: emotionFreq[2],
+                            labels: ['화남', '경멸', '역겨움', '공포', '행복', '중립', '슬픔', '놀람'],
+                            type: 'pie',
+                            hoverinfo: 'label+percent',
+                        }];
+                        var layout = {
+                            title: '질문3 감정 빈도',
+                        }
+                        Plotly.newPlot('piechart3', data, layout);
+
+                        var data = [{
+                            values: emotionFreq[3],
+                            labels: ['화남', '경멸', '역겨움', '공포', '행복', '중립', '슬픔', '놀람'],
+                            type: 'pie',
+                            hoverinfo: 'label+percent',
+                        }];
+                        var layout = {
+                            title: '질문4 감정 빈도',
+                        }
+                        Plotly.newPlot('piechart4', data, layout);
+
+                        var data = [{
+                            values: emotionFreq[4],
+                            labels: ['화남', '경멸', '역겨움', '공포', '행복', '중립', '슬픔', '놀람'],
+                            type: 'pie',
+                            hoverinfo: 'label+percent',
+                        }];
+                        var layout = {
+                            title: '질문5 감정 빈도',
+                        }
+                        Plotly.newPlot('piechart5', data, layout);
+                    </script>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false"
+                            aria-controls="collapseTwo">
+                            <i class="more-less glyphicon glyphicon-plus"></i>
+                            음성 인식 결과
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
+                        non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
+                        moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+                        Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                        Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
+                        synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingThree">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false"
+                            aria-controls="collapseThree">
+                            <i class="more-less glyphicon glyphicon-plus"></i>
+                            성향 분석 결과
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
+                        non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
+                        moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+                        Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                        Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
+                        synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- panel-group -->
+        <div>
+            <a href="#" class="top">Top</a>
+        </div>
+    </div>
+    <!-- container -->
 </body>
+
 </html>

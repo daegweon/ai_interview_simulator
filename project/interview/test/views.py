@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-from project.interview.models import Interview, Question
+from project.interview.models import Interview, Question,InterviewCount
 import json
 from random import randint
 # Create your views here.
@@ -28,5 +28,7 @@ def testInterviewOnAir(request):
     return render(request,'project/interview/onAir.html',{'ques_id': ques_id, 'ques_text' : ques_text})
 
 def getTestResultPage(request):
-    emotionResult = Interview.objects.values('emotion').all() #몇회차 면접인지 정보가 추가적으로 들어가야함.
-    return render(request,'project/interview/interviewResult.html',{'emotionResult':emotionResult})
+    interview_count = InterviewCount.objects.values_list('interview_count',flat=True).filter(user_id = request.user) 
+    emotionResult = Interview.objects.values('emotion').filter(user_id = request.user,interview_count=11)
+    rowcount = emotionResult.count()
+    return render(request,'project/interview/interviewResult.html',{'emotionResult':emotionResult,'rowcount':rowcount})
