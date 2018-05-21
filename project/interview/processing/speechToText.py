@@ -27,7 +27,7 @@ def speechProcessing(src_filename, dst_filename):
         transcription += result2['results'][x]['alternatives'][0]['transcript']
         print(result2['results'][x]['alternatives'][0]['transcript'])'''
     tmpFilename = "temp.txt"
-    if os.path.exists(tmpFilename):
+    if os.path.isfile(tmpFilename):
         openType = 'a'
     else:
         openType = 'w'
