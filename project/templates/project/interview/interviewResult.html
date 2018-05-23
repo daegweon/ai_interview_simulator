@@ -26,8 +26,10 @@
         {% for emotion in emotionResult %}
         var emotionList = JSON.parse({{ emotion| safe }}["emotion"]);
         var rowcount = {{ rowcount }}
-        for (var i = 0; i < emotionList.length; i++) {
-            xAxis.push(i + 1);
+        var length = emotionList.length;
+        var temp = [];
+        for (var i = 0; i < length; i++) {
+            temp.push( i + 1);
             tempemotionFreq[emotionList[i].indexOf(Math.max.apply(null, emotionList[i]))] += 1;
             angerList.push(emotionList[i][0]);
             contemptList.push(emotionList[i][1]);
@@ -38,6 +40,8 @@
             sadnessList.push(emotionList[i][6]);
             surpriseList.push(emotionList[i][7]);
         }
+        xAxis.push(temp);
+        console.log(xAxis);
         emotionFreq.push(tempemotionFreq);
         tempemotionFreq = [0, 0, 0, 0, 0, 0, 0, 0];
         {% endfor %}
@@ -71,53 +75,51 @@
                     <div class="panel-body" id="linechart5"></div>
                     <div class="panel-body" id="piechart5"></div>
                     <script>
-                        var length = emotionList.length;
-                        console.log(emotionList);
                         var anger = {
-                            x: xAxis.slice(0,length),
-                            y: angerList.slice(0,length),
+                            x: xAxis[0],
+                            y: angerList.slice(0,xAxis[0].length),
                             type: 'lines',
                             name: '화남'
                         };
                         var contempt = {
-                            x: xAxis.slice(0,length),
-                            y: contemptList.slice(0,length),
+                            x: xAxis[0],
+                            y: contemptList.slice(0,xAxis[0].length),
                             type: 'lines',
                             name: '경멸'
                         };
                         var disgust = {
-                            x: xAxis.slice(0,length),
-                            y: disgustList.slice(0,length),
+                            x: xAxis[0],
+                            y: disgustList.slice(0,xAxis[0].length),
                             type: 'lines',
                             name: '역겨움'
                         };
                         var fear = {
-                            x: xAxis.slice(0,length),
-                            y: fearList.slice(0,length),
+                            x: xAxis[0],
+                            y: fearList.slice(0,xAxis[0].length),
                             type: 'lines',
                             name: '공포'
                         };
                         var happiness = {
-                            x: xAxis.slice(0,length),
-                            y: happinessList.slice(0,length),
+                            x: xAxis[0],
+                            y: happinessList.slice(0,xAxis[0].length),
                             type: 'lines',
                             name: '행복'
                         };
                         var neutral = {
-                            x: xAxis.slice(0,length),
-                            y: neutralList.slice(0,length),
+                            x: xAxis[0],
+                            y: neutralList.slice(0,xAxis[0].length),
                             type: 'lines',
                             name: '중립'
                         };
                         var sadness = {
-                            x: xAxis.slice(0,length),
-                            y: sadnessList.slice(0,length),
+                            x: xAxis[0],
+                            y: sadnessList.slice(0,xAxis[0].length),
                             type: 'lines',
                             name: '슬픔'
                         };
                         var surprise = {
-                            x: xAxis.slice(0,length),
-                            y: surpriseList.slice(0,length),
+                            x: xAxis[0],
+                            y: surpriseList.slice(0,xAxis[0].length),
                             type: 'lines',
                             name: '놀람'
                         };
@@ -134,50 +136,51 @@
                         Plotly.newPlot('linechart1', data, layout);
                        
                         var anger = {
-                            x: xAxis.slice(length,2*length),
-                            y: angerList.slice(length,2*length),
+                            x: xAxis[1],
+                            y: angerList.slice(xAxis[0].length,xAxis[0].length+xAxis[1].length),
                             type: 'lines',
                             name: '화남'
                         };
+                        console.log(anger.y);
                         var contempt = {
-                            x: xAxis.slice(length,2*length),
-                            y: contemptList.slice(length,2*length),
+                            x: xAxis[1],
+                            y: contemptList.slice(xAxis[0].length,xAxis[0].length+xAxis[1].length),
                             type: 'lines',
                             name: '경멸'
                         };
                         var disgust = {
-                            x: xAxis.slice(length,2*length),
-                            y: disgustList.slice(length,2*length),
+                            x: xAxis[1],
+                            y: disgustList.slice(xAxis[0].length,xAxis[0].length+xAxis[1].length),
                             type: 'lines',
                             name: '역겨움'
                         };
                         var fear = {
-                            x: xAxis.slice(length,2*length),
-                            y: fearList.slice(length,2*length),
+                            x: xAxis[1],
+                            y: fearList.slice(xAxis[0].length,xAxis[0].length+xAxis[1].length),
                             type: 'lines',
                             name: '공포'
                         };
                         var happiness = {
-                            x: xAxis.slice(length,2*length),
-                            y: happinessList.slice(length,2*length),
+                            x: xAxis[1],
+                            y: happinessList.slice(xAxis[0].length,xAxis[0].length+xAxis[1].length),
                             type: 'lines',
                             name: '행복'
                         };
                         var neutral = {
-                            x: xAxis.slice(length,2*length),
-                            y: neutralList.slice(length,2*length),
+                            x: xAxis[1],
+                            y: neutralList.slice(xAxis[0].length,xAxis[0].length+xAxis[1].length),
                             type: 'lines',
                             name: '중립'
                         };
                         var sadness = {
-                            x: xAxis.slice(length,2*length),
-                            y: sadnessList.slice(length,2*length),
+                            x: xAxis[1],
+                            y: sadnessList.slice(xAxis[0].length,xAxis[0].length+xAxis[1].length),
                             type: 'lines',
                             name: '슬픔'
                         };
                         var surprise = {
-                            x: xAxis.slice(length,2*length),
-                            y: surpriseList.slice(length,2*length),
+                            x: xAxis[1],
+                            y: surpriseList.slice(xAxis[0].length,xAxis[0].length+xAxis[1].length),
                             type: 'lines',
                             name: '놀람'
                         };
@@ -194,50 +197,50 @@
                         Plotly.newPlot('linechart2', data, layout);
 
                         var anger = {
-                            x: xAxis.slice(2*length,3*length),
-                            y: angerList.slice(2*length,3*length),
+                            x: xAxis[2],
+                            y: angerList.slice(xAxis[1].length,xAxis[1].length+xAxis[2].length),
                             type: 'lines',
                             name: '화남'
                         };
                         var contempt = {
-                            x: xAxis.slice(2*length,3*length),
-                            y: contemptList.slice(2*length,3*length),
+                            x: xAxis[2],
+                            y: contemptList.slice(xAxis[1].length,xAxis[1].length+xAxis[2].length),
                             type: 'lines',
                             name: '경멸'
                         };
                         var disgust = {
-                            x: xAxis.slice(2*length,3*length),
-                            y: disgustList.slice(2*length,3*length),
+                            x: xAxis[2],
+                            y: disgustList.slice(xAxis[1].length,xAxis[1].length+xAxis[2].length),
                             type: 'lines',
                             name: '역겨움'
                         };
                         var fear = {
-                            x: xAxis.slice(2*length,3*length),
-                            y: fearList.slice(2*length,3*length),
+                            x: xAxis[2],
+                            y: fearList.slice(xAxis[1].length,xAxis[1].length+xAxis[2].length),
                             type: 'lines',
                             name: '공포'
                         };
                         var happiness = {
-                            x: xAxis.slice(2*length,3*length),
-                            y: happinessList.slice(2*length,3*length),
+                            x: xAxis[2],
+                            y: happinessList.slice(xAxis[1].length,xAxis[1].length+xAxis[2].length),
                             type: 'lines',
                             name: '행복'
                         };
                         var neutral = {
-                            x: xAxis.slice(2*length,3*length),
-                            y: neutralList.slice(2*length,3*length),
+                            x: xAxis[2],
+                            y: neutralList.slice(xAxis[1].length,xAxis[1].length+xAxis[2].length),
                             type: 'lines',
                             name: '중립'
                         };
                         var sadness = {
-                            x: xAxis.slice(2*length,3*length),
-                            y: sadnessList.slice(2*length,3*length),
+                            x: xAxis[2],
+                            y: sadnessList.slice(xAxis[1].length,xAxis[1].length+xAxis[2].length),
                             type: 'lines',
                             name: '슬픔'
                         };
                         var surprise = {
-                            x: xAxis.slice(2*length,3*length),
-                            y: surpriseList.slice(2*length,3*length),
+                            x: xAxis[2],
+                            y: surpriseList.slice(xAxis[1].length,xAxis[1].length+xAxis[2].length),
                             type: 'lines',
                             name: '놀람'
                         };
@@ -254,50 +257,50 @@
                         Plotly.newPlot('linechart3', data, layout);
 
                         var anger = {
-                            x: xAxis.slice(3*length,4*length),
-                            y: angerList.slice(3*length,4*length),
+                            x: xAxis[3],
+                            y: angerList.slice(xAxis[2].length,xAxis[2].length+xAxis[3].length),
                             type: 'lines',
                             name: '화남'
                         };
                         var contempt = {
-                            x: xAxis.slice(3*length,4*length),
-                            y: contemptList.slice(3*length,4*length),
+                            x: xAxis[3],
+                            y: contemptList.slice(xAxis[2].length,xAxis[2].length+xAxis[3].length),
                             type: 'lines',
                             name: '경멸'
                         };
                         var disgust = {
-                            x: xAxis.slice(3*length,4*length),
-                            y: disgustList.slice(3*length,4*length),
+                            x: xAxis[3],
+                            y: disgustList.slice(xAxis[2].length,xAxis[2].length+xAxis[3].length),
                             type: 'lines',
                             name: '역겨움'
                         };
                         var fear = {
-                            x: xAxis.slice(3*length,4*length),
-                            y: fearList.slice(3*length,4*length),
+                            x: xAxis[3],
+                            y: fearList.slice(xAxis[2].length,xAxis[2].length+xAxis[3].length),
                             type: 'lines',
                             name: '공포'
                         };
                         var happiness = {
-                            x: xAxis.slice(3*length,4*length),
-                            y: happinessList.slice(3*length,4*length),
+                            x: xAxis[3],
+                            y: happinessList.slice(xAxis[2].length,xAxis[2].length+xAxis[3].length),
                             type: 'lines',
                             name: '행복'
                         };
                         var neutral = {
-                            x: xAxis.slice(3*length,4*length),
-                            y: neutralList.slice(3*length,4*length),
+                            x: xAxis[3],
+                            y: neutralList.slice(xAxis[2].length,xAxis[2].length+xAxis[3].length),
                             type: 'lines',
                             name: '중립'
                         };
                         var sadness = {
-                            x: xAxis.slice(3*length,4*length),
-                            y: sadnessList.slice(3*length,4*length),
+                            x: xAxis[3],
+                            y: sadnessList.slice(xAxis[2].length,xAxis[2].length+xAxis[3].length),
                             type: 'lines',
                             name: '슬픔'
                         };
                         var surprise = {
-                            x: xAxis.slice(3*length,4*length),
-                            y: surpriseList.slice(3*length,4*length),
+                            x: xAxis[3],
+                            y: surpriseList.slice(xAxis[2].length,xAxis[2].length+xAxis[3].length),
                             type: 'lines',
                             name: '놀람'
                         };
@@ -314,50 +317,50 @@
                         Plotly.newPlot('linechart4', data, layout);
 
                         var anger = {
-                            x: xAxis.slice(4*length,5*length),
-                            y: angerList.slice(4*length,5*length),
+                            x:xAxis[4],
+                            y: angerList.slice(xAxis[3].length,xAxis[3].length+xAxis[4].length),
                             type: 'lines',
                             name: '화남'
                         };
                         var contempt = {
-                            x: xAxis.slice(4*length,5*length),
-                            y: contemptList.slice(4*length,5*length),
+                            x:xAxis[4],
+                            y: contemptList.slice(xAxis[3].length,xAxis[3].length+xAxis[4].length),
                             type: 'lines',
                             name: '경멸'
                         };
                         var disgust = {
-                            x: xAxis.slice(4*length,5*length),
-                            y: disgustList.slice(4*length,5*length),
+                            x:xAxis[4],
+                            y: disgustList.slice(xAxis[3].length,xAxis[3].length+xAxis[4].length),
                             type: 'lines',
                             name: '역겨움'
                         };
                         var fear = {
-                            x: xAxis.slice(4*length,5*length),
-                            y: fearList.slice(4*length,5*length),
+                            x:xAxis[4],
+                            y: fearList.slice(xAxis[3].length,xAxis[3].length+xAxis[4].length),
                             type: 'lines',
                             name: '공포'
                         };
                         var happiness = {
-                            x: xAxis.slice(4*length,5*length),
-                            y: happinessList.slice(4*length,5*length),
+                            x:xAxis[4],
+                            y: happinessList.slice(xAxis[3].length,xAxis[3].length+xAxis[4].length),
                             type: 'lines',
                             name: '행복'
                         };
                         var neutral = {
-                            x: xAxis.slice(4*length,5*length),
-                            y: neutralList.slice(4*length,5*length),
+                            x:xAxis[4],
+                            y: neutralList.slice(xAxis[3].length,xAxis[3].length+xAxis[4].length),
                             type: 'lines',
                             name: '중립'
                         };
                         var sadness = {
-                            x: xAxis.slice(4*length,5*length),
-                            y: sadnessList.slice(4*length,5*length),
+                            x:xAxis[4],
+                            y: sadnessList.slice(xAxis[3].length,xAxis[3].length+xAxis[4].length),
                             type: 'lines',
                             name: '슬픔'
                         };
                         var surprise = {
-                            x: xAxis.slice(4*length,5*length),
-                            y: surpriseList.slice(4*length,5*length),
+                            x:xAxis[4],
+                            y: surpriseList.slice(xAxis[3].length,xAxis[3].length+xAxis[4].length),
                             type: 'lines',
                             name: '놀람'
                         };

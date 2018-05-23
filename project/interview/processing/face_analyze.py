@@ -21,7 +21,7 @@ url = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect' # Req
 headers = {
     # Request headers
     'Content-Type': 'application/octet-stream',
-    'Ocp-Apim-Subscription-Key': '764334d735844da0830ace92252fe842',
+    'Ocp-Apim-Subscription-Key': '0347551b54ab452d8ebbb6585bc78a1f',
 }
 
 params = urllib.parse.urlencode({

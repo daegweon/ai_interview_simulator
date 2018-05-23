@@ -29,6 +29,6 @@ def testInterviewOnAir(request):
 
 def getTestResultPage(request):
     interview_count = InterviewCount.objects.values_list('interview_count',flat=True).filter(user_id = request.user) 
-    emotionResult = Interview.objects.values('emotion').filter(user_id = request.user,interview_count=11)
+    emotionResult = Interview.objects.values('emotion').filter(user_id = request.user,interview_count=24)
     rowcount = emotionResult.count()
     return render(request,'project/interview/interviewResult.html',{'emotionResult':emotionResult,'rowcount':rowcount})

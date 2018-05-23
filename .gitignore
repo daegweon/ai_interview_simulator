@@ -10,6 +10,7 @@
 *.m4a
 *.jpg
 *.flac
+*.txt
 __pycache__/
 ai_interview_simulator/__pycache__/
 project/__pycache__/
