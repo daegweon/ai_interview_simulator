@@ -15,8 +15,4 @@ def personality_insights(text):
     content_language='ko',
     raw_scores=True, consumption_preferences=True)
 
-  '''f = open("result.json", "w")
-  f.write(json.dumps(profile, ident=2))
-  f.close()'''
-
   return profile

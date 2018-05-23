@@ -81,7 +81,7 @@ function startTick() {
   }, 1000);
 }
 
-function stopTick(){
+function stopTick() {
   clearInterval(timer)
 }
 
@@ -117,26 +117,29 @@ function handleStop(event) {
 }
 
 function toggleRecording() {
-  if(questionCount == 5){
+  console.log("hh")
+
+  if (recordButton.textContent === '면접 시작') {
+    document.getElementById("question").textContent = ques_text[questionCount]
+    startTick();
+    startRecording();
+  } else {
+    stopTick();
+    stopRecording();
+    questionCount += 1;
+    if (questionCount == 5) {
       questionCount = 0;
       recordButton.disabled = true;
-      document.getElementById("finInterview").style.display="inline";
+      document.getElementById("finInterview").style.display = "inline";
       recordButton.textContent = '면접 종료';
       stopTick();
-  }
-  else{
-    if (recordButton.textContent === '면접 시작') {
-      document.getElementById("question").textContent = ques_text[questionCount]
-      startTick();
-      startRecording();
-      questionCount += 1;
-    } else {
-      stopTick();
-      stopRecording();
+    }
+    else{
       recordButton.textContent = '면접 시작';
     }
   }
-  
+
+
 }
 
 function startRecording() {
@@ -190,10 +193,10 @@ function download() {
   formData.append('file', file);
   formData.append('csrfmiddlewaretoken', csrftoken);
   formData.append('questionId', quesId);
-  formData.append('trigger',0);
-  console.log(questionCount);
-  if(questionCount==1){
-    formData.append('trigger',1);
+  formData.append('questionCount', questionCount);
+
+  if(questionCount==4){
+    formData.append('questionList', quesId);
   }
   uploadToServer(formData);
 }
@@ -216,12 +219,12 @@ function uploadToServer(formData) {
 
 
 
-function ToggleWebCam(){
+function ToggleWebCam() {
   if (camOnOffButton.textContent === '카메라 OFF') {
     camOnOffButton.textContent = '카메라 ON';
-    document.getElementById("gum").style.visibility="hidden";
+    document.getElementById("gum").style.visibility = "hidden";
   } else {
-    document.getElementById("gum").style.visibility="";
+    document.getElementById("gum").style.visibility = "";
     camOnOffButton.textContent = '카메라 OFF';
   }
 }
