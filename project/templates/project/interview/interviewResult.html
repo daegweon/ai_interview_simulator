@@ -25,7 +25,6 @@
         var emotionFreq = [];
         {% for emotion in emotionResult %}
         var emotionList = JSON.parse({{ emotion| safe }}["emotion"]);
-        var rowcount = {{ rowcount }}
         var length = emotionList.length;
         var temp = [];
         for (var i = 0; i < length; i++) {
