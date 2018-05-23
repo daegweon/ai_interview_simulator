@@ -13,6 +13,8 @@ from multiprocessing import Process
 import sys
 import os
 import time
+import json
+import subprocess
 # Create your views here.
 
 @require_http_methods("POST")
@@ -40,7 +42,7 @@ def videoProcessing(request):
     user_id = User.objects.values_list('id', flat=True).get(username=request.user)
     questionId = request.POST["questionId"]
     interviewObj = InterviewCount.objects.get(user_id=user_id)
-    if request.POST["questionCount"]=="1":
+    if request.POST["questionCount"]=="0":
         interviewObj.interview_count += 1 
         interviewObj.save()
     
@@ -56,15 +58,24 @@ def videoProcessing(request):
     p1.start()
     p2.start()'''
 
-    if request.POST["questionCount"]=="5":
-        while True :
+    if request.POST["questionCount"]=="4":
+        try :
             f=open('temp.txt','r')
-            speechId=str(f.readline().strip())
-            if not speechId: break;
-            speechResult = json.loads(subprocess.check_output("gcloud ml speech operations wait %s"%speechId,shell=True))
-            transcription = speechToText.speechParsing(speechResult)
-        f.close()
-        os.remove('temp.txt')
+            index = 0
+            while index != 5 :
+                speechId=str(f.readline().strip())
+                if not speechId:
+                    print("ERROR : There's no speechId in temp.txt!")
+                    break #오류 처리 필요
+                speechResult = json.loads(subprocess.check_output("gcloud ml speech operations wait %s"%speechId,shell=True))
+                transcription = speechToText.speechParsing(speechResult)
+                tendency = personality.personality_insights(transcription)
+                questionIdToInsert = request.POST["questionList"][index]
+                Interview.objects.filter(question_id=questionIdToInsert, interview_count=interviewObj.interview_count, user_id=user_id).update(speech=speechResult, tendency=tendency)
+                index += 1
+        finally :   #오류 처리 필요(except문)
+            f.close()
+            os.remove('temp.txt')
     #speechResult = speechToText.speechProcessing('testaudio.flac','testupload.flac')
     #personality.personality_insights(speechResult)
     
