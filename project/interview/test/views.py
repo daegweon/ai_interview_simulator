@@ -33,11 +33,11 @@ def getTestResultPage(request):
     noun_count = 3
     questionList = []
     interview_count = InterviewCount.objects.values_list('interview_count',flat=True).filter(user_id = request.user) 
-    emotionResult = Interview.objects.values('emotion').filter(user_id = request.user,interview_count=24)
-    speechResult = Interview.objects.values('speech').filter(user_id = request.user,interview_count=24)
+    emotionResult = Interview.objects.values('emotion').filter(user_id = request.user,interview_count=11)
+    speechResult = Interview.objects.values('speech').filter(user_id = request.user,interview_count=11)
     for speech in speechResult:
         text += speech['speech']
         text += " "
 
     words = exportWord.get_tags(text, noun_count)
-    return render(request,'project/interview/interviewResult.html',{'emotionResult':emotionResult, 'words':words})
+    return render(request,'project/interview/interviewResult.html',{'emotionResult':emotionResult, 'words':words,'username':request.user})
