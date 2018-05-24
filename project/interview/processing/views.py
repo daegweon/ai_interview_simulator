@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth.models import User
-from project.interview.models import Question,Interview,InterviewCount
+from project.interview.models import Question,Interview,InterviewCount,tendencyResult
 from datetime import datetime
 from random import randint
 from . import speechToText
@@ -46,17 +46,16 @@ def videoProcessing(request):
         interviewObj.interview_count += 1 
         interviewObj.save()
     
-    Interview.objects.create(user_id=user_id,question_id=questionId,emotion='',speech='',tendency='',interview_count=interviewObj.interview_count,interview_date = datetime.now(), interview_type = '1')
+    Interview.objects.create(user_id=user_id,question_id=questionId,emotion='',speech='',interview_count=interviewObj.interview_count,interview_date = datetime.now(), interview_type = '1')
     interview_id = Interview.objects.values_list('id', flat=True).get(question_id=questionId,interview_count = interviewObj.interview_count)
     face_analyze.ReqAnalyze(interview_id, frame_dirname)
-    '''speechResult = speechToText.speechProcessing(audio_filename, upload_filename)
-    tendency = personality.personality_insights(speechResult)  
-    Interview.objects.filter(id=interview_id).update(speech=speechResult, tendency=tendency)   '''  
     speechToText.speechProcessing(audio_filename, upload_filename) 
     '''p1 = Process(target=face,args=(interview_id,))
     p2 = Process(target=audio,args=(interview_id,audio_filename,upload_filename,))
     p1.start()
     p2.start()'''
+
+    allSpeech = ""
 
     if request.POST["questionCount"]=="4":
         try :
@@ -69,17 +68,17 @@ def videoProcessing(request):
                     break #오류 처리 필요
                 speechResult = json.loads(subprocess.check_output("gcloud ml speech operations wait %s"%speechId,shell=True))
                 transcription = speechToText.speechParsing(speechResult)
-                tendency = personality.personality_insights(transcription)
+                allSpeech += transcription + " "
                 questionIdToInsert = request.POST["questionList"][index]
-                Interview.objects.filter(question_id=questionIdToInsert, interview_count=interviewObj.interview_count, user_id=user_id).update(speech=speechResult, tendency=tendency)
+                Interview.objects.filter(question_id=questionIdToInsert, interview_count=interviewObj.interview_count, user_id=user_id).update(speech=transcription)
                 index += 1
         finally :   #오류 처리 필요(except문)
             f.close()
             os.remove('temp.txt')
-    #speechResult = speechToText.speechProcessing('testaudio.flac','testupload.flac')
-    #personality.personality_insights(speechResult)
-    
+        tendency = personality.personality_insights(allSpeech)
+        tendencyResult.objects.create(interview_count=interviewObj.interview_count, user_id=user_id, tendency=tendency)
 
+    os.remove(video_filename)
     return HttpResponse('good')
 
 def face(interview_id):

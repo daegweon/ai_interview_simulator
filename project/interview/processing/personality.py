@@ -12,7 +12,7 @@ def personality_insights(text):
   #with open(path.join(path.dirname(__file__), './test.txt')) as profile_txt: (텍스트를 파일로 읽을때 사용. 아래쪽의 text 자리에 profile_text.read()로 대체하면 됨)
   profile = personality_insights.profile(
     text, content_type='text/plain;charset=cp949',
-    content_language='ko',
+    content_language='ko', accept_language='ko',
     raw_scores=True, consumption_preferences=True)
 
   return profile

@@ -8,7 +8,6 @@
 *.wav
 *.webm
 *.m4a
-*.jpg
 *.flac
 *.txt
 __pycache__/

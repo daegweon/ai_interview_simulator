@@ -11,6 +11,9 @@
     <script src='{%static "js/interviewResult.js" %}'></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+    <script src='{%static "js/personality.js" %}'></script>
+    <script src="https://d3js.org/d3-color.v1.min.js"></script>
     <script>
         var angerList = [];
         var contemptList = [];
@@ -104,14 +107,16 @@
                             });
                             return r;
                         }, []);
-                        var maxEmotionValue1 = totalEmotionFreq.indexOf(Math.max.apply(null,totalEmotionFreq));
-                        totalEmotionFreq.splice(maxEmotionValue1,1);
-                        var maxEmotionValue2 = totalEmotionFreq.indexOf(Math.max.apply(null,totalEmotionFreq));
-                        totalEmotionFreq.splice(maxEmotionValue2,1);
-                        var maxEmotionValue3 = totalEmotionFreq.indexOf(Math.max.apply(null,totalEmotionFreq));
-                        if(Math.max.apply(null,totalEmotionFreq)==0){maxEmotionValue3=-1;}
-                        function emotionFunc(emotionvalue){
-                            switch(emotionvalue){
+                        console.log(totalEmotionFreq);
+                        var maxEmotionValue1 = totalEmotionFreq.indexOf(Math.max.apply(null, totalEmotionFreq));
+                        totalEmotionFreq.splice(maxEmotionValue1, 1);
+                        var maxEmotionValue2 = totalEmotionFreq.indexOf(Math.max.apply(null, totalEmotionFreq));
+                        if (Math.max.apply(null, totalEmotionFreq) == 0) { maxEmotionValue2 = -1; }
+                        totalEmotionFreq.splice(maxEmotionValue2, 1);
+                        var maxEmotionValue3 = totalEmotionFreq.indexOf(Math.max.apply(null, totalEmotionFreq));
+                        if (Math.max.apply(null, totalEmotionFreq) == 0) { maxEmotionValue3 = -1; }
+                        function emotionFunc(emotionvalue) {
+                            switch (emotionvalue) {
                                 case 0:
                                     return "화남";
                                     break;
@@ -135,17 +140,17 @@
                                     break;
                                 case 7:
                                     return "놀람";
-                                    break;       
+                                    break;
                                 default:
                                     return "없음";
-                                    break;                         
+                                    break;
                             }
                         }
                         document.getElementById("usernameSection").innerHTML = "{{username}}님의 분석 결과 입니다.<br><br>";
                         document.getElementById("totalTime").innerHTML = "총 면접 시간 : " + minute + "분" + second + "초<br><br>";
                         document.getElementById("questionContent").innerHTML = "질문1:<br>질문2:<br>질문3:<br>질문4:<br>질문5:<br><br>";
                         document.getElementById("questionTime").innerHTML = "길게 답변한 질문: " + parseInt(maxQuestionTime / 60) + "분 " + maxQuestionTime % 60 + "초<br>가장 짧게 답변한 질문: " + parseInt(minQuestionTime / 60) + "분 " + minQuestionTime % 60 + "초<br><br>";
-                        document.getElementById("best").innerHTML = "감정 빈도<br> 1위: "+emotionFunc(maxEmotionValue1)+"<br>2위: "+emotionFunc(maxEmotionValue2)+"<br>3위: "+emotionFunc(maxEmotionValue3)+"<br><br>성향 BEST3:<br>높은 수치 가장 많이 사용한 단어 BEST3: 많이 말한 순위 1,2,3 그 다음 몇번말했는지<br>";
+                        document.getElementById("best").innerHTML = "감정 빈도<br> 1위: " + emotionFunc(maxEmotionValue1) + "<br>2위: " + emotionFunc(maxEmotionValue2) + "<br>3위: " + emotionFunc(maxEmotionValue3) + "<br><br>성향 BEST3:<br>높은 수치 가장 많이 사용한 단어 BEST3: 많이 말한 순위 1,2,3 그 다음 몇번말했는지<br>";
                     </script>
                 </div>
             </div>
@@ -160,15 +165,15 @@
                         </a>
                     </h4>
                 </div>
-                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" align="center">
                     <div class="panel-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
-                        non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-                        moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-                        Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                        Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
-                        synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        <div id="sunburstChart"></div>
                     </div>
+                    <script>
+                        var profile = {{ personality | safe }};
+                        var chart = new PersonalitySunburstChart({ selector: '#sunburstChart', version: 'v3' });
+                        chart.show(profile);
+                    </script>
                 </div>
             </div>
         </div>

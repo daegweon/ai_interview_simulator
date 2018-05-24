@@ -196,7 +196,7 @@ function download() {
   formData.append('questionCount', questionCount);
 
   if(questionCount==4){
-    formData.append('questionList', quesId);
+    formData.append('questionList', ques_id);
   }
   uploadToServer(formData);
 }
