@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>AIS - A.I Interview Simulator</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href='{%static "vendor/bootstrap/css/bootstrap.min.css" %}' rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href='{%static "vendor/font-awesome/css/font-awesome.min.css" %}' rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href='{%static "css/agency.min.css" %}' rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container" style="background-color: darkgray">
+            <a class="navbar-brand js-scroll-trigger" style="color: White" href="#page-top">AIS</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#introduction">Introduction</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#interview">Interview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#results">Results</a>
+                    </li>
+
+                    <!-- 로그인에 성공하면 sign in은 안보이게 바뀐다 -->
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="/member/logout/">Logout</a>
+                    </li>
+
+                    <!-- 로그인에 성공하면 사용자의 이름으로 바뀐다 -->
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" id="name"></a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <!-- Interview -->
+    <section class="bg-light" style="height: 700px" id="interview">
+        <div class="container">
+            <div class="row" style="height: 480px;">
+                <div class="col-lg-12 text-center" style="width: 460px;height: inherit; margin-right: 35px; padding: 20px">
+                    <br>
+                    <h2 class="section-heading text-uppercase" style="width: inherit">셀프 점검</h2>
+                    <br><br>
+                    <h3 class="section-subheading text-muted" style="width: inherit">1. 카메라 테스트 - 본인의 모습이 잘 나오는지 확인해주세요.</h3>
+                    <h3 class="section-subheading text-muted" style="width: inherit">2. 마이크 테스트 - 본인의 음성이 잘 들리는지 확인해주세요.</h3>
+                    <h3 class="section-subheading text-muted" style="width: inherit">3. 점검이 완료되면 다음 단계를 진행해주세요.</h3>
+                    <input type="button" value="다음" onclick="window.location.href='/interviews/test/on-air/'"/>
+                </div>
+                <div style="float: right; width: auto; height: inherit; padding: 20px">
+                    <video style="border: 1px solid black; align-items: center;" id="video" width="580" height="440" autoplay></video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <span class="copyright">Copyright &copy; Your Website 2018</span>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline social-buttons">
+                        <li class="list-inline-item">
+                            <a href="#">
+                  <i class="fa fa-twitter"></i>
+                </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                  <i class="fa fa-facebook"></i>
+                </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                  <i class="fa fa-linkedin"></i>
+                </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline quicklinks">
+                        <li class="list-inline-item">
+                            <a href="#">Privacy Policy</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">Terms of Use</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+    <script>
+        // Grab elements, create settings, etc.
+        var video = document.getElementById('video');
+
+        // Get access to the camera and microphone!
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({
+                video: true,
+                audio: true
+            }).then(function(stream) {
+                video.src = window.URL.createObjectURL(stream);
+                video.play();
+            });
+        }
+
+    </script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src='{%static "vendor/jquery/jquery.min.js" %}'></script>
+    <script src='{%static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}'></script>
+
+    <!-- Plugin JavaScript -->
+    <script src='{%static "vendor/jquery-easing/jquery.easing.min.js" %}'></script>
+
+    <!-- Custom scripts for this template -->
+    <script src='{%static "js/agency.min.js" %}'></script>
+
+</body>
+
+</html>
