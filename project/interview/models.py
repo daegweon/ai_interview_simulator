@@ -23,6 +23,6 @@ class InterviewCount(models.Model):
 
 class tendencyResult(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    interview_count = models.ForeignKey(InterviewCount, on_delete=models.CASCADE)
+    interview_count = models.IntegerField(default=0)
     tendency = models.TextField()
 

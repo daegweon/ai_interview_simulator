@@ -45,7 +45,7 @@ async def analyze(filename,interview_id,frame_dirname):
         with open(frame_dirname + filename, 'rb') as img:
             regex = re.compile(r'\d+')
             body = img.read()
-
+        
         async with aiohttp.ClientSession() as session:
             async with session.post(url, data=body, headers=headers, params=params) as resp:
                 res = await resp.json()
@@ -63,7 +63,7 @@ async def analyze(filename,interview_id,frame_dirname):
                 interview_emotion.save()      
 
     except Exception as e:
-        print('error: '+str(e))
+        print('error: '+ frame_dirname + filename)
 
 def ReqAnalyze(interview_id, frame_dirname):
     initEmotionData()
