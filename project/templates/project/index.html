@@ -13,7 +13,6 @@
 
     <!-- Bootstrap core CSS -->
     <link href='{%static "vendor/bootstrap/css/bootstrap.min.css" %}' rel="stylesheet">
-
     <!-- Custom fonts for this template -->
     <link href='{%static "vendor/font-awesome/css/font-awesome.min.css" %}' rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -24,7 +23,7 @@
     <!-- Custom styles for this template -->
     <link href='{%static "css/agency.min.css" %}' rel="stylesheet">
     <link href='{%static "css/login.css" %}' rel="stylesheet">
-
+    <link href='{%static "css/login_status.css" %}' rel="stylesheet">
 
 </head>
 
@@ -35,7 +34,15 @@
         <div class="container">
             <a class="navbar-brand js-scroll-trigger" style="color: #205ec1" href="#page-top">AIS</a>
             {% if user.is_authenticated %}
-            <a style="color:white">{{user.username}}님 환영합니다.</a>
+            <div class="profile-header-container">   
+                <div class="profile-header-img">
+                    <img class="img-circle" src='{%static "img/user.png"%}' />
+                    <!-- badge -->
+                    <div class="rank-label-container">
+                        <span class="label label-default rank-label">{{user.username}}</span>
+                    </div>
+                </div>
+            </div> 
             {% endif %}
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
