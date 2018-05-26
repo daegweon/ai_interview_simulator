@@ -36,7 +36,7 @@ def videoProcessing(request):
         os.mkdir(frame_dirname)
        
     os.system('ffmpeg -i '+ video_filename +' -vf fps=1/1 '+frame_dirname+'img%d.jpg')    
-    os.system('ffmpeg -fix_sub_duration -i %s -vn %s'%(video_filename, audio_filename)) #옵션 설명 : y : 같은 이름 overwrite , -vn : 음성에 비디오를 포함하지 않겠다. 음성을 포함할 경우 변환시간 오래걸림
+    os.system('ffmpeg -i %s -vn -c:a flac -compression_level 8 %s'%(video_filename, audio_filename)) #옵션 설명 : y : 같은 이름 overwrite , -vn : 음성에 비디오를 포함하지 않겠다. 음성을 포함할 경우 변환시간 오래걸림
 
     #print(request.user) #AnonymousUser 로그인안하면 이렇게 출력된다.
     user_id = User.objects.values_list('id', flat=True).get(username=request.user)
@@ -61,6 +61,7 @@ def videoProcessing(request):
         try :
             f=open('temp.txt','r')
             index = 0
+            questionIdToInsert = request.POST["questionList"].split(",")
             while index != 5 :
                 speechId=str(f.readline().strip())
                 if not speechId:
@@ -69,8 +70,7 @@ def videoProcessing(request):
                 speechResult = json.loads(subprocess.check_output("gcloud ml speech operations wait %s"%speechId,shell=True))
                 transcription = speechToText.speechParsing(speechResult)
                 allSpeech += transcription + " "
-                questionIdToInsert = request.POST["questionList"][index]
-                Interview.objects.filter(question_id=questionIdToInsert, interview_count=interviewObj.interview_count, user_id=user_id).update(speech=transcription)
+                Interview.objects.filter(question_id=questionIdToInsert[index], interview_count=interviewObj.interview_count, user_id=user_id).update(speech=transcription)
                 index += 1
         finally :   #오류 처리 필요(except문)
             f.close()
@@ -91,3 +91,4 @@ def audio(interview_id,audio_filename,upload_filename):
     tendency = personality.personality_insights(speechResult)  
     Interview.objects.filter(id=interview_id).update(speech=speechResult, tendency=tendency)   '''  
     speechToText.speechProcessing(audio_filename, upload_filename) 
+    

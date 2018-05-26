@@ -2,6 +2,7 @@ import json
 from google.cloud import storage
 import subprocess
 import os
+import asyncio
 
 def speechProcessing(src_filename, dst_filename):
 

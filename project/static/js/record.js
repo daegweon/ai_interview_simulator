@@ -119,7 +119,7 @@ function handleStop(event) {
 function toggleRecording() {
   console.log("hh")
 
-  if (recordButton.textContent === '면접 시작') {
+  if (recordButton.textContent === '면접 시작' || recordButton.textContent === '다음 문제') {
     document.getElementById("question").textContent = ques_text[questionCount]
     startTick();
     startRecording();
@@ -135,7 +135,7 @@ function toggleRecording() {
       stopTick();
     }
     else{
-      recordButton.textContent = '면접 시작';
+      recordButton.textContent = '다음 문제';
     }
   }
 
@@ -166,7 +166,7 @@ function startRecording() {
     return;
   }
   console.log('Created MediaRecorder', mediaRecorder, 'with options', options);
-  recordButton.textContent = '다음 문제';
+  recordButton.textContent = '답변 종료';
   mediaRecorder.onstop = handleStop;
   mediaRecorder.ondataavailable = handleDataAvailable;
   mediaRecorder.start(10); // collect 10ms of data
@@ -202,7 +202,6 @@ function download() {
 }
 
 function uploadToServer(formData) {
-
   $.ajax({
     url: '/interviews/video-processing/',
     type: 'POST',
@@ -211,13 +210,12 @@ function uploadToServer(formData) {
     contentType: false,
     async: true,
     success: function (data) {
-      alert('complete');
+      if(data ==='good') alert('complete');
+      else alert('??');
     }
   });
   return false;
 }
-
-
 
 function ToggleWebCam() {
   if (camOnOffButton.textContent === '카메라 OFF') {

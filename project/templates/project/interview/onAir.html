@@ -10,6 +10,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href='{%static "css/records.css" %}' rel="stylesheet">
+    <script>
+        var ques_id = {{ ques_id | safe }};
+        var ques_text = {{ ques_text | safe}};
+    </script>
 </head>
 
 <body>
@@ -68,16 +72,16 @@
 
                 <br>
                 <br>
-                <h4 id="question">질문을 여기에?</h4>
+                <h4 id="question">시작 버튼을 누르시면 질문이 표시됩니다.</h4>
                 <br>
                 <div>
                     <button type="button" id="camOnOff" class="btn btn-danger">카메라 OFF</button>
                     <button type="button" id="record" class="btn btn-primary" disabled>면접 시작</button>
-                    <button type="button" id="finInterview" class="btn btn-success" style="text-align: right; display: none;"  onclick="window.location.href='/interviews/test/result/'">결과 보기</button>
+                    <button type="button" id="finInterview" class="btn btn-success" style="text-align: right; display: none;" onclick="window.location.href='{% url 'testResult' ic=interview_count %}'">결과 보기</button>
                 </div>
             </div>
             <div class="col-sm-4 sidenav">
-                <div class="well">
+                <div class="well"> 
                     <p style="text-align: left">분석 같은걸 여기에?</p>
                 </div>
                 <div class="well">
@@ -90,12 +94,7 @@
     <footer class="container-fluid text-center">
         <p>Footer Text</p>
     </footer>
-
-    <script>
-        var ques_id = {{ ques_id | safe }};
-        var ques_text = {{ ques_text | safe}};
-    </script>
-    <script src='{%static "js/record.js" %}?ver=180524'></script>
+    <script src='{%static "js/record.js" %}'></script>
 </body>
 
 </html>
