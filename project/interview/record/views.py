@@ -8,9 +8,10 @@ connection = pymysql.connect(host='localhost', user='root', password='humanroot'
 def getRecordPage(request):
     recordList=[]
     dateList=[]
+    interviewList=[]
     count=0
     cursor = connection.cursor()
-    sql = "select * from project_interview;"
+    sql = "select * from project_interview group by interview_count;"
     cursor.execute(sql)
     rows = cursor.fetchall()
     for row in rows:
@@ -18,5 +19,6 @@ def getRecordPage(request):
         recordList.append(row)
     for i in range(count):
         dateList.append(str(recordList[i][4])) #4번째 element가 date
+        interviewList.append(recordList[i][3])
     cursor.close()
-    return render(request, 'project/record/index.html', {'date':dateList})
+    return render(request, 'project/record/index.html', {'date':dateList, 'interviewList':interviewList})
