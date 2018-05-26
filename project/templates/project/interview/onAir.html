@@ -69,9 +69,6 @@
                 </p>
             </div>
             <div class="col-sm-7">
-                <br>
-
-                </video>
                 <div id="content">
                     <div id="container">
                         <video id="gum" width="400" height="300" preload="auto" playsinline autoplay loop></video>
@@ -153,7 +150,7 @@
             if (er) {
                 updateData(er);
                 for (var i = 0; i < er.length; i++) {
-                    if (er[i].value > 0.7) {
+                    if (er[i].value > 0.8) {
                         document.getElementById('icon' + (i + 1)).style.visibility = 'visible';
                     } else {
                         document.getElementById('icon' + (i + 1)).style.visibility = 'hidden';

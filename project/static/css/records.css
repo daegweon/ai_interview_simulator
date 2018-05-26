@@ -135,7 +135,7 @@ body {
 }
 
 #icon1, #icon2, #icon3, #icon4, #icon5, #icon6 {
-  visibility : visible;
+  visibility : hidden;
 }
 
 /* d3 */
