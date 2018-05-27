@@ -1,58 +1,145 @@
 h4 {
-  font-family: times, Times New Roman, times-roman, georgia, serif;
-  color: #444;
-  margin: 0;
-  padding: 0px 0px 6px 0px;
-  font-size: 51px;
-  line-height: 44px;
-  letter-spacing: -2px;
-  font-weight: bold;
+font-family: times, Times New Roman, times-roman, georgia, serif;
+color: #444;
+margin: 0;
+padding: 0px 0px 6px 0px;
+font-size: 51px;
+line-height: 44px;
+letter-spacing: -2px;
+font-weight: bold;
 }
 
 p {
-  font-family: Gill Sans, Verdana;
-  font-size: 14px;
-  line-height: 14px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-weight: bold;
+font-family: Gill Sans, Verdana;
+font-size: 14px;
+line-height: 14px;
+text-transform: uppercase;
+letter-spacing: 2px;
+font-weight: bold;
 }
 
 .navbar {
-  margin-bottom: 0;
-  border-radius: 0;
+margin-bottom: 0;
+border-radius: 0;
 }
 
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 
 .row.content {
-  height: 750px
+height: 750px
 }
 
 /* Set gray background color and 100% height */
 
 .sidenav {
-  padding-top: 20px;
-  background-color: #f1f1f1;
-  height: 100%;
+padding-top: 20px;
+background-color: #f1f1f1;
+height: 100%;
 }
 
 /* Set black background color, white text and some padding */
 
 footer {
-  background-color: #555;
-  color: white;
-  padding: 15px;
+background-color: #555;
+color: white;
+padding: 15px;
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */
 
 @media screen and (max-width: 767px) {
-  .sidenav {
-      height: auto;
-      padding: 15px;
-  }
-  .row.content {
-      height: auto;
-  }
+.sidenav {
+height: auto;
+padding: 15px;
+}
+.row.content {
+height: auto;
+}
+}
+
+@import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
+
+body {
+  font-family: 'Lato';
+  background-color: #f0f0f0;
+  margin: 0px auto;
+  max-width: 1150px;
+}
+
+#overlay {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  -o-transform : scaleX(-1);
+  -webkit-transform : scaleX(-1);
+  transform : scaleX(-1);
+  -ms-filter : fliph; /*IE*/
+  filter : fliph; /*IE*/
+
+  
+}
+
+#gum {
+  -o-transform : scaleX(-1);
+  -webkit-transform : scaleX(-1);
+  transform : scaleX(-1);
+  -ms-filter : fliph; /*IE*/
+  filter : fliph; /*IE*/
+
+  
+}
+
+#container {
+  position : relative;
+  width : 370px;
+  /*margin : 0px auto;*/
+}
+
+#content {
+  margin-top : 50px;
+  margin-left : auto;
+  margin-right : auto;
+  max-width: 600px;
+}
+
+.btn {
+  font-family: 'Lato';
+  font-size: 16px;
+}
+
+#controls {
+  text-align : center;
+}
+
+#emotion_container {
+  width: 600px;
+}
+
+#emotion_icons {
+  height: 50px;
+  padding-left: 10px;
+}
+
+.emotion_icon {
+  width : 40px;
+  height : 40px;
+  margin-top: 5px;
+  /*margin-left : 13px;*/
+  margin-left : 2px;
+  margin-right : 8px;
+}
+
+#emotion_chart, #emotion_icons {
+  margin: 0px;
+  width : 400px;
+}
+
+#icon1, #icon2, #icon3, #icon4, #icon5, #icon6 {
+  visibility : hidden;
+}
+
+/* d3 */
+.bar {
+  fill : steelblue;
+  fill-opacity : .9;
 }

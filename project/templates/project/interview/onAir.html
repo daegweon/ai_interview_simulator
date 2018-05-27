@@ -10,10 +10,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href='{%static "css/records.css" %}' rel="stylesheet">
-    <script>
-        var ques_id = {{ ques_id | safe }};
-        var ques_text = {{ ques_text | safe}};
-    </script>
+    <script src='{%static "js/clmtrackr.js" %}'></script>
+    <script src='{%static "js/emotionmodel.js" %}'></script>
+    <script src='{%static "js/emotion_classifier.js" %}'></script>
+    <script src='{%static "js/model_pca_20_svm.js" %}'></script>
+    <script src='{%static "js/d3.min.js" %}'></script>
+    <script src='{%static "js/Stats.js" %}'></script>
+    <script src='{%static "js/utils.js" %}'></script>
 </head>
 
 <body>
@@ -66,10 +69,27 @@
                 </p>
             </div>
             <div class="col-sm-7">
-                <br>
-
-                <video id="gum" style="border: 1px solid black; align-items: center;" autoplay muted width="70%"></video>
-
+                <div id="content">
+                    <div id="container">
+                        <video id="gum" width="400" height="300" preload="auto" playsinline autoplay loop></video>
+                        <canvas id="overlay" width="400" height="300"></canvas>
+                    </div>
+                    <div id="emotion_container">
+                        <div id="emotion_icons">
+                            <img class="emotion_icon" id="icon1" src="{%static "img/icon_angry.png"%}">
+                            <img class="emotion_icon" id="icon2" src="{%static "img/icon_disgust.png"%}">
+                            <img class="emotion_icon" id="icon3" src="{%static "img/icon_fear.png"%}">
+                            <img class="emotion_icon" id="icon4" src="{%static "img/icon_sad.png"%}">
+                            <img class="emotion_icon" id="icon5" src="{%static "img/icon_surprised.png"%}">
+                            <img class="emotion_icon" id="icon6" src="{%static "img/icon_happy.png"%}">
+                        </div>
+                        <div id="emotion_chart">
+                        </div>
+                    </div>
+                    <div id="controls">
+                        <input class="btn" type="button" value="start" onclick="startVideo()" id="startbutton">
+                    </div>
+                </div>
                 <br>
                 <br>
                 <h4 id="question">시작 버튼을 누르시면 질문이 표시됩니다.</h4>
@@ -94,6 +114,141 @@
     <footer class="container-fluid text-center">
         <p>Footer Text</p>
     </footer>
+    <script type="text/javascript">
+        var videoInput = document.getElementById('gum');
+        pModel.shapeModel.nonRegularizedVectors.push(9);
+        pModel.shapeModel.nonRegularizedVectors.push(11);
+        var ctracker = new clm.tracker({ useWebGL: true });
+        ctracker.init(pModel);
+        var trackingStarted = false;
+
+        function startVideo() {
+            // start video
+            videoInput.play();
+            // start tracking
+            ctracker.start(videoInput);
+            trackingStarted = true;
+            // start loop to draw face
+            drawLoop();
+        }
+
+        var ec = new emotionClassifier();
+        ec.init(emotionModel);
+        var emotionData = ec.getBlank();
+
+        var canvasInput = document.getElementById('overlay');
+        var cc = canvasInput.getContext('2d');
+
+        function drawLoop() {
+            requestAnimationFrame(drawLoop);
+            cc.clearRect(0, 0, canvasInput.width, canvasInput.height);
+            if (ctracker.getCurrentPosition()) {
+                ctracker.draw(canvasInput);
+            }
+            var cp = ctracker.getCurrentParameters();
+            var er = ec.meanPredict(cp);
+            if (er) {
+                updateData(er);
+                for (var i = 0; i < er.length; i++) {
+                    if (er[i].value > 0.8) {
+                        document.getElementById('icon' + (i + 1)).style.visibility = 'visible';
+                    } else {
+                        document.getElementById('icon' + (i + 1)).style.visibility = 'hidden';
+                    }
+                }
+            }
+        }
+        /************ d3 code for barchart *****************/
+
+        var margin = { top: 20, right: 20, bottom: 10, left: 40 },
+            width = 400 - margin.left - margin.right,
+            height = 100 - margin.top - margin.bottom;
+
+        var barWidth = 30;
+
+        var formatPercent = d3.format(".0%");
+
+        var x = d3.scale.linear()
+            .domain([0, ec.getEmotions().length]).range([margin.left, width + margin.left]);
+
+        var y = d3.scale.linear()
+            .domain([0, 1]).range([0, height]);
+
+        var svg = d3.select("#emotion_chart").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+
+        svg.selectAll("rect").
+            data(emotionData).
+            enter().
+            append("svg:rect").
+            attr("x", function (datum, index) { return x(index); }).
+            attr("y", function (datum) { return height - y(datum.value); }).
+            attr("height", function (datum) { return y(datum.value); }).
+            attr("width", barWidth).
+            attr("fill", "#2d578b");
+
+        svg.selectAll("text.labels").
+            data(emotionData).
+            enter().
+            append("svg:text").
+            attr("x", function (datum, index) { return x(index) + barWidth; }).
+            attr("y", function (datum) { return height - y(datum.value); }).
+            attr("dx", -barWidth / 2).
+            attr("dy", "1.2em").
+            attr("text-anchor", "middle").
+            text(function (datum) { return datum.value; }).
+            attr("fill", "white").
+            attr("class", "labels");
+
+        svg.selectAll("text.yAxis").
+            data(emotionData).
+            enter().append("svg:text").
+            attr("x", function (datum, index) { return x(index) + barWidth; }).
+            attr("y", height).
+            attr("dx", -barWidth / 2).
+            attr("text-anchor", "middle").
+            attr("style", "font-size: 12").
+            text(function (datum) { return datum.emotion; }).
+            attr("transform", "translate(0, 18)").
+            attr("class", "yAxis");
+
+        function updateData(data) {
+            // update
+            var rects = svg.selectAll("rect")
+                .data(data)
+                .attr("y", function (datum) { return height - y(datum.value); })
+                .attr("height", function (datum) { return y(datum.value); });
+            var texts = svg.selectAll("text.labels")
+                .data(data)
+                .attr("y", function (datum) { return height - y(datum.value); })
+                .text(function (datum) { return datum.value.toFixed(1); });
+
+            // enter
+            rects.enter().append("svg:rect");
+            texts.enter().append("svg:text");
+
+            // exit
+            rects.exit().remove();
+            texts.exit().remove();
+        }
+
+        /******** stats ********/
+
+        stats = new Stats();
+        stats.domElement.style.position = 'absolute';
+        stats.domElement.style.top = '0px';
+        document.getElementById('container').appendChild(stats.domElement);
+
+        // update stats on every iteration
+        document.addEventListener('clmtrackrIteration', function (event) {
+            stats.update();
+        }, false);
+    </script>
+    <script>
+        var ques_id = {{ ques_id | safe }};
+        var ques_text = {{ ques_text | safe}};
+    </script>
     <script src='{%static "js/record.js" %}'></script>
 </body>
 
