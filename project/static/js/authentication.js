@@ -13,7 +13,7 @@ $('#login').click(function (e) {
             alert("아이디 혹은 비밀번호가 잘못되었습니다.");
         }
         else {
-            window.location.replace('/interviews');
+            window.location.replace('/');
         }
     });
 });
@@ -33,8 +33,8 @@ $('#register').click(function (e) {
             alert("회원가입에 실패하였습니다. 입력 정보를 확인하세요.");
         }
         else {
-            alert("회원가입에 성공하였습니다. 가입한 계정으로 로그인됩니다.");
-            window.location.replace('/interviews');
+            alert("회원가입에 성공하였습니다.");
+            window.location.replace('/');
         }
     });
 });

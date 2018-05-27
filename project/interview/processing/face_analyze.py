@@ -21,7 +21,7 @@ url = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect' # Req
 headers = {
     # Request headers
     'Content-Type': 'application/octet-stream',
-    'Ocp-Apim-Subscription-Key': '764334d735844da0830ace92252fe842',
+    'Ocp-Apim-Subscription-Key': '0347551b54ab452d8ebbb6585bc78a1f',
 }
 
 params = urllib.parse.urlencode({
@@ -37,16 +37,15 @@ def initEmotionData():
             'sadness': 0.0, 'surprise': 0.0}
     EmotionCount = {'anger': 0, 'contempt': 0, 'disgust': 0, 'fear': 0, 'happiness': 0, 'neutral': 0, 'sadness': 0,
             'surprise': 0}
-    directory = os.listdir('./frames')
 
-async def analyze(filename,interview_id):
+async def analyze(filename,interview_id,frame_dirname):
     tempList=[]
     body=""
     try:
-        with open('./frames/' + filename, 'rb') as img:
+        with open(frame_dirname + filename, 'rb') as img:
             regex = re.compile(r'\d+')
             body = img.read()
-
+        
         async with aiohttp.ClientSession() as session:
             async with session.post(url, data=body, headers=headers, params=params) as resp:
                 res = await resp.json()
@@ -64,12 +63,12 @@ async def analyze(filename,interview_id):
                 interview_emotion.save()      
 
     except Exception as e:
-        print('error: '+str(e))
+        print('error: '+ frame_dirname + filename)
 
-def ReqAnalyze(interview_id):
+def ReqAnalyze(interview_id, frame_dirname):
     initEmotionData()
-    directory = os.listdir('./frames')
-    tasks = [analyze(file,interview_id) for file in directory]
+    directory = os.listdir(frame_dirname)
+    tasks = [analyze(file,interview_id,frame_dirname) for file in directory]
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
     loop.run_until_complete(asyncio.wait(tasks))
@@ -77,4 +76,4 @@ def ReqAnalyze(interview_id):
     #TODO DB에 어떤식으로 값을 저장할 것인지
     #print(EmotionCount,EmotionScore,Global.reqCnt)
     initEmotionData()
-    shutil.rmtree('./frames')
+    shutil.rmtree(frame_dirname)

@@ -9,72 +9,11 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <link href='{%static "css/interviewResult.css" %}' rel="stylesheet">
     <script src='{%static "js/interviewResult.js" %}'></script>
-</head>    
-<body>
-    <div class="container demo">
-
-
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingOne">
-                        <h4 class="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <i class="more-less glyphicon glyphicon-plus"></i>
-                                감정 분석 결과
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                        <div class="panel-body" id="emotionresult">
-                            <ul id="angerul">화남</ul>
-                            <ul id="contemptul">경멸</ul>
-                            <ul id="disgustul">혐오</ul>
-                            <ul id="fearul">공포</ul>
-                            <ul id="happinessul">행복</ul>
-                            <ul id="neutralul">중립</ul>
-                            <ul id="sadnessul">슬픔</ul>
-                            <ul id="surpriseul">놀람</ul>
-                        </div>
-                    </div>
-                </div>
-        
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingTwo">
-                        <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                <i class="more-less glyphicon glyphicon-plus"></i>
-                                음성 인식 결과
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div>
-        
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingThree">
-                        <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                <i class="more-less glyphicon glyphicon-plus"></i>
-                                성향 분석 결과
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div>
-        
-            </div><!-- panel-group -->
-            
-            
-        </div><!-- container -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+    <script src='{%static "js/personality.js" %}'></script>
+    <script src="https://d3js.org/d3-color.v1.min.js"></script>
     <script>
         var angerList = [];
         var contemptList = [];
@@ -84,10 +23,16 @@
         var neutralList = [];
         var sadnessList = [];
         var surpriseList = [];
-        {% for emotion in emotionResult%}
-        var emotionList = JSON.parse({{emotion|safe}}["emotion"]);
-        console.log(emotionList.length);
-        for(var i=0;i<emotionList.length;i++){
+        var xAxis = [];
+        var tempemotionFreq = [0, 0, 0, 0, 0, 0, 0, 0];
+        var emotionFreq = [];
+        {% for emotion in emotionResult %}
+        var emotionList = JSON.parse({{ emotion| safe }}["emotion"]);
+        var length = emotionList.length;
+        var temp = [];
+        for (var i = 0; i < length; i++) {
+            temp.push(i + 1);
+            tempemotionFreq[emotionList[i].indexOf(Math.max.apply(null, emotionList[i]))] += 1;
             angerList.push(emotionList[i][0]);
             contemptList.push(emotionList[i][1]);
             disgustList.push(emotionList[i][2]);
@@ -97,32 +42,504 @@
             sadnessList.push(emotionList[i][6]);
             surpriseList.push(emotionList[i][7]);
         }
-        console.log(angerList,contemptList,disgustList,fearList,happinessList,neutralList,sadnessList,surpriseList);
-        var angerli = document.createElement('li');
-        angerli.innerHTML = angerList;
-        document.getElementById("angerul").appendChild(angerli);
-        var contemptli = document.createElement('li');
-        contemptli.innerHTML = contemptList;
-        document.getElementById("contemptul").appendChild(contemptli);
-        var disgustli = document.createElement('li');
-        disgustli.innerHTML = disgustList;
-        document.getElementById("disgustul").appendChild(disgustli);
-        var fearli = document.createElement('li');
-        fearli.innerHTML = fearList;
-        document.getElementById("fearul").appendChild(fearli);
-        var happinessli = document.createElement('li');
-        happinessli.innerHTML = happinessList;
-        document.getElementById("happinessul").appendChild(happinessli);
-        var neutralli = document.createElement('li');
-        neutralli.innerHTML = neutralList;
-        document.getElementById("neutralul").appendChild(neutralli);
-        var sadnessli = document.createElement('li');
-        sadnessli.innerHTML = sadnessList;
-        document.getElementById("sadnessul").appendChild(sadnessli);
-        var surpriseli = document.createElement('li');
-        surpriseli.innerHTML = surpriseList;
-        document.getElementById("surpriseul").appendChild(surpriseli);
-    {% endfor %}
+        xAxis.push(temp);
+        console.log(xAxis);
+        emotionFreq.push(tempemotionFreq);
+        tempemotionFreq = [0, 0, 0, 0, 0, 0, 0, 0];
+        {% endfor %}
+    </script>
+</head>
+
+<body>
+    <div class="container demo">
+
+
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false"
+                            aria-controls="collapseOne">
+                            <i class="more-less glyphicon glyphicon-plus"></i>
+                            종합 분석 결과
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        <div id="usernameSection"></div>
+                        <div id="totalTime"></div>
+                        <div id="questionContent"></div>
+                        <div id="questionTime"></div>
+                        <div id="best"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="more-less glyphicon glyphicon-plus"></i>
+                            감정 분석 상세 결과
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" align="center">
+                    <div class="panel-body" id="linechart1"></div>
+                    <div class="panel-body" id="piechart1"></div>
+                    <div class="panel-body" id="linechart2"></div>
+                    <div class="panel-body" id="piechart2"></div>
+                    <div class="panel-body" id="linechart3"></div>
+                    <div class="panel-body" id="piechart3"></div>
+                    <div class="panel-body" id="linechart4"></div>
+                    <div class="panel-body" id="piechart4"></div>
+                    <div class="panel-body" id="linechart5"></div>
+                    <div class="panel-body" id="piechart5"></div>
+                    <script>
+                        var totaltime = xAxis[0].length + xAxis[1].length + xAxis[2].length + xAxis[3].length + xAxis[4].length;
+                        var minute = parseInt(totaltime / 60);
+                        var second = totaltime % 60;
+                        var maxQuestionTime = Math.max(xAxis[0].length, xAxis[1].length, xAxis[2].length, xAxis[3].length, xAxis[4].length);
+                        var minQuestionTime = Math.min(xAxis[0].length, xAxis[1].length, xAxis[2].length, xAxis[3].length, xAxis[4].length);
+                        var totalEmotionFreq = emotionFreq.reduce(function (r, a) { //배열의 합
+                            a.forEach(function (b, i) {
+                                r[i] = (r[i] || 0) + b;
+                            });
+                            return r;
+                        }, []);
+                        console.log(totalEmotionFreq);
+                        var maxEmotionValue1 = totalEmotionFreq.indexOf(Math.max.apply(null, totalEmotionFreq));
+                        totalEmotionFreq.splice(maxEmotionValue1, 1);
+                        var maxEmotionValue2 = totalEmotionFreq.indexOf(Math.max.apply(null, totalEmotionFreq));
+                        if (Math.max.apply(null, totalEmotionFreq) == 0) { maxEmotionValue2 = -1; }
+                        totalEmotionFreq.splice(maxEmotionValue2, 1);
+                        var maxEmotionValue3 = totalEmotionFreq.indexOf(Math.max.apply(null, totalEmotionFreq));
+                        if (Math.max.apply(null, totalEmotionFreq) == 0) { maxEmotionValue3 = -1; }
+                        function emotionFunc(emotionvalue) {
+                            switch (emotionvalue) {
+                                case 0:
+                                    return "화남";
+                                    break;
+                                case 1:
+                                    return "경멸";
+                                    break;
+                                case 2:
+                                    return "역겨움";
+                                    break;
+                                case 3:
+                                    return "공포";
+                                    break;
+                                case 4:
+                                    return "행복";
+                                    break;
+                                case 5:
+                                    return "중립";
+                                    break;
+                                case 6:
+                                    return "슬픔";
+                                    break;
+                                case 7:
+                                    return "놀람";
+                                    break;
+                                default:
+                                    return "없음";
+                                    break;
+                            }
+                        }
+                        document.getElementById("usernameSection").innerHTML = "{{username}}님의 분석 결과 입니다.<br><br>";
+                        document.getElementById("totalTime").innerHTML = "총 면접 시간 : " + minute + "분" + second + "초<br><br>";
+                        document.getElementById("questionContent").innerHTML = "질문1:<br>질문2:<br>질문3:<br>질문4:<br>질문5:<br><br>";
+                        document.getElementById("questionTime").innerHTML = "길게 답변한 질문: " + parseInt(maxQuestionTime / 60) + "분 " + maxQuestionTime % 60 + "초<br>가장 짧게 답변한 질문: " + parseInt(minQuestionTime / 60) + "분 " + minQuestionTime % 60 + "초<br><br>";
+                        document.getElementById("best").innerHTML = "감정 빈도<br> 1위: " + emotionFunc(maxEmotionValue1) + "<br>2위: " + emotionFunc(maxEmotionValue2) + "<br>3위: " + emotionFunc(maxEmotionValue3) + "<br><br>성향 BEST3:<br>높은 수치 가장 많이 사용한 단어 BEST3: 많이 말한 순위 1,2,3 그 다음 몇번말했는지<br>";
+                    </script>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingThree">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false"
+                            aria-controls="collapseThree">
+                            <i class="more-less glyphicon glyphicon-plus"></i>
+                            성향 분석 상세 결과
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+                        <div id="sunburstChart"></div>
+                    </div>
+                    <script>
+                        var profile = {{ personality | safe }};
+                        var chart = new PersonalitySunburstChart({ selector: '#sunburstChart', version: 'v3' });
+                        chart.show(profile);
+                    </script>
+                </div>
+            </div>
+        </div>
+        <!-- panel-group -->
+        <div>
+            <a href="#" class="top">Top</a>
+        </div>
+    </div>
+    <!-- container -->
+    <script>    
+        var anger = {
+            x: xAxis[0],
+            y: angerList.slice(0, xAxis[0].length),
+            type: 'lines',
+            name: '화남'
+        };
+        var contempt = {
+            x: xAxis[0],
+            y: contemptList.slice(0, xAxis[0].length),
+            type: 'lines',
+            name: '경멸'
+        };
+        var disgust = {
+            x: xAxis[0],
+            y: disgustList.slice(0, xAxis[0].length),
+            type: 'lines',
+            name: '역겨움'
+        };
+        var fear = {
+            x: xAxis[0],
+            y: fearList.slice(0, xAxis[0].length),
+            type: 'lines',
+            name: '공포'
+        };
+        var happiness = {
+            x: xAxis[0],
+            y: happinessList.slice(0, xAxis[0].length),
+            type: 'lines',
+            name: '행복'
+        };
+        var neutral = {
+            x: xAxis[0],
+            y: neutralList.slice(0, xAxis[0].length),
+            type: 'lines',
+            name: '중립'
+        };
+        var sadness = {
+            x: xAxis[0],
+            y: sadnessList.slice(0, xAxis[0].length),
+            type: 'lines',
+            name: '슬픔'
+        };
+        var surprise = {
+            x: xAxis[0],
+            y: surpriseList.slice(0, xAxis[0].length),
+            type: 'lines',
+            name: '놀람'
+        };
+        var layout = {
+            title: '질문1 감정 변화 추이',
+            xaxis: {
+                title: '시간'
+            },
+            yaxis: {
+                title: '감정 비중'
+            }
+        }
+        var data = [anger, contempt, disgust, fear, happiness, neutral, sadness, surprise];
+        Plotly.newPlot('linechart1', data, layout);
+
+        var anger = {
+            x: xAxis[1],
+            y: angerList.slice(xAxis[0].length, xAxis[0].length + xAxis[1].length),
+            type: 'lines',
+            name: '화남'
+        };
+        console.log(anger.y);
+        var contempt = {
+            x: xAxis[1],
+            y: contemptList.slice(xAxis[0].length, xAxis[0].length + xAxis[1].length),
+            type: 'lines',
+            name: '경멸'
+        };
+        var disgust = {
+            x: xAxis[1],
+            y: disgustList.slice(xAxis[0].length, xAxis[0].length + xAxis[1].length),
+            type: 'lines',
+            name: '역겨움'
+        };
+        var fear = {
+            x: xAxis[1],
+            y: fearList.slice(xAxis[0].length, xAxis[0].length + xAxis[1].length),
+            type: 'lines',
+            name: '공포'
+        };
+        var happiness = {
+            x: xAxis[1],
+            y: happinessList.slice(xAxis[0].length, xAxis[0].length + xAxis[1].length),
+            type: 'lines',
+            name: '행복'
+        };
+        var neutral = {
+            x: xAxis[1],
+            y: neutralList.slice(xAxis[0].length, xAxis[0].length + xAxis[1].length),
+            type: 'lines',
+            name: '중립'
+        };
+        var sadness = {
+            x: xAxis[1],
+            y: sadnessList.slice(xAxis[0].length, xAxis[0].length + xAxis[1].length),
+            type: 'lines',
+            name: '슬픔'
+        };
+        var surprise = {
+            x: xAxis[1],
+            y: surpriseList.slice(xAxis[0].length, xAxis[0].length + xAxis[1].length),
+            type: 'lines',
+            name: '놀람'
+        };
+        var layout = {
+            title: '질문2 감정 변화 추이',
+            xaxis: {
+                title: '시간'
+            },
+            yaxis: {
+                title: '감정 비중'
+            }
+        }
+        var data = [anger, contempt, disgust, fear, happiness, neutral, sadness, surprise];
+        Plotly.newPlot('linechart2', data, layout);
+
+        var anger = {
+            x: xAxis[2],
+            y: angerList.slice(xAxis[1].length, xAxis[1].length + xAxis[2].length),
+            type: 'lines',
+            name: '화남'
+        };
+        var contempt = {
+            x: xAxis[2],
+            y: contemptList.slice(xAxis[1].length, xAxis[1].length + xAxis[2].length),
+            type: 'lines',
+            name: '경멸'
+        };
+        var disgust = {
+            x: xAxis[2],
+            y: disgustList.slice(xAxis[1].length, xAxis[1].length + xAxis[2].length),
+            type: 'lines',
+            name: '역겨움'
+        };
+        var fear = {
+            x: xAxis[2],
+            y: fearList.slice(xAxis[1].length, xAxis[1].length + xAxis[2].length),
+            type: 'lines',
+            name: '공포'
+        };
+        var happiness = {
+            x: xAxis[2],
+            y: happinessList.slice(xAxis[1].length, xAxis[1].length + xAxis[2].length),
+            type: 'lines',
+            name: '행복'
+        };
+        var neutral = {
+            x: xAxis[2],
+            y: neutralList.slice(xAxis[1].length, xAxis[1].length + xAxis[2].length),
+            type: 'lines',
+            name: '중립'
+        };
+        var sadness = {
+            x: xAxis[2],
+            y: sadnessList.slice(xAxis[1].length, xAxis[1].length + xAxis[2].length),
+            type: 'lines',
+            name: '슬픔'
+        };
+        var surprise = {
+            x: xAxis[2],
+            y: surpriseList.slice(xAxis[1].length, xAxis[1].length + xAxis[2].length),
+            type: 'lines',
+            name: '놀람'
+        };
+        var layout = {
+            title: '질문3 감정 변화 추이',
+            xaxis: {
+                title: '시간'
+            },
+            yaxis: {
+                title: '감정 비중'
+            }
+        }
+        var data = [anger, contempt, disgust, fear, happiness, neutral, sadness, surprise];
+        Plotly.newPlot('linechart3', data, layout);
+
+        var anger = {
+            x: xAxis[3],
+            y: angerList.slice(xAxis[2].length, xAxis[2].length + xAxis[3].length),
+            type: 'lines',
+            name: '화남'
+        };
+        var contempt = {
+            x: xAxis[3],
+            y: contemptList.slice(xAxis[2].length, xAxis[2].length + xAxis[3].length),
+            type: 'lines',
+            name: '경멸'
+        };
+        var disgust = {
+            x: xAxis[3],
+            y: disgustList.slice(xAxis[2].length, xAxis[2].length + xAxis[3].length),
+            type: 'lines',
+            name: '역겨움'
+        };
+        var fear = {
+            x: xAxis[3],
+            y: fearList.slice(xAxis[2].length, xAxis[2].length + xAxis[3].length),
+            type: 'lines',
+            name: '공포'
+        };
+        var happiness = {
+            x: xAxis[3],
+            y: happinessList.slice(xAxis[2].length, xAxis[2].length + xAxis[3].length),
+            type: 'lines',
+            name: '행복'
+        };
+        var neutral = {
+            x: xAxis[3],
+            y: neutralList.slice(xAxis[2].length, xAxis[2].length + xAxis[3].length),
+            type: 'lines',
+            name: '중립'
+        };
+        var sadness = {
+            x: xAxis[3],
+            y: sadnessList.slice(xAxis[2].length, xAxis[2].length + xAxis[3].length),
+            type: 'lines',
+            name: '슬픔'
+        };
+        var surprise = {
+            x: xAxis[3],
+            y: surpriseList.slice(xAxis[2].length, xAxis[2].length + xAxis[3].length),
+            type: 'lines',
+            name: '놀람'
+        };
+        var layout = {
+            title: '질문4 감정 변화 추이',
+            xaxis: {
+                title: '시간'
+            },
+            yaxis: {
+                title: '감정 비중'
+            }
+        }
+        var data = [anger, contempt, disgust, fear, happiness, neutral, sadness, surprise];
+        Plotly.newPlot('linechart4', data, layout);
+
+        var anger = {
+            x: xAxis[4],
+            y: angerList.slice(xAxis[3].length, xAxis[3].length + xAxis[4].length),
+            type: 'lines',
+            name: '화남'
+        };
+        var contempt = {
+            x: xAxis[4],
+            y: contemptList.slice(xAxis[3].length, xAxis[3].length + xAxis[4].length),
+            type: 'lines',
+            name: '경멸'
+        };
+        var disgust = {
+            x: xAxis[4],
+            y: disgustList.slice(xAxis[3].length, xAxis[3].length + xAxis[4].length),
+            type: 'lines',
+            name: '역겨움'
+        };
+        var fear = {
+            x: xAxis[4],
+            y: fearList.slice(xAxis[3].length, xAxis[3].length + xAxis[4].length),
+            type: 'lines',
+            name: '공포'
+        };
+        var happiness = {
+            x: xAxis[4],
+            y: happinessList.slice(xAxis[3].length, xAxis[3].length + xAxis[4].length),
+            type: 'lines',
+            name: '행복'
+        };
+        var neutral = {
+            x: xAxis[4],
+            y: neutralList.slice(xAxis[3].length, xAxis[3].length + xAxis[4].length),
+            type: 'lines',
+            name: '중립'
+        };
+        var sadness = {
+            x: xAxis[4],
+            y: sadnessList.slice(xAxis[3].length, xAxis[3].length + xAxis[4].length),
+            type: 'lines',
+            name: '슬픔'
+        };
+        var surprise = {
+            x: xAxis[4],
+            y: surpriseList.slice(xAxis[3].length, xAxis[3].length + xAxis[4].length),
+            type: 'lines',
+            name: '놀람'
+        };
+        var layout = {
+            title: '질문5 감정 변화 추이',
+            xaxis: {
+                title: '시간'
+            },
+            yaxis: {
+                title: '감정 비중'
+            }
+        }
+        var data = [anger, contempt, disgust, fear, happiness, neutral, sadness, surprise];
+        Plotly.newPlot('linechart5', data, layout);
+
+        var data = [{
+            values: emotionFreq[0],
+            labels: ['화남', '경멸', '역겨움', '공포', '행복', '중립', '슬픔', '놀람'],
+            type: 'pie',
+            hoverinfo: 'label+percent',
+        }];
+        var layout = {
+            title: '질문1 감정 빈도',
+        }
+        Plotly.newPlot('piechart1', data, layout);
+
+        var data = [{
+            values: emotionFreq[1],
+            labels: ['화남', '경멸', '역겨움', '공포', '행복', '중립', '슬픔', '놀람'],
+            type: 'pie',
+            hoverinfo: 'label+percent',
+        }];
+        var layout = {
+            title: '질문2 감정 빈도',
+        }
+        Plotly.newPlot('piechart2', data, layout);
+
+        var data = [{
+            values: emotionFreq[2],
+            labels: ['화남', '경멸', '역겨움', '공포', '행복', '중립', '슬픔', '놀람'],
+            type: 'pie',
+            hoverinfo: 'label+percent',
+        }];
+        var layout = {
+            title: '질문3 감정 빈도',
+        }
+        Plotly.newPlot('piechart3', data, layout);
+
+        var data = [{
+            values: emotionFreq[3],
+            labels: ['화남', '경멸', '역겨움', '공포', '행복', '중립', '슬픔', '놀람'],
+            type: 'pie',
+            hoverinfo: 'label+percent',
+        }];
+        var layout = {
+            title: '질문4 감정 빈도',
+        }
+        Plotly.newPlot('piechart4', data, layout);
+
+        var data = [{
+            values: emotionFreq[4],
+            labels: ['화남', '경멸', '역겨움', '공포', '행복', '중립', '슬픔', '놀람'],
+            type: 'pie',
+            hoverinfo: 'label+percent',
+        }];
+        var layout = {
+            title: '질문5 감정 빈도',
+        }
+        Plotly.newPlot('piechart5', data, layout);
     </script>
 </body>
+
 </html>

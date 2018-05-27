@@ -8,14 +8,15 @@
 *.wav
 *.webm
 *.m4a
-*.jpg
 *.flac
+*.txt
 __pycache__/
 ai_interview_simulator/__pycache__/
 project/__pycache__/
 local_settings.py
 db.sqlite3
 media
+.DS_Store
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # in your Git repository. Update and uncomment the following line accordingly.

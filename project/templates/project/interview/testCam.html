@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 
@@ -16,118 +16,141 @@
 
     <!-- Custom fonts for this template -->
     <link href='{%static "vendor/font-awesome/css/font-awesome.min.css" %}' rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
     <!-- Custom styles for this template -->
     <link href='{%static "css/agency.min.css" %}' rel="stylesheet">
 
+    <!-- bootstrap checkbox -->
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+    <!-- Sweetalert2 -->
+    <script src='{%static "sweetalert2/res/sweetalert2.min.js" %}'></script>
+    <script src='{%static "sweetalert2/res/sweetalert2.all.js" %}'></script>
+    <link rel="stylesheet" href='{%static "sweetalert2/res/sweetalert2.min.css" %}'>
+
+    <style>
+        body {
+            width: 1px;
+            min-width: 100%;
+            *width: 100%;
+        }
+
+    </style>
 </head>
 
-<body id="page-top">
+<body id="page-top" style="background-color: #ECECEA">
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-        <div class="container" style="background-color: darkgray">
-            <a class="navbar-brand js-scroll-trigger" style="color: White" href="#page-top">AIS</a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg" style="height: 75px;background-color: rgb(44,62,80); text-transform: none" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top" style="color: white;" onclick="window.location.reload()">AIS</a>
+            <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fa fa-bars"></i>
         </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#introduction">Introduction</a>
+            <div class="collapse navbar-collapse" id="navbarResponsive" style="background-color: rgb(44,62,80);">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/interviews/training/hw-check/">Practice</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#interview">Interview</a>
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/interviews/test/hw-check/">Test</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#results">Results</a>
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/interviews/record">Results</a>
                     </li>
-
-                    <!-- 로그인에 성공하면 sign in은 안보이게 바뀐다 -->
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="/member/logout/">Logout</a>
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/member/logout/">Logout</a>
                     </li>
-
-                    <!-- 로그인에 성공하면 사용자의 이름으로 바뀐다 -->
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" id="name"></a>
-                    </li>
-
                 </ul>
             </div>
         </div>
     </nav>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
-
-    <!-- Interview -->
-    <section class="bg-light" style="height: 700px" id="interview">
-        <div class="container">
-            <div class="row" style="height: 480px;">
-                <div class="col-lg-12 text-center" style="width: 460px;height: inherit; margin-right: 35px; padding: 20px">
-                    <br>
-                    <h2 class="section-heading text-uppercase" style="width: inherit">셀프 점검</h2>
-                    <br><br>
-                    <h3 class="section-subheading text-muted" style="width: inherit">1. 카메라 테스트 - 본인의 모습이 잘 나오는지 확인해주세요.</h3>
-                    <h3 class="section-subheading text-muted" style="width: inherit">2. 마이크 테스트 - 본인의 음성이 잘 들리는지 확인해주세요.</h3>
-                    <h3 class="section-subheading text-muted" style="width: inherit">3. 점검이 완료되면 다음 단계를 진행해주세요.</h3>
-                    <input type="button" value="다음" onclick="window.location.href='/interviews/test/on-air/'"/>
+    <!-- HW Check -->
+    <div style='-webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box; margin-top: 50px; margin-bottom: 50px'>
+        <div class="col-lg-12 text-center" style="width: 540px; float: left; border: 1px solid; padding: 20px">
+            <br>
+            <h2 style="font-size: 36px; font-weight: bold">면접준비 체크</h2>
+            <br><br><br>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="checkbox" id="camtest">
+                    </div>
                 </div>
-                <div style="float: right; width: auto; height: inherit; padding: 20px">
-                    <video style="border: 1px solid black; align-items: center;" id="video" width="580" height="440" autoplay></video>
-                </div>
+                <input type="text" class="form-control" style="font-size: 24px; color: black" value="오른쪽 화면에 얼굴이 보이고 있나요?">
             </div>
+            <br>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="checkbox" id="mictest">
+                    </div>
+                </div>
+                <input type="text" class="form-control" style="font-size: 24px; color: black" value="마이크에 입력된 목소리가 들리나요?">
+            </div>
+            <br>
+            <button class="btn btn-primary btn-lg" onclick="next()"> Next </button>
         </div>
-    </section>
 
-   
+        <div style="width: 150px"> </div>
+
+        <div style="float:left; width: auto; height: inherit; padding: 20px">
+            <video style="border: 1px solid black; align-items: center;" id="video" width="532" height="400" autoplay></video>
+        </div>
+    </div>
+
     <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <span class="copyright">Copyright &copy; Your Website 2018</span>
-                </div>
-                <div class="col-md-4">
-                    <ul class="list-inline social-buttons">
-                        <li class="list-inline-item">
-                            <a href="#">
-                  <i class="fa fa-twitter"></i>
-                </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                  <i class="fa fa-facebook"></i>
-                </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                  <i class="fa fa-linkedin"></i>
-                </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <ul class="list-inline quicklinks">
-                        <li class="list-inline-item">
-                            <a href="#">Privacy Policy</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">Terms of Use</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+    <div style="text-align: center;">
+        <div style="width: 33.3%; height: 150px; float: left; background-color: rgb(44,62,80);">
+            <br>
+            <a style="color:white; font-size: 24px; font-weight: bold">Copyright</a>
+            <br><br>
+            <a style="color: white; font-size: 18px;">&copy; 2018 Human Learning. &nbsp; All Rights Reserved </a>
         </div>
-    </footer>
+        <div style="width: 33.3%; height: 150px; float: left; background-color: rgb(44,62,80);">
+            <br>
+            <a style="color:white; font-size: 24px;  font-weight: bold">About Us&nbsp; </a>
+            <br><br>
+            <a href="https://github.com/daegweon/ai_interview_simulator"> <i style="color: white; font-size:30px" class="fa">&#xf09b;</i> </a>
+            <a> &nbsp; &nbsp; </a>
+            <a> <i style="color: white; font-size:30px;" class="fa">&#xf08c;</i> </a>
+            <a> &nbsp; &nbsp; </a>
+            <a href="#"> <i style="color: white; font-size:30px;" class="fa">&#xf0d5;</i> </a>
+            <br><br>
+        </div>
+        <div style="width: 33.3%; height: 150px; float: left; background-color: rgb(44,62,80);">
+            <br>
+            <a style="color:white; font-size: 24px; font-weight: bold">Contact Us&nbsp; </a>
+            <br><br>
+            <a style="color: white; font-size: 18px;">quwieo@ajou.ac.kr</a>
+        </div>
+    </div>
 
+    <script>
+        function next() {
+            var camtest = document.getElementById("camtest").checked;
+            var mictest = document.getElementById('mictest').checked;
 
+            if (camtest == true && mictest == true) {
+                window.location.href = '/interviews/training/prior-info';
+            } else {
+                //$('#warningModal').modal('show');
+                swal({
+                    title: '점검을 완료해주세요!',
+                    //text: '카메라와 마이크가 작동해야 면접을 진행할 수 있어요.',
+                    type: 'error',
+                    confirmButtonText: '닫기'
+                })
+            }
+        }
 
+    </script>
 
     <script>
         // Grab elements, create settings, etc.

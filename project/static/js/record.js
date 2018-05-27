@@ -81,7 +81,7 @@ function startTick() {
   }, 1000);
 }
 
-function stopTick(){
+function stopTick() {
   clearInterval(timer)
 }
 
@@ -117,26 +117,31 @@ function handleStop(event) {
 }
 
 function toggleRecording() {
-  if(questionCount == 5){
+  console.log("hh")
+
+  if (recordButton.textContent === '면접 시작' || recordButton.textContent === '다음 문제') {
+    startSpeechToText();
+    document.getElementById("question").textContent = ques_text[questionCount]
+    startTick();
+    startRecording();
+  } else {
+    stopSpeechToText();
+    stopTick();
+    stopRecording();
+    questionCount += 1;
+    if (questionCount == 5) {
       questionCount = 0;
       recordButton.disabled = true;
-      document.getElementById("finInterview").style.display="inline";
+      document.getElementById("finInterview").style.display = "inline";
       recordButton.textContent = '면접 종료';
       stopTick();
-  }
-  else{
-    if (recordButton.textContent === '면접 시작') {
-      document.getElementById("question").textContent = ques_text[questionCount]
-      startTick();
-      startRecording();
-      questionCount += 1;
-    } else {
-      stopTick();
-      stopRecording();
-      recordButton.textContent = '면접 시작';
+    }
+    else{
+      recordButton.textContent = '다음 문제';
     }
   }
-  
+
+
 }
 
 function startRecording() {
@@ -163,7 +168,7 @@ function startRecording() {
     return;
   }
   console.log('Created MediaRecorder', mediaRecorder, 'with options', options);
-  recordButton.textContent = '다음 문제';
+  recordButton.textContent = '답변 종료';
   mediaRecorder.onstop = handleStop;
   mediaRecorder.ondataavailable = handleDataAvailable;
   mediaRecorder.start(10); // collect 10ms of data
@@ -190,16 +195,16 @@ function download() {
   formData.append('file', file);
   formData.append('csrfmiddlewaretoken', csrftoken);
   formData.append('questionId', quesId);
-  formData.append('trigger',0);
-  console.log(questionCount);
-  if(questionCount==1){
-    formData.append('trigger',1);
+  formData.append('questionCount', questionCount);
+  formData.append('transcription', final_transcript);
+
+  if(questionCount==4){
+    formData.append('questionList', ques_id);
   }
-  uploadToServer(formData);
+  uploadToServer(formData)
 }
 
 function uploadToServer(formData) {
-
   $.ajax({
     url: '/interviews/video-processing/',
     type: 'POST',
@@ -208,20 +213,19 @@ function uploadToServer(formData) {
     contentType: false,
     async: true,
     success: function (data) {
-      alert('complete');
+      if(data ==='good') alert('complete');
+      else alert('??');
     }
   });
   return false;
 }
 
-
-
-function ToggleWebCam(){
+function ToggleWebCam() {
   if (camOnOffButton.textContent === '카메라 OFF') {
     camOnOffButton.textContent = '카메라 ON';
-    document.getElementById("gum").style.visibility="hidden";
+    document.getElementById("gum").style.visibility = "hidden";
   } else {
-    document.getElementById("gum").style.visibility="";
+    document.getElementById("gum").style.visibility = "";
     camOnOffButton.textContent = '카메라 OFF';
   }
 }

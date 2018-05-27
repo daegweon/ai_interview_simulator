@@ -1,0 +1,37 @@
+.profile-header-container{
+    margin: 0 auto;
+    text-align: center;
+}
+
+.profile-header-img {
+    padding: 54px;
+}
+
+.profile-header-img > img.img-circle {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #51D2B7;
+}
+
+.img-circle{
+    border-radius: 50%;
+}
+.profile-header {
+    margin-top: 43px;
+}
+
+/**
+ * Ranking component
+ */
+.rank-label-container {
+    margin-top: -19px;
+    /* z-index: 1000; */
+    text-align: center;
+}
+
+.label.label-default.rank-label {
+    background-color: rgb(81, 210, 183);
+    padding: 3px 8px 3px 8px;
+    border-radius: 27px;
+    font-size:12px;
+}
