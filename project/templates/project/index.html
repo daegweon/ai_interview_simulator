@@ -61,7 +61,6 @@
                         <a class="nav-link js-scroll-trigger" href="#results">Results</a>
                     </li>
 
-                    <!-- 로그인에 성공하면 sign in은 안보이게 바뀐다 -->
                     <li class="nav-item">
                         {% if user.is_authenticated %}
                         <a class="nav-link js-scroll-trigger" href="/member/logout">Logout</a>
@@ -69,12 +68,6 @@
                         <a class="nav-link js-scroll-trigger" data-toggle="modal" data-target="#login-modal" href="#">Sign In</a>
                         {% endif %}
                     </li>
-
-                    <!-- 로그인에 성공하면 사용자의 이름으로 바뀐다 -->
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" id="name"></a>
-                    </li>
-
                 </ul>
             </div>
         </div>
