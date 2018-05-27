@@ -9,10 +9,32 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href='{%static "css/records.css" %}' rel="stylesheet">
+    <script src='{%static "js/stt.js" %}'></script>
+    <link href='{%static "css/OnAir.css" %}' rel="stylesheet">
     <script>
         var ques_id = {{ ques_id | safe }};
         var ques_text = {{ ques_text | safe}};
+    </script>
+    <script>
+        var final_transcript = "";
+        function startSpeechToText() {
+            final_transcript = "";
+            annyang.start({ autoRestart: true, continuous: true });
+            var recognition = annyang.getSpeechRecognizer();
+            recognition.interimResults = true;
+            recognition.onresult = function (event) {
+                for (var i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        final_transcript += " " + event.results[i][0].transcript;
+                        console.log("final_transcript=" + final_transcript);
+                        //annyang.trigger(final_transcript); //If the sentence is "final" for the Web Speech API, we can try to trigger the sentence
+                    }
+                }
+            };
+        }
+        function stopSpeechToText(){
+            annyang.abort();
+        }
     </script>
 </head>
 
@@ -54,18 +76,8 @@
 
     <div class="container-fluid text-center">
         <div class="row content">
-            <div class="col-sm-1 sidenav">
-                <p>
-                    <a href="#">여기다</a>
-                </p>
-                <p>
-                    <a href="#">메뉴를</a>
-                </p>
-                <p>
-                    <a href="#">띄워야</a>
-                </p>
-            </div>
-            <div class="col-sm-7">
+
+            <div class="col-sm-8 sidenav">
                 <br>
 
                 <video id="gum" style="border: 1px solid black; align-items: center;" autoplay muted width="70%"></video>
