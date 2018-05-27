@@ -85,8 +85,6 @@ body {
   transform : scaleX(-1);
   -ms-filter : fliph; /*IE*/
   filter : fliph; /*IE*/
-
-  
 }
 
 #container {

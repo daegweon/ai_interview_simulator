@@ -36,7 +36,7 @@ def videoProcessing(request):
         os.mkdir(frame_dirname)
        
     os.system('ffmpeg -i '+ video_filename +' -vf fps=1/1 '+frame_dirname+'img%d.jpg')    
-    os.system('ffmpeg -i %s -vn -c:a flac -compression_level 8 %s'%(video_filename, audio_filename)) #옵션 설명 : y : 같은 이름 overwrite , -vn : 음성에 비디오를 포함하지 않겠다. 음성을 포함할 경우 변환시간 오래걸림
+    #os.system('ffmpeg -i %s -vn -c:a flac -compression_level 8 %s'%(video_filename, audio_filename)) #옵션 설명 : y : 같은 이름 overwrite , -vn : 음성에 비디오를 포함하지 않겠다. 음성을 포함할 경우 변환시간 오래걸림
 
     #print(request.user) #AnonymousUser 로그인안하면 이렇게 출력된다.
     user_id = User.objects.values_list('id', flat=True).get(username=request.user)
@@ -49,14 +49,16 @@ def videoProcessing(request):
     Interview.objects.create(user_id=user_id,question_id=questionId,emotion='',speech='',interview_count=interviewObj.interview_count,interview_date = datetime.now(), interview_type = '1')
     interview_id = Interview.objects.values_list('id', flat=True).get(question_id=questionId,interview_count = interviewObj.interview_count)
     face_analyze.ReqAnalyze(interview_id, frame_dirname)
-    speechToText.speechProcessing(audio_filename, upload_filename) 
+
+    #speechToText.speechProcessing(audio_filename, upload_filename) 
     '''p1 = Process(target=face,args=(interview_id,))
     p2 = Process(target=audio,args=(interview_id,audio_filename,upload_filename,))
     p1.start()
     p2.start()'''
-
+    transcription = request.POST["transcription"]
+    Interview.objects.filter(question_id=questionId, interview_count=interviewObj.interview_count, user_id=user_id).update(speech=transcription)
+    '''
     allSpeech = ""
-
     if request.POST["questionCount"]=="4":
         try :
             f=open('temp.txt','r')
@@ -77,7 +79,14 @@ def videoProcessing(request):
             os.remove('temp.txt')
         tendency = personality.personality_insights(allSpeech)
         tendencyResult.objects.create(interview_count=interviewObj.interview_count, user_id=user_id, tendency=tendency)
-
+    '''
+    allSpeech = ""
+    if request.POST["questionCount"]=="4":
+        speechResult = Interview.objects.values('speech').filter(user_id = request.user, interview_count=interviewObj.interview_count)
+        for speech in speechResult:
+            allSpeech += speech['speech'] + " "
+        tendency = personality.personality_insights(allSpeech)
+        tendencyResult.objects.create(interview_count=interviewObj.interview_count, user_id=user_id, tendency=tendency)
     os.remove(video_filename)
     return HttpResponse('good')
 

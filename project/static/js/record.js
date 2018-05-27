@@ -120,10 +120,12 @@ function toggleRecording() {
   console.log("hh")
 
   if (recordButton.textContent === '면접 시작' || recordButton.textContent === '다음 문제') {
+    startSpeechToText();
     document.getElementById("question").textContent = ques_text[questionCount]
     startTick();
     startRecording();
   } else {
+    stopSpeechToText();
     stopTick();
     stopRecording();
     questionCount += 1;
@@ -194,11 +196,12 @@ function download() {
   formData.append('csrfmiddlewaretoken', csrftoken);
   formData.append('questionId', quesId);
   formData.append('questionCount', questionCount);
+  formData.append('transcription', final_transcript);
 
   if(questionCount==4){
     formData.append('questionList', ques_id);
   }
-  uploadToServer(formData);
+  uploadToServer(formData)
 }
 
 function uploadToServer(formData) {
