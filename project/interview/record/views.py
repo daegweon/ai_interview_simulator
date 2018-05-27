@@ -24,4 +24,4 @@ def getRecordPage(request):
             dateList.append(str(recordList[i][4])) #4번째 element가 date
             interviewList.append(recordList[i][3])
         cursor.close()
-        return render(request, 'project/record/index.html', {'date':dateList, 'interviewList':interviewList})   
+        return render(request, 'project/record/index.html', {'date':dateList, 'interviewList':interviewList,'username':request.user})   
