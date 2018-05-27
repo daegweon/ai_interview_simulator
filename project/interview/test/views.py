@@ -31,8 +31,9 @@ def testInterviewOnAir(request):
     return render(request,'project/interview/onAir.html',{'ques_id': ques_id, 'ques_text' : ques_text, 'interview_count':interview_count+1})
 
 def getTestResultPage(request, ic):
-
-    try:
+    if not request.user.is_authenticated():
+        return render(request,'project/index.html',{'isLogin':0})
+    else:    
         text = ""
         noun_count = 3
         questionList = []
@@ -53,7 +54,5 @@ def getTestResultPage(request, ic):
 
         words = exportWord.get_tags(text, noun_count)
         return render(request,'project/interview/interviewResult.html',{'emotionResult':emotionResult, 'words':words,'username':request.user,'personality': personality})
-    except TypeError as e:
-        raise Http404("None")
 
     
