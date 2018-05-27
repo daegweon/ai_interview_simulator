@@ -19,6 +19,11 @@
     <script src='{%static "js/utils.js" %}'></script>
     <script src='{%static "js/stt.js" %}'></script>
     <script>
+        function banWordToast(x) {
+            x.className = "show";
+            setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+        }
+        var banWordList = ['사실', '다시'];
         annyang.start({ autoRestart: true, continuous: false })
         var recognition = annyang.getSpeechRecognizer();
         var final_transcript = '';
@@ -30,14 +35,17 @@
             for (var i = event.resultIndex; i < event.results.length; ++i) {
                 if (event.results[i].isFinal) {
                     final_transcript += event.results[i][0].transcript;
-                    if (event.results[i][0].transcript.indexOf("사실") != -1) console.log("ban");
                     console.log("final_transcript=" + final_transcript);
                     //annyang.trigger(final_transcript); //If the sentence is "final" for the Web Speech API, we can try to trigger the sentence
                 } else {
                     interim_transcript += event.results[i][0].transcript;
-                    if (event.results[i][0].transcript.indexOf("사실") != -1) {
-                        cnt++;
-                        document.getElementById("banWord").innerHTML += " " + cnt;
+                    var banLength = banWordList.length;
+                    var snackbar = document.getElementById("snackbar");
+                    for (var j = 0; j < banLength ; j++) {
+                        if (event.results[i][0].transcript.indexOf(banWordList[j]) != -1) {
+                            snackbar.innerHTML = "'" + banWordList[j] + "' 단어가 검출되었습니다";
+                            banWordToast(snackbar);
+                        }
                     }
                     console.log("interim_transcript=" + interim_transcript);
                 }
@@ -113,6 +121,7 @@
                     <button type="button" id="camOnOff" class="btn btn-danger">카메라 OFF</button>
                     <button type="button" id="record" class="btn btn-primary" disabled>면접 시작</button>
                     <button type="button" id="finInterview" class="btn btn-success" style="text-align: right; display: none;" onclick="window.location.href='{% url 'testResult' ic=interview_count %}'">결과 보기</button>
+                    <a class="btn btn-danger" onclick="toastr.error('Hi! I am error message.');">Error message</a>
                 </div>
             </div>
             <div class="col-sm-4 sidenav">
@@ -139,6 +148,7 @@
             </div>
         </div>
     </div>
+    <div id="snackbar"></div>
 
     <footer class="container-fluid text-center">
         <p>Footer Text</p>
