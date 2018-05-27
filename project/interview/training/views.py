@@ -9,7 +9,7 @@ def trainingInterviewPriorInfo(request):
     return render(request,'project/priorInfo.html',{}) 
 
 def trainingInterviewOnAir(request):
-    return render(request,'project/main.html',{})
+    return render(request,'project/trainingOnAir.html',{})
 
 def getTrainingResultPage(request):
     return render(request,'project/main.html',{})
