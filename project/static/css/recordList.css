@@ -1,0 +1,85 @@
+/*    --------------------------------------------------
+	:: General
+	-------------------------------------------------- */
+    body {
+        font-family: 'Open Sans', sans-serif;
+        color: #353535;
+    }
+    .content{
+        width:100%;
+    }
+    /*	--------------------------------------------------
+        :: Table Filter
+        -------------------------------------------------- */
+    .panel {
+        border: 1px solid #ddd;
+        background-color: #fcfcfc;
+    }
+    .panel .btn-group {
+        margin: 15px 0 30px;
+    }
+    .panel .btn-group .btn {
+        transition: background-color .3s ease;
+    }
+    .table-filter {
+        background-color: #fff;
+        border-bottom: 1px solid #eee;
+    }
+    .table-filter tbody tr:hover {
+        cursor: pointer;
+        background-color: #eee;
+    }
+    .table-filter tbody tr td {
+        padding: 10px;
+        vertical-align: middle;
+        border-top-color: #eee;
+    }
+    .table-filter tbody tr.selected td {
+        background-color: #eee;
+    }
+    .table-filter .media-body {
+        display: block;
+        /* Had to use this style to force the div to expand (wasn't necessary with my bootstrap version 3.3.6) */
+    }
+    .table-filter .media-meta {
+        font-size: 16px;
+        color: #999;
+    }
+    .table-filter .media {
+        color: #2BBCDE;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: normal;
+        margin: 0;
+    }
+    .table-filter .media span {
+        font-size: 16px;
+        margin-right: 20px;
+    }
+    .table-filter .media span.pagado {
+        color: #5cb85c;
+    }
+    .table-filter .media span.pendiente {
+        color: #f0ad4e;
+    }
+    .table th,td {
+        border-right: 1px solid #dee2e6;
+    }
+    .content .title{
+        display: block;
+        text-transform: uppercase;
+        font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 2em;
+        font-weight: 700;
+    }
+    hr.star-light {
+        border-color: #fff;
+        margin: 15px auto 20px;
+        margin-left:0px;
+        margin-top:5px;
+        padding: 0;
+        max-width: 250px;
+        border: 0;
+        border-top: solid 5px;
+        text-align: center;
+    }
