@@ -65,3 +65,21 @@
     .table th,td {
         border-right: 1px solid #dee2e6;
     }
+    .content .title{
+        display: block;
+        text-transform: uppercase;
+        font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 2em;
+        font-weight: 700;
+    }
+    hr.star-light {
+        border-color: #fff;
+        margin: 15px auto 20px;
+        margin-left:0px;
+        margin-top:5px;
+        padding: 0;
+        max-width: 250px;
+        border: 0;
+        border-top: solid 5px;
+        text-align: center;
+    }

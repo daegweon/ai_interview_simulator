@@ -61,6 +61,10 @@
     <div class="row">
 
       <section class="content">
+        <div class="title col-md-12 col-md-offset-2">
+          <span>결과 내역</span>
+          <hr class="star-light">
+        </div>
         <div class="col-md-12 col-md-offset-2">
           <div class="panel panel-default">
             <div class="panel-body">
@@ -73,100 +77,12 @@
               </div>
               <div class="table-container">
                 <table class="table table-filter">
-                  <tbody>
+                  <tbody id="tablebody">
                     <tr>
                       <th>번호</th>
                       <th>평가명</th>
                       <th>면접종류</th>
                       <th>면접일시</th>
-                    </tr>
-                    <tr data-status="pagado">
-                      <td width="10%">
-                        <a href="#" class="pull-left">
-                          1
-                        </a>
-                      </td>
-                      <td width="30%">제 1회 모의면접</td>
-                      <td width="20%">
-                        <div class="media">
-                          <div class="media-body">
-                            <span class="pagado">연습</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td width="40%">
-                        <div class="media">
-                          <div class="media-body">
-                            <span class="media-meta">Febrero 13, 2016</span>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr data-status="pendiente" class="selected">
-                      <td width="10%">
-                        <a href="#" class="pull-left">
-                          2
-                        </a>
-                      </td>
-                      <td width="30%">제 2회 모의면접</td>
-                      <td width="20%">
-                        <div class="media">
-                          <div class="media-body">
-                            <span class="pendiente">실전</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td width="40%">
-                        <div class="media">
-                          <div class="media-body">
-                            <span class="media-meta">Febrero 13, 2016</span>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr data-status="pagado">
-                      <td width="10%">
-                        <a href="#" class="pull-left">
-                          3
-                        </a>
-                      </td>
-                      <td width="30%">제 3회 모의면접</td>
-                      <td width="20%">
-                        <div class="media">
-                          <div class="media-body">
-                            <span class="pagado">연습</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td width="40%">
-                        <div class="media">
-                          <div class="media-body">
-                            <span class="media-meta">Febrero 13, 2016</span>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr data-status="pendiente" onclick="window.location.replace('/interviews/test/result/11')">
-                      <td width="10%">
-                        <a href="#" class="pull-left">
-                          4
-                        </a>
-                      </td>
-                      <td width="30%">제 4회 모의면접</td>
-                      <td width="20%">
-                        <div class="media">
-                          <div class="media-body">
-                            <span class="pendiente">실전</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td width="40%">
-                        <div class="media">
-                          <div class="media-body">
-                            <span class="media-meta">Febrero 13, 2016</span>
-                          </div>
-                        </div>
-                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -179,7 +95,74 @@
     </div>
   </div>
   <script>
-    var interviewList = {{ interviewList| safe}};
+    //디비에서 받아올 내용 : 그 사용자의 면접 횟수, 면접 타입, 면접 날짜, 링크
+    var interviewTypeList = {{ interviewTypeList| safe}};
+    var dateList = {{ dateList| safe }};
+    var count = {{ count }};
+    var interviewCountList = {{interviewCountList}};
+
+    var tablebody = document.getElementById("tablebody");
+    for (var i = 0; i < count; i++) {
+      var row = document.createElement('tr');
+      var firstcol = document.createElement('td');
+      var secondcol = document.createElement('td');
+      var thirdcol = document.createElement('td');
+      var fourthcol = document.createElement('td');
+      var firstatag = document.createElement('a');
+      var mediadiv1 = document.createElement('div');
+      var mediabodydiv1 = document.createElement('div');
+      var span1 = document.createElement('span');
+      var mediadiv2 = document.createElement('div');
+      var mediabodydiv2 = document.createElement('div');
+      var span2 = document.createElement('span');
+
+      if (interviewTypeList[i] == 0) { //연습면접
+        var practiceURL = '/interviews/training/result/'+interviewCountList[i];
+        console.log(practiceURL);
+        row.setAttribute("data-status", "pagado");
+        row.setAttribute("onClick","window.location.replace(practiceURL)")
+        secondcol.innerHTML = "제 " + (i+1) + "회 연습면접"; //어떤 몇회 어떤 타입의 모의 면접인지
+        span1.innerHTML = "연습"; // 면접 타입
+        span1.className = "pagado";
+      }
+
+      else if (interviewTypeList[i] == 1) { //실전면접
+        var testURL = '/interviews/test/result/'+interviewCountList[i];
+        console.log(testURL);
+        row.setAttribute("data-status", "pendiente");
+        row.setAttribute("onClick","window.location.replace(testURL)")
+        secondcol.innerHTML = "제 " + (i+1) + "회 실전면접"; //어떤 몇회 어떤 타입의 모의 면접인지
+        span1.innerHTML = "실전"; // 면접 타입
+        span1.className = "pendiente";
+      }
+
+      firstcol.width = "10%";
+      secondcol.width = "30%";
+      thirdcol.width = "20%";
+      fourthcol.width = "40%";
+
+      /* 테이블 column에 대한 설정 */
+      firstatag.innerHTML = i+1; //몇 회 인지
+      firstcol.appendChild(firstatag);
+      mediadiv1.className = "media";
+      mediabodydiv1.className = "media-body";
+      mediabodydiv1.appendChild(span1);
+      mediadiv1.appendChild(mediabodydiv1);
+      thirdcol.appendChild(mediadiv1);
+      mediadiv2.className = "media";
+      mediabodydiv2.className = "media-body";
+      span2.className = "media-meta";
+
+      span2.innerHTML = dateList[i]; //면접 날짜 
+      mediabodydiv2.appendChild(span2);
+      mediadiv2.appendChild(mediabodydiv2);
+      fourthcol.appendChild(mediadiv2);
+      row.appendChild(firstcol);
+      row.appendChild(secondcol);
+      row.appendChild(thirdcol);
+      row.appendChild(fourthcol);
+      tablebody.appendChild(row);
+    }
   </script>
 </body>
 <script> $(window).load(function () { $('#exampleModalCenter').modal('show'); }); </script>
