@@ -26,3 +26,5 @@ def traningInterviewOnAir(request):
 
     return render(request,'project/interview/trainingOnAir.html',{'ques_id': ques_id, 'ques_text' : ques_text, 'interview_count':interview_count+1})
    
+def trainingResult(request):
+    return render(request,'project/interview/trainingResult.html',{})   
