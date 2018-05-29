@@ -106,7 +106,7 @@ function setEmotionTrendResult() {
             name: '놀람'
         };
         var layout = {
-            title: '질문' + i + ' 감정 변화 추이',
+            title: '감정 변화 추이',
             xaxis: {
                 title: '시간'
             },
@@ -116,6 +116,7 @@ function setEmotionTrendResult() {
         }
         var data = [anger, contempt, disgust, fear, happiness, neutral, sadness, surprise];
         Plotly.newPlot('linechart' + i, data, layout);
+        document.getElementById("question" + i).innerHTML = "질문 " + i + '. ' + questionList[i - 1];
 
         //질문에 대한 당황 체크
         var temp = happinessList.slice(tempidx, tempidx + 6);
@@ -123,9 +124,15 @@ function setEmotionTrendResult() {
         for (var j = 0; j < temp.length; j++) value += 1000 * temp[j];
         temp = neutralList.slice(tempidx, tempidx + 6);
         for (var j = 0; j < temp.length; j++) value += 1000 * temp[j];
-        if(6000 - value > 3000){
-            document.getElementById("ltext"+i).innerHTML += "이 질문에 당황한 흔적이 보여요. 이에 대한 대비가 필요하지 않을까요?<br>";
+        if (6000 - value > 3000) {
+            document.getElementById("ltext" + i).innerHTML += "이 질문에 당황한 흔적이 보여요. 이에 대한 대비가 필요하지 않을까요?<br>";
         }
+        
+        //행복도 체크
+        temp = happinessList.slice(tempidx, tempidx + xAxis[i].length);
+        for (var j = 0; j < temp.length; j++) value += 1000 * temp[j];
+        if (value > temp.length * 100 * 0.6) document.getElementById("ltext" + i).innerHTML += "표정에서 행복함이 보여요. 보기 좋아요. 다만 때로는 진지한 모습도 까먹지 마세요!<br>";
+
         tempidx += xAxis[i].length;
     }
 
@@ -147,14 +154,14 @@ function setEmotionFrequencyResult() {
             hoverinfo: 'label+percent',
         }];
         var layout = {
-            title: '질문' + i + ' 감정 빈도',
+            title: '감정 빈도',
         }
         Plotly.newPlot('piechart' + i, data, layout);
 
         //무표정 100% 일 때
-        var maxvalue = Math.max.apply(null, emotionFreq[i-1]);
-        if(maxvalue == xAxis[i].length && maxvalue == emotionFreq[i-1][5]){
-            document.getElementById("ptext"+i).innerHTML += "무표정을 유지하고 계시네요. 조금씩은 웃는 표정을 지어보는게 어떨까요?<br>";
+        var maxvalue = Math.max.apply(null, emotionFreq[i - 1]);
+        if (maxvalue == xAxis[i].length && maxvalue == emotionFreq[i - 1][5]) {
+            document.getElementById("ptext" + i).innerHTML += "무표정을 유지하고 계시네요. 조금씩은 웃는 표정을 지어보는게 어떨까요?<br>";
         }
     }
 }

@@ -78,6 +78,15 @@ function startTick() {
       clearInterval(x);
       document.getElementById("timer").innerHTML = "EXPIRED";
     }
+    
+    var snapshotCanvas = document.getElementById('snapshot');
+    var context = snapshot.getContext('2d');
+    // Draw the video frame to the canvas.
+    context.drawImage(gumVideo, 0, 0, snapshotCanvas.width,
+      snapshotCanvas.height);
+    var dataUrl = snapshotCanvas.toDataURL('image/png');
+    var blob = dataURItoBlob(dataUrl);
+    processImage(blob)
   }, 1000);
 }
 
@@ -105,10 +114,23 @@ function handleSourceOpen(event) {
   console.log('Source buffer: ', sourceBuffer);
 }
 
+function dataURItoBlob(dataURI) {
+  var byteString = atob(dataURI.split(',')[1]);
+  var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+  var ab = new ArrayBuffer(byteString.length);
+  var ia = new Uint8Array(ab);
+  for (var i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i);
+  }
+
+  var bb = new Blob([ab], { "type": mimeString });
+  return bb;
+}
 
 function handleDataAvailable(event) {
   if (event.data && event.data.size > 0) {
-    recordedBlobs.push(event.data);
+    //recordedBlobs.push(event.data);
+    //console.log(recordedBlobs)
   }
 }
 
@@ -134,7 +156,7 @@ function toggleRecording() {
       recordButton.textContent = '면접 종료';
       stopTick();
     }
-    else{
+    else {
       recordButton.textContent = '다음 문제';
     }
   }
@@ -169,20 +191,20 @@ function startRecording() {
   recordButton.textContent = '답변 종료';
   mediaRecorder.onstop = handleStop;
   mediaRecorder.ondataavailable = handleDataAvailable;
-  mediaRecorder.start(10); // collect 10ms of data
+  mediaRecorder.start(1000); // collect 10ms of data
   console.log('MediaRecorder started', mediaRecorder);
 }
 
 function stopRecording() {
   mediaRecorder.stop();
   console.log('Recorded Blobs: ', recordedBlobs);
-  download();
+  //download();
 }
 
 
 function download() {
   var blob = new Blob(recordedBlobs, { type: 'video/webm' });
-  var file = new File([blob], 'filename.webm', {
+  var file = new File(temp, 'filename.webm', {
     type: 'video/webm'
   });
 
@@ -196,7 +218,7 @@ function download() {
   formData.append('questionText', ques_text[questionCount])
   formData.append('transcription', final_transcript);
 
-  if(questionCount==4){
+  if (questionCount == 4) {
     formData.append('questionList', ques_id);
   }
   uploadToServer(formData)
@@ -211,7 +233,7 @@ function uploadToServer(formData) {
     contentType: false,
     async: true,
     success: function (data) {
-      if(data ==='good') alert('complete');
+      if (data === 'good') alert('complete');
       else alert('??');
     }
   });
@@ -227,3 +249,76 @@ function ToggleWebCam() {
     camOnOffButton.textContent = '카메라 OFF';
   }
 }
+
+function processImage(data) {
+  console.log(data);
+  // Replace <Subscription Key> with your valid subscription key.
+  var subscriptionKey = "09b66cac84c242d5996750d4dd15b86e";
+
+  // NOTE: You must use the same region in your REST call as you used to
+  // obtain your subscription keys. For example, if you obtained your
+  // subscription keys from westus, replace "westcentralus" in the URL
+  // below with "westus".
+  //
+  // Free trial subscription keys are generated in the westcentralus region.
+  // If you use a free trial subscription key, you shouldn't need to change 
+  // this region.
+  var uriBase =
+    "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect";
+
+  // Request parameters.
+  var params = {
+    "returnFaceId": "true",
+    "returnFaceLandmarks": "false",
+    "returnFaceAttributes": 'emotion',
+  };
+
+  // Display the image.
+  //var sourceImageUrl = document.getElementById("inputImage").value;
+  //document.querySelector("#sourceImage").src = sourceImageUrl;
+
+  // Perform the REST API call.
+  $.ajax({
+    url: uriBase + "?" + $.param(params),
+
+    // Request headers.
+    beforeSend: function (xhrObj) {
+      xhrObj.setRequestHeader("Content-Type", "application/octet-stream");
+      xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
+    },
+
+    type: "POST",
+
+    // Request body.
+    data: data,
+    processData: false,
+    contentType: false,
+    async: true
+  })
+
+    .done(function (data) {
+      // Show formatted JSON on webpage.
+      //$("#responseTextArea").val(JSON.stringify(data, null, 2));
+      var anger = data[0]['faceAttributes']['emotion']['anger'];
+      var contempt = data[0]['faceAttributes']['emotion']['contempt'];
+      var disgust = data[0]['faceAttributes']['emotion']['disgust'];
+      var fear = data[0]['faceAttributes']['emotion']['fear'];
+      var happiness = data[0]['faceAttributes']['emotion']['happiness'];
+      var neutral = data[0]['faceAttributes']['emotion']['neutral'];
+      var sadness = data[0]['faceAttributes']['emotion']['sadness'];
+      var surprise = data[0]['faceAttributes']['emotion']['surprise'];
+      var temp = anger + "<br>" + contempt + "<br>" + disgust + "<br>" + fear + "<br>" + happiness + "<br>" + neutral + "<br>" + sadness + "<br>" + surprise + "<br>";
+      document.getElementById("result").innerHTML = temp;
+    })
+
+    .fail(function (jqXHR, textStatus, errorThrown) {
+      // Display error message.
+      var errorString = (errorThrown === "") ?
+        "Error. " : errorThrown + " (" + jqXHR.status + "): ";
+      errorString += (jqXHR.responseText === "") ?
+        "" : (jQuery.parseJSON(jqXHR.responseText).message) ?
+          jQuery.parseJSON(jqXHR.responseText).message :
+          jQuery.parseJSON(jqXHR.responseText).error.message;
+      alert(errorString);
+    });
+};

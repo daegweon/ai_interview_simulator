@@ -41,12 +41,13 @@ def videoProcessing(request):
     #print(request.user) #AnonymousUser 로그인안하면 이렇게 출력된다.
     user_id = User.objects.values_list('id', flat=True).get(username=request.user)
     questionId = request.POST["questionId"]
+    questionText = request.POST["questionText"]
     interviewObj = InterviewCount.objects.get(user_id=user_id)
     if request.POST["questionCount"]=="0":
         interviewObj.interview_count += 1 
         interviewObj.save()
     
-    Interview.objects.create(user_id=user_id,question_id=questionId,emotion='',speech='',interview_count=interviewObj.interview_count,interview_date = datetime.now(), interview_type = '1')
+    Interview.objects.create(user_id=user_id,question_id=questionId,emotion='',speech='',interview_count=interviewObj.interview_count,interview_date = datetime.now(), interview_type = '1', question_text=questionText)
     interview_id = Interview.objects.values_list('id', flat=True).get(question_id=questionId,interview_count = interviewObj.interview_count)
     face_analyze.ReqAnalyze(interview_id, frame_dirname)
 

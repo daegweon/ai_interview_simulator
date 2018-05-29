@@ -27,6 +27,7 @@
         var xAxis = [[],];
         var tempemotionFreq = [0, 0, 0, 0, 0, 0, 0, 0];
         var emotionFreq = [];
+        var questionList = {{questionList | safe }}
         {% for emotion in emotionResult %}
         var emotionList = JSON.parse({{ emotion| safe }}["emotion"]);
         var length = emotionList.length;
@@ -87,14 +88,19 @@
                     </h4>
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" align="center">
+                    <div class="panel-body"><h4 id="question1"></h4></div>
                     <div class="panel-body" id="linechart1"><h4 id="ltext1"></h4></div>
                     <div class="panel-body" id="piechart1"><h4 id="ptext1"></h4></div>
+                    <div class="panel-body"><h4 id="question2"></h4></div>
                     <div class="panel-body" id="linechart2"><h4 id="ltext2"></h4></div>
                     <div class="panel-body" id="piechart2"><h4 id="ptext2"></h4></div>
+                    <div class="panel-body"><h4 id="question3"></h4></div>
                     <div class="panel-body" id="linechart3"><h4 id="ltext3"></h4></div>
                     <div class="panel-body" id="piechart3"><h4 id="ptext3"></h4></div>
+                    <div class="panel-body"><h4 id="question4"></h4></div>
                     <div class="panel-body" id="linechart4"><h4 id="ltext4"></h4></div>
                     <div class="panel-body" id="piechart4"><h4 id="ptext4"></h4></div>
+                    <div class="panel-body"><h4 id="question5"></h4></div>
                     <div class="panel-body" id="linechart5"><h4 id="ltext5"></h4></div>
                     <div class="panel-body" id="piechart5"><h4 id="ptext5"></h4></div>
                     <script>
