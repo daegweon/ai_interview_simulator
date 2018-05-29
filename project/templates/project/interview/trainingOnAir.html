@@ -1,6 +1,6 @@
 {%load static%}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <title>AIS - A.I Interview Simulator</title>
@@ -142,9 +142,10 @@
     </footer>
     <script type="text/javascript">
         var videoInput = document.getElementById('gum');
-        pModel.shapeModel.nonRegularizedVectors.push(9);
-        pModel.shapeModel.nonRegularizedVectors.push(11);
-        var ctracker = new clm.tracker({ useWebGL: true });
+        pModel.shapeModel.nonRegularizedVectors.push(13);
+        //pModel.shapeModel.nonRegularizedVectors.push(9);
+        //pModel.shapeModel.nonRegularizedVectors.push(11);
+        var ctracker = new clm.tracker({ searchWindow:13, useWebGL: true});
         ctracker.init(pModel);
         var trackingStarted = false;
 
@@ -176,7 +177,7 @@
             if (er) {
                 updateData(er);
                 for (var i = 0; i < er.length; i++) {
-                    if (er[i].value > 0.8) {
+                    if (er[i].value > 0.7) {
                         document.getElementById('icon' + (i + 1)).style.visibility = 'visible';
                     } else {
                         document.getElementById('icon' + (i + 1)).style.visibility = 'hidden';
