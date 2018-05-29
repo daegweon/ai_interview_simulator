@@ -131,7 +131,7 @@ function setEmotionTrendResult() {
         //행복도 체크
         temp = happinessList.slice(tempidx, tempidx + xAxis[i].length);
         for (var j = 0; j < temp.length; j++) value += 1000 * temp[j];
-        if (value > temp.length * 100 * 0.6) document.getElementById("ltext" + i).innerHTML += "표정에서 행복함이 보여요. 보기 좋아요. 다만 때로는 진지한 모습도 까먹지 마세요!<br>";
+        if (value > temp.length * 100 * 0.6) document.getElementById("ltext" + i).innerHTML += "표정에서 행복함이 묻어나 보기 좋아요. 다만 때로는 진지한 모습을 보여주는 것도 좋아요!<br>";
 
         tempidx += xAxis[i].length;
     }

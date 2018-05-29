@@ -10,10 +10,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src='{%static "js/stt.js" %}'></script>
+    <script src='{%static "js/realtimeface.js" %}'></script>
     <link href='{%static "css/OnAir.css" %}' rel="stylesheet">
     <script>
         var ques_id = {{ ques_id | safe }};
         var ques_text = {{ ques_text | safe}};
+        getKey();
     </script>
     <script>
         var final_transcript = "";

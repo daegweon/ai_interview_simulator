@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
-from django.http import HttpResponse,HttpResponseRedirect
+from django.http import HttpResponse,HttpResponseRedirect, JsonResponse
 from django.contrib.auth.models import User
 from project.interview.models import Question,Interview,InterviewCount,tendencyResult
 from datetime import datetime
@@ -101,4 +101,9 @@ def audio(interview_id,audio_filename,upload_filename):
     tendency = personality.personality_insights(speechResult)  
     Interview.objects.filter(id=interview_id).update(speech=speechResult, tendency=tendency)   '''  
     speechToText.speechProcessing(audio_filename, upload_filename) 
-    
+
+def returnKey(request):
+    key = ""
+    with open("faceKey.txt", 'r') as f:
+        key = f.readline().strip()
+    return JsonResponse({'subKey' : key}, json_dumps_params = {'ensure_ascii': True})

@@ -19,12 +19,15 @@ var mediaRecorder;
 var recordedBlobs;
 var sourceBuffer;
 var timer;
+var face;
 var questionCount = 0;
 
 var gumVideo = document.querySelector('video#gum');
 
 var recordButton = document.querySelector('button#record');
 var camOnOffButton = document.querySelector('button#camOnOff');
+var snapshotCanvas = document.getElementById('snapshot');
+var context = snapshot.getContext('2d');
 recordButton.onclick = toggleRecording;
 camOnOffButton.onclick = ToggleWebCam;
 
@@ -78,15 +81,6 @@ function startTick() {
       clearInterval(x);
       document.getElementById("timer").innerHTML = "EXPIRED";
     }
-    
-    var snapshotCanvas = document.getElementById('snapshot');
-    var context = snapshot.getContext('2d');
-    // Draw the video frame to the canvas.
-    context.drawImage(gumVideo, 0, 0, snapshotCanvas.width,
-      snapshotCanvas.height);
-    var dataUrl = snapshotCanvas.toDataURL('image/png');
-    var blob = dataURItoBlob(dataUrl);
-    processImage(blob)
   }, 1000);
 }
 
@@ -127,41 +121,29 @@ function dataURItoBlob(dataURI) {
   return bb;
 }
 
-function handleDataAvailable(event) {
-  if (event.data && event.data.size > 0) {
-    //recordedBlobs.push(event.data);
-    //console.log(recordedBlobs)
-  }
-}
-
-function handleStop(event) {
-  console.log('Recorder stopped: ', event);
-}
-
 function toggleRecording() {
   if (recordButton.textContent === '면접 시작' || recordButton.textContent === '다음 문제') {
     startSpeechToText();
     document.getElementById("question").textContent = ques_text[questionCount]
     startTick();
     startRecording();
+    StartDetectFace();
   } else {
     stopSpeechToText();
     stopTick();
     stopRecording();
+    StopDetectFace();
     questionCount += 1;
     if (questionCount == 5) {
       questionCount = 0;
       recordButton.disabled = true;
       document.getElementById("finInterview").style.display = "inline";
       recordButton.textContent = '면접 종료';
-      stopTick();
     }
     else {
       recordButton.textContent = '다음 문제';
     }
   }
-
-
 }
 
 function startRecording() {
@@ -197,31 +179,21 @@ function startRecording() {
 
 function stopRecording() {
   mediaRecorder.stop();
-  console.log('Recorded Blobs: ', recordedBlobs);
-  //download();
 }
 
+function StartDetectFace() {
+  face = setInterval(function () {
+    // Draw the video frame to the canvas.
+    context.drawImage(gumVideo, 0, 0, snapshotCanvas.width,
+      snapshotCanvas.height);
+    var dataUrl = snapshotCanvas.toDataURL('image/png');
+    var blob = dataURItoBlob(dataUrl);
+    processImage(blob)
+  }, 1000); //set time interval ms
+}
 
-function download() {
-  var blob = new Blob(recordedBlobs, { type: 'video/webm' });
-  var file = new File(temp, 'filename.webm', {
-    type: 'video/webm'
-  });
-
-  var csrftoken = getCookie('csrftoken');
-
-  var formData = new FormData();
-  formData.append('file', file);
-  formData.append('csrfmiddlewaretoken', csrftoken);
-  formData.append('questionId', ques_id[questionCount]);
-  formData.append('questionCount', questionCount);
-  formData.append('questionText', ques_text[questionCount])
-  formData.append('transcription', final_transcript);
-
-  if (questionCount == 4) {
-    formData.append('questionList', ques_id);
-  }
-  uploadToServer(formData)
+function StopDetectFace(){
+  clearInterval(face);
 }
 
 function uploadToServer(formData) {
@@ -249,76 +221,3 @@ function ToggleWebCam() {
     camOnOffButton.textContent = '카메라 OFF';
   }
 }
-
-function processImage(data) {
-  console.log(data);
-  // Replace <Subscription Key> with your valid subscription key.
-  var subscriptionKey = "09b66cac84c242d5996750d4dd15b86e";
-
-  // NOTE: You must use the same region in your REST call as you used to
-  // obtain your subscription keys. For example, if you obtained your
-  // subscription keys from westus, replace "westcentralus" in the URL
-  // below with "westus".
-  //
-  // Free trial subscription keys are generated in the westcentralus region.
-  // If you use a free trial subscription key, you shouldn't need to change 
-  // this region.
-  var uriBase =
-    "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect";
-
-  // Request parameters.
-  var params = {
-    "returnFaceId": "true",
-    "returnFaceLandmarks": "false",
-    "returnFaceAttributes": 'emotion',
-  };
-
-  // Display the image.
-  //var sourceImageUrl = document.getElementById("inputImage").value;
-  //document.querySelector("#sourceImage").src = sourceImageUrl;
-
-  // Perform the REST API call.
-  $.ajax({
-    url: uriBase + "?" + $.param(params),
-
-    // Request headers.
-    beforeSend: function (xhrObj) {
-      xhrObj.setRequestHeader("Content-Type", "application/octet-stream");
-      xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
-    },
-
-    type: "POST",
-
-    // Request body.
-    data: data,
-    processData: false,
-    contentType: false,
-    async: true
-  })
-
-    .done(function (data) {
-      // Show formatted JSON on webpage.
-      //$("#responseTextArea").val(JSON.stringify(data, null, 2));
-      var anger = data[0]['faceAttributes']['emotion']['anger'];
-      var contempt = data[0]['faceAttributes']['emotion']['contempt'];
-      var disgust = data[0]['faceAttributes']['emotion']['disgust'];
-      var fear = data[0]['faceAttributes']['emotion']['fear'];
-      var happiness = data[0]['faceAttributes']['emotion']['happiness'];
-      var neutral = data[0]['faceAttributes']['emotion']['neutral'];
-      var sadness = data[0]['faceAttributes']['emotion']['sadness'];
-      var surprise = data[0]['faceAttributes']['emotion']['surprise'];
-      var temp = anger + "<br>" + contempt + "<br>" + disgust + "<br>" + fear + "<br>" + happiness + "<br>" + neutral + "<br>" + sadness + "<br>" + surprise + "<br>";
-      document.getElementById("result").innerHTML = temp;
-    })
-
-    .fail(function (jqXHR, textStatus, errorThrown) {
-      // Display error message.
-      var errorString = (errorThrown === "") ?
-        "Error. " : errorThrown + " (" + jqXHR.status + "): ";
-      errorString += (jqXHR.responseText === "") ?
-        "" : (jQuery.parseJSON(jqXHR.responseText).message) ?
-          jQuery.parseJSON(jqXHR.responseText).message :
-          jQuery.parseJSON(jqXHR.responseText).error.message;
-      alert(errorString);
-    });
-};
