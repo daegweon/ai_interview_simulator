@@ -1,0 +1,149 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400|Raleway:300);
+html {
+  padding-top: 50px;
+  font-family: 'Open Sans', Helvetica, arial, sans-serif;
+  text-align: center;
+  background-color: #eeeeee;
+}
+html *,
+html *:before,
+html *:after {
+  box-sizing: border-box;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+html i, html em,
+html b, html strong,
+html span {
+  -webkit-transition: none;
+  transition: none;
+}
+
+*:before,
+*:after {
+  z-index: -1;
+}
+
+h1,
+h4 {
+  font-family: 'Raleway', 'Open Sans', sans-serif;
+  margin: 0;
+  line-height: 1;
+}
+
+a {
+  text-decoration: none;
+  line-height: 80px;
+  color: black;
+}
+
+.centerer {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.wrap {
+  width: 100%;
+  float: left;
+}
+
+[class^="btn-"] {
+  position: relative;
+  display: inline-block;
+  margin: 20px auto;
+  margin-right:20px;
+  width: 80%;
+  height: 80px;
+  max-width: 200px;
+  text-transform: uppercase;
+  overflow: hidden;
+  border: 1px solid currentColor;
+}
+
+.btn-0 {
+  color: #3e3f89;
+}
+.btn-0:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 80px;
+  background: #111146;
+}
+.btn-0:hover {
+  color: #c6c7dc;
+}
+.btn-0:hover:before {
+  width: 250px;
+}
+.btn-0:active {
+  background: #1c1d74;
+}
+
+.btn-1 {
+  color: #387bb3;
+}
+.btn-1:after {
+  content: '';
+  width: 0;
+  height: 0;
+  -webkit-transform: rotate(360deg);
+  border-style: solid;
+  border-width: 0 0 0 0;
+  border-color: #0d3c64 transparent transparent transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.btn-1:hover {
+  color: #c5d8e9;
+}
+.btn-1:hover:after {
+  border-width: 330px 330px 0 0;
+}
+.btn-1:active {
+  background: #1564a6;
+}
+
+.btn-1-2 {
+  color: #ba7970;
+}
+.btn-1-2:before {
+  content: '';
+  width: 0;
+  height: 0;
+  -webkit-transform: rotate(360deg);
+  border-style: solid;
+  border-width: 0 0 0 0;
+  border-color: transparent transparent transparent #683a34;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.btn-1-2:after {
+  content: '';
+  width: 0;
+  height: 0;
+  -webkit-transform: rotate(360deg);
+  border-style: solid;
+  border-width: 0 0 0 0;
+  border-color: transparent transparent #683a34 transparent;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.btn-1-2:hover {
+  color: #ebd8d5;
+}
+.btn-1-2:hover:before {
+  border-width: 206.25px 0 0 206.25px;
+}
+.btn-1-2:hover:after {
+  border-width: 0 0 206.25px 206.25px;
+}
+.btn-1-2:active {
+  background: #ae6157;
+}

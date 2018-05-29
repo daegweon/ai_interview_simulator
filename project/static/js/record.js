@@ -134,7 +134,6 @@ function toggleRecording() {
       recordButton.disabled = true;
       document.getElementById("finInterview").style.display = "inline";
       recordButton.textContent = '면접 종료';
-      stopTick();
     }
     else{
       recordButton.textContent = '다음 문제';
