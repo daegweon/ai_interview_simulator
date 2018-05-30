@@ -1,0 +1,282 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>AIS - A.I Interview Simulator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href='{%static "css/OnAir.css" %}' rel="stylesheet">
+    <script src='{%static "js/clmtrackr.js" %}'></script>
+    <script src='{%static "js/emotionmodel.js" %}'></script>
+    <script src='{%static "js/emotion_classifier.js" %}'></script>
+    <script src='{%static "js/model_pca_20_svm.js" %}'></script>
+    <script src='{%static "js/d3.min.js" %}'></script>
+    <script src='{%static "js/Stats.js" %}'></script>
+    <script src='{%static "js/utils.js" %}'></script>
+    <script src='{%static "js/stt.js" %}'></script>
+    <script>
+        function banWordToast(x) {
+            x.className = "show";
+            setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+        }
+        var banWordList = ['사실', '다시'];
+        annyang.start({ autoRestart: true, continuous: false })
+        var recognition = annyang.getSpeechRecognizer();
+        var final_transcript = '';
+        recognition.interimResults = true;
+        recognition.onresult = function (event) {
+            var interim_transcript = '';
+            final_transcript = '';
+            for (var i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    final_transcript += event.results[i][0].transcript;
+                    console.log("final_transcript=" + final_transcript);
+                    //annyang.trigger(final_transcript); //If the sentence is "final" for the Web Speech API, we can try to trigger the sentence
+                } else {
+                    interim_transcript += event.results[i][0].transcript;
+                    var banLength = banWordList.length;
+                    var snackbar = document.getElementById("snackbar");
+                    for (var j = 0; j < banLength; j++) {
+                        if (event.results[i][0].transcript.indexOf(banWordList[j]) != -1) {
+                            snackbar.innerHTML = "'" + banWordList[j] + "' 단어가 검출되었습니다";
+                            banWordToast(snackbar);
+                        }
+                    }
+                    console.log("interim_transcript=" + interim_transcript);
+                }
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Logo</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Projects</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/member/logout/">
+                            <span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid text-center">
+        <div class="row content">
+            <div class="col-sm-8 sidenav">
+                <div id="content">
+                    <div id="container">
+                        <video id="gum" style="border: 1px solid black;"  width="400" height="300" preload="auto" playsinline autoplay muted loop></video>
+                        <canvas id="overlay" width="400" height="300"></canvas>
+                    </div>
+                    <div id="controls">
+                        <input class="btn" type="button" value="start" onclick="startVideo()" id="startbutton">
+                    </div>
+                </div>
+                <br>
+                <br>
+                <h4 id="question">시작 버튼을 누르시면 질문이 표시됩니다.</h4>
+                <br>
+                <div>
+                    <button type="button" id="camOnOff" class="btn btn-danger">카메라 OFF</button>
+                    <button type="button" id="record" class="btn btn-primary" disabled>면접 시작</button>
+                    <button type="button" id="finInterview" class="btn btn-success" style="text-align: right; display: none;" onclick="window.location.href='{% url 'testResult' ic=interview_count %}'">결과 보기</button>
+                </div>
+            </div>
+            <div class="col-sm-4 sidenav">
+                <div class="well">
+                    <div id="emotion_container" style="margin: auto;">
+                        <div id="emotion_icons">
+                            <img class="emotion_icon" id="icon1" src="{%static 'img/icon_angry.png'%}">
+                            <img class="emotion_icon" id="icon2" src="{%static 'img/icon_disgust.png'%}">
+                            <img class="emotion_icon" id="icon3" src="{%static 'img/icon_fear.png'%}">
+                            <img class="emotion_icon" id="icon4" src="{%static 'img/icon_sad.png'%}">
+                            <img class="emotion_icon" id="icon5" src="{%static 'img/icon_surprised.png'%}">
+                            <img class="emotion_icon" id="icon6" src="{%static 'img/icon_happy.png'%}">
+                        </div>
+                        <div id="emotion_chart">
+                        </div>
+                    </div>
+                </div>
+                <div class="well">
+                    <p style="text-align: left" id="banWord">금지 단어</p>
+                </div>
+                <div class="well">
+                    <p id="timer">00:00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="snackbar"></div>
+
+    <footer class="container-fluid text-center">
+        <p>Footer Text</p>
+    </footer>
+    <script type="text/javascript">
+        var videoInput = document.getElementById('gum');
+        pModel.shapeModel.nonRegularizedVectors.push(13);
+        //pModel.shapeModel.nonRegularizedVectors.push(9);
+        //pModel.shapeModel.nonRegularizedVectors.push(11);
+        var ctracker = new clm.tracker({ searchWindow:13, useWebGL: true});
+        ctracker.init(pModel);
+        var trackingStarted = false;
+
+        function startVideo() {
+            // start video
+            videoInput.play();
+            // start tracking
+            ctracker.start(videoInput);
+            trackingStarted = true;
+            // start loop to draw face
+            drawLoop();
+        }
+
+        var ec = new emotionClassifier();
+        ec.init(emotionModel);
+        var emotionData = ec.getBlank();
+
+        var canvasInput = document.getElementById('overlay');
+        var cc = canvasInput.getContext('2d');
+
+        function drawLoop() {
+            requestAnimationFrame(drawLoop);
+            cc.clearRect(0, 0, canvasInput.width, canvasInput.height);
+            if (ctracker.getCurrentPosition()) {
+                ctracker.draw(canvasInput);
+            }
+            var cp = ctracker.getCurrentParameters();
+            var er = ec.meanPredict(cp);
+            if (er) {
+                updateData(er);
+                for (var i = 0; i < er.length; i++) {
+                    if (er[i].value > 0.7) {
+                        document.getElementById('icon' + (i + 1)).style.visibility = 'visible';
+                    } else {
+                        document.getElementById('icon' + (i + 1)).style.visibility = 'hidden';
+                    }
+                }
+            }
+        }
+        /************ d3 code for barchart *****************/
+
+        var margin = { top: 20, right: 20, bottom: 10, left: 40 },
+            width = 400 - margin.left - margin.right,
+            height = 100 - margin.top - margin.bottom;
+
+        var barWidth = 30;
+
+        var formatPercent = d3.format(".0%");
+
+        var x = d3.scale.linear()
+            .domain([0, ec.getEmotions().length]).range([margin.left, width + margin.left]);
+
+        var y = d3.scale.linear()
+            .domain([0, 1]).range([0, height]);
+
+        var svg = d3.select("#emotion_chart").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+
+        svg.selectAll("rect").
+            data(emotionData).
+            enter().
+            append("svg:rect").
+            attr("x", function (datum, index) { return x(index); }).
+            attr("y", function (datum) { return height - y(datum.value); }).
+            attr("height", function (datum) { return y(datum.value); }).
+            attr("width", barWidth).
+            attr("fill", "#2d578b");
+
+        svg.selectAll("text.labels").
+            data(emotionData).
+            enter().
+            append("svg:text").
+            attr("x", function (datum, index) { return x(index) + barWidth; }).
+            attr("y", function (datum) { return height - y(datum.value); }).
+            attr("dx", -barWidth / 2).
+            attr("dy", "1.2em").
+            attr("text-anchor", "middle").
+            text(function (datum) { return datum.value; }).
+            attr("fill", "white").
+            attr("class", "labels");
+
+        svg.selectAll("text.yAxis").
+            data(emotionData).
+            enter().append("svg:text").
+            attr("x", function (datum, index) { return x(index) + barWidth; }).
+            attr("y", height).
+            attr("dx", -barWidth / 2).
+            attr("text-anchor", "middle").
+            attr("style", "font-size: 12").
+            text(function (datum) { return datum.emotion; }).
+            attr("transform", "translate(0, 18)").
+            attr("class", "yAxis");
+
+        function updateData(data) {
+            // update
+            var rects = svg.selectAll("rect")
+                .data(data)
+                .attr("y", function (datum) { return height - y(datum.value); })
+                .attr("height", function (datum) { return y(datum.value); });
+            var texts = svg.selectAll("text.labels")
+                .data(data)
+                .attr("y", function (datum) { return height - y(datum.value); })
+                .text(function (datum) { return datum.value.toFixed(1); });
+
+            // enter
+            rects.enter().append("svg:rect");
+            texts.enter().append("svg:text");
+
+            // exit
+            rects.exit().remove();
+            texts.exit().remove();
+        }
+
+        /******** stats ********/
+
+        stats = new Stats();
+        stats.domElement.style.position = 'absolute';
+        stats.domElement.style.top = '0px';
+        document.getElementById('container').appendChild(stats.domElement);
+
+        // update stats on every iteration
+        document.addEventListener('clmtrackrIteration', function (event) {
+            stats.update();
+        }, false);
+    </script>
+    <script>
+        var ques_id = {{ ques_id | safe }};
+        var ques_text = {{ ques_text | safe}};
+    </script>
+    <script src='{%static "js/record.js" %}'></script>
+</body>
+
+</html>

@@ -1,282 +1,331 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
-    <title>AIS - A.I Interview Simulator</title>
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href='{%static "css/OnAir.css" %}' rel="stylesheet">
-    <script src='{%static "js/clmtrackr.js" %}'></script>
-    <script src='{%static "js/emotionmodel.js" %}'></script>
-    <script src='{%static "js/emotion_classifier.js" %}'></script>
-    <script src='{%static "js/model_pca_20_svm.js" %}'></script>
-    <script src='{%static "js/d3.min.js" %}'></script>
-    <script src='{%static "js/Stats.js" %}'></script>
-    <script src='{%static "js/utils.js" %}'></script>
-    <script src='{%static "js/stt.js" %}'></script>
-    <script>
-        function banWordToast(x) {
-            x.className = "show";
-            setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>AIS - A.I Interview Simulator</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href='{%static "vendor/bootstrap/css/bootstrap.min.css" %}' rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Custom fonts for this template -->
+    <link href='{%static "vendor/font-awesome/css/font-awesome.min.css" %}' rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href='{%static "css/agency.min.css" %}' rel="stylesheet">
+
+    <!-- bootstrap checkbox -->
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+    <style>
+        body {
+            width: 1px;
+            min-width: 100%;
+            *width: 100%;
         }
-        var banWordList = ['사실', '다시'];
-        annyang.start({ autoRestart: true, continuous: false })
-        var recognition = annyang.getSpeechRecognizer();
-        var final_transcript = '';
-        recognition.interimResults = true;
-        recognition.onresult = function (event) {
-            var interim_transcript = '';
-            final_transcript = '';
-            for (var i = event.resultIndex; i < event.results.length; ++i) {
-                if (event.results[i].isFinal) {
-                    final_transcript += event.results[i][0].transcript;
-                    console.log("final_transcript=" + final_transcript);
-                    //annyang.trigger(final_transcript); //If the sentence is "final" for the Web Speech API, we can try to trigger the sentence
-                } else {
-                    interim_transcript += event.results[i][0].transcript;
-                    var banLength = banWordList.length;
-                    var snackbar = document.getElementById("snackbar");
-                    for (var j = 0; j < banLength; j++) {
-                        if (event.results[i][0].transcript.indexOf(banWordList[j]) != -1) {
-                            snackbar.innerHTML = "'" + banWordList[j] + "' 단어가 검출되었습니다";
-                            banWordToast(snackbar);
-                        }
-                    }
-                    console.log("interim_transcript=" + interim_transcript);
-                }
-            }
-        };
-    </script>
+
+        .switch input {
+            display: none;
+        }
+
+        .switch {
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+            margin: 8px;
+            transform: translateY(50%);
+            position: relative;
+        }
+
+        .slider {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border-radius: 30px;
+            box-shadow: 0 0 0 2px #777, 0 0 4px #777;
+            cursor: pointer;
+            border: 4px solid transparent;
+            overflow: hidden;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 100%;
+            background: #777;
+            border-radius: 30px;
+            transform: translateX(-30px);
+            transition: .4s;
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(30px);
+            background: Red;
+        }
+
+        input:checked+.slider {
+            box-shadow: 0 0 0 2px Red, 0 0 2px limeGreen;
+        }
+
+        .progress-bar-vertical {
+            width: 20px;
+            min-height: 100px;
+            display: flex;
+            align-items: flex-end;
+            margin-right: 20px;
+            float: left;
+        }
+
+        .progress-bar-vertical .progress-bar {
+            width: 100%;
+            height: 0;
+            -webkit-transition: height 0.02s ease;
+            -o-transition: height 0.02s ease;
+            transition: height 0.02s ease;
+        }
+
+        .entry:not(:first-of-type) {
+            margin-top: 10px;
+        }
+
+        .glyphicon {
+            font-size: 12px;
+        }
+
+    </style>
 </head>
 
-<body>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">Logo</a>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="/">Home</a>
+<body id="page-top" style="background-color: #ECECEA">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg" style="height: 75px;background-color: rgb(44,62,80); text-transform: none" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top" style="color: white;" onclick="window.location.reload()">AIS</a>
+            <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive" style="background-color: rgb(44,62,80);">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/interviews/training/hw-check/">Practice</a>
                     </li>
-                    <li>
-                        <a href="#">About</a>
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/interviews/test/hw-check/">Test</a>
                     </li>
-                    <li>
-                        <a href="#">Projects</a>
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/interviews/record">Record</a>
                     </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/member/logout/">
-                            <span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/member/logout/">Logout</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container-fluid text-center">
-        <div class="row content">
-            <div class="col-sm-8 sidenav">
-                <div id="content">
-                    <div id="container">
-                        <video id="gum" style="border: 1px solid black;"  width="400" height="300" preload="auto" playsinline autoplay muted loop></video>
-                        <canvas id="overlay" width="400" height="300"></canvas>
-                    </div>
-                    <div id="controls">
-                        <input class="btn" type="button" value="start" onclick="startVideo()" id="startbutton">
-                    </div>
-                </div>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+    <!-- Check -->
+    <div style="width: 15%; height: 700px; float: left; margin-left: 50px; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+
+        <div style="border: 3px solid; border-radius: 25px; padding: 20px;">
+            <div class="container2">
                 <br>
-                <br>
-                <h4 id="question">시작 버튼을 누르시면 질문이 표시됩니다.</h4>
-                <br>
+                <a style="font-size: 24px; font-weight: bold;"> &nbsp; &nbsp; ON / OFF</a>
+                <br><br>
                 <div>
-                    <button type="button" id="camOnOff" class="btn btn-danger">카메라 OFF</button>
-                    <button type="button" id="record" class="btn btn-primary" disabled>면접 시작</button>
-                    <button type="button" id="finInterview" class="btn btn-success" style="text-align: right; display: none;" onclick="window.location.href='{% url 'testResult' ic=interview_count %}'">결과 보기</button>
+                    <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+        </label> <a style="font-size: 24px; font-weight: bold"> &nbsp; 분노 &nbsp; </a>
                 </div>
-            </div>
-            <div class="col-sm-4 sidenav">
-                <div class="well">
-                    <div id="emotion_container" style="margin: auto;">
-                        <div id="emotion_icons">
-                            <img class="emotion_icon" id="icon1" src="{%static 'img/icon_angry.png'%}">
-                            <img class="emotion_icon" id="icon2" src="{%static 'img/icon_disgust.png'%}">
-                            <img class="emotion_icon" id="icon3" src="{%static 'img/icon_fear.png'%}">
-                            <img class="emotion_icon" id="icon4" src="{%static 'img/icon_sad.png'%}">
-                            <img class="emotion_icon" id="icon5" src="{%static 'img/icon_surprised.png'%}">
-                            <img class="emotion_icon" id="icon6" src="{%static 'img/icon_happy.png'%}">
-                        </div>
-                        <div id="emotion_chart">
-                        </div>
-                    </div>
+                <div>
+                    <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+        </label> <a style="font-size: 24px; font-weight: bold"> &nbsp; 경멸 &nbsp; </a>
                 </div>
-                <div class="well">
-                    <p style="text-align: left" id="banWord">금지 단어</p>
+                <div>
+                    <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+        </label> <a style="font-size: 24px; font-weight: bold"> &nbsp; 싫음 &nbsp; </a>
                 </div>
-                <div class="well">
-                    <p id="timer">00:00</p>
+                <div>
+                    <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+        </label> <a style="font-size: 24px; font-weight: bold"> &nbsp; 공포 &nbsp; </a>
+                </div>
+                <div>
+                    <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+        </label> <a style="font-size: 24px; font-weight: bold"> &nbsp; 행복 &nbsp; </a>
+                </div>
+                <div>
+                    <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+        </label> <a style="font-size: 24px; font-weight: bold"> &nbsp; 중립 &nbsp; </a>
+                </div>
+                <div>
+                    <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+        </label> <a style="font-size: 24px; font-weight: bold"> &nbsp; 슬픔 &nbsp; </a>
+                </div>
+                <div>
+                    <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+        </label> <a style="font-size: 24px; font-weight: bold"> &nbsp; 놀람 &nbsp; </a>
+                </div>
+                <div style="height: 20px;">
+
                 </div>
             </div>
         </div>
+
     </div>
-    <div id="snackbar"></div>
 
-    <footer class="container-fluid text-center">
-        <p>Footer Text</p>
-    </footer>
-    <script type="text/javascript">
-        var videoInput = document.getElementById('gum');
-        pModel.shapeModel.nonRegularizedVectors.push(13);
-        //pModel.shapeModel.nonRegularizedVectors.push(9);
-        //pModel.shapeModel.nonRegularizedVectors.push(11);
-        var ctracker = new clm.tracker({ searchWindow:13, useWebGL: true});
-        ctracker.init(pModel);
-        var trackingStarted = false;
+    <div style="width: 55%; height: 700px; float: left; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+        <video style="border: 1px solid black; align-items: center;" id="video" width="800" height="600" autoplay></video>
+    </div>
+    <div style="width: 20%; height: 700px; float: left; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
 
-        function startVideo() {
-            // start video
-            videoInput.play();
-            // start tracking
-            ctracker.start(videoInput);
-            trackingStarted = true;
-            // start loop to draw face
-            drawLoop();
+        <div style="width: 300px; height: 578px; border: 1px solid; border-radius: 25px; text-align: center;">
+
+            <br><br>
+            <a style="font-size: 24px; font-weight: bold;"> 금지 단어</a>
+            <!--<hr style="border: 0.5px solid;">-->
+            <br><br><br>
+
+            <div>
+                <input id="word" type="text" style="width: 200px; margin-right: -5px; border: 1px solid; border-top-left-radius: 5px;border-bottom-left-radius: 5px;" />
+                <button style="border: 1px solid; border-bottom-right-radius: 5px; border-top-right-radius: 5px;" onclick="add();"> 추가 </button>
+            </div>
+
+            <br><br>
+
+            <ul class="list-group" style="-webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+                <li id="word1" class="list-group-item" style="width: 80%">1</li>
+                <li id="word2" class="list-group-item" style="width: 80%">2</li>
+                <li id="word3" class="list-group-item" style="width: 80%">3</li>
+                <li id="word4" class="list-group-item" style="width: 80%">4</li>
+                <li id="word5" class="list-group-item" style="width: 80%">5</li>
+            </ul>
+
+            <br><br>
+            <button type="button" class="btn btn-primary" onclick="reset()">초기화</button>
+
+            <!--<hr style="border: 0.5px solid;">-->
+        </div>
+
+    </div>
+    <script>
+        function add2() {
+            document.getElementById("wor").textContent = "12";
         }
 
-        var ec = new emotionClassifier();
-        ec.init(emotionModel);
-        var emotionData = ec.getBlank();
-
-        var canvasInput = document.getElementById('overlay');
-        var cc = canvasInput.getContext('2d');
-
-        function drawLoop() {
-            requestAnimationFrame(drawLoop);
-            cc.clearRect(0, 0, canvasInput.width, canvasInput.height);
-            if (ctracker.getCurrentPosition()) {
-                ctracker.draw(canvasInput);
-            }
-            var cp = ctracker.getCurrentParameters();
-            var er = ec.meanPredict(cp);
-            if (er) {
-                updateData(er);
-                for (var i = 0; i < er.length; i++) {
-                    if (er[i].value > 0.7) {
-                        document.getElementById('icon' + (i + 1)).style.visibility = 'visible';
-                    } else {
-                        document.getElementById('icon' + (i + 1)).style.visibility = 'hidden';
-                    }
-                }
-            }
-        }
-        /************ d3 code for barchart *****************/
-
-        var margin = { top: 20, right: 20, bottom: 10, left: 40 },
-            width = 400 - margin.left - margin.right,
-            height = 100 - margin.top - margin.bottom;
-
-        var barWidth = 30;
-
-        var formatPercent = d3.format(".0%");
-
-        var x = d3.scale.linear()
-            .domain([0, ec.getEmotions().length]).range([margin.left, width + margin.left]);
-
-        var y = d3.scale.linear()
-            .domain([0, 1]).range([0, height]);
-
-        var svg = d3.select("#emotion_chart").append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-
-        svg.selectAll("rect").
-            data(emotionData).
-            enter().
-            append("svg:rect").
-            attr("x", function (datum, index) { return x(index); }).
-            attr("y", function (datum) { return height - y(datum.value); }).
-            attr("height", function (datum) { return y(datum.value); }).
-            attr("width", barWidth).
-            attr("fill", "#2d578b");
-
-        svg.selectAll("text.labels").
-            data(emotionData).
-            enter().
-            append("svg:text").
-            attr("x", function (datum, index) { return x(index) + barWidth; }).
-            attr("y", function (datum) { return height - y(datum.value); }).
-            attr("dx", -barWidth / 2).
-            attr("dy", "1.2em").
-            attr("text-anchor", "middle").
-            text(function (datum) { return datum.value; }).
-            attr("fill", "white").
-            attr("class", "labels");
-
-        svg.selectAll("text.yAxis").
-            data(emotionData).
-            enter().append("svg:text").
-            attr("x", function (datum, index) { return x(index) + barWidth; }).
-            attr("y", height).
-            attr("dx", -barWidth / 2).
-            attr("text-anchor", "middle").
-            attr("style", "font-size: 12").
-            text(function (datum) { return datum.emotion; }).
-            attr("transform", "translate(0, 18)").
-            attr("class", "yAxis");
-
-        function updateData(data) {
-            // update
-            var rects = svg.selectAll("rect")
-                .data(data)
-                .attr("y", function (datum) { return height - y(datum.value); })
-                .attr("height", function (datum) { return y(datum.value); });
-            var texts = svg.selectAll("text.labels")
-                .data(data)
-                .attr("y", function (datum) { return height - y(datum.value); })
-                .text(function (datum) { return datum.value.toFixed(1); });
-
-            // enter
-            rects.enter().append("svg:rect");
-            texts.enter().append("svg:text");
-
-            // exit
-            rects.exit().remove();
-            texts.exit().remove();
-        }
-
-        /******** stats ********/
-
-        stats = new Stats();
-        stats.domElement.style.position = 'absolute';
-        stats.domElement.style.top = '0px';
-        document.getElementById('container').appendChild(stats.domElement);
-
-        // update stats on every iteration
-        document.addEventListener('clmtrackrIteration', function (event) {
-            stats.update();
-        }, false);
     </script>
     <script>
-        var ques_id = {{ ques_id | safe }};
-        var ques_text = {{ ques_text | safe}};
+        var btnCount = 1;
+
+        function add() {
+            var word = $("#word").val();
+
+            switch (btnCount) {
+                case 1:
+                    document.getElementById("word1").textContent = word;
+                    btnCount++;
+                    break;
+                case 2:
+                    document.getElementById("word2").textContent = word;
+                    btnCount++;
+                    break;
+                case 3:
+                    document.getElementById("word3").textContent = word;
+                    btnCount++;
+                    break;
+                case 4:
+                    document.getElementById("word4").textContent = word;
+                    btnCount++;
+                    break;
+                case 5:
+                    document.getElementById("word4").textContent = word;
+                    break;
+            }
+
+        }
+
     </script>
-    <script src='{%static "js/record.js" %}'></script>
+
+    <script>
+        function reset() {
+            document.getElementById("word1").textContent = "1";
+            document.getElementById("word2").textContent = "2";
+            document.getElementById("word3").textContent = "3";
+            document.getElementById("word4").textContent = "4";
+            document.getElementById("word5").textContent = "5";
+        }
+
+    </script>
+
+    <!-- Footer -->
+    <div style="text-align: center;">
+        <div style="width: 33.3%; height: 150px; float: left; background-color: rgb(44,62,80);">
+            <br>
+            <a style="color:white; font-size: 24px; font-weight: bold">Copyright</a>
+            <br><br>
+            <a style="color: white; font-size: 18px;">&copy; 2018 Human Learning. &nbsp; All Rights Reserved </a>
+        </div>
+        <div style="width: 33.3%; height: 150px; float: left; background-color: rgb(44,62,80);">
+            <br>
+            <a style="color:white; font-size: 24px;  font-weight: bold">About Us&nbsp; </a>
+            <br><br>
+            <a href="https://github.com/daegweon/ai_interview_simulator"> <i style="color: white; font-size:30px" class="fa">&#xf09b;</i> </a>
+            <a> &nbsp; &nbsp; </a>
+            <a> <i style="color: white; font-size:30px;" class="fa">&#xf08c;</i> </a>
+            <a> &nbsp; &nbsp; </a>
+            <a href="#"> <i style="color: white; font-size:30px;" class="fa">&#xf0d5;</i> </a>
+            <br><br>
+        </div>
+        <div style="width: 33.3%; height: 150px; float: left; background-color: rgb(44,62,80);">
+            <br>
+            <a style="color:white; font-size: 24px; font-weight: bold">Contact Us&nbsp; </a>
+            <br><br>
+            <a style="color: white; font-size: 18px;">quwieo@ajou.ac.kr</a>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src='{%static "vendor/jquery/jquery.min.js" %}'></script>
+    <script src='{%static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}'></script>
+
+    <!-- Plugin JavaScript -->
+    <script src='{%static "vendor/jquery-easing/jquery.easing.min.js" %}'></script>
+
+    <!-- Custom scripts for this template -->
+    <script src='{%static "js/agency.min.js" %}'></script>>
+
 </body>
 
 </html>
