@@ -3,13 +3,25 @@ from django.shortcuts import render
 # Create your views here.
 
 def trainingInterviewHwCheck(request):
-    return render(request, 'project/interview/hwcheckOnTraining.html', {})
+    if request.user.is_authenticated():
+        return render(request, 'project/interview/hwcheckOnTraining.html', {})
+    else: 
+        return render(request,'project/index.html',{'isLogin':0})
     
 def trainingInterviewPriorInfo(request):
-    return render(request,'project/priorInfo.html',{}) 
+    if request.user.is_authenticated():
+        return render(request,'project/priorInfo.html',{}) 
+    else: 
+        return render(request,'project/index.html',{'isLogin':0})
 
 def trainingInterviewOnAir(request):
-    return render(request,'project/interview/trainingOnAir.html',{})
+    if request.user.is_authenticated():
+        return render(request,'project/interview/trainingOnAir.html',{})
+    else: 
+        return render(request,'project/index.html',{'isLogin':0})
 
 def getTrainingResultPage(request):
-    return render(request,'project/main.html',{})
+    if request.user.is_authenticated():
+        return render(request,'project/main.html',{})
+    else: 
+        return render(request,'project/index.html',{'isLogin':0})
