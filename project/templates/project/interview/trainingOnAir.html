@@ -13,74 +13,27 @@
 
     <!-- jQuery Import -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-   
+
     <!-- Bootstrap core CSS -->
     <link href='{%static "vendor/bootstrap/css/bootstrap.min.css" %}' rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
     <link href='{%static "vendor/font-awesome/css/font-awesome.min.css" %}' rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+
 
     <!-- Custom styles for this template -->
     <link href='{%static "css/agency.min.css" %}' rel="stylesheet">
 
     <script src='{%static "js/realtimeface.js"%}'></script>
     <script src='{%static "js/stt.js" %}'></script>
-        
-    <script>
-        var ques_id = {{ ques_id | safe }};
-        var ques_text = {{ ques_text | safe}};
-    </script>
 
-    <script>
-        function banWordToast(x) {
-            x.className = "show";
-            setTimeout(function() {
-                x.className = x.className.replace("show", "");
-            }, 3000);
-        }
-        var banWordList = ['사실', '다시'];
-        var final_transcript = "";
-
-        function startSpeechToText() {
-            final_transcript = "";
-            annyang.start({
-                autoRestart: true,
-                continuous: false
-            });
-            var recognition = annyang.getSpeechRecognizer();
-            recognition.interimResults = true;
-            recognition.onresult = function(event) {
-                var snackbar = document.getElementById("snackbar");
-                var interim_transcript = '';
-                final_transcript = '';
-                for (var i = event.resultIndex; i < event.results.length; ++i) {
-                    if (event.results[i].isFinal) {
-                        final_transcript += event.results[i][0].transcript;
-                        console.log("final_transcript=" + final_transcript);
-                        //annyang.trigger(final_transcript); //If the sentence is "final" for the Web Speech API, we can try to trigger the sentence
-                    } else {
-                        interim_transcript += event.results[i][0].transcript;
-                        var banLength = banWordList.length;
-                        for (var j = 0; j < banLength; j++) {
-                            if (event.results[i][0].transcript.indexOf(banWordList[j]) != -1) {
-                                snackbar.innerHTML = "'" + banWordList[j] + "' 단어가 검출되었습니다";
-                                banWordToast(snackbar);
-                            }
-                        }
-                        console.log("interim_transcript=" + interim_transcript);
-                    }
-                }
-            };
-        }
-
-        function stopSpeechToText() {
-            annyang.abort();
-        }
-
-    </script>
-   
     <style>
+        .glyphicon-exclamation-sign:before {
+            content: "\e101"
+        }
+
         body {
             width: 1px;
             min-width: 100%;
@@ -169,73 +122,8 @@
             /*IE*/
         }
 
-        #snackbar {
-            visibility: hidden;
-            min-width: 250px;
-            margin-left: -125px;
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            border-radius: 2px;
-            padding: 16px;
-            position: fixed;
-            z-index: 1;
-            left: 50%;
-            bottom: 30px;
-            font-size: 17px;
-        }
-
-        #snackbar.show {
-            visibility: visible;
-            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-            animation: fadein 0.5s, fadeout 0.5s 2.5s;
-        }
-
-        @-webkit-keyframes fadein {
-            from {
-                bottom: 0;
-                opacity: 0;
-            }
-            to {
-                bottom: 30px;
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadein {
-            from {
-                bottom: 0;
-                opacity: 0;
-            }
-            to {
-                bottom: 30px;
-                opacity: 1;
-            }
-        }
-
-        @-webkit-keyframes fadeout {
-            from {
-                bottom: 30px;
-                opacity: 1;
-            }
-            to {
-                bottom: 0;
-                opacity: 0;
-            }
-        }
-
-        @keyframes fadeout {
-            from {
-                bottom: 30px;
-                opacity: 1;
-            }
-            to {
-                bottom: 0;
-                opacity: 0;
-            }
-        }
-
         /* The side navigation menu */
+
         .sidenav {
             height: 100%;
             /* 100% Full-height */
@@ -259,6 +147,7 @@
         }
 
         /* The navigation menu links */
+
         .sidenav a {
             padding: 8px 8px 8px 32px;
             text-decoration: none;
@@ -269,11 +158,13 @@
         }
 
         /* When you mouse over the navigation links, change their color */
+
         .sidenav a:hover {
             color: #f1f1f1;
         }
 
         /* Position and style the close button (top right corner) */
+
         .sidenav .closebtn {
             position: absolute;
             top: 0;
@@ -283,12 +174,14 @@
         }
 
         /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+
         #main {
             transition: margin-left .5s;
             padding: 20px;
         }
 
         /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+
         @media screen and (max-height: 450px) {
             .sidenav {
                 padding-top: 15px;
@@ -297,9 +190,113 @@
                 font-size: 18px;
             }
         }
-
     </style>
 
+    <script>
+        var ques_id = {{ ques_id | safe }};
+        var ques_text = {{ ques_text | safe}};
+    </script>
+
+    <script>
+        getKey();
+        function banEmotionToast(Emotion) {
+            $.notify({
+                // options
+                icon: 'glyphicon glyphicon-exclamation-sign',
+                title: '<strong>탐지:</strong>',
+                message: "'" + Emotion + "' 표정이 탐지되었어요",
+            }, {
+                    // settings
+                    element: 'body',
+                    position: null,
+                    type: "warning",
+                    allow_dismiss: true,
+                    newest_on_top: false,
+                    showProgressbar: false,
+                    placement: {
+                        from: "top",
+                        align: "left"
+                    },
+                    offset: 20,
+                    spacing: 10,
+                    z_index: 1031,
+                    delay: 5000,
+                    timer: 1000,
+                    mouse_over: null,
+                    animate: {
+                        enter: 'animated fadeInDown',
+                        exit: 'animated fadeOutUp'
+                    }
+                });
+        }
+        function banWordToast(word) {
+            $.notify({
+                // options
+                icon: 'glyphicon glyphicon-exclamation-sign',
+                title: '<strong>탐지:</strong>',
+                message: "'" + word + "' 단어가 탐지되었어요",
+            }, {
+                    // settings
+                    element: 'body',
+                    position: null,
+                    type: "warning",
+                    allow_dismiss: true,
+                    newest_on_top: false,
+                    showProgressbar: false,
+                    placement: {
+                        from: "bottom",
+                        align: "right"
+                    },
+                    offset: 20,
+                    spacing: 10,
+                    z_index: 1031,
+                    delay: 5000,
+                    timer: 1000,
+                    mouse_over: null,
+                    animate: {
+                        enter: 'animated fadeInDown',
+                        exit: 'animated fadeOutUp'
+                    }
+                });
+        }
+        var banWordList = [];
+        var final_transcript = "";
+
+        function startSpeechToText() {
+            final_transcript = "";
+            annyang.start({
+                autoRestart: true,
+                continuous: false
+            });
+            var recognition = annyang.getSpeechRecognizer();
+            recognition.interimResults = true;
+            recognition.onresult = function (event) {
+                var interim_transcript = '';
+                final_transcript = '';
+                for (var i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        final_transcript += event.results[i][0].transcript;
+                        var banLength = banWordList.length;
+                        for (var j = 0; j < banLength; j++) {
+                            if (event.results[i][0].transcript.indexOf(banWordList[j]) != -1) {
+                                banWordToast(banWordList[j]);
+                            }
+                        }
+                        console.log("final_transcript=" + final_transcript);
+                        //annyang.trigger(final_transcript); //If the sentence is "final" for the Web Speech API, we can try to trigger the sentence
+                    } else {
+                        interim_transcript += event.results[i][0].transcript;
+                        console.log("interim_transcript=" + interim_transcript);
+                    }
+                }
+            };
+        }
+
+        function stopSpeechToText() {
+            annyang.abort();
+        }
+
+    </script>
 </head>
 
 <body id="page-top" style="background-color: #ECECEA">
@@ -308,7 +305,8 @@
     <nav class="navbar navbar-expand-lg" style="height: 75px;background-color: rgb(44,62,80); text-transform: none" id="mainNav">
         <div class="container">
             <a class="navbar-brand js-scroll-trigger" href="/interviews/" style="color: white;">AIS</a>
-            <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fa fa-bars"></i>
             </button>
@@ -331,7 +329,8 @@
         </div>
     </nav>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+        crossorigin="anonymous">
 
     <div id="mySidenav" class="sidenav" style="background-color: rgba(255,255,255,1); width: inherit;">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -343,21 +342,21 @@
 
                 <div style="width: 90px; float: left;">
                     <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span> 
+                        <input type="checkbox" id="checkAnger">
+                        <span class="slider"></span>
                     </label>
                     <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">분노</a>
                 </div>
                 <div style="width: 90px; float: left;">
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" id="checkContempt">
                         <span class="slider"></span>
                     </label>
                     <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">경멸</a>
                 </div>
                 <div style="width: 90px; float: left;">
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" id="checkDisgust">
                         <span class="slider"></span>
                     </label>
                     <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">싫음</a>
@@ -365,35 +364,35 @@
                 <br>
                 <div style="width: 90px; float: left;">
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" id="checkFear">
                         <span class="slider"></span>
                     </label>
                     <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">공포</a>
                 </div>
                 <div style="width: 90px; float: left;">
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" id="checkHappiness">
                         <span class="slider"></span>
                     </label>
                     <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">행복</a>
                 </div>
                 <div style="width: 90px; float: left;">
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" id="checkNeutral">
                         <span class="slider"></span>
                     </label>
                     <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">중립</a>
                 </div>
                 <div style="width: 90px; float: left;">
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" id="checkSadness">
                         <span class="slider"></span>
                     </label>
                     <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">슬픔</a>
                 </div>
                 <div style="width: 90px; float: left;">
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" id="checkSurprise">
                         <span class="slider"></span>
                     </label>
                     <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">놀람</a>
@@ -412,7 +411,8 @@
                 <br>
 
                 <div>
-                    <input id="word" type="text" style="width: 160px; margin-right: -5px; border: 1px solid; border-top-left-radius: 5px;border-bottom-left-radius: 5px;" />
+                    <input id="word" type="text" style="width: 160px; margin-right: -5px; border: 1px solid; border-top-left-radius: 5px;border-bottom-left-radius: 5px;"
+                    />
                     <button style="border: 1px solid; border-bottom-right-radius: 5px; border-top-right-radius: 5px;" onclick="add();"> 추가 </button>
                 </div>
 
@@ -449,34 +449,35 @@
         <button type="button" id="setting" class="btn btn-danger" onclick="nav();">환경 설정 ON</button>
         <button type="button" id="record" class="btn btn-primary" disabled>면접 시작</button>
         <div style="width: inherit;">
-            <h4 id="question">시작 버튼을 누르시면 질문이 표시됩니다.</h4>    
+            <h4 id="question">시작 버튼을 누르시면 질문이 표시됩니다.</h4>
+            <p id="timer">00:00</p>
         </div>
-        
+
     </div>
-    
+
     <div style="width: 20%; height: 700px; float: left; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
 
     </div>
 
     <script>
-        function nav(){
+        function nav() {
             var navBtn = document.querySelector('button#setting');
-            
-            if(navBtn.textContent == '환경 설정 ON'){
+
+            if (navBtn.textContent == '환경 설정 ON') {
                 openNav();
                 navBtn.textContent = '환경 설정 OFF';
             }
-            else if(navBtn.textContent == '환경 설정 OFF'){
+            else if (navBtn.textContent == '환경 설정 OFF') {
                 closeNav();
                 navBtn.textContent = '환경 설정 ON';
             }
-                
+
         }
 
         /* Set the width of the side navigation to ???px */
         function openNav() {
             document.getElementById("mySidenav").style.width = "310px";
-        
+
         }
 
         /* Set the width of the side navigation to 0 */
@@ -485,7 +486,7 @@
         }
 
     </script>
-   
+
     <script>
         var btnCount = 1;
 
@@ -496,40 +497,48 @@
                 case 1:
                     document.getElementById("word1").textContent = word;
                     btnCount++;
+                    banWordList.push(word);
                     break;
                 case 2:
                     document.getElementById("word2").textContent = word;
                     btnCount++;
+                    banWordList.push(word);
                     break;
                 case 3:
                     document.getElementById("word3").textContent = word;
                     btnCount++;
+                    banWordList.push(word);
                     break;
                 case 4:
                     document.getElementById("word4").textContent = word;
                     btnCount++;
+                    banWordList.push(word);
                     break;
                 case 5:
                     document.getElementById("word5").textContent = word;
                     btnCount++;
+                    banWordList.push(word);
                     break;
             }
 
         }
-        
+
         function reset() {
+            btnCount = 1;
             document.getElementById("word1").textContent = "1";
             document.getElementById("word2").textContent = "2";
             document.getElementById("word3").textContent = "3";
             document.getElementById("word4").textContent = "4";
             document.getElementById("word5").textContent = "5";
+            banWordList = [];
+            console.log(btnCount)
         }
 
     </script>
 
-    
+
     <div id="snackbar"></div>
-    
+
     <!-- Footer -->
     <div style="text-align: center;">
         <div style="width: 33.3%; height: 150px; float: left; background-color: rgb(44,62,80);">
@@ -578,6 +587,7 @@
     <!-- Custom scripts for this template -->
     <script src='{%static "js/agency.min.js" %}'></script>
     <script src='{%static "js/interviewTraining.js" %}'></script>
+    <script src='{%static "js/bootstrap-notify.js"%}'></script>
 
 </body>
 

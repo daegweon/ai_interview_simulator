@@ -22,11 +22,11 @@ import subprocess
 def videoProcessing(request):
 
     print(request.POST)
-
-    video_filename = 'video%s.webm'%request.POST["questionCount"]
+    token = request.POST["csrfmiddlewaretoken"]
+    video_filename = token+'video%s.webm'%request.POST["questionCount"]
     audio_filename = 'audio%s.flac'%request.POST["questionCount"]
     upload_filename = 'uploadAudio%s.flac'%request.POST["questionCount"]
-    frame_dirname = './frames' + request.POST["questionCount"] + '/'
+    frame_dirname = './'+token+ 'frames' + request.POST["questionCount"] + '/'
 
     video_stream = request.FILES['file'].read()
     with open(video_filename, 'wb') as f_vid:

@@ -75,8 +75,31 @@ function processImage(data) {
             var neutral = data[0]['faceAttributes']['emotion']['neutral'];
             var sadness = data[0]['faceAttributes']['emotion']['sadness'];
             var surprise = data[0]['faceAttributes']['emotion']['surprise'];
-            var temp = anger + "<br>" + contempt + "<br>" + disgust + "<br>" + fear + "<br>" + happiness + "<br>" + neutral + "<br>" + sadness + "<br>" + surprise + "<br>";
-            document.getElementById("result").innerHTML = temp;
+            
+            if(document.getElementById("checkAnger").checked == true){
+                if (anger > 0.5) banEmotionToast("화남");
+            }
+            if(document.getElementById("checkContempt").checked == true){
+                if (contempt > 0.5) banEmotionToast("경멸");
+            }
+            if(document.getElementById("checkDisgust").checked == true){
+                if (disgust > 0.5) banEmotionToast("싫음");
+            }
+            if(document.getElementById("checkFear").checked == true){
+                if (fear > 0.5) banEmotionToast("공포");
+            }
+            if(document.getElementById("checkHappiness").checked == true){
+                if (happiness > 0.5) banEmotionToast("행복");
+            }
+            if(document.getElementById("checkNeutral").checked == true){
+                if (neutral > 0.5) banEmotionToast("중립");
+            }
+            if(document.getElementById("checkSadness").checked == true){
+                if (sadness > 0.5) banEmotionToast("슬픔");
+            }
+            if(document.getElementById("checkSurprise").checked == true){
+                if (surprise > 0.5) banEmotionToast("놀람");
+            }
         })
 
         .fail(function (jqXHR, textStatus, errorThrown) {

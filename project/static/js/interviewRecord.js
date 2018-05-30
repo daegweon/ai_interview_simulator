@@ -119,7 +119,7 @@ function handleStop(event) {
 function toggleRecording() {
   if (recordButton.textContent === '면접 시작' || recordButton.textContent === '다음 문제') {
     startSpeechToText();
-    document.getElementById("question").textContent = ques_text[questionCount]
+    document.getElementById("question").textContent = "질문"+(questionCount+1)+". "+ques_text[questionCount]
     startTick();
     startRecording();
   } else {

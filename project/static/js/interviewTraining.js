@@ -137,12 +137,12 @@ function toggleRecording() {
     document.getElementById("question").textContent = ques_text[questionCount]
     startTick();
     startRecording();
-    //StartDetectFace();
+    StartDetectFace();
   } else {
     stopSpeechToText();
     stopTick();
     stopRecording();
-    //StopDetectFace();
+    StopDetectFace();
     questionCount += 1;
     if (questionCount == 5) {
       questionCount = 0;
