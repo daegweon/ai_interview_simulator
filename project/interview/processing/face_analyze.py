@@ -9,6 +9,10 @@ from django.contrib.auth.models import User
 from project.interview.models import Question,Interview
 from random import randint
 
+key = ""
+with open("faceKey.txt", 'r') as f:
+    key = f.readline().strip()
+
 emotionList=[]
 
 EmotionScore = {'anger': 0.0, 'contempt': 0.0, 'disgust': 0.0, 'fear': 0.0, 'happiness': 0.0, 'neutral': 0.0,
@@ -21,7 +25,7 @@ url = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect' # Req
 headers = {
     # Request headers
     'Content-Type': 'application/octet-stream',
-    'Ocp-Apim-Subscription-Key': '0347551b54ab452d8ebbb6585bc78a1f',
+    'Ocp-Apim-Subscription-Key': key,
 }
 
 params = urllib.parse.urlencode({

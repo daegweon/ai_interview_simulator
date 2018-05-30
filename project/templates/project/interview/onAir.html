@@ -32,7 +32,7 @@
                 }
             };
         }
-        function stopSpeechToText(){
+        function stopSpeechToText() {
             annyang.abort();
         }
     </script>
@@ -89,7 +89,7 @@
                 <div>
                     <button type="button" id="camOnOff" class="btn btn-danger">카메라 OFF</button>
                     <button type="button" id="record" class="btn btn-primary" disabled>면접 시작</button>
-                    <button type="button" id="finInterview" class="btn btn-success" style="text-align: right; display: none;" onclick="window.location.href='{% url 'testResult' ic=interview_count %}'">결과 보기</button>
+                    <button type="button" id="finInterview" class="btn btn-success" style="text-align: right; display: none;" onclick="window.location.href='{% url 'testResult' ic=interview_count %}'" disabled>결과 보기</button>
                 </div>
             </div>
             <div class="col-sm-4 sidenav">

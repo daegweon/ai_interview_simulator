@@ -123,18 +123,25 @@ function toggleRecording() {
     startTick();
     startRecording();
   } else {
-    stopSpeechToText();
+    recordButton.disabled = true;
     stopTick();
-    stopRecording();
     questionCount += 1;
+    setTimeout(function(){
+      stopRecording();
+      stopSpeechToText();
+      if(questionCount == 5) {}
+      else{
+        recordButton.disabled = false;
+        recordButton.textContent = '다음 문제';
+      }
+    },3000);
     if (questionCount == 5) {
-      questionCount = 0;
       recordButton.disabled = true;
       document.getElementById("finInterview").style.display = "inline";
       recordButton.textContent = '면접 종료';
     }
     else{
-      recordButton.textContent = '다음 문제';
+      recordButton.textContent = '처리중';
     }
   }
 
@@ -210,7 +217,7 @@ function uploadToServer(formData) {
     contentType: false,
     async: true,
     success: function (data) {
-      if(data ==='good') alert('complete');
+      if(data ==='good' && questionCount ==5) document.getElementById("finInterview").disabled = false;
       else alert('??');
     }
   });
