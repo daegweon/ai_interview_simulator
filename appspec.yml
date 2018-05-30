@@ -2,4 +2,4 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ubuntu/ec2-user/
+    destination: /home/ubuntu/ai_interview_simulator/
