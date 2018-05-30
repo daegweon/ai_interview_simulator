@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 
 def trainingInterviewHwCheck(request):
-    return render(request, 'project/interview/testCam.html', {})
+    return render(request, 'project/interview/hwcheckOnTraining.html', {})
     
 def trainingInterviewPriorInfo(request):
     return render(request,'project/priorInfo.html',{}) 

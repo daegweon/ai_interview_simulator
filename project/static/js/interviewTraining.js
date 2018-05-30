@@ -108,6 +108,16 @@ function handleSourceOpen(event) {
   console.log('Source buffer: ', sourceBuffer);
 }
 
+function handleStop(event) {
+  console.log('Recorder stopped: ', event);
+}
+
+function handleDataAvailable(event) {
+  if (event.data && event.data.size > 0) {
+    //recordedBlobs.push(event.data);
+  }
+}
+
 function dataURItoBlob(dataURI) {
   var byteString = atob(dataURI.split(',')[1]);
   var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
@@ -127,12 +137,12 @@ function toggleRecording() {
     document.getElementById("question").textContent = ques_text[questionCount]
     startTick();
     startRecording();
-    StartDetectFace();
+    //StartDetectFace();
   } else {
     stopSpeechToText();
     stopTick();
     stopRecording();
-    StopDetectFace();
+    //StopDetectFace();
     questionCount += 1;
     if (questionCount == 5) {
       questionCount = 0;

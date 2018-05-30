@@ -9,7 +9,7 @@ from project.interview.processing import exportWord
 
 
 def testInterviewHwCheck(request):
-    return render(request, 'project/interview/testCam.html', {})
+    return render(request, 'project/interview/hwcheckOnTest.html', {})
 
 def testInterviewPriorInfo(request):
     return render(request,'project/priorInfo.html',{})   
