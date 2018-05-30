@@ -74,12 +74,12 @@ function startTick() {
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     // Output the result in an element with id="timer"
-    document.getElementById("timer").innerHTML = pad(minutes, 2) + ":" + pad(seconds, 2);
+    //document.getElementById("timer").innerHTML = pad(minutes, 2) + ":" + pad(seconds, 2);
 
     // If the count down is over, write some text 
     if (distance < 0) {
       clearInterval(x);
-      document.getElementById("timer").innerHTML = "EXPIRED";
+      //document.getElementById("timer").innerHTML = "EXPIRED";
     }
   }, 1000);
 }
@@ -137,12 +137,12 @@ function toggleRecording() {
     document.getElementById("question").textContent = ques_text[questionCount]
     startTick();
     startRecording();
-    //StartDetectFace();
+    StartDetectFace();
   } else {
     stopSpeechToText();
     stopTick();
     stopRecording();
-    //StopDetectFace();
+    StopDetectFace();
     questionCount += 1;
     if (questionCount == 5) {
       questionCount = 0;
@@ -183,7 +183,7 @@ function startRecording() {
   recordButton.textContent = '답변 종료';
   mediaRecorder.onstop = handleStop;
   mediaRecorder.ondataavailable = handleDataAvailable;
-  mediaRecorder.start(1000); // collect 10ms of data
+  mediaRecorder.start(100); // collect 10ms of data
   console.log('MediaRecorder started', mediaRecorder);
 }
 
@@ -199,7 +199,7 @@ function StartDetectFace() {
     var dataUrl = snapshotCanvas.toDataURL('image/png');
     var blob = dataURItoBlob(dataUrl);
     processImage(blob)
-  }, 1000); //set time interval ms
+  }, 500); //set time interval ms
 }
 
 function StopDetectFace(){
