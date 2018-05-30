@@ -15,6 +15,7 @@
     <script src='{%static "js/personality.js" %}'></script>
     <script src="https://d3js.org/d3-color.v1.min.js"></script>
     <script>
+        //set Data Vlaue for Analyze
         var angerList = [];
         var contemptList = [];
         var disgustList = [];
@@ -23,9 +24,10 @@
         var neutralList = [];
         var sadnessList = [];
         var surpriseList = [];
-        var xAxis = [];
+        var xAxis = [[],];
         var tempemotionFreq = [0, 0, 0, 0, 0, 0, 0, 0];
         var emotionFreq = [];
+        var questionList = {{questionList | safe }}
         {% for emotion in emotionResult %}
         var emotionList = JSON.parse({{ emotion| safe }}["emotion"]);
         var length = emotionList.length;
@@ -43,7 +45,6 @@
             surpriseList.push(emotionList[i][7]);
         }
         xAxis.push(temp);
-        console.log(xAxis);
         emotionFreq.push(tempemotionFreq);
         tempemotionFreq = [0, 0, 0, 0, 0, 0, 0, 0];
         {% endfor %}
@@ -52,8 +53,6 @@
 
 <body>
     <div class="container demo">
-
-
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <div class="panel panel-default">
                 <div class="panel-heading" role="tab" id="headingOne">
@@ -73,6 +72,10 @@
                         <div id="questionTime"></div>
                         <div id="best"></div>
                     </div>
+                    <script>
+                        setTotalResult();
+                        document.getElementById("usernameSection").innerHTML = "{{username}}님의 분석 결과 입니다.<br><br>";
+                    </script>
                 </div>
             </div>
             <div class="panel panel-default">
@@ -85,72 +88,24 @@
                     </h4>
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" align="center">
-                    <div class="panel-body" id="linechart1"></div>
-                    <div class="panel-body" id="piechart1"></div>
-                    <div class="panel-body" id="linechart2"></div>
-                    <div class="panel-body" id="piechart2"></div>
-                    <div class="panel-body" id="linechart3"></div>
-                    <div class="panel-body" id="piechart3"></div>
-                    <div class="panel-body" id="linechart4"></div>
-                    <div class="panel-body" id="piechart4"></div>
-                    <div class="panel-body" id="linechart5"></div>
-                    <div class="panel-body" id="piechart5"></div>
+                    <div class="panel-body"><h4 id="question1"></h4></div>
+                    <div class="panel-body" id="linechart1"><h4 id="ltext1"></h4></div>
+                    <div class="panel-body" id="piechart1"><h4 id="ptext1"></h4></div>
+                    <div class="panel-body"><h4 id="question2"></h4></div>
+                    <div class="panel-body" id="linechart2"><h4 id="ltext2"></h4></div>
+                    <div class="panel-body" id="piechart2"><h4 id="ptext2"></h4></div>
+                    <div class="panel-body"><h4 id="question3"></h4></div>
+                    <div class="panel-body" id="linechart3"><h4 id="ltext3"></h4></div>
+                    <div class="panel-body" id="piechart3"><h4 id="ptext3"></h4></div>
+                    <div class="panel-body"><h4 id="question4"></h4></div>
+                    <div class="panel-body" id="linechart4"><h4 id="ltext4"></h4></div>
+                    <div class="panel-body" id="piechart4"><h4 id="ptext4"></h4></div>
+                    <div class="panel-body"><h4 id="question5"></h4></div>
+                    <div class="panel-body" id="linechart5"><h4 id="ltext5"></h4></div>
+                    <div class="panel-body" id="piechart5"><h4 id="ptext5"></h4></div>
                     <script>
-                        var totaltime = xAxis[0].length + xAxis[1].length + xAxis[2].length + xAxis[3].length + xAxis[4].length;
-                        var minute = parseInt(totaltime / 60);
-                        var second = totaltime % 60;
-                        var maxQuestionTime = Math.max(xAxis[0].length, xAxis[1].length, xAxis[2].length, xAxis[3].length, xAxis[4].length);
-                        var minQuestionTime = Math.min(xAxis[0].length, xAxis[1].length, xAxis[2].length, xAxis[3].length, xAxis[4].length);
-                        var totalEmotionFreq = emotionFreq.reduce(function (r, a) { //배열의 합
-                            a.forEach(function (b, i) {
-                                r[i] = (r[i] || 0) + b;
-                            });
-                            return r;
-                        }, []);
-                        console.log(totalEmotionFreq);
-                        var maxEmotionValue1 = totalEmotionFreq.indexOf(Math.max.apply(null, totalEmotionFreq));
-                        totalEmotionFreq.splice(maxEmotionValue1, 1);
-                        var maxEmotionValue2 = totalEmotionFreq.indexOf(Math.max.apply(null, totalEmotionFreq));
-                        if (Math.max.apply(null, totalEmotionFreq) == 0) { maxEmotionValue2 = -1; }
-                        totalEmotionFreq.splice(maxEmotionValue2, 1);
-                        var maxEmotionValue3 = totalEmotionFreq.indexOf(Math.max.apply(null, totalEmotionFreq));
-                        if (Math.max.apply(null, totalEmotionFreq) == 0) { maxEmotionValue3 = -1; }
-                        function emotionFunc(emotionvalue) {
-                            switch (emotionvalue) {
-                                case 0:
-                                    return "화남";
-                                    break;
-                                case 1:
-                                    return "경멸";
-                                    break;
-                                case 2:
-                                    return "역겨움";
-                                    break;
-                                case 3:
-                                    return "공포";
-                                    break;
-                                case 4:
-                                    return "행복";
-                                    break;
-                                case 5:
-                                    return "중립";
-                                    break;
-                                case 6:
-                                    return "슬픔";
-                                    break;
-                                case 7:
-                                    return "놀람";
-                                    break;
-                                default:
-                                    return "없음";
-                                    break;
-                            }
-                        }
-                        document.getElementById("usernameSection").innerHTML = "{{username}}님의 분석 결과 입니다.<br><br>";
-                        document.getElementById("totalTime").innerHTML = "총 면접 시간 : " + minute + "분" + second + "초<br><br>";
-                        document.getElementById("questionContent").innerHTML = "질문1:<br>질문2:<br>질문3:<br>질문4:<br>질문5:<br><br>";
-                        document.getElementById("questionTime").innerHTML = "길게 답변한 질문: " + parseInt(maxQuestionTime / 60) + "분 " + maxQuestionTime % 60 + "초<br>가장 짧게 답변한 질문: " + parseInt(minQuestionTime / 60) + "분 " + minQuestionTime % 60 + "초<br><br>";
-                        document.getElementById("best").innerHTML = "감정 빈도<br> 1위: " + emotionFunc(maxEmotionValue1) + "<br>2위: " + emotionFunc(maxEmotionValue2) + "<br>3위: " + emotionFunc(maxEmotionValue3) + "<br><br>성향 BEST3:<br>높은 수치 가장 많이 사용한 단어 BEST3: 많이 말한 순위 1,2,3 그 다음 몇번말했는지<br>";
+                        setEmotionTrendResult();
+                        setEmotionFrequencyResult();
                     </script>
                 </div>
             </div>
@@ -183,363 +138,6 @@
         </div>
     </div>
     <!-- container -->
-    <script>    
-        var anger = {
-            x: xAxis[0],
-            y: angerList.slice(0, xAxis[0].length),
-            type: 'lines',
-            name: '화남'
-        };
-        var contempt = {
-            x: xAxis[0],
-            y: contemptList.slice(0, xAxis[0].length),
-            type: 'lines',
-            name: '경멸'
-        };
-        var disgust = {
-            x: xAxis[0],
-            y: disgustList.slice(0, xAxis[0].length),
-            type: 'lines',
-            name: '역겨움'
-        };
-        var fear = {
-            x: xAxis[0],
-            y: fearList.slice(0, xAxis[0].length),
-            type: 'lines',
-            name: '공포'
-        };
-        var happiness = {
-            x: xAxis[0],
-            y: happinessList.slice(0, xAxis[0].length),
-            type: 'lines',
-            name: '행복'
-        };
-        var neutral = {
-            x: xAxis[0],
-            y: neutralList.slice(0, xAxis[0].length),
-            type: 'lines',
-            name: '중립'
-        };
-        var sadness = {
-            x: xAxis[0],
-            y: sadnessList.slice(0, xAxis[0].length),
-            type: 'lines',
-            name: '슬픔'
-        };
-        var surprise = {
-            x: xAxis[0],
-            y: surpriseList.slice(0, xAxis[0].length),
-            type: 'lines',
-            name: '놀람'
-        };
-        var layout = {
-            title: '질문1 감정 변화 추이',
-            xaxis: {
-                title: '시간'
-            },
-            yaxis: {
-                title: '감정 비중'
-            }
-        }
-        var data = [anger, contempt, disgust, fear, happiness, neutral, sadness, surprise];
-        Plotly.newPlot('linechart1', data, layout);
-
-        var anger = {
-            x: xAxis[1],
-            y: angerList.slice(xAxis[0].length, xAxis[0].length + xAxis[1].length),
-            type: 'lines',
-            name: '화남'
-        };
-        console.log(anger.y);
-        var contempt = {
-            x: xAxis[1],
-            y: contemptList.slice(xAxis[0].length, xAxis[0].length + xAxis[1].length),
-            type: 'lines',
-            name: '경멸'
-        };
-        var disgust = {
-            x: xAxis[1],
-            y: disgustList.slice(xAxis[0].length, xAxis[0].length + xAxis[1].length),
-            type: 'lines',
-            name: '역겨움'
-        };
-        var fear = {
-            x: xAxis[1],
-            y: fearList.slice(xAxis[0].length, xAxis[0].length + xAxis[1].length),
-            type: 'lines',
-            name: '공포'
-        };
-        var happiness = {
-            x: xAxis[1],
-            y: happinessList.slice(xAxis[0].length, xAxis[0].length + xAxis[1].length),
-            type: 'lines',
-            name: '행복'
-        };
-        var neutral = {
-            x: xAxis[1],
-            y: neutralList.slice(xAxis[0].length, xAxis[0].length + xAxis[1].length),
-            type: 'lines',
-            name: '중립'
-        };
-        var sadness = {
-            x: xAxis[1],
-            y: sadnessList.slice(xAxis[0].length, xAxis[0].length + xAxis[1].length),
-            type: 'lines',
-            name: '슬픔'
-        };
-        var surprise = {
-            x: xAxis[1],
-            y: surpriseList.slice(xAxis[0].length, xAxis[0].length + xAxis[1].length),
-            type: 'lines',
-            name: '놀람'
-        };
-        var layout = {
-            title: '질문2 감정 변화 추이',
-            xaxis: {
-                title: '시간'
-            },
-            yaxis: {
-                title: '감정 비중'
-            }
-        }
-        var data = [anger, contempt, disgust, fear, happiness, neutral, sadness, surprise];
-        Plotly.newPlot('linechart2', data, layout);
-
-        var anger = {
-            x: xAxis[2],
-            y: angerList.slice(xAxis[1].length, xAxis[1].length + xAxis[2].length),
-            type: 'lines',
-            name: '화남'
-        };
-        var contempt = {
-            x: xAxis[2],
-            y: contemptList.slice(xAxis[1].length, xAxis[1].length + xAxis[2].length),
-            type: 'lines',
-            name: '경멸'
-        };
-        var disgust = {
-            x: xAxis[2],
-            y: disgustList.slice(xAxis[1].length, xAxis[1].length + xAxis[2].length),
-            type: 'lines',
-            name: '역겨움'
-        };
-        var fear = {
-            x: xAxis[2],
-            y: fearList.slice(xAxis[1].length, xAxis[1].length + xAxis[2].length),
-            type: 'lines',
-            name: '공포'
-        };
-        var happiness = {
-            x: xAxis[2],
-            y: happinessList.slice(xAxis[1].length, xAxis[1].length + xAxis[2].length),
-            type: 'lines',
-            name: '행복'
-        };
-        var neutral = {
-            x: xAxis[2],
-            y: neutralList.slice(xAxis[1].length, xAxis[1].length + xAxis[2].length),
-            type: 'lines',
-            name: '중립'
-        };
-        var sadness = {
-            x: xAxis[2],
-            y: sadnessList.slice(xAxis[1].length, xAxis[1].length + xAxis[2].length),
-            type: 'lines',
-            name: '슬픔'
-        };
-        var surprise = {
-            x: xAxis[2],
-            y: surpriseList.slice(xAxis[1].length, xAxis[1].length + xAxis[2].length),
-            type: 'lines',
-            name: '놀람'
-        };
-        var layout = {
-            title: '질문3 감정 변화 추이',
-            xaxis: {
-                title: '시간'
-            },
-            yaxis: {
-                title: '감정 비중'
-            }
-        }
-        var data = [anger, contempt, disgust, fear, happiness, neutral, sadness, surprise];
-        Plotly.newPlot('linechart3', data, layout);
-
-        var anger = {
-            x: xAxis[3],
-            y: angerList.slice(xAxis[2].length, xAxis[2].length + xAxis[3].length),
-            type: 'lines',
-            name: '화남'
-        };
-        var contempt = {
-            x: xAxis[3],
-            y: contemptList.slice(xAxis[2].length, xAxis[2].length + xAxis[3].length),
-            type: 'lines',
-            name: '경멸'
-        };
-        var disgust = {
-            x: xAxis[3],
-            y: disgustList.slice(xAxis[2].length, xAxis[2].length + xAxis[3].length),
-            type: 'lines',
-            name: '역겨움'
-        };
-        var fear = {
-            x: xAxis[3],
-            y: fearList.slice(xAxis[2].length, xAxis[2].length + xAxis[3].length),
-            type: 'lines',
-            name: '공포'
-        };
-        var happiness = {
-            x: xAxis[3],
-            y: happinessList.slice(xAxis[2].length, xAxis[2].length + xAxis[3].length),
-            type: 'lines',
-            name: '행복'
-        };
-        var neutral = {
-            x: xAxis[3],
-            y: neutralList.slice(xAxis[2].length, xAxis[2].length + xAxis[3].length),
-            type: 'lines',
-            name: '중립'
-        };
-        var sadness = {
-            x: xAxis[3],
-            y: sadnessList.slice(xAxis[2].length, xAxis[2].length + xAxis[3].length),
-            type: 'lines',
-            name: '슬픔'
-        };
-        var surprise = {
-            x: xAxis[3],
-            y: surpriseList.slice(xAxis[2].length, xAxis[2].length + xAxis[3].length),
-            type: 'lines',
-            name: '놀람'
-        };
-        var layout = {
-            title: '질문4 감정 변화 추이',
-            xaxis: {
-                title: '시간'
-            },
-            yaxis: {
-                title: '감정 비중'
-            }
-        }
-        var data = [anger, contempt, disgust, fear, happiness, neutral, sadness, surprise];
-        Plotly.newPlot('linechart4', data, layout);
-
-        var anger = {
-            x: xAxis[4],
-            y: angerList.slice(xAxis[3].length, xAxis[3].length + xAxis[4].length),
-            type: 'lines',
-            name: '화남'
-        };
-        var contempt = {
-            x: xAxis[4],
-            y: contemptList.slice(xAxis[3].length, xAxis[3].length + xAxis[4].length),
-            type: 'lines',
-            name: '경멸'
-        };
-        var disgust = {
-            x: xAxis[4],
-            y: disgustList.slice(xAxis[3].length, xAxis[3].length + xAxis[4].length),
-            type: 'lines',
-            name: '역겨움'
-        };
-        var fear = {
-            x: xAxis[4],
-            y: fearList.slice(xAxis[3].length, xAxis[3].length + xAxis[4].length),
-            type: 'lines',
-            name: '공포'
-        };
-        var happiness = {
-            x: xAxis[4],
-            y: happinessList.slice(xAxis[3].length, xAxis[3].length + xAxis[4].length),
-            type: 'lines',
-            name: '행복'
-        };
-        var neutral = {
-            x: xAxis[4],
-            y: neutralList.slice(xAxis[3].length, xAxis[3].length + xAxis[4].length),
-            type: 'lines',
-            name: '중립'
-        };
-        var sadness = {
-            x: xAxis[4],
-            y: sadnessList.slice(xAxis[3].length, xAxis[3].length + xAxis[4].length),
-            type: 'lines',
-            name: '슬픔'
-        };
-        var surprise = {
-            x: xAxis[4],
-            y: surpriseList.slice(xAxis[3].length, xAxis[3].length + xAxis[4].length),
-            type: 'lines',
-            name: '놀람'
-        };
-        var layout = {
-            title: '질문5 감정 변화 추이',
-            xaxis: {
-                title: '시간'
-            },
-            yaxis: {
-                title: '감정 비중'
-            }
-        }
-        var data = [anger, contempt, disgust, fear, happiness, neutral, sadness, surprise];
-        Plotly.newPlot('linechart5', data, layout);
-
-        var data = [{
-            values: emotionFreq[0],
-            labels: ['화남', '경멸', '역겨움', '공포', '행복', '중립', '슬픔', '놀람'],
-            type: 'pie',
-            hoverinfo: 'label+percent',
-        }];
-        var layout = {
-            title: '질문1 감정 빈도',
-        }
-        Plotly.newPlot('piechart1', data, layout);
-
-        var data = [{
-            values: emotionFreq[1],
-            labels: ['화남', '경멸', '역겨움', '공포', '행복', '중립', '슬픔', '놀람'],
-            type: 'pie',
-            hoverinfo: 'label+percent',
-        }];
-        var layout = {
-            title: '질문2 감정 빈도',
-        }
-        Plotly.newPlot('piechart2', data, layout);
-
-        var data = [{
-            values: emotionFreq[2],
-            labels: ['화남', '경멸', '역겨움', '공포', '행복', '중립', '슬픔', '놀람'],
-            type: 'pie',
-            hoverinfo: 'label+percent',
-        }];
-        var layout = {
-            title: '질문3 감정 빈도',
-        }
-        Plotly.newPlot('piechart3', data, layout);
-
-        var data = [{
-            values: emotionFreq[3],
-            labels: ['화남', '경멸', '역겨움', '공포', '행복', '중립', '슬픔', '놀람'],
-            type: 'pie',
-            hoverinfo: 'label+percent',
-        }];
-        var layout = {
-            title: '질문4 감정 빈도',
-        }
-        Plotly.newPlot('piechart4', data, layout);
-
-        var data = [{
-            values: emotionFreq[4],
-            labels: ['화남', '경멸', '역겨움', '공포', '행복', '중립', '슬픔', '놀람'],
-            type: 'pie',
-            hoverinfo: 'label+percent',
-        }];
-        var layout = {
-            title: '질문5 감정 빈도',
-        }
-        Plotly.newPlot('piechart5', data, layout);
-    </script>
 </body>
 
 </html>

@@ -40,7 +40,11 @@ def getTestResultPage(request, ic):
         personality = ""
         emotionResult = Interview.objects.values('emotion').filter(user_id = request.user,interview_count=ic)
         speechResult = Interview.objects.values('speech').filter(user_id = request.user,interview_count=ic)
+        questionText = Interview.objects.values('question_text').filter(user_id = request.user,interview_count=ic)
         personalityResult = tendencyResult.objects.values('tendency').filter(user_id = request.user,interview_count=ic)
+        for question in questionText:
+            questionList.append(question['question_text'])
+        
         for speech in speechResult:
             text += speech['speech']
             text += " "
@@ -53,6 +57,6 @@ def getTestResultPage(request, ic):
             personality = temp
 
         words = exportWord.get_tags(text, noun_count)
-        return render(request,'project/interview/interviewResult.html',{'emotionResult':emotionResult, 'words':words,'username':request.user,'personality': personality})
+        return render(request,'project/interview/interviewResult.html',{'emotionResult':emotionResult, 'words':words,'username':request.user,'personality': personality, 'questionList':questionList})
 
     

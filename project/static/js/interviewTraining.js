@@ -19,12 +19,15 @@ var mediaRecorder;
 var recordedBlobs;
 var sourceBuffer;
 var timer;
+var face;
 var questionCount = 0;
 
 var gumVideo = document.querySelector('video#gum');
 
 var recordButton = document.querySelector('button#record');
 var camOnOffButton = document.querySelector('button#camOnOff');
+var snapshotCanvas = document.getElementById('snapshot');
+var context = snapshot.getContext('2d');
 recordButton.onclick = toggleRecording;
 camOnOffButton.onclick = ToggleWebCam;
 
@@ -105,15 +108,17 @@ function handleSourceOpen(event) {
   console.log('Source buffer: ', sourceBuffer);
 }
 
-
-function handleDataAvailable(event) {
-  if (event.data && event.data.size > 0) {
-    recordedBlobs.push(event.data);
+function dataURItoBlob(dataURI) {
+  var byteString = atob(dataURI.split(',')[1]);
+  var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+  var ab = new ArrayBuffer(byteString.length);
+  var ia = new Uint8Array(ab);
+  for (var i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i);
   }
-}
 
-function handleStop(event) {
-  console.log('Recorder stopped: ', event);
+  var bb = new Blob([ab], { "type": mimeString });
+  return bb;
 }
 
 function toggleRecording() {
@@ -122,10 +127,12 @@ function toggleRecording() {
     document.getElementById("question").textContent = ques_text[questionCount]
     startTick();
     startRecording();
+    StartDetectFace();
   } else {
     stopSpeechToText();
     stopTick();
     stopRecording();
+    StopDetectFace();
     questionCount += 1;
     if (questionCount == 5) {
       questionCount = 0;
@@ -133,12 +140,10 @@ function toggleRecording() {
       document.getElementById("finInterview").style.display = "inline";
       recordButton.textContent = '면접 종료';
     }
-    else{
+    else {
       recordButton.textContent = '다음 문제';
     }
   }
-
-
 }
 
 function startRecording() {
@@ -168,37 +173,27 @@ function startRecording() {
   recordButton.textContent = '답변 종료';
   mediaRecorder.onstop = handleStop;
   mediaRecorder.ondataavailable = handleDataAvailable;
-  mediaRecorder.start(10); // collect 10ms of data
+  mediaRecorder.start(1000); // collect 10ms of data
   console.log('MediaRecorder started', mediaRecorder);
 }
 
 function stopRecording() {
   mediaRecorder.stop();
-  console.log('Recorded Blobs: ', recordedBlobs);
-  download();
 }
 
+function StartDetectFace() {
+  face = setInterval(function () {
+    // Draw the video frame to the canvas.
+    context.drawImage(gumVideo, 0, 0, snapshotCanvas.width,
+      snapshotCanvas.height);
+    var dataUrl = snapshotCanvas.toDataURL('image/png');
+    var blob = dataURItoBlob(dataUrl);
+    processImage(blob)
+  }, 1000); //set time interval ms
+}
 
-function download() {
-  var blob = new Blob(recordedBlobs, { type: 'video/webm' });
-  var file = new File([blob], 'filename.webm', {
-    type: 'video/webm'
-  });
-
-  var csrftoken = getCookie('csrftoken');
-
-  var formData = new FormData();
-  formData.append('file', file);
-  formData.append('csrfmiddlewaretoken', csrftoken);
-  formData.append('questionId', ques_id[questionCount]);
-  formData.append('questionCount', questionCount);
-  formData.append('questionText', ques_text[questionCount])
-  formData.append('transcription', final_transcript);
-
-  if(questionCount==4){
-    formData.append('questionList', ques_id);
-  }
-  uploadToServer(formData)
+function StopDetectFace(){
+  clearInterval(face);
 }
 
 function uploadToServer(formData) {
@@ -210,7 +205,7 @@ function uploadToServer(formData) {
     contentType: false,
     async: true,
     success: function (data) {
-      if(data ==='good') alert('complete');
+      if (data === 'good') alert('complete');
       else alert('??');
     }
   });
