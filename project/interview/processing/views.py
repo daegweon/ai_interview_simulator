@@ -43,7 +43,7 @@ def videoProcessing(request):
     questionId = request.POST["questionId"]
     questionText = request.POST["questionText"]
     interviewObj = InterviewCount.objects.get(user_id=user_id)
-    if request.POST["questionCount"]=="0":
+    if request.POST["questionCount"]=="1":
         interviewObj.interview_count += 1 
         interviewObj.save()
     
@@ -82,7 +82,7 @@ def videoProcessing(request):
         tendencyResult.objects.create(interview_count=interviewObj.interview_count, user_id=user_id, tendency=tendency)
     '''
     allSpeech = ""
-    if request.POST["questionCount"]=="4":
+    if request.POST["questionCount"]=="5":
         speechResult = Interview.objects.values('speech').filter(user_id = request.user, interview_count=interviewObj.interview_count)
         for speech in speechResult:
             allSpeech += speech['speech'] + " "

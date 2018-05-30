@@ -202,7 +202,7 @@ function download() {
   formData.append('questionText', ques_text[questionCount])
   formData.append('transcription', final_transcript);
 
-  if(questionCount==4){
+  if(questionCount==5){
     formData.append('questionList', ques_id);
   }
   uploadToServer(formData)
@@ -217,8 +217,9 @@ function uploadToServer(formData) {
     contentType: false,
     async: true,
     success: function (data) {
-      if(data ==='good' && questionCount ==5) document.getElementById("finInterview").disabled = false;
-      else alert('??');
+      if(data ==='good' && questionCount ==5){
+        document.getElementById("finInterview").disabled = false;
+      } 
     }
   });
   return false;
