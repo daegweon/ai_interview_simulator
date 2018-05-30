@@ -29,7 +29,7 @@ var camOnOffButton = document.querySelector('button#camOnOff');
 var snapshotCanvas = document.getElementById('snapshot');
 var context = snapshot.getContext('2d');
 recordButton.onclick = toggleRecording;
-camOnOffButton.onclick = ToggleWebCam;
+//camOnOffButton.onclick = ToggleWebCam;
 
 function getCookie(name) {
   var cookieValue = null;
@@ -221,7 +221,7 @@ function uploadToServer(formData) {
   });
   return false;
 }
-
+/*
 function ToggleWebCam() {
   if (camOnOffButton.textContent === '카메라 OFF') {
     camOnOffButton.textContent = '카메라 ON';
@@ -230,4 +230,4 @@ function ToggleWebCam() {
     document.getElementById("gum").style.visibility = "";
     camOnOffButton.textContent = '카메라 OFF';
   }
-}
+}*/
