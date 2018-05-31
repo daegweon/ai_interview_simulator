@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from project.interview.models import Question,Interview,InterviewCount,tendencyResult
 from datetime import datetime
 from . import personality
-from multiprocessing import Process
 import time
 import json
 # Create your views here.
