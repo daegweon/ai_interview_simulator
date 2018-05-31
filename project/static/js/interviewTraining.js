@@ -200,7 +200,7 @@ function StartDetectFace() {
     var dataUrl = snapshotCanvas.toDataURL('image/png');
     var blob = dataURItoBlob(dataUrl);
     processImage(blob)
-  }, 1000); //set time interval ms
+  }, 500); //set time interval ms
 }
 
 function StopDetectFace(){
