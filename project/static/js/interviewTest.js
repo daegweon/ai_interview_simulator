@@ -16,15 +16,18 @@
 var mediaSource = new MediaSource();
 mediaSource.addEventListener('sourceopen', handleSourceOpen, false);
 var mediaRecorder;
-var recordedBlobs;
 var sourceBuffer;
 var timer;
 var questionCount = 0;
-
+var subscriptionKey ="";
+var emotionList=[];
 var gumVideo = document.querySelector('video#gum');
 
 var recordButton = document.querySelector('button#record');
 var camOnOffButton = document.querySelector('button#camOnOff');
+var snapshotCanvas = document.getElementById('snapshot');
+var context = snapshot.getContext('2d');
+var face;
 recordButton.onclick = toggleRecording;
 camOnOffButton.onclick = ToggleWebCam;
 
@@ -107,9 +110,7 @@ function handleSourceOpen(event) {
 
 
 function handleDataAvailable(event) {
-  if (event.data && event.data.size > 0) {
-    recordedBlobs.push(event.data);
-  }
+
 }
 
 function handleStop(event) {
@@ -119,37 +120,36 @@ function handleStop(event) {
 function toggleRecording() {
   if (recordButton.textContent === '면접 시작' || recordButton.textContent === '다음 문제') {
     startSpeechToText();
-    document.getElementById("question").textContent = "질문"+(questionCount+1)+". "+ques_text[questionCount]
+    document.getElementById("question").textContent = "질문" + (questionCount + 1) + ". " + ques_text[questionCount]
     startTick();
     startRecording();
+    StartDetectFace();
   } else {
     recordButton.disabled = true;
     stopTick();
+    StopDetectFace();
     questionCount += 1;
-    setTimeout(function(){
+    setTimeout(function () {
       stopRecording();
       stopSpeechToText();
-      if(questionCount == 5) {}
-      else{
+      if (questionCount == 5) { }
+      else {
         recordButton.disabled = false;
         recordButton.textContent = '다음 문제';
       }
-    },3000);
+    }, 3000);
     if (questionCount == 5) {
       recordButton.disabled = true;
       document.getElementById("finInterview").style.display = "inline";
       recordButton.textContent = '면접 종료';
     }
-    else{
+    else {
       recordButton.textContent = '처리중';
     }
   }
-
-
 }
 
 function startRecording() {
-  recordedBlobs = [];
   var options = { mimeType: 'video/webm;codecs=vp9' };
   if (!MediaRecorder.isTypeSupported(options.mimeType)) {
     console.log(options.mimeType + ' is not Supported');
@@ -181,30 +181,39 @@ function startRecording() {
 
 function stopRecording() {
   mediaRecorder.stop();
-  console.log('Recorded Blobs: ', recordedBlobs);
-  download();
+  setData();
+}
+
+function dataURItoBlob(dataURI) {
+  var byteString = atob(dataURI.split(',')[1]);
+  var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+  var ab = new ArrayBuffer(byteString.length);
+  var ia = new Uint8Array(ab);
+  for (var i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i);
+  }
+
+  var bb = new Blob([ab], { "type": mimeString });
+  return bb;
 }
 
 
-function download() {
-  var blob = new Blob(recordedBlobs, { type: 'video/webm' });
-  var file = new File([blob], 'filename.webm', {
-    type: 'video/webm'
-  });
+function setData() {
 
   var csrftoken = getCookie('csrftoken');
 
   var formData = new FormData();
-  formData.append('file', file);
+  formData.append('emotionList', JSON.stringify(emotionList));
   formData.append('csrfmiddlewaretoken', csrftoken);
-  formData.append('questionId', ques_id[questionCount-1]);
+  formData.append('questionId', ques_id[questionCount - 1]);
   formData.append('questionCount', questionCount);
-  formData.append('questionText', ques_text[questionCount-1])
+  formData.append('questionText', ques_text[questionCount - 1])
   formData.append('transcription', final_transcript);
 
-  if(questionCount==5){
+  if (questionCount == 5) {
     formData.append('questionList', ques_id);
   }
+  emotionList=[];
   uploadToServer(formData)
 }
 
@@ -217,9 +226,9 @@ function uploadToServer(formData) {
     contentType: false,
     async: true,
     success: function (data) {
-      if(data ==='good' && questionCount ==5){
+      if (data === 'good' && questionCount == 5) {
         document.getElementById("finInterview").disabled = false;
-      } 
+      }
     }
   });
   return false;
@@ -234,3 +243,92 @@ function ToggleWebCam() {
     camOnOffButton.textContent = '카메라 OFF';
   }
 }
+
+function StartDetectFace() {
+  face = setInterval(function () {
+    // Draw the video frame to the canvas.
+    context.drawImage(gumVideo, 0, 0, gumVideo.width,
+      gumVideo.height);
+    var dataUrl = snapshotCanvas.toDataURL('image/png');
+    var blob = dataURItoBlob(dataUrl);
+    processImage(blob)
+  }, 1000); //set time interval ms
+}
+
+function StopDetectFace(){
+  clearInterval(face);
+}
+
+function getKey() {
+  var csrftoken = getCookie('csrftoken');
+
+  var formData = new FormData();
+  formData.append('csrfmiddlewaretoken', csrftoken);
+
+  $.ajax({
+    url: '/interviews/getSubKey/',
+    type: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    async: false,
+  }).done(function (data) {
+    subscriptionKey = data['subKey'];
+  });
+}
+
+function processImage(data) {
+
+  var uriBase =
+    "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect";
+
+  // Request parameters.
+  var params = {
+    "returnFaceId": "true",
+    "returnFaceLandmarks": "false",
+    "returnFaceAttributes": 'emotion',
+  };
+
+  $.ajax({
+    url: uriBase + "?" + $.param(params),
+
+    // Request headers.
+    beforeSend: function (xhrObj) {
+      xhrObj.setRequestHeader("Content-Type", "application/octet-stream");
+      xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
+    },
+
+    type: "POST",
+
+    // Request body.
+    data: data,
+    processData: false,
+    contentType: false,
+    async: true
+  })
+
+    .done(function (data) {
+      // Show formatted JSON on webpage.
+      var anger = data[0]['faceAttributes']['emotion']['anger'];
+      var contempt = data[0]['faceAttributes']['emotion']['contempt'];
+      var disgust = data[0]['faceAttributes']['emotion']['disgust'];
+      var fear = data[0]['faceAttributes']['emotion']['fear'];
+      var happiness = data[0]['faceAttributes']['emotion']['happiness'];
+      var neutral = data[0]['faceAttributes']['emotion']['neutral'];
+      var sadness = data[0]['faceAttributes']['emotion']['sadness'];
+      var surprise = data[0]['faceAttributes']['emotion']['surprise'];
+      var temp = [anger, contempt, disgust, fear, happiness, neutral, sadness, surprise];
+      emotionList.push(temp);
+    })
+
+    .fail(function (jqXHR, textStatus, errorThrown) {
+      // Display error message.
+      var errorString = (errorThrown === "") ?
+        "Error. " : errorThrown + " (" + jqXHR.status + "): ";
+      errorString += (jqXHR.responseText === "") ?
+        "" : (jQuery.parseJSON(jqXHR.responseText).message) ?
+          jQuery.parseJSON(jqXHR.responseText).message :
+          jQuery.parseJSON(jqXHR.responseText).error.message;
+      alert(errorString);
+    });
+};

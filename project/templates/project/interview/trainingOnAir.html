@@ -209,13 +209,13 @@
                     // settings
                     element: 'body',
                     position: null,
-                    type: "warning",
+                    type: "info",
                     allow_dismiss: true,
                     newest_on_top: false,
                     showProgressbar: false,
                     placement: {
-                        from: "top",
-                        align: "left"
+                        from: "bottom",
+                        align: "right"
                     },
                     offset: 20,
                     spacing: 10,
@@ -448,6 +448,8 @@
         <br>
         <button type="button" id="setting" class="btn btn-danger" onclick="nav();">환경 설정 ON</button>
         <button type="button" id="record" class="btn btn-primary" disabled>면접 시작</button>
+        <button type="button" id="finInterview" class="btn btn-success" style="text-align: right; display: none;" onclick="window.location.href='/interviews'"
+            disabled>연습 종료</button>
         <div style="width: inherit;">
             <h4 id="question">시작 버튼을 누르시면 질문이 표시됩니다.</h4>
             <p id="timer">00:00</p>
