@@ -42,7 +42,7 @@ def initEmotionData():
     EmotionCount = {'anger': 0, 'contempt': 0, 'disgust': 0, 'fear': 0, 'happiness': 0, 'neutral': 0, 'sadness': 0,
             'surprise': 0}
 
-async def analyze(filename,interview_id,frame_dirname):
+async def analyze(filename,frame_dirname):
     tempList=[]
     body=""
     try:
@@ -61,10 +61,7 @@ async def analyze(filename,interview_id,frame_dirname):
                 tempList.append(res[0]["faceAttributes"]["emotion"]["neutral"])
                 tempList.append(res[0]["faceAttributes"]["emotion"]["sadness"])
                 tempList.append(res[0]["faceAttributes"]["emotion"]["surprise"])
-                emotionList.insert(int(regex.findall(filename)[0])-1,tempList)  
-                interview_emotion = Interview.objects.get(pk=interview_id)
-                interview_emotion.emotion = emotionList
-                interview_emotion.save()      
+                emotionList.insert(int(regex.findall(filename)[0])-1,tempList)     
 
     except Exception as e:
         print('error: '+ frame_dirname + filename)
@@ -72,12 +69,13 @@ async def analyze(filename,interview_id,frame_dirname):
 def ReqAnalyze(interview_id, frame_dirname):
     initEmotionData()
     directory = os.listdir(frame_dirname)
-    tasks = [analyze(file,interview_id,frame_dirname) for file in directory]
+    tasks = [analyze(file,frame_dirname) for file in directory]
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
     loop.run_until_complete(asyncio.wait(tasks))
 
-    #TODO DB에 어떤식으로 값을 저장할 것인지
-    #print(EmotionCount,EmotionScore,Global.reqCnt)
+    interview_emotion = Interview.objects.get(pk=interview_id)
+    interview_emotion.emotion = emotionList
+    interview_emotion.save()
     initEmotionData()
     shutil.rmtree(frame_dirname)

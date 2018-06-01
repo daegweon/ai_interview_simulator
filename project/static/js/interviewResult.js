@@ -1,9 +1,9 @@
 function setTotalResult() {
-    var totaltime = xAxis[0].length + xAxis[1].length + xAxis[2].length + xAxis[3].length + xAxis[4].length;
+    var totaltime = xAxis[5].length + xAxis[1].length + xAxis[2].length + xAxis[3].length + xAxis[4].length;
     var minute = parseInt(totaltime / 60);
     var second = totaltime % 60;
-    var maxQuestionTime = Math.max(xAxis[0].length, xAxis[1].length, xAxis[2].length, xAxis[3].length, xAxis[4].length);
-    var minQuestionTime = Math.min(xAxis[0].length, xAxis[1].length, xAxis[2].length, xAxis[3].length, xAxis[4].length);
+    var maxQuestionTime = Math.max(xAxis[5].length, xAxis[1].length, xAxis[2].length, xAxis[3].length, xAxis[4].length);
+    var minQuestionTime = Math.min(xAxis[5].length, xAxis[1].length, xAxis[2].length, xAxis[3].length, xAxis[4].length);
     var totalEmotionFreq = emotionFreq.reduce(function (r, a) { //배열의 합
         a.forEach(function (b, i) {
             r[i] = (r[i] || 0) + b;
@@ -48,10 +48,13 @@ function setTotalResult() {
                 break;
         }
     }
+    var questionContent = "";
+    mostWord = "<br>1위: '" + words[0]['tag'] + "'<br>" + "2위: '" + words[1]['tag'] + "'<br>" + "3위: '" + words[2]['tag'] + "'"
+    for (var i = 1; i <= 5; i++) questionContent += "질문" + i + ": " + questionList[i - 1] + "<br>";
     document.getElementById("totalTime").innerHTML = "총 면접 시간 : " + minute + "분" + second + "초<br><br>";
-    document.getElementById("questionContent").innerHTML = "질문1:<br>질문2:<br>질문3:<br>질문4:<br>질문5:<br><br>";
-    document.getElementById("questionTime").innerHTML = "길게 답변한 질문: " + parseInt(maxQuestionTime / 60) + "분 " + maxQuestionTime % 60 + "초<br>가장 짧게 답변한 질문: " + parseInt(minQuestionTime / 60) + "분 " + minQuestionTime % 60 + "초<br><br>";
-    document.getElementById("best").innerHTML = "감정 빈도<br> 1위: " + emotionFunc(maxEmotionValue1) + "<br>2위: " + emotionFunc(maxEmotionValue2) + "<br>3위: " + emotionFunc(maxEmotionValue3) + "<br><br>성향 BEST3:<br>높은 수치 가장 많이 사용한 단어 BEST3: 많이 말한 순위 1,2,3 그 다음 몇번말했는지<br>";
+    document.getElementById("questionContent").innerHTML = questionContent;
+    document.getElementById("questionTime").innerHTML = "<br>길게 답변한 질문: " + parseInt(maxQuestionTime / 60) + "분 " + maxQuestionTime % 60 + "초<br>가장 짧게 답변한 질문: " + parseInt(minQuestionTime / 60) + "분 " + minQuestionTime % 60 + "초<br><br>";
+    document.getElementById("best").innerHTML = "감정 빈도<br> 1위: " + emotionFunc(maxEmotionValue1) + "<br>2위: " + emotionFunc(maxEmotionValue2) + "<br>3위: " + emotionFunc(maxEmotionValue3) + "<br><br>성향 BEST3:<br>가장 많이 사용한 단어 BEST3:" + mostWord;
 }
 
 function setEmotionTrendResult() {
@@ -127,12 +130,12 @@ function setEmotionTrendResult() {
         if (6000 - value > 3000) {
             document.getElementById("ltext" + i).innerHTML += "이 질문에 당황한 흔적이 보여요. 이에 대한 대비가 필요하지 않을까요?<br>";
         }
-        
+
         //행복도 체크
         temp = happinessList.slice(tempidx, tempidx + xAxis[i].length);
         value = 0;
         for (var j = 0; j < temp.length; j++) value += 1000 * temp[j];
-        if (value > temp.length * 100 * 0.6) document.getElementById("ltext" + i).innerHTML += "표정에서 행복함이 묻어나 보기 좋아요. 다만 때로는 진지한 모습을 보여주는 것도 좋아요!<br>";
+        if (value > temp.length * 1000 * 0.6) document.getElementById("ltext" + i).innerHTML += "표정에서 행복함이 묻어나 보기 좋아요. 다만 때로는 진지한 모습을 보여주는 것도 좋아요!<br>";
 
         tempidx += xAxis[i].length;
     }

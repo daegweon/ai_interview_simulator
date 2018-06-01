@@ -148,6 +148,7 @@ function toggleRecording() {
       questionCount = 0;
       recordButton.disabled = true;
       document.getElementById("finInterview").style.display = "inline";
+      document.getElementById("finInterview").disabled = false;
       recordButton.textContent = '면접 종료';
     }
     else {

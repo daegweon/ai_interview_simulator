@@ -75,82 +75,31 @@ function processImage(data) {
             var neutral = data[0]['faceAttributes']['emotion']['neutral'];
             var sadness = data[0]['faceAttributes']['emotion']['sadness'];
             var surprise = data[0]['faceAttributes']['emotion']['surprise'];
-            var temp = anger + "<br>" + contempt + "<br>" + disgust + "<br>" + fear + "<br>" + happiness + "<br>" + neutral + "<br>" + sadness + "<br>" + surprise + "<br>";
-            //document.getElementById("result").innerHTML = temp;
-            var dataset = [];
-            dataset.push(anger);
-            dataset.push(contempt);
-            dataset.push(disgust);
-            dataset.push(fear);
-            dataset.push(happiness);
-            dataset.push(neutral);
-            dataset.push(sadness);
-            dataset.push(surprise);
-            var progress = document.getElementById('animationProgress');
-            var ctx = document.getElementById("myChart").getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ["anger", "contempt", "disgust", "fear", "happiness", "neutral", "sadness", "surprise"],
-                    datasets: [{
-                        label: 'Emotion',
-                        data: dataset,
-                        backgroundColor: [
-                            'rgba(244, 67, 54, 0.7)',
-                            'rgba(156, 39, 176, 0.7)',
-                            'rgba(38, 198, 218, 0.7)',
-                            'rgba(38, 166, 154, 0.7)',
-                            'rgba(255, 238, 88, 0.7)',
-                            'rgba(236, 64, 122, 0.7)',
-                            'rgba(224, 224, 224, 0.7)',
-                            'rgba(92, 107, 192, 0.7)'
-
-                        ],
-                        borderColor: [
-                            'rgba(244, 67, 54, 1)',
-                            'rgba(156, 39, 176, 1)',
-                            'rgba(38, 198, 218, 1)',
-                            'rgba(38, 166, 154, 1)',
-                            'rgba(255, 238, 88, 1)',
-                            'rgba(236, 64, 122, 1)',
-                            'rgba(224, 224, 224, 1)',
-                            'rgba(92, 107, 192, 1)'
-                        ],
-                        borderWidth: 5
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        xAxes: [{
-                            ticks: {
-                                fontColor: '#03A9F4',
-                                fontSize: 18,
-                                fontStyle: "normal",
-                                fontFamily: "tahoma"
-                            }
-                        }],
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true,
-                                min: 0,
-                                max: 1,
-                                stepSize: 0
-                            }
-                        }]
-                    },
-                    animation: {
-                        duration: 4000,// general animation time
-                    },
-                    hover: {
-                        animationDuration: 4000, // duration of animations when hovering an item
-                    },
-                    responsiveAnimationDuration: 4000, // animation duration after a resize
-                },
-            });
-            //myChart.data.datasets[0].data = tmpdataset;
-            //myChart.update();
+            
+            if(document.getElementById("checkAnger").checked == true){
+                if (anger > 0.5) banEmotionToast("화남");
+            }
+            if(document.getElementById("checkContempt").checked == true){
+                if (contempt > 0.5) banEmotionToast("경멸");
+            }
+            if(document.getElementById("checkDisgust").checked == true){
+                if (disgust > 0.5) banEmotionToast("싫음");
+            }
+            if(document.getElementById("checkFear").checked == true){
+                if (fear > 0.5) banEmotionToast("공포");
+            }
+            if(document.getElementById("checkHappiness").checked == true){
+                if (happiness > 0.5) banEmotionToast("행복");
+            }
+            if(document.getElementById("checkNeutral").checked == true){
+                if (neutral > 0.5) banEmotionToast("중립");
+            }
+            if(document.getElementById("checkSadness").checked == true){
+                if (sadness > 0.5) banEmotionToast("슬픔");
+            }
+            if(document.getElementById("checkSurprise").checked == true){
+                if (surprise > 0.5) banEmotionToast("놀람");
+            }
         })
 
         .fail(function (jqXHR, textStatus, errorThrown) {
