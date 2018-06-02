@@ -17,6 +17,7 @@ class Interview(models.Model):
     interview_date = models.DateField()
     interview_type = models.CharField(default=None,max_length=10)
     question_text = models.TextField()
+    headpose = models.TextField()
 
 class InterviewCount(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

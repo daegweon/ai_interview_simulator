@@ -48,6 +48,7 @@ def getTestResultPage(request, ic):
         questionList = []
         personality = ""
         emotionResult = Interview.objects.values('emotion').filter(user_id = request.user,interview_count=ic)
+        headposeResult = Interview.objects.values('headpose').filter(user_id = request.user,interview_count=ic)
         speechResult = Interview.objects.values('speech').filter(user_id = request.user,interview_count=ic)
         questionText = Interview.objects.values('question_text').filter(user_id = request.user,interview_count=ic)
         personalityResult = tendencyResult.objects.values('tendency').filter(user_id = request.user,interview_count=ic)
