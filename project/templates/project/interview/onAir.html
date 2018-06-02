@@ -27,6 +27,11 @@
     <link href='{%static "css/agency.min.css" %}' rel="stylesheet">
     <script src='{%static "js/stt.js" %}'></script>
 
+    <!-- Sweetalert2 -->
+    <script src='{%static "sweetalert2/res/sweetalert2.min.js" %}'></script>
+    <script src='{%static "sweetalert2/res/sweetalert2.all.js" %}'></script>
+    <link rel="stylesheet" href='{%static "sweetalert2/res/sweetalert2.min.css" %}'>
+   
     <style>
         .glyphicon-exclamation-sign:before {
             content: "\e101"
@@ -254,18 +259,25 @@
 
     </div>
 
-    <div style="width: 55%; height: 700px; margin-top: -40px;float: left; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
-        <video style="border: 1px solid black; align-items: center;" id="gum" width="720" height="540" autoplay muted></video>
+    <div style="width: 55%; height: 700px; float: left;">
+       <br>
+       <div style="-webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+           <video style="border: 1px solid black; align-items: center;" id="gum" width="720" height="540" autoplay muted></video>
         <canvas id="snapshot" width="720" height="540" style="display: none;"></canvas>
 
+       </div>
+        
         <br>
-        <button type="button" id="camOnOff" class="btn btn-danger">카메라 OFF</button>
+        <div style="-webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+            <button type="button" id="camOnOff" class="btn btn-danger">카메라 OFF</button>
         <button type="button" id="record" class="btn btn-primary" disabled>면접 시작</button>
         <button type="button" id="finInterview" class="btn btn-success" style="text-align: right; display: none;" onclick="window.location.href='{% url 'testResult' ic=interview_count %}'"
             disabled>결과 보기</button>
+            <a id="timer" style="width: 80px; margin-left: 10px; vertical-align: middle; font-size: 24px; font-weight: bold;">&nbsp;00:00&nbsp;</a>
+        </div>
+        
         <div style="width: inherit;">
             <h4 id="question">시작 버튼을 누르시면 질문이 표시됩니다.</h4>
-            <p id="timer">00:00</p>
         </div>
 
     </div>
