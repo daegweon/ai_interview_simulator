@@ -67,18 +67,18 @@ function processImage(data) {
         .done(function (data) {
             // Show formatted JSON on webpage.
             //$("#responseTextArea").val(JSON.stringify(data, null, 2));
-            var anger = data[0]['faceAttributes']['emotion']['anger'];
-            var contempt = data[0]['faceAttributes']['emotion']['contempt'];
-            var disgust = data[0]['faceAttributes']['emotion']['disgust'];
-            var fear = data[0]['faceAttributes']['emotion']['fear'];
-            var happiness = data[0]['faceAttributes']['emotion']['happiness'];
-            var neutral = data[0]['faceAttributes']['emotion']['neutral'];
-            var sadness = data[0]['faceAttributes']['emotion']['sadness'];
-            var surprise = data[0]['faceAttributes']['emotion']['surprise'];
+            var anger = data[0]['faceAttributes']['emotion']['anger'].toFixed(3);
+            var contempt = data[0]['faceAttributes']['emotion']['contempt'].toFixed(3);
+            var disgust = data[0]['faceAttributes']['emotion']['disgust'].toFixed(3);
+            var fear = data[0]['faceAttributes']['emotion']['fear'].toFixed(3);
+            var happiness = data[0]['faceAttributes']['emotion']['happiness'].toFixed(3);
+            var neutral = data[0]['faceAttributes']['emotion']['neutral'].toFixed(3);
+            var sadness = data[0]['faceAttributes']['emotion']['sadness'].toFixed(3);
+            var surprise = data[0]['faceAttributes']['emotion']['surprise'].toFixed(3);
 
             document.getElementById('value1').innerHTML = "화남: "+anger;
             document.getElementById('value2').innerHTML = "경멸: "+contempt;
-            document.getElementById('value3').innerHTML = "역겨움: "+disgust;
+            document.getElementById('value3').innerHTML = "싫음: "+disgust;
             document.getElementById('value4').innerHTML = "공포: "+fear;
             document.getElementById('value5').innerHTML = "행복: "+happiness;
             document.getElementById('value6').innerHTML = "중립: "+neutral;

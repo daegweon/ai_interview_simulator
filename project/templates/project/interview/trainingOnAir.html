@@ -25,8 +25,8 @@
 
     <!-- Custom styles for this template -->
     <script>
-            var ques_id = {{ ques_id | safe }};
-            var ques_text = {{ ques_text | safe}};
+        var ques_id = {{ ques_id | safe }};
+        var ques_text = {{ ques_text | safe}};
     </script>
     <link href='{%static "css/agency.min.css" %}' rel="stylesheet">
 
@@ -194,8 +194,29 @@
                 font-size: 18px;
             }
         }
-        .emotion_icon{
+        .emotion_icon {
             visibility: hidden;
+        }
+        #emotiontitle{
+            font-size:20px;
+            text-align: center;
+        }
+        #emotion_icons{
+            position: relative;
+            width:25%;
+            float: left;
+        }
+        #emotiondisplay{
+            position: relative;
+            font-size: 18px;
+            border-radius: 5px;
+            padding : 20px;
+            padding-left : 30px;
+            margin : 0px;
+            width:75%;
+            height:330px;
+            line-height: 37px;
+            float:left;
         }
     </style>
 
@@ -443,9 +464,9 @@
 
     </div>
 
-    <div style="width: 55%; height: 700px; margin-top: -40px;float: left; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
-        <video style="border: 1px solid black; align-items: center;" id="gum" width="720" height="540" autoplay muted></video>
-        <canvas id="snapshot" width="720" height="540" style="display: none;"></canvas>
+    <div style="width: 55%; height: 700px; float: left;">
+        <video style="border: 1px solid black; align-items: center;" id="gum" width="660" height="495" autoplay muted></video>
+        <canvas id="snapshot" width="660" height="495" style="display: none;"></canvas>
 
         <br>
         <button type="button" id="setting" class="btn btn-danger" onclick="nav();">환경 설정 ON</button>
@@ -459,17 +480,20 @@
 
     </div>
 
-    <div style="width: 20%; height: 700px; float: left; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+    <div style="width: 20%; height: 700px; float: left;">
         <div id="emotionresult">
+            <div id="emotiontitle">
+                <span>사용자 실시간 감정</span>
+            </div>
             <div id="emotiondisplay">
-                <span class="emotion_value" id="value1"></span>
-                <span class="emotion_value" id="value2"></span>
-                <span class="emotion_value" id="value3"></span>
-                <span class="emotion_value" id="value4"></span>
-                <span class="emotion_value" id="value5"></span>
-                <span class="emotion_value" id="value6"></span>
-                <span class="emotion_value" id="value7"></span>
-                <span class="emotion_value" id="value8"></span>
+                <span class="emotion_value" id="value1">화남: 0</span><br>
+                <span class="emotion_value" id="value2">경멸: 0</span><br>
+                <span class="emotion_value" id="value3">싫음: 0</span><br>
+                <span class="emotion_value" id="value4">공포: 0</span><br>
+                <span class="emotion_value" id="value5">행복: 0</span><br>
+                <span class="emotion_value" id="value6">중립: 0</span><br>
+                <span class="emotion_value" id="value7">슬픔: 0</span><br>
+                <span class="emotion_value" id="value8">놀람: 0</span>
             </div>
             <div id="emotion_icons">
                 <img class="emotion_icon" id="icon1" src='{%static "img/icon_angry.png"%}'></img>
