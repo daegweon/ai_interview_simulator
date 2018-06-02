@@ -122,12 +122,12 @@ function setEmotionTrendResult() {
         document.getElementById("question" + i).innerHTML = "질문 " + i + '. ' + questionList[i - 1];
 
         //질문에 대한 당황 체크
-        var temp = happinessList.slice(tempidx, tempidx + 6);
+        var temp = happinessList.slice(tempidx, tempidx + 4);
         var value = 0;
         for (var j = 0; j < temp.length; j++) value += 1000 * temp[j];
-        temp = neutralList.slice(tempidx, tempidx + 6);
+        temp = neutralList.slice(tempidx, tempidx + 4);
         for (var j = 0; j < temp.length; j++) value += 1000 * temp[j];
-        if (6000 - value > 3000) {
+        if (4000 - value > 2000) {
             document.getElementById("ltext" + i).innerHTML += "이 질문에 당황한 흔적이 보여요. 이에 대한 대비가 필요하지 않을까요?<br>";
         }
 
@@ -135,7 +135,12 @@ function setEmotionTrendResult() {
         temp = happinessList.slice(tempidx, tempidx + xAxis[i].length);
         value = 0;
         for (var j = 0; j < temp.length; j++) value += 1000 * temp[j];
-        if (value > temp.length * 1000 * 0.6) document.getElementById("ltext" + i).innerHTML += "표정에서 행복함이 묻어나 보기 좋아요. 다만 때로는 진지한 모습을 보여주는 것도 좋아요!<br>";
+        if (value > temp.length * 1000 * 0.5) document.getElementById("ltext" + i).innerHTML += "표정에서 행복함이 묻어나 보기 좋아요. 다만 때로는 진지한 모습을 보여주는 것도 좋아요!<br>";
+
+        temp = sadnessList.slice(tempidx, tempidx + xAxis[i].length);
+        value = 0;
+        for (var j = 0; j < temp.length; j++) value += 1000 * temp[j];
+        if (value > temp.length * 1000 * 0.5) document.getElementById("ltext" + i).innerHTML += "입꼬리가 내려간 것은 좋지 않아요.<br>";
 
         tempidx += xAxis[i].length;
     }

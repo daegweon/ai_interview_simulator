@@ -24,6 +24,10 @@
 
 
     <!-- Custom styles for this template -->
+    <script>
+            var ques_id = {{ ques_id | safe }};
+            var ques_text = {{ ques_text | safe}};
+    </script>
     <link href='{%static "css/agency.min.css" %}' rel="stylesheet">
 
     <script src='{%static "js/realtimeface.js"%}'></script>
@@ -190,12 +194,10 @@
                 font-size: 18px;
             }
         }
+        .emotion_icon{
+            visibility: hidden;
+        }
     </style>
-
-    <script>
-        var ques_id = {{ ques_id | safe }};
-        var ques_text = {{ ques_text | safe}};
-    </script>
 
     <script>
         getKey();
@@ -458,7 +460,28 @@
     </div>
 
     <div style="width: 20%; height: 700px; float: left; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
-
+        <div id="emotionresult">
+            <div id="emotiondisplay">
+                <span class="emotion_value" id="value1"></span>
+                <span class="emotion_value" id="value2"></span>
+                <span class="emotion_value" id="value3"></span>
+                <span class="emotion_value" id="value4"></span>
+                <span class="emotion_value" id="value5"></span>
+                <span class="emotion_value" id="value6"></span>
+                <span class="emotion_value" id="value7"></span>
+                <span class="emotion_value" id="value8"></span>
+            </div>
+            <div id="emotion_icons">
+                <img class="emotion_icon" id="icon1" src='{%static "img/icon_angry.png"%}'></img>
+                <img class="emotion_icon" id="icon2" src='{%static "img/icon_disgust.png"%}'></img>
+                <img class="emotion_icon" id="icon3" src='{%static "img/icon_contempt.png"%}'></img>
+                <img class="emotion_icon" id="icon4" src='{%static "img/icon_fear.png"%}'></img>
+                <img class="emotion_icon" id="icon5" src='{%static "img/icon_happy.png"%}'></img>
+                <img class="emotion_icon" id="icon6" src='{%static "img/icon_neutral.png"%}'></img>
+                <img class="emotion_icon" id="icon7" src='{%static "img/icon_sad.png"%}'></img>
+                <img class="emotion_icon" id="icon8" src='{%static "img/icon_surprised.png"%}'></img>
+            </div>
+        </div>
     </div>
 
     <script>

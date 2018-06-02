@@ -85,31 +85,60 @@ function processImage(data) {
                 if ((pitch < -5 || pitch >5) && (roll < -5 || roll > 5)) banPoseToast();
             }
             */
-            
-            if(document.getElementById("checkAnger").checked == true){
-                if (anger > 0.5) banEmotionToast("화남");
+            document.getElementById('value1').innerHTML = "화남: "+anger;
+            document.getElementById('value2').innerHTML = "경멸: "+contempt;
+            document.getElementById('value3').innerHTML = "역겨움: "+disgust;
+            document.getElementById('value4').innerHTML = "공포: "+fear;
+            document.getElementById('value5').innerHTML = "행복: "+happiness;
+            document.getElementById('value6').innerHTML = "중립: "+neutral;
+            document.getElementById('value7').innerHTML = "슬픔: "+sadness;
+            document.getElementById('value8').innerHTML = "놀람: "+surprise;
+
+            if (anger > 0.5){
+                document.getElementById('icon1').style.visibility="visible";
+                if(document.getElementById("checkAnger").checked == true) banEmotionToast("화남");
             }
-            if(document.getElementById("checkContempt").checked == true){
-                if (contempt > 0.5) banEmotionToast("경멸");
+            else{ document.getElementById('icon1').style.visibility="hidden"; }
+            if (contempt > 0.5){
+                document.getElementById('icon2').style.visibility="visible";
+                if(document.getElementById("checkContempt").checked == true) banEmotionToast("경멸");
             }
-            if(document.getElementById("checkDisgust").checked == true){
-                if (disgust > 0.5) banEmotionToast("싫음");
+            else{ document.getElementById('icon2').style.visibility="hidden"; }
+            if (disgust > 0.5){
+                document.getElementById('icon3').style.visibility="visible";
+                if(document.getElementById("checkDisgust").checked == true) banEmotionToast("싫음");
             }
-            if(document.getElementById("checkFear").checked == true){
-                if (fear > 0.5) banEmotionToast("공포");
+            else{ document.getElementById('icon3').style.visibility="hidden"; }
+
+            if (fear > 0.5){
+                document.getElementById('icon4').style.visibility="visible";
+                if(document.getElementById("checkFear").checked == true) banEmotionToast("공포");
             }
-            if(document.getElementById("checkHappiness").checked == true){
-                if (happiness > 0.5) banEmotionToast("행복");
+            else{ document.getElementById('icon4').style.visibility="hidden"; }
+
+            if (happiness > 0.5){
+                document.getElementById('icon5').style.visibility="visible";
+                if(document.getElementById("checkHappiness").checked == true) banEmotionToast("행복");
             }
-            if(document.getElementById("checkNeutral").checked == true){
-                if (neutral > 0.5) banEmotionToast("중립");
+            else{ document.getElementById('icon5').style.visibility="hidden"; }
+
+            if (neutral > 0.5){
+                document.getElementById('icon6').style.visibility="visible";
+                if(document.getElementById("checkNeutral").checked == true) banEmotionToast("중립");
             }
-            if(document.getElementById("checkSadness").checked == true){
-                if (sadness > 0.5) banEmotionToast("슬픔");
+            else{ document.getElementById('icon6').style.visibility="hidden"; }
+
+            if (sadness > 0.5){
+                document.getElementById('icon7').style.visibility="visible";
+                if(document.getElementById("checkSadness").checked == true) banEmotionToast("슬픔");
             }
-            if(document.getElementById("checkSurprise").checked == true){
-                if (surprise > 0.5) banEmotionToast("놀람");
+            else{ document.getElementById('icon7').style.visibility="hidden"; }
+
+            if (surprise > 0.5){
+                document.getElementById('icon8').style.visibility="visible";
+                if(document.getElementById("checkSurprise").checked == true) banEmotionToast("놀람");
             }
+            else{ document.getElementById('icon8').style.visibility="hidden"; }
         })
 
         .fail(function (jqXHR, textStatus, errorThrown) {
