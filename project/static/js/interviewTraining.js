@@ -74,7 +74,7 @@ function startTick() {
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     // Output the result in an element with id="timer"
-    //document.getElementById("timer").innerHTML = pad(minutes, 2) + ":" + pad(seconds, 2);
+    document.getElementById("timer").innerHTML = "&nbsp"+pad(minutes, 2) + ":" + pad(seconds, 2)+"&nbsp";
 
     // If the count down is over, write some text 
     if (distance < 0) {
