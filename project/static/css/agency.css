@@ -63,7 +63,7 @@ section h3.section-subheading {
   font-size: 18px;
   padding: 20px 40px;
 }
-
+/*
 .btn-primary {
   background-color: #fed136;
   border-color: #fed136;
@@ -78,7 +78,7 @@ section h3.section-subheading {
 .btn-primary:active, .btn-primary:focus {
   box-shadow: 0 0 0 0.2rem rgba(254, 209, 55, 0.5) !important;
 }
-
+*/
 ::-moz-selection {
   background: #fed136;
   text-shadow: none;

@@ -31,6 +31,8 @@ var face;
 recordButton.onclick = toggleRecording;
 camOnOffButton.onclick = ToggleWebCam;
 
+var showCount = 0;
+
 function getCookie(name) {
   var cookieValue = null;
   if (document.cookie && document.cookie != '') {
@@ -118,9 +120,11 @@ function handleStop(event) {
 }
 
 function toggleRecording() {
+
   if (recordButton.textContent === '면접 시작' || recordButton.textContent === '다음 문제') {
     startSpeechToText();
-    document.getElementById("question").textContent = "질문" + (questionCount + 1) + ". " + ques_text[questionCount]
+    document.getElementById("question").textContent = "질문" + (questionCount + 1) + ". " + ques_text[questionCount];
+    btnShow();
     startTick();
     startRecording();
     StartDetectFace();
@@ -150,6 +154,7 @@ function toggleRecording() {
 }
 
 function startRecording() {
+    
   var options = { mimeType: 'video/webm;codecs=vp9' };
   if (!MediaRecorder.isTypeSupported(options.mimeType)) {
     console.log(options.mimeType + ' is not Supported');
@@ -332,3 +337,22 @@ function processImage(data) {
       alert(errorString);
     });
 };
+      
+function btnShow(){
+    if(showCount == 0){
+        document.getElementById("question").style.display = "block";
+        setTimeout(btnHide, 7000);
+    }
+    else{
+        //문제 다시보기는 1회만 제공됩니다라고 토스트 띄워주세용 홍홍
+    }
+}
+
+function btnHide(){
+    document.getElementById("question").style.display = "none";
+}
+
+function btnAgain(){
+    btnShow();
+    showCount = 1;
+}
