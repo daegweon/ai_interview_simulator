@@ -21,7 +21,20 @@
     <link href='{%static "css/agency.min.css" %}' rel="stylesheet">
     <link href='{%static "css/login.css" %}' rel="stylesheet">
     <link href='{%static "css/login_status.css" %}' rel="stylesheet">
-
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+        #typedtext {
+            font-family: 'Anonymous Pro';
+            font-size: 40px;
+            margin: 10px 50px;
+            letter-spacing: 6px;
+            font-weight: bold;
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+        }
+        .intro-text{
+            height: 703px;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -74,8 +87,7 @@
     <header class="masthead">
         <div class="container">
             <div class="intro-text">
-                <div class="intro-heading text-uppercase">A.I &nbsp;Interview &nbsp;Simulator</div>
-                <div class="intro-lead-in">Project &nbsp;by &nbsp;Human Learning</div>
+                <div id="typedtext"></div>
                 <br> {% if user.is_authenticated %}
                 <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" id="start_btn" href="/interviews/">지금 시작하기</a>
                 {% else %}
@@ -91,32 +103,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading text-uppercase">모의 면접</h2>
+                    <h2 class="section-heading text-uppercase">서비스 소개</h2>
                     <h3 class="section-subheading text-muted"></h3>
                 </div>
             </div>
             <div class="row text-center">
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">연습 면접</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore
-                        harum ex magni, dicta impedit.</p>
-                </div>
-
-                <!-- 가운데 공백용 -->
-                <div class="col-md-4"></div>
-
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">실전 면접</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore
-                        harum ex magni, dicta impedit.</p>
+                <div class="col-md-10">
+                    <h3>
+                        <i>
+                            면접을 연습할 좋은 방법이 없을까?
+                            <br>
+                            <br> 비싼 수강료 No!
+                            <br>
+                            <br> 언제! 어디서나! AIS와 함께!</i>
+                    </h3>
                 </div>
             </div>
         </div>
@@ -125,93 +125,36 @@
     <!-- Interview -->
     <section class="bg-light" id="interview">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading text-uppercase">Portfolio</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Threads</h4>
-                        <p class="text-muted">Illustration</p>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="section-heading text-uppercase">Interview</h2>
+                        <h3 class="section-subheading text-muted"></h3>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a class="portfolio-link" data-toggle="modal" href="#portfolioModal2">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Explore</h4>
-                        <p class="text-muted">Graphic Design</p>
+                <div class="row text-center">
+                    <div class="col-md-5">
+                        <span class="fa-stack fa-4x">
+                            <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fa fa-user fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h4 class="service-heading">연습 면접</h4>
+                        <p class="text-muted">인공지능 면접을 연습할 수 있습니다!
+                            <br> 여러분의 감정과 음성이 실시간으로 인식되며 관리하고 싶은 감정, 금지 단어를 설정하여 인공지능 면접을 대비해보세요!
+                        </p>
                     </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a class="portfolio-link" data-toggle="modal" href="#portfolioModal3">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Finish</h4>
-                        <p class="text-muted">Identity</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a class="portfolio-link" data-toggle="modal" href="#portfolioModal4">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Lines</h4>
-                        <p class="text-muted">Branding</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a class="portfolio-link" data-toggle="modal" href="#portfolioModal5">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Southwest</h4>
-                        <p class="text-muted">Website Design</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a class="portfolio-link" data-toggle="modal" href="#portfolioModal6">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Window</h4>
-                        <p class="text-muted">Photography</p>
+
+                    <div class="col-md-5">
+                        <span class="fa-stack fa-4x">
+                            <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fa fa-users fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h4 class="service-heading">실전 면접</h4>
+                        <p class="text-muted">연습 면접을 통해 인공지능 면접과 친해지셨다구요?
+                            <br> 이번에는 실제 면접장의 분위기가 조성된 실전 면접 기능을 이용해보시는게 어떨까요?</p>
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 
     <!-- Records -->
@@ -219,7 +162,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading text-uppercase">About</h2>
+                    <h2 class="section-heading text-uppercase">Record</h2>
                     <h3 class="section-subheading text-muted"></h3>
                 </div>
             </div>
@@ -227,29 +170,39 @@
                 <div class="col-lg-12">
                     <ul class="timeline">
                         <li>
-
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4>2009-2011</h4>
-                                    <h4 class="subheading">Our Humble Beginnings</h4>
+                                    <h4>1.</h4>
+                                    <h4 class="subheading">내역 페이지 접속</h4>
                                 </div>
+                                <img src="{%static 'img/record_intro1.png' %}">
                                 <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente,
-                                        totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt
-                                        et ea quo dolore laudantium consectetur!</p>
+                                    <p class="text-muted">내역 페이지에 접속하시면 다음과 같이 현재까지 완료한 모의면접 내역을 확인하실 수 있습니다! </p>
                                 </div>
                             </div>
                         </li>
                         <li class="timeline-inverted">
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4>March 2011</h4>
-                                    <h4 class="subheading">An Agency is Born</h4>
+                                    <h4>2.</h4>
+                                    <h4 class="subheading">편리한 내역 정렬 기능</h4>
                                 </div>
+                                <img src="{%static 'img/record_intro2.png' %}">
                                 <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente,
-                                        totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt
-                                        et ea quo dolore laudantium consectetur!</p>
+                                    <p class="text-muted">내역이 너~무 길어서 이전 기록을 확인하기 힘드시다구요? 우측 상단에 위치한 정렬 기능을 이용해보세요! 연습면접 버튼을 클릭하면 연습면접결과만! 실전면접
+                                        버튼을 클릭하면 실전면접결과만 확인하실 수 있습니다. 다시 모든 결과를 확인하시려면 전체 버튼을 눌러주세요.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>3.</h4>
+                                    <h4 class="subheading">이전 결과 확인하기</h4>
+                                </div>
+                                <img src="{%static 'img/record_intro3.png' %}">
+                                <div class="timeline-body">
+                                    <p class="text-muted">다시 확인하고 싶은 내역을 클릭하면 상세 분석 결과를 다시 확인해보실 수 있습니다.</p>
                                 </div>
                             </div>
                         </li>
@@ -266,246 +219,38 @@
             <div style="width: 33.3%; height: 150px; float: left; background-color: rgb(44,62,80);">
                 <br>
                 <a style="color:white; font-size: 24px; font-weight: bold">Copyright</a>
-                <br><br>
+                <br>
+                <br>
                 <a style="color: white; font-size: 18px;">© 2018 Human Learning. &nbsp; All Rights Reserved </a>
             </div>
             <div style="width: 33.3%; height: 150px; float: left; background-color: rgb(44,62,80);">
                 <br>
                 <a style="color:white; font-size: 24px;  font-weight: bold">About Us&nbsp; </a>
-                <br><br>
-                <a href="https://github.com/daegweon/ai_interview_simulator"> <i style="color: white; font-size:30px" class="fa"></i> </a>
+                <br>
+                <br>
+                <a href="https://github.com/daegweon/ai_interview_simulator">
+                    <i style="color: white; font-size:30px" class="fa"></i>
+                </a>
                 <a> &nbsp; &nbsp; </a>
-                <a> <i style="color: white; font-size:30px;" class="fa"></i> </a>
+                <a>
+                    <i style="color: white; font-size:30px;" class="fa"></i>
+                </a>
                 <a> &nbsp; &nbsp; </a>
-                <a href="#"> <i style="color: white; font-size:30px;" class="fa"></i> </a>
-                <br><br>
+                <a href="#">
+                    <i style="color: white; font-size:30px;" class="fa"></i>
+                </a>
+                <br>
+                <br>
             </div>
             <div style="width: 33.3%; height: 150px; float: left; background-color: rgb(44,62,80);">
                 <br>
                 <a style="color:white; font-size: 24px; font-weight: bold">Contact Us&nbsp; </a>
-                <br><br>
+                <br>
+                <br>
                 <a style="color: white; font-size: 18px;">quwieo@ajou.ac.kr</a>
             </div>
         </div>
     </footer>
-
-    <!-- Portfolio Modals -->
-
-    <!-- Modal 1 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl"></div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 mx-auto">
-                            <div class="modal-body">
-                                <!-- Project Details Go Here -->
-                                <h2 class="text-uppercase">Project Name</h2>
-                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing
-                                    elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam
-                                    quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis
-                                    facere nemo!</p>
-                                <ul class="list-inline">
-                                    <li>Date: January 2017</li>
-                                    <li>Client: Threads</li>
-                                    <li>Category: Illustration</li>
-                                </ul>
-                                <button class="btn btn-primary" data-dismiss="modal" type="button">
-                                    <i class="fa fa-times"></i>
-                                    Close Project</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal 2 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl"></div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 mx-auto">
-                            <div class="modal-body">
-                                <!-- Project Details Go Here -->
-                                <h2 class="text-uppercase">Project Name</h2>
-                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing
-                                    elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam
-                                    quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis
-                                    facere nemo!</p>
-                                <ul class="list-inline">
-                                    <li>Date: January 2017</li>
-                                    <li>Client: Explore</li>
-                                    <li>Category: Graphic Design</li>
-                                </ul>
-                                <button class="btn btn-primary" data-dismiss="modal" type="button">
-                                    <i class="fa fa-times"></i>
-                                    Close Project</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal 3 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl"></div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 mx-auto">
-                            <div class="modal-body">
-                                <!-- Project Details Go Here -->
-                                <h2 class="text-uppercase">Project Name</h2>
-                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing
-                                    elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam
-                                    quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis
-                                    facere nemo!</p>
-                                <ul class="list-inline">
-                                    <li>Date: January 2017</li>
-                                    <li>Client: Finish</li>
-                                    <li>Category: Identity</li>
-                                </ul>
-                                <button class="btn btn-primary" data-dismiss="modal" type="button">
-                                    <i class="fa fa-times"></i>
-                                    Close Project</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal 4 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl"></div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 mx-auto">
-                            <div class="modal-body">
-                                <!-- Project Details Go Here -->
-                                <h2 class="text-uppercase">Project Name</h2>
-                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing
-                                    elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam
-                                    quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis
-                                    facere nemo!</p>
-                                <ul class="list-inline">
-                                    <li>Date: January 2017</li>
-                                    <li>Client: Lines</li>
-                                    <li>Category: Branding</li>
-                                </ul>
-                                <button class="btn btn-primary" data-dismiss="modal" type="button">
-                                    <i class="fa fa-times"></i>
-                                    Close Project</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal 5 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl"></div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 mx-auto">
-                            <div class="modal-body">
-                                <!-- Project Details Go Here -->
-                                <h2 class="text-uppercase">Project Name</h2>
-                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing
-                                    elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam
-                                    quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis
-                                    facere nemo!</p>
-                                <ul class="list-inline">
-                                    <li>Date: January 2017</li>
-                                    <li>Client: Southwest</li>
-                                    <li>Category: Website Design</li>
-                                </ul>
-                                <button class="btn btn-primary" data-dismiss="modal" type="button">
-                                    <i class="fa fa-times"></i>
-                                    Close Project</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal 6 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl"></div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 mx-auto">
-                            <div class="modal-body">
-                                <!-- Project Details Go Here -->
-                                <h2 class="text-uppercase">Project Name</h2>
-                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing
-                                    elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam
-                                    quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis
-                                    facere nemo!</p>
-                                <ul class="list-inline">
-                                    <li>Date: January 2017</li>
-                                    <li>Client: Window</li>
-                                    <li>Category: Photography</li>
-                                </ul>
-                                <button class="btn btn-primary" data-dismiss="modal" type="button">
-                                    <i class="fa fa-times"></i>
-                                    Close Project</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Log in Modal -->
     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -572,11 +317,49 @@
     <script src='{%static "js/agency.min.js" %}'></script>
     <script src='{%static "js/authentication.js" %}'></script>
     <script>
-        var login_status = {{isLogin}}
-        if(login_status==0){
+        var login_status = {{ isLogin }}
+        if (login_status == 0) {
             alert("로그인이 필요한 서비스입니다.");
             window.location.replace('/');
         }
+    </script>
+    <script>
+        // set up text to print, each item in array is new line
+        var aText = new Array(
+            "A.I Interview Simulator",
+            "Project by Human Learning Team"
+        );
+        var iSpeed = 100; // time delay of print out
+        var iIndex = 0; // start printing array at this posision
+        var iArrLength = aText[0].length; // the length of the text array
+        var iScrollAt = 20; // start scrolling up at this many lines
+
+        var iTextPos = 0; // initialise text position
+        var sContents = ''; // initialise contents variable
+        var iRow; // initialise current row
+
+        function typewriter() {
+            sContents = ' ';
+            iRow = Math.max(0, iIndex - iScrollAt);
+            var destination = document.getElementById("typedtext");
+
+            while (iRow < iIndex) {
+                sContents += aText[iRow++] + '<br />';
+            }
+            destination.innerHTML = sContents + aText[iIndex].substring(0, iTextPos) + "_";
+            if (iTextPos++ == iArrLength) {
+                iTextPos = 0;
+                iIndex++;
+                if (iIndex != aText.length) {
+                    iArrLength = aText[iIndex].length;
+                    setTimeout("typewriter()", 500);
+                }
+            } else {
+                setTimeout("typewriter()", iSpeed);
+            }
+        }
+
+        typewriter();
     </script>
 </body>
 

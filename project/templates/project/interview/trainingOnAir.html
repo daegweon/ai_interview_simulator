@@ -194,9 +194,37 @@
                 font-size: 18px;
             }
         }
-
+        @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+        @import url(http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
         .emotion_icon {
             visibility: hidden;
+        }
+        #emotiontitle{
+            font-size:20px;
+            font-family: Noto Sans KR;
+            font-weight: bold;
+            text-align: center;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            border-bottom:2px solid #000080;
+        }
+        #emotion_icons{
+            position: relative;
+            width:30%;
+            float: left;
+            padding-left: 20px;
+        }
+        #emotiondisplay{
+            position: relative;
+            font-size: 18px;
+            font-family: Nanum Myeongjo;
+            margin : 0px;
+            padding-left:20px;
+            width:70%;
+            height:330px;
+            line-height: 40px;
+            float:left;
         }
     </style>
 
@@ -492,15 +520,18 @@
 
     <div style="width: 21%; height: 700px; float: left; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
         <div id="emotionresult">
+            <div id="emotiontitle">
+                <span>실시간 감정</span>
+            </div>
             <div id="emotiondisplay">
-                <span class="emotion_value" id="value1"></span>
-                <span class="emotion_value" id="value2"></span>
-                <span class="emotion_value" id="value3"></span>
-                <span class="emotion_value" id="value4"></span>
-                <span class="emotion_value" id="value5"></span>
-                <span class="emotion_value" id="value6"></span>
-                <span class="emotion_value" id="value7"></span>
-                <span class="emotion_value" id="value8"></span>
+                <span class="emotion_value" id="value1">화남: 0</span><br>
+                <span class="emotion_value" id="value2">경멸: 0</span><br>
+                <span class="emotion_value" id="value3">싫음: 0</span><br>
+                <span class="emotion_value" id="value4">공포: 0</span><br>
+                <span class="emotion_value" id="value5">행복: 0</span><br>
+                <span class="emotion_value" id="value6">중립: 0</span><br>
+                <span class="emotion_value" id="value7">슬픔: 0</span><br>
+                <span class="emotion_value" id="value8">놀람: 0</span>
             </div>
             <div id="emotion_icons">
                 <img class="emotion_icon" id="icon1" src='{%static "img/icon_angry.png"%}'>
