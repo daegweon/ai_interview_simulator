@@ -123,10 +123,12 @@
                 <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                     <div class="panel-body">
                         <div id="sunburstChart"></div>
-                        <div class="personalityResult" id="personality-result">{{username}}님은 </div>
+                        <div class="characteristics" id="characteristics-result"><h3>AIS가 분석한 {{username}}님의 성격은 </h4></div>
+                        <br>
+                        <div class="personalityResult" id="personality-result"><h4>Big5</h4></div>
                         <div class="facetResult" id="facet-result"></div>
-                        <div class="needsResult" id="needs-result"></div>
-                        <div class="valueResult" id="value-result"></div>
+                        <div class="needsResult" id="needs-result"><h4>Needs</h4></div>
+                        <div class="valueResult" id="value-result"><h4>Values</h4></div>
                         <script>
                             var profile = {{ personality | safe }};
                             var chart = new PersonalitySunburstChart({ selector: '#sunburstChart', version: 'v3' });
@@ -530,7 +532,6 @@
                                     validPersonality += 1;
                                 }
                             }
-
                             for(var j = 0;validPersonality > 1 && j <3 ; validPersonality--,j++){
                                 if(j!=0){
                                     document.getElementById('personality-result').innerHTML += ", ";
@@ -550,22 +551,22 @@
                                 document.getElementById('personality-result').innerHTML += descriptionDict[personalityString];
                                 sortedPersonality.pop();
                             }
-                            document.getElementById('personality-result').innerHTML += " 성격입니다.";
+                            document.getElementById('personality-result').innerHTML += " 성격입니다.</h4>";
 
                             for(var i = sortedFacet.length-1, count = 0 ; count < 3 && i >= 0 ; i--){
                                 if(0.5 - sortedFacet[i][1] < -0.18){
                                     count += 1;
                                     document.getElementById('facet-result').innerHTML += facetsDict[sortedFacet[i][0]]["HighTerm"] + " 성격입니다. ";
-                                    document.getElementById('facet-result').innerHTML += facetsDict[sortedFacet[i][0]]["HighDescription"] + ". ";
+                                    document.getElementById('facet-result').innerHTML += facetsDict[sortedFacet[i][0]]["HighDescription"] + ".<br>";
                                 }
                                 else if(0.5 - sortedFacet[i][1] > 0.18){
                                     count += 1;
                                     document.getElementById('facet-result').innerHTML += facetsDict[sortedFacet[i][0]]["LowTerm"] + " 성격입니다. ";
-                                    document.getElementById('facet-result').innerHTML += facetsDict[sortedFacet[i][0]]["LowDescription"] + ". ";
+                                    document.getElementById('facet-result').innerHTML += facetsDict[sortedFacet[i][0]]["LowDescription"] + ".<br>";
                                 }
                             }
 
-                            document.getElementById('needs-result').innerHTML = "{{username}}님의 선택들은 (" + needsDict[sortedNeed[0][0]] + ")에 대한 열망에 의해 좌우됩니다.";
+                            document.getElementById('needs-result').innerHTML += "{{username}}님의 선택들은 <strong>" + needsDict[sortedNeed[0][0]] + "</strong>에 대한 열망에 의해 좌우됩니다.";
                             
                             var plusCount = 0;
                             var minusCount = 0;
@@ -602,7 +603,7 @@
                                     }
                                 }
                             }
-                            document.getElementById('value-result').innerHTML = valuePlusString + valueDescriptionPlus + valueMinusString + valueDescriptionMinus;
+                            document.getElementById('value-result').innerHTML += valuePlusString + valueDescriptionPlus + "<br>" + valueMinusString + valueDescriptionMinus;
                             
 
                             function sortProperties(obj)
