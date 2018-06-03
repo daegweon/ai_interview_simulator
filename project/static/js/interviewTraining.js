@@ -25,11 +25,9 @@ var questionCount = 0;
 var gumVideo = document.querySelector('video#gum');
 
 var recordButton = document.querySelector('button#record');
-var camOnOffButton = document.querySelector('button#camOnOff');
 var snapshotCanvas = document.getElementById('snapshot');
 var context = snapshot.getContext('2d');
 recordButton.onclick = toggleRecording;
-//camOnOffButton.onclick = ToggleWebCam;
 
 function getCookie(name) {
   var cookieValue = null;
@@ -222,13 +220,3 @@ function uploadToServer(formData) {
   });
   return false;
 }
-/*
-function ToggleWebCam() {
-  if (camOnOffButton.textContent === '카메라 OFF') {
-    camOnOffButton.textContent = '카메라 ON';
-    document.getElementById("gum").style.visibility = "hidden";
-  } else {
-    document.getElementById("gum").style.visibility = "";
-    camOnOffButton.textContent = '카메라 OFF';
-  }
-}*/

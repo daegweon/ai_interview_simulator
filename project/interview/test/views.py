@@ -46,6 +46,7 @@ def getTestResultPage(request, ic):
         text = ""
         noun_count = 3
         questionList = []
+        headposeList = []
         personality = ""
         emotionResult = Interview.objects.values('emotion').filter(user_id = request.user,interview_count=ic)
         headposeResult = Interview.objects.values('headpose').filter(user_id = request.user,interview_count=ic)

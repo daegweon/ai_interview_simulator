@@ -80,11 +80,11 @@ function processImage(data) {
             var yaw = data[0]['faceAttributes']['headPose']['yaw'];
             console.log("R: "+roll+" Y: " +yaw)
             
-            /*
-            if(document.getElementById("checkPose").checked == true){
-                if ((pitch < -5 || pitch >5) && (roll < -5 || roll > 5)) banPoseToast();
-            }
-            */
+            
+            //if(document.getElementById("checkPose").checked == true){
+                if ((yaw < -7 || yaw >7) || (roll < -7 || roll > 7)) banPoseToast();
+            //}
+            
             document.getElementById('value1').innerHTML = "화남: "+anger;
             document.getElementById('value2').innerHTML = "경멸: "+contempt;
             document.getElementById('value3').innerHTML = "역겨움: "+disgust;
