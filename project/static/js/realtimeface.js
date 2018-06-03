@@ -43,7 +43,7 @@ function processImage(data) {
     var params = {
         "returnFaceId": "true",
         "returnFaceLandmarks": "false",
-        "returnFaceAttributes": 'emotion',
+        "returnFaceAttributes": "headPose,emotion",
     };
 
     $.ajax({
@@ -75,7 +75,16 @@ function processImage(data) {
             var neutral = data[0]['faceAttributes']['emotion']['neutral'];
             var sadness = data[0]['faceAttributes']['emotion']['sadness'];
             var surprise = data[0]['faceAttributes']['emotion']['surprise'];
-
+            var pitch = data[0]['faceAttributes']['headPose']['pitch'];
+            var roll = data[0]['faceAttributes']['headPose']['roll'];
+            var yaw = data[0]['faceAttributes']['headPose']['yaw'];
+            console.log("R: "+roll+" Y: " +yaw)
+            
+            
+            //if(document.getElementById("checkPose").checked == true){
+                if ((yaw < -7 || yaw >7) || (roll < -7 || roll > 7)) banPoseToast();
+            //}
+            
             document.getElementById('value1').innerHTML = "화남: "+anger;
             document.getElementById('value2').innerHTML = "경멸: "+contempt;
             document.getElementById('value3').innerHTML = "역겨움: "+disgust;

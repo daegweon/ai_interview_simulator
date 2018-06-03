@@ -21,6 +21,7 @@ var timer;
 var questionCount = 0;
 var subscriptionKey ="";
 var emotionList=[];
+var headposeList=[];
 var gumVideo = document.querySelector('video#gum');
 
 var recordButton = document.querySelector('button#record');
@@ -209,6 +210,7 @@ function setData() {
 
   var formData = new FormData();
   formData.append('emotionList', JSON.stringify(emotionList));
+  formData.append('headposeList',JSON.stringify(headposeList));
   formData.append('csrfmiddlewaretoken', csrftoken);
   formData.append('questionId', ques_id[questionCount - 1]);
   formData.append('questionCount', questionCount);
@@ -219,6 +221,7 @@ function setData() {
     formData.append('questionList', ques_id);
   }
   emotionList=[];
+  headposeList=[];
   uploadToServer(formData)
 }
 
@@ -291,7 +294,7 @@ function processImage(data) {
   var params = {
     "returnFaceId": "true",
     "returnFaceLandmarks": "false",
-    "returnFaceAttributes": 'emotion',
+    "returnFaceAttributes": "headPose,emotion"
   };
 
   $.ajax({
@@ -322,8 +325,14 @@ function processImage(data) {
       var neutral = data[0]['faceAttributes']['emotion']['neutral'];
       var sadness = data[0]['faceAttributes']['emotion']['sadness'];
       var surprise = data[0]['faceAttributes']['emotion']['surprise'];
+      var pitch = data[0]['faceAttributes']['headPose']['pitch'];
+      var roll = data[0]['faceAttributes']['headPose']['roll'];
+      var yaw = data[0]['faceAttributes']['headPose']['yaw'];
+      
       var temp = [anger, contempt, disgust, fear, happiness, neutral, sadness, surprise];
+      var temp2 = [pitch, roll, yaw];
       emotionList.push(temp);
+      headposeList.push(temp2);
     })
 
     .fail(function (jqXHR, textStatus, errorThrown) {

@@ -25,8 +25,9 @@ def videoProcessing(request):
         interviewObj.interview_count += 1 
         interviewObj.save()
     emotionList = request.POST["emotionList"]
+    headposeList = request.POST["headposeList"]
     transcription = request.POST["transcription"]
-    Interview.objects.create(user_id=user_id,question_id=questionId,emotion=emotionList,speech=transcription,interview_count=interviewObj.interview_count,interview_date = datetime.now(), interview_type = '1', question_text=questionText)
+    Interview.objects.create(user_id=user_id,question_id=questionId,emotion=emotionList,speech=transcription,interview_count=interviewObj.interview_count,interview_date = datetime.now(), interview_type = '1', question_text=questionText, headpose = headposeList)
 
     if request.POST["questionCount"]=="5":
         allSpeech = ""
