@@ -25,8 +25,8 @@
 
     <!-- Custom styles for this template -->
     <script>
-            var ques_id = {{ ques_id | safe }};
-            var ques_text = {{ ques_text | safe}};
+        var ques_id = {{ ques_id | safe }};
+        var ques_text = {{ ques_text | safe}};
     </script>
     <link href='{%static "css/agency.min.css" %}' rel="stylesheet">
 
@@ -194,14 +194,15 @@
                 font-size: 18px;
             }
         }
-        .emotion_icon{
+
+        .emotion_icon {
             visibility: hidden;
         }
     </style>
 
     <script>
         getKey();
-        function banPoseToast(){
+        function banPoseToast() {
             $.notify({
                 // options
                 icon: 'glyphicon glyphicon-exclamation-sign',
@@ -451,12 +452,8 @@
                 <br>
                 <br>
 
-                <ul class="list-group" style="width: 280px ;-webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
-                    <li id="word1" class="list-group-item" style="width: 80%">1</li>
-                    <li id="word2" class="list-group-item" style="width: 80%">2</li>
-                    <li id="word3" class="list-group-item" style="width: 80%">3</li>
-                    <li id="word4" class="list-group-item" style="width: 80%">4</li>
-                    <li id="word5" class="list-group-item" style="width: 80%">5</li>
+                <ul class="list-group" id="ban-word" style="width: 280px ;-webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+                    
                 </ul>
 
                 <br>
@@ -475,11 +472,11 @@
 
     <div style="width: 55%; height: 700px; float: left;">
         <div class="questionArea" style="height: 100px; padding: 10px;">
-            <p id="question" style="font-size: 20px; text-align: center"> 시작 버튼을 누르시면 질문이 표시됩니다. </p>   
+            <p id="question" style="font-size: 20px; text-align: center"> 시작 버튼을 누르시면 질문이 표시됩니다. </p>
         </div>
         <div style="-webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
             <video style="border: 1px solid black; align-items: center;" id="gum" width="660" height="495" autoplay muted></video>
-            <canvas id="snapshot" width="660" height="495" style="display: none;"></canvas>    
+            <canvas id="snapshot" width="660" height="495" style="display: none;"></canvas>
         </div>
         <div style="-webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
             <br>
@@ -488,8 +485,8 @@
             <button type="button" id="record" class="btn btn-primary" disabled>면접 시작</button>
 
             <button type="button" id="finInterview" class="btn btn-success" style="display: none;" onclick="window.location.href='/interviews'"
-                    disabled>연습 종료</button>
-            <a id="timer" style="width: 80px; margin-left: 10px; vertical-align: middle; font-size: 24px; font-weight: bold;">&nbsp;00:00&nbsp;</a>    
+                disabled>연습 종료</button>
+            <a id="timer" style="width: 80px; margin-left: 10px; vertical-align: middle; font-size: 24px; font-weight: bold;">&nbsp;00:00&nbsp;</a>
         </div>
     </div>
 
@@ -547,56 +544,34 @@
     </script>
 
     <script>
+        $(document).ready(function () {
+            $("#word").keypress(function (e) {
+                if (e.which == 13) {
+                    add();  // 실행할 이벤트
+                }
+            });
+        });
         var btnCount = 1;
 
         function add() {
             var word = $("#word").val();
-
-            switch (btnCount) {
-                case 1:
-                    document.getElementById("word1").textContent = word;
-                    btnCount++;
-                    banWordList.push(word);
-                    break;
-                case 2:
-                    document.getElementById("word2").textContent = word;
-                    btnCount++;
-                    banWordList.push(word);
-                    break;
-                case 3:
-                    document.getElementById("word3").textContent = word;
-                    btnCount++;
-                    banWordList.push(word);
-                    break;
-                case 4:
-                    document.getElementById("word4").textContent = word;
-                    btnCount++;
-                    banWordList.push(word);
-                    break;
-                case 5:
-                    document.getElementById("word5").textContent = word;
-                    btnCount++;
-                    banWordList.push(word);
-                    break;
-            }
-
+            var li = document.createElement("li");
+            li.className="list-group-item";
+            li.style="width: 80%";
+            li.id="word"+btnCount;
+            li.innerHTML=word;
+            banWordList.push(word);
+            $("#ban-word").append(li)
+            $("#word").val("");
         }
 
         function reset() {
+            $("#ban-word").empty();
             btnCount = 1;
-            document.getElementById("word1").textContent = "1";
-            document.getElementById("word2").textContent = "2";
-            document.getElementById("word3").textContent = "3";
-            document.getElementById("word4").textContent = "4";
-            document.getElementById("word5").textContent = "5";
             banWordList = [];
-            console.log(btnCount)
         }
 
     </script>
-
-
-    <div id="snackbar"></div>
 
     <!-- Footer -->
     <div style="text-align: center;">
