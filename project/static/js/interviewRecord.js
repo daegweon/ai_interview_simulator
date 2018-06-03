@@ -197,9 +197,9 @@ function download() {
   var formData = new FormData();
   formData.append('file', file);
   formData.append('csrfmiddlewaretoken', csrftoken);
-  formData.append('questionId', ques_id[questionCount]);
+  formData.append('questionId', ques_id[questionCount-1]);
   formData.append('questionCount', questionCount);
-  formData.append('questionText', ques_text[questionCount])
+  formData.append('questionText', ques_text[questionCount-1])
   formData.append('transcription', final_transcript);
 
   if(questionCount==5){
