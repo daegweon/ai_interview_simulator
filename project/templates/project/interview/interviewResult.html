@@ -126,17 +126,23 @@
                         <div id="sunburstChart"></div>
                         <div class="characteristics" id="characteristics-result"><h3>AIS가 분석한 {{username}}님의 성향은 </h4></div>
                         <br>
-                        <h4 data-toggle="tooltip" data-placement="top" title="인간의 성격을 개방성, 성실성, 외향성, 친화성, 감정 기복의 5가지 독립적인 요인들로 설명하는 심리학적 모델" style="width : 35px">Big5</h4>
+                        <h4 style="display : inline">Big5&nbsp;<img id="big5Info" data-toggle="tooltip" data-placement="top" title="인간의 성격을 개방성, 성실성, 외향성, 친화성, 감정 기복의 5가지 독립적인 요인들로 설명하는 심리학적 모델"  src='{%static "img/info.png" %}' style="width : 12px; height : 12px" ></h4>
                         <div class="personalityResult" id="personality-result"></div>
                         <div class="facetResult" id="facet-result"></div>
-                        <h4 data-toggle="tooltip" data-placement="top" title="행동에 영향을 미칠 수 있는 욕구" style="width : 50px">Needs</h4>
+                        <h4 style="display : inline">Needs&nbsp;<img id="needsInfo" data-toggle="tooltip" data-placement="top" title="행동에 영향을 미칠 수 있는 욕구" src='{%static "img/info.png" %}' style="width : 12px; height : 12px" ></h4>
                         <div class="needsResult" id="needs-result"></div>
-                        <h4 data-toggle="tooltip" data-placement="top" title="삶에서 중요하게 여기는 가치" style="width : 50px">Values</h4>
+                        <h4 style="display : inline">Values&nbsp;<img id="valueInfo" data-toggle="tooltip" data-placement="top" title="삶에서 중요하게 여기는 가치" src='{%static "img/info.png" %}' style="width : 12px; height : 12px"></h4>
                         <div class="valueResult" id="value-result"></div>
                         <script>
                             $(document).ready(function(){
                                 $('[data-toggle="tooltip"]').tooltip();   
                             });
+                            /* $("#big5Info").mouseover(function(){$(this).css("background-color", "Gainsboro");})
+                            $("#big5Info").mouseleave(function(){$(this).css("background-color", "transparent");})
+                            $("#needsInfo").mouseover(function(){$(this).css("background-color", "Gainsboro");})
+                            $("#needsInfo").mouseleave(function(){$(this).css("background-color", "transparent");})
+                            $("#valueInfo").mouseover(function(){$(this).css("background-color", "Gainsboro");})
+                            $("#valueInfo").mouseleave(function(){$(this).css("background-color", "transparent");}) */
                             var profile = {{ personality | safe }};
                             var chart = new PersonalitySunburstChart({ selector: '#sunburstChart', version: 'v3' });
                             chart.show(profile);
