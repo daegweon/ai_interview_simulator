@@ -132,7 +132,7 @@ function dataURItoBlob(dataURI) {
 function toggleRecording() {
   if (recordButton.textContent === '면접 시작' || recordButton.textContent === '다음 문제') {
     startSpeechToText();
-    document.getElementById("question").textContent = ques_text[questionCount]
+    document.getElementById("question").textContent = "질문" + (questionCount + 1) + ". " + ques_text[questionCount];
     startTick();
     startRecording();
     StartDetectFace();
@@ -141,6 +141,7 @@ function toggleRecording() {
     stopTick();
     stopRecording();
     StopDetectFace();
+    tipToast(questionCount);
     questionCount += 1;
     if (questionCount == 5) {
       questionCount = 0;

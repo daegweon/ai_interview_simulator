@@ -226,10 +226,53 @@
             line-height: 40px;
             float:left;
         }
+        .glyphicon-tag:before{content:"\e041"}
     </style>
 
     <script>
         getKey();
+        var tip = {{ tip | safe}};
+        function tipToast(count) {
+            $.notify({
+                // options
+                icon: 'glyphicon glyphicon-tag',
+                title: '<strong> 무작위 TIP ! </strong>',
+                message: tip[count],
+            }, {
+                    // settings
+                    element: 'body',
+                    position: null,
+                    type: "info",
+                    allow_dismiss: true,
+                    newest_on_top: false,
+                    showProgressbar: false,
+                    placement: {
+                        from: "top",
+                        align: "center"
+                    },
+                    offset: 20,
+                    spacing: 10,
+                    z_index: 1031,
+                    delay: 7000,
+                    timer: 1000,
+                    mouse_over: null,
+                    animate: {
+                        enter: 'animated fadeInDown',
+                        exit: 'animated fadeOutUp'
+                    },
+                    icon_type: 'class',
+                    template: '<div data-notify="container" class="col-xs-11 col-sm-4 alert alert-{0}" role="alert">' +
+                        '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
+                        '<span data-notify="icon"></span> ' +
+                        '<span data-notify="title">{1}</span> ' +
+                        '<span data-notify="message">{2}</span>' +
+                        '<div class="progress" data-notify="progressbar">' +
+                        '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                        '</div>' +
+                        '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                        '</div>'
+                });
+        }
         function banPoseToast() {
             $.notify({
                 // options
@@ -481,7 +524,7 @@
                 <br>
 
                 <ul class="list-group" id="ban-word" style="width: 280px ;-webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
-                    
+
                 </ul>
 
                 <br>
@@ -587,10 +630,10 @@
         function add() {
             var word = $("#word").val();
             var li = document.createElement("li");
-            li.className="list-group-item";
-            li.style="width: 80%";
-            li.id="word"+btnCount;
-            li.innerHTML=word;
+            li.className = "list-group-item";
+            li.style = "width: 80%";
+            li.id = "word" + btnCount;
+            li.innerHTML = word;
             banWordList.push(word);
             $("#ban-word").append(li)
             $("#word").val("");

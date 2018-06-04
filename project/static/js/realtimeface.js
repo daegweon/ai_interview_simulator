@@ -82,7 +82,7 @@ function processImage(data) {
             
             
             //if(document.getElementById("checkPose").checked == true){
-                if ((yaw < -7 || yaw >7) || (roll < -7 || roll > 7)) banPoseToast();
+                if ((yaw < -15 || yaw > 15) || (roll < -15 || roll > 15)) banPoseToast();
             //}
             
             document.getElementById('value1').innerHTML = "화남: "+anger;
