@@ -16,6 +16,19 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
     <link href='{%static "css/trainingResult.css" %}' rel="stylesheet">
+    <style>
+        #wordArea {
+            position: relative;
+            display: inline-block;
+            width: 300px;
+        }
+
+        #emotionArea {
+            position: relative;
+            display: inline-block;
+            width: 300px;
+        }
+    </style>
 </head>
 
 <body>
@@ -25,9 +38,24 @@
         <h4>By:
             <a href="https://github.com/daegweon/ai_interview_simulator">Human Learning Team</a>
         </h4>
-        <h2 id="resultArea">
-            금지 단어 빈도<br><br>
-        </h2>
+        <div id="resultContainer">
+            <div id="wordArea">
+                <h2 style="color:orangered">
+                    금지 단어 빈도
+                    <br>
+                </h2>
+                <h3 id="resultWordArea">
+                </h3>
+            </div>
+            <div id="emotionArea">
+                <h2 style="color:orangered">
+                    금지 감정 빈도
+                    <br>
+                </h2>
+                <h3 id="resultEmotionArea">
+                </h3>
+            </div>
+        </div>
         <div class="wrap">
             <a class="btn-0" href="/">Main page</a>
             <a class="btn-1" href="/interviews/training/on-air/">재연습하기</a>
@@ -35,14 +63,32 @@
         </div>
     </div>
     <script>
-        var banwordlist = {{banwordlist|safe}};
-        var banwordcount = {{banwordcount|safe}};
+        var banwordlist = {{ banwordlist| safe}};
+        var banwordcount = {{ banwordcount| safe}};
+        var banemotionlist = {{ banemotionlist| safe }}
+        var banemotioncount = {{ banemotioncount| safe}}
         banwordlist = banwordlist[0].split(',');
         banwordcount = banwordcount[0].split(',');
-        for(var i=0;i<Object.keys(banwordlist).length;i++){
+        for (var i = 0; i < Object.keys(banwordlist).length; i++) {
             var spantag = document.createElement('span');
-            spantag.innerHTML = banwordlist[i]+": "+banwordcount[i]+"회<br>";
-            document.getElementById('resultArea').appendChild(spantag);
+            spantag.innerHTML = banwordlist[i] + ": " + banwordcount[i] + "회<br>";
+            document.getElementById('resultWordArea').appendChild(spantag);
+        }
+        banemotionlist = banemotionlist[0].split(',');
+        banemotioncount = banemotioncount[0].split(',');
+
+        for (var i = 0; i < Object.keys(banemotionlist).length; i++) {
+            var spantag = document.createElement('span');
+            spantag.innerHTML = banemotionlist[i];
+            if (banemotionlist[i] == "화남") { spantag.innerHTML += ": " + banemotioncount[0] + "회<br>" }
+            else if (banemotionlist[i] == "경멸") { spantag.innerHTML += ": " + banemotioncount[1] + "회<br>" }
+            else if (banemotionlist[i] == "싫음") { spantag.innerHTML += ": " + banemotioncount[2] + "회<br>" }
+            else if (banemotionlist[i] == "공포") { spantag.innerHTML += ": " + banemotioncount[3] + "회<br>" }
+            else if (banemotionlist[i] == "행복") { spantag.innerHTML += ": " + banemotioncount[4] + "회<br>" }
+            else if (banemotionlist[i] == "중립") { spantag.innerHTML += ": " + banemotioncount[5] + "회<br>" }
+            else if (banemotionlist[i] == "슬픔") { spantag.innerHTML += ": " + banemotioncount[6] + "회<br>" }
+            else if (banemotionlist[i] == "놀람") { spantag.innerHTML += ": " + banemotioncount[7] + "회<br>" }
+            document.getElementById('resultEmotionArea').appendChild(spantag);
         }
     </script>
 </body>

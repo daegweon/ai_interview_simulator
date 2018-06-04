@@ -221,14 +221,16 @@ function uploadToServer(formData) {
   return false;
 }
 
-function getTrainingResult(banwordlist,banwordcount){
+function getTrainingResult(banwordlist,banwordcount,banEmotionList,banEmotionCount){
   var csrftoken = getCookie('csrftoken');
 
   var formData = new FormData();
   formData.append('csrfmiddlewaretoken', csrftoken);
   formData.append('banwordlist',banwordlist);
   formData.append('banwordcount',banwordcount);
- 
+  formData.append('banemotionlist',banEmotionList);
+  formData.append('banemotioncount',banEmotionCount);
+
   $.ajax({
     type: "POST",
     url: '/interviews/training/result/',
@@ -236,7 +238,6 @@ function getTrainingResult(banwordlist,banwordcount){
     processData: false,
     contentType: false,
     success : function(data){
-      console.log(data);
       window.location.href = "/interviews/training/result/";
     }
   });

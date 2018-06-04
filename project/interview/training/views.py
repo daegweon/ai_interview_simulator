@@ -36,14 +36,18 @@ def trainingInterviewOnAir(request):
 class ban:
     global banwordlist
     global banwordcount
+    global banemotionlist
+    global banemotioncount
 
 def getTrainingResultPage(request):
     if request.method =="POST":
         if request.user.is_authenticated():
             ban.banwordlist = request.POST.getlist('banwordlist')
             ban.banwordcount = request.POST.getlist('banwordcount')
-            return render(request,'project/interview/trainingResult.html',{'banwordlist':ban.banwordlist,'banwordcount':ban.banwordcount})
+            ban.banemotionlist = request.POST.getlist('banemotionlist')
+            ban.banemotioncount = request.POST.getlist('banemotioncount')
+            return render(request,'project/interview/trainingResult.html',{'banwordlist':ban.banwordlist,'banwordcount':ban.banwordcount,'banemotionlist':ban.banemotionlist,'banemotioncount':ban.banemotioncount})
         else: 
             return render(request,'project/index.html',{'isLogin':0})     
     else:
-        return render(request,'project/interview/trainingResult.html',{'banwordlist':ban.banwordlist,'banwordcount':ban.banwordcount})
+        return render(request,'project/interview/trainingResult.html',{'banwordlist':ban.banwordlist,'banwordcount':ban.banwordcount,'banemotionlist':ban.banemotionlist,'banemotioncount':ban.banemotioncount})
