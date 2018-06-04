@@ -68,21 +68,13 @@
         <div class="col-md-12 col-md-offset-2">
           <div class="panel panel-default">
             <div class="panel-body">
-              <div class="pull-right">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-success btn-filter" data-target="pagado">연습</button>
-                  <button type="button" class="btn btn-warning btn-filter" data-target="pendiente">실전</button>
-                  <button type="button" class="btn btn-default btn-filter" data-target="all">전체</button>
-                </div>
-              </div>
               <div class="table-container">
                 <table class="table table-filter">
                   <tbody id="tablebody">
                     <tr>
-                      <th>번호</th>
-                      <th>평가명</th>
-                      <th>면접종류</th>
-                      <th>면접일시</th>
+                      <th style="text-align: center;">번호</th>
+                      <th style="text-align: center;">평가명</th>
+                      <th style="text-align: center;">면접일시</th>
                     </tr>
                   </tbody>
                 </table>
@@ -125,55 +117,35 @@
     var dateList = {{ dateList| safe }};
     var count = {{ count }};
     var interviewCountList = {{interviewCountList}};
-
     var tablebody = document.getElementById("tablebody");
+
     for (var i = 0; i < count; i++) {
       var row = document.createElement('tr');
       var firstcol = document.createElement('td');
       var secondcol = document.createElement('td');
       var thirdcol = document.createElement('td');
-      var fourthcol = document.createElement('td');
       var firstatag = document.createElement('a');
-      var mediadiv1 = document.createElement('div');
-      var mediabodydiv1 = document.createElement('div');
-      var span1 = document.createElement('span');
       var mediadiv2 = document.createElement('div');
       var mediabodydiv2 = document.createElement('div');
       var span2 = document.createElement('span');
 
-      if (interviewTypeList[i] == 0) { //연습면접
-        var practiceURL = '/interviews/training/result/'+interviewCountList[i];
-        console.log(practiceURL);
-        row.setAttribute("data-status", "pagado");
-        row.setAttribute("onClick","window.location.replace('" + practiceURL + "')")
-        secondcol.innerHTML = "제 " + (i+1) + "회 연습면접"; //어떤 몇회 어떤 타입의 모의 면접인지
-        span1.innerHTML = "연습"; // 면접 타입
-        span1.className = "pagado";
-      }
-
-      else if (interviewTypeList[i] == 1) { //실전면접
+      if (interviewTypeList[i] == 1) { //실전면접
         var testURL = '/interviews/test/result/'+interviewCountList[i];
-        console.log(testURL);
         row.setAttribute("data-status", "pendiente");
-        row.setAttribute("onClick","window.location.replace('" + testURL + "')")
+        row.setAttribute("onClick","window.location.href='" + testURL + "'");
         secondcol.innerHTML = "제 " + (i+1) + "회 실전면접"; //어떤 몇회 어떤 타입의 모의 면접인지
-        span1.innerHTML = "실전"; // 면접 타입
-        span1.className = "pendiente";
       }
 
-      firstcol.width = "10%";
-      secondcol.width = "30%";
-      thirdcol.width = "20%";
-      fourthcol.width = "40%";
+      firstcol.width = "20%";
+      secondcol.width = "35%";
+      thirdcol.width = "45%";
+      firstcol.style.textAlign="center";
+      secondcol.style.textAlign="center";
+      thirdcol.style.textAlign="center";
 
       /* 테이블 column에 대한 설정 */
       firstatag.innerHTML = i+1; //몇 회 인지
       firstcol.appendChild(firstatag);
-      mediadiv1.className = "media";
-      mediabodydiv1.className = "media-body";
-      mediabodydiv1.appendChild(span1);
-      mediadiv1.appendChild(mediabodydiv1);
-      thirdcol.appendChild(mediadiv1);
       mediadiv2.className = "media";
       mediabodydiv2.className = "media-body";
       span2.className = "media-meta";
@@ -181,11 +153,10 @@
       span2.innerHTML = dateList[i]; //면접 날짜 
       mediabodydiv2.appendChild(span2);
       mediadiv2.appendChild(mediabodydiv2);
-      fourthcol.appendChild(mediadiv2);
+      thirdcol.appendChild(mediadiv2);
       row.appendChild(firstcol);
       row.appendChild(secondcol);
       row.appendChild(thirdcol);
-      row.appendChild(fourthcol);
       tablebody.appendChild(row);
     }
   </script>

@@ -34,6 +34,9 @@ function getKey() {
     });
 }
 
+var banEmotionList=[];
+var banEmotionCount=[0,0,0,0,0,0,0,0];
+
 function processImage(data) {
 
     var uriBase =
@@ -125,7 +128,7 @@ function processImage(data) {
 		
 
             //if(document.getElementById("checkPose").checked == true){
-                if ((yaw < -7 || yaw >7) || (roll < -7 || roll > 7)) banPoseToast();
+                if ((yaw < -15 || yaw > 15) || (roll < -15 || roll > 15)) banPoseToast();
             //}
             
             document.getElementById('value1').innerHTML = "화남: "+anger;
@@ -140,41 +143,65 @@ function processImage(data) {
             if (anger > 0.5){ 
                 document.getElementById('value1').style.zoom="110%";
                 document.getElementById('icon1').style.visibility="visible";
-                if(document.getElementById("checkAnger").checked == true) banEmotionToast("화남");
+                if(document.getElementById("checkAnger").checked == true){
+                    banEmotionCount[0]+=1;
+                    if(banEmotionCount[0]==1) banEmotionList.push('화남');
+                    banEmotionToast("화남");
+                }
             }
             else{ document.getElementById('icon1').style.visibility="hidden"; document.getElementById('value1').style.zoom="100%";}
             
             if (contempt > 0.5){
                 document.getElementById('value2').style.zoom="110%";
                 document.getElementById('icon2').style.visibility="visible";
-                if(document.getElementById("checkContempt").checked == true) banEmotionToast("경멸");
+                if(document.getElementById("checkContempt").checked == true){
+                    banEmotionCount[1]+=1;
+                    if(banEmotionCount[1]==1) banEmotionList.push('경멸');
+                    banEmotionToast("경멸");
+                }
             }
             else{ document.getElementById('icon2').style.visibility="hidden"; document.getElementById('value2').style.zoom="100%";}
             if (disgust > 0.5){
                 document.getElementById('value3').style.zoom="110%";
                 document.getElementById('icon3').style.visibility="visible";
-                if(document.getElementById("checkDisgust").checked == true) banEmotionToast("싫음");
+                if(document.getElementById("checkDisgust").checked == true){
+                    banEmotionCount[2]+=1;
+                    if(banEmotionCount[2]==1) banEmotionList.push('싫음');
+                    banEmotionToast("싫음");
+                }
             }
             else{ document.getElementById('icon3').style.visibility="hidden"; document.getElementById('value3').style.zoom="100%";}
 
             if (fear > 0.5){
                 document.getElementById('value4').style.zoom="110%";
                 document.getElementById('icon4').style.visibility="visible";
-                if(document.getElementById("checkFear").checked == true) banEmotionToast("공포");
+                if(document.getElementById("checkFear").checked == true){
+                    banEmotionCount[3]+=1;
+                    if(banEmotionCount[3]==1) banEmotionList.push('공포');
+                    banEmotionToast("공포");
+                }
             }
             else{ document.getElementById('icon4').style.visibility="hidden"; document.getElementById('value4').style.zoom="100%";}
 
             if (happiness > 0.5){
                 document.getElementById('value5').style.zoom="110%";
                 document.getElementById('icon5').style.visibility="visible";
-                if(document.getElementById("checkHappiness").checked == true) banEmotionToast("행복");
+                if(document.getElementById("checkHappiness").checked == true){
+                    banEmotionCount[4]+=1;
+                    if(banEmotionCount[4]==1) banEmotionList.push('행복');
+                    banEmotionToast("행복");
+                }
             }
             else{ document.getElementById('icon5').style.visibility="hidden"; document.getElementById('value5').style.zoom="100%";}
 
             if (neutral > 0.5){
                 document.getElementById('value6').style.zoom="110%";
                 document.getElementById('icon6').style.visibility="visible";
-                if(document.getElementById("checkNeutral").checked == true) banEmotionToast("중립");
+                if(document.getElementById("checkNeutral").checked == true){
+                    banEmotionCount[5]+=1;
+                    if(banEmotionCount[5]==1) banEmotionList.push('중립');
+                    banEmotionToast("중립");
+                }
             }
             else{ document.getElementById('icon6').style.visibility="hidden";
              document.getElementById('value6').style.zoom="100%"; }
@@ -182,14 +209,22 @@ function processImage(data) {
             if (sadness > 0.5){
                 document.getElementById('value7').style.zoom="110%";
                 document.getElementById('icon7').style.visibility="visible";
-                if(document.getElementById("checkSadness").checked == true) banEmotionToast("슬픔");
+                if(document.getElementById("checkSadness").checked == true){
+                    banEmotionCount[6]+=1;
+                    if(banEmotionCount[6]==1) banEmotionList.push('슬픔');
+                    banEmotionToast("슬픔");
+                }
             }
             else{ document.getElementById('icon7').style.visibility="hidden"; document.getElementById('value7').style.zoom="100%";}
 
             if (surprise > 0.5){
                 document.getElementById('value8').style.zoom="110%";
                 document.getElementById('icon8').style.visibility="visible";
-                if(document.getElementById("checkSurprise").checked == true) banEmotionToast("놀람");
+                if(document.getElementById("checkSurprise").checked == true){
+                    banEmotionCount[7]+=1;
+                    if(banEmotionCount[7]==1) banEmotionList.push('놀람');
+                    banEmotionToast("놀람");
+                }
             }
             else{ document.getElementById('icon8').style.visibility="hidden"; document.getElementById('value8').style.zoom="110%";}
         })

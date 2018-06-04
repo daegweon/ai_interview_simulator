@@ -132,7 +132,7 @@ function dataURItoBlob(dataURI) {
 function toggleRecording() {
   if (recordButton.textContent === '면접 시작' || recordButton.textContent === '다음 문제') {
     startSpeechToText();
-    document.getElementById("question").textContent = ques_text[questionCount]
+    document.getElementById("question").textContent = "질문" + (questionCount + 1) + ". " + ques_text[questionCount];
     startTick();
     startRecording();
     StartDetectFace();
@@ -141,6 +141,7 @@ function toggleRecording() {
     stopTick();
     stopRecording();
     StopDetectFace();
+    tipToast(questionCount);
     questionCount += 1;
     if (questionCount == 5) {
       questionCount = 0;
@@ -219,4 +220,26 @@ function uploadToServer(formData) {
     }
   });
   return false;
+}
+
+function getTrainingResult(banwordlist,banwordcount,banEmotionList,banEmotionCount){
+  var csrftoken = getCookie('csrftoken');
+
+  var formData = new FormData();
+  formData.append('csrfmiddlewaretoken', csrftoken);
+  formData.append('banwordlist',banwordlist);
+  formData.append('banwordcount',banwordcount);
+  formData.append('banemotionlist',banEmotionList);
+  formData.append('banemotioncount',banEmotionCount);
+
+  $.ajax({
+    type: "POST",
+    url: '/interviews/training/result/',
+    data: formData,
+    processData: false,
+    contentType: false,
+    success : function(data){
+      window.location.href = "/interviews/training/result/";
+    }
+  });
 }
