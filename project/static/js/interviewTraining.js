@@ -220,3 +220,24 @@ function uploadToServer(formData) {
   });
   return false;
 }
+
+function getTrainingResult(banwordlist,banwordcount){
+  var csrftoken = getCookie('csrftoken');
+
+  var formData = new FormData();
+  formData.append('csrfmiddlewaretoken', csrftoken);
+  formData.append('banwordlist',banwordlist);
+  formData.append('banwordcount',banwordcount);
+ 
+  $.ajax({
+    type: "POST",
+    url: '/interviews/training/result/',
+    data: formData,
+    processData: false,
+    contentType: false,
+    success : function(data){
+      console.log(data);
+      window.location.href = "/interviews/training/result/";
+    }
+  });
+}

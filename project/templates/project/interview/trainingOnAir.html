@@ -321,6 +321,7 @@
                 });
         }
         var banWordList = [];
+        var banWordCount=[];
         var final_transcript = "";
 
         function startSpeechToText() {
@@ -341,6 +342,12 @@
                         for (var j = 0; j < banLength; j++) {
                             if (event.results[i][0].transcript.indexOf(banWordList[j]) != -1) {
                                 banWordToast(banWordList[j]);
+                            }
+                            var final_transcript_words = final_transcript.split(" ");
+                            for(var k=0; k<final_transcript_words.length; k++){
+                                if(final_transcript_words[k]==banWordList[j]){
+                                    banWordCount[j]+=1;
+                                }
                             }
                         }
                         console.log("final_transcript=" + final_transcript);
@@ -512,8 +519,7 @@
 
             <button type="button" id="record" class="btn btn-primary" disabled>면접 시작</button>
 
-            <button type="button" id="finInterview" class="btn btn-success" style="display: none;" onclick="window.location.href='/interviews'"
-                disabled>연습 종료</button>
+            <button type="button" id="finInterview" class="btn btn-success" style="display: none;" onclick="getTrainingResult(banWordList,banWordCount)" disabled>연습 종료</button>
             <a id="timer" style="width: 80px; margin-left: 10px; vertical-align: middle; font-size: 24px; font-weight: bold;">&nbsp;00:00&nbsp;</a>
         </div>
     </div>
@@ -594,14 +600,16 @@
             banWordList.push(word);
             $("#ban-word").append(li)
             $("#word").val("");
+            var len = banWordList.length;
+            banWordCount[len-1]=0;
         }
 
         function reset() {
             $("#ban-word").empty();
             btnCount = 1;
             banWordList = [];
+            banWordCount = [];
         }
-
     </script>
 
     <!-- Footer -->

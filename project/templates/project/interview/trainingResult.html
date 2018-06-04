@@ -12,8 +12,8 @@
     <title>AIS - A.I Interview Simulator</title>
 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
     <link href='{%static "css/trainingResult.css" %}' rel="stylesheet">
 </head>
@@ -25,13 +25,26 @@
         <h4>By:
             <a href="https://github.com/daegweon/ai_interview_simulator">Human Learning Team</a>
         </h4>
-
+        <h2 id="resultArea">
+            금지 단어 빈도<br><br>
+        </h2>
         <div class="wrap">
             <a class="btn-0" href="/">Main page</a>
             <a class="btn-1" href="/interviews/training/on-air/">재연습하기</a>
             <a class="btn-1-2" href="/interviews/test/on-air/">실전면접으로 가기</a>
         </div>
     </div>
+    <script>
+        var banwordlist = {{banwordlist|safe}};
+        var banwordcount = {{banwordcount|safe}};
+        banwordlist = banwordlist[0].split(',');
+        banwordcount = banwordcount[0].split(',');
+        for(var i=0;i<Object.keys(banwordlist).length;i++){
+            var spantag = document.createElement('span');
+            spantag.innerHTML = banwordlist[i]+": "+banwordcount[i]+"회<br>";
+            document.getElementById('resultArea').appendChild(spantag);
+        }
+    </script>
 </body>
 
 </html>

@@ -33,9 +33,17 @@ def trainingInterviewOnAir(request):
                 ques_text.append(random_question_text)
 
         return render(request,'project/interview/trainingOnAir.html',{'ques_id': ques_id, 'ques_text' : ques_text, 'interview_count':interview_count+1})
-   
+class ban:
+    global banwordlist
+    global banwordcount
+
 def getTrainingResultPage(request):
-    if request.user.is_authenticated():
-        return render(request,'project/interview/trainingResult.html',{})
-    else: 
-        return render(request,'project/index.html',{'isLogin':0})  
+    if request.method =="POST":
+        if request.user.is_authenticated():
+            ban.banwordlist = request.POST.getlist('banwordlist')
+            ban.banwordcount = request.POST.getlist('banwordcount')
+            return render(request,'project/interview/trainingResult.html',{'banwordlist':ban.banwordlist,'banwordcount':ban.banwordcount})
+        else: 
+            return render(request,'project/index.html',{'isLogin':0})     
+    else:
+        return render(request,'project/interview/trainingResult.html',{'banwordlist':ban.banwordlist,'banwordcount':ban.banwordcount})
