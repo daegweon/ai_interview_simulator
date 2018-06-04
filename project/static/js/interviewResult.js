@@ -26,7 +26,7 @@ function setTotalResult() {
                 return "경멸";
                 break;
             case 2:
-                return "역겨움";
+                return "싫음";
                 break;
             case 3:
                 return "공포";
@@ -52,9 +52,9 @@ function setTotalResult() {
     mostWord = "<br>1위: '" + words[0]['tag'] + "'<br>" + "2위: '" + words[1]['tag'] + "'<br>" + "3위: '" + words[2]['tag'] + "'"
     for (var i = 1; i <= 5; i++) questionContent += "질문" + i + ": " + questionList[i - 1] + "<br>";
     document.getElementById("totalTime").innerHTML = "총 면접 시간 : " + minute + "분" + second + "초<br><br>";
-    document.getElementById("questionContent").innerHTML = questionContent;
+    document.getElementById("questionContent").innerHTML = "출제된 문제는 다음과 같습니다.<br><br>"+questionContent+"<br>";
     document.getElementById("questionTime").innerHTML = "<br>길게 답변한 질문: " + parseInt(maxQuestionTime / 60) + "분 " + maxQuestionTime % 60 + "초<br>가장 짧게 답변한 질문: " + parseInt(minQuestionTime / 60) + "분 " + minQuestionTime % 60 + "초<br><br>";
-    document.getElementById("best").innerHTML = "감정 빈도<br> 1위: " + emotionFunc(maxEmotionValue1) + "<br>2위: " + emotionFunc(maxEmotionValue2) + "<br>3위: " + emotionFunc(maxEmotionValue3) + "<br><br>성향 BEST3:<br>가장 많이 사용한 단어 BEST3:" + mostWord;
+    document.getElementById("best").innerHTML = "감정 빈도<br> 1위: " + emotionFunc(maxEmotionValue1) + "<br>2위: " + emotionFunc(maxEmotionValue2) + "<br>3위: " + emotionFunc(maxEmotionValue3) + "<br><br>단어 빈도:" + mostWord;
 }
 
 function setEmotionTrendResult() {

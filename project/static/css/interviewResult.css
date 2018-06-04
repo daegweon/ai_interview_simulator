@@ -37,12 +37,14 @@
 
 /* ----- v CAN BE DELETED v ----- */
 body {
-background-color: #26a69a;
+    background-color: #26a69a;
+    font-family: 'Open Sans', sans-serif;
+    color: #353535;
 }
 
 .demo {
-padding-top: 60px;
-padding-bottom: 60px;
+    padding-top: 60px;
+    padding-bottom: 60px;
 }
 
 a.top {
