@@ -28,7 +28,6 @@ def testInterviewOnAir(request):
         ques_id=[]
         ques_text=[]
         interview_count = InterviewCount.objects.values_list('interview_count',flat=True).get(user_id = request.user)
-        print(interview_count)
         while(len(ques_id)<5):
             random_idx = randint(0,count-1)    
             random_question_id = Question.objects.values_list('id', flat=True).all()[random_idx]
