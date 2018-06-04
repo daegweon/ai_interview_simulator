@@ -79,8 +79,51 @@ function processImage(data) {
             var roll = data[0]['faceAttributes']['headPose']['roll'];
             var yaw = data[0]['faceAttributes']['headPose']['yaw'];
             console.log("R: "+roll+" Y: " +yaw)
-            
-            
+
+			var checkAnger = document.getElementById('checkAnger').checked;
+			var checkContempt = document.getElementById('checkContempt').checked;
+			var checkDisgust = document.getElementById('checkDisgust').checked;
+			var checkFear = document.getElementById('checkFear').checked;
+			var checkHappiness = document.getElementById('checkHappiness').checked;
+			var checkNeutral = document.getElementById('checkNeutral').checked;
+			var checkSadness = document.getElementById('checkSadness').checked;
+			var checkSurprise = document.getElementById('checkSurprise').checked;
+			
+			var angerReturn = document.getElementById('anger');
+			var contemptReturn = document.getElementById('contempt');
+			var disgustReturn = document.getElementById('disgust');
+			var fearReturn = document.getElementById('fear');
+			var happinessReturn = document.getElementById('happiness');
+			var neutralReturn = document.getElementById('neutral');
+			var sadnessReturn = document.getElementById('sadness');
+			var surpriseReturn = document.getElementById('surprise');
+			
+		
+			if(checkAnger == true){ angerChange(anger); }
+			else{ angerReturn.src = '/static/img/emoticon/a9.png'; }
+		
+			if(checkContempt == true){ contemptChange(contempt); }
+			else{ contemptReturn.src = '/static/img/emoticon/c9.png'; }
+		
+			if(checkDisgust == true){ disgustChange(disgust); }
+			else{ disgustReturn.src = '/static/img/emoticon/d9.png'; }
+		
+			if(checkFear == true){ fearChange(fear); }
+			else{ fearReturn.src = '/static/img/emoticon/f9.png'; }
+		
+			if(checkHappiness == true){	happinessChange(happiness);	}
+			else{ happinessReturn.src = '/static/img/emoticon/h9.png'; }
+		
+			if(checkNeutral == true){ neutralChange(neutral); }
+			else{ neutralReturn.src = '/static/img/emoticon/n9.png'; }
+		
+			if(checkSadness == true){ sadnessChange(sadness); }
+			else{ sadnessReturn.src = '/static/img/emoticon/s9.png'; }
+		
+			if(checkSurprise == true){ surpriseChange(surprise); }
+			else{ surpriseReturn.src = '/static/img/emoticon/p9.png'; }
+		
+
             //if(document.getElementById("checkPose").checked == true){
                 if ((yaw < -7 || yaw >7) || (roll < -7 || roll > 7)) banPoseToast();
             //}
@@ -100,6 +143,7 @@ function processImage(data) {
                 if(document.getElementById("checkAnger").checked == true) banEmotionToast("화남");
             }
             else{ document.getElementById('icon1').style.visibility="hidden"; document.getElementById('value1').style.zoom="100%";}
+            
             if (contempt > 0.5){
                 document.getElementById('value2').style.zoom="110%";
                 document.getElementById('icon2').style.visibility="visible";
@@ -161,3 +205,123 @@ function processImage(data) {
             alert(errorString);
         });
 };
+
+function angerChange(emotion){
+		var emo = document.getElementById('anger');
+	
+		if(emotion>=0.9){ emo.src='/static/img/emoticon/a9.png';}
+    	else if(emotion>=0.8){ emo.src='/static/img/emoticon/a8.png';}
+    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/a7.png';}
+    	else if(emotion>=0.6){ emo.src='/static/img/emoticon/a6.png';}
+    	else if(emotion>=0.5){ emo.src='/static/img/emoticon/a5.png';}
+    	else if(emotion>=0.4){ emo.src='/static/img/emoticon/a4.png';}
+    	else if(emotion>=0.3){ emo.src='/static/img/emoticon/a3.png';}
+    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/a2.png';}
+		else if(emotion>=0.1){ emo.src='/static/img/emoticon/a1.png';}
+    	else{ emo.src='/static/img/emoticon/a0.png';}
+}
+
+function contemptChange(emotion){
+		var emo = document.getElementById('contempt');
+
+		if(emotion>=0.9){ emo.src='/static/img/emoticon/c9.png';}
+    	else if(emotion>=0.8){ emo.src='/static/img/emoticon/c8.png';}
+    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/c7.png';}
+    	else if(emotion>=0.6){ emo.src='/static/img/emoticon/c6.png';}
+    	else if(emotion>=0.5){ emo.src='/static/img/emoticon/c5.png';}
+    	else if(emotion>=0.4){ emo.src='/static/img/emoticon/c4.png';}
+    	else if(emotion>=0.3){ emo.src='/static/img/emoticon/c3.png';}
+    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/c2.png';}
+		else if(emotion>=0.1){ emo.src='/static/img/emoticon/c1.png';}
+    	else{ emo.src='/static/img/emoticon/c0.png';}
+}
+
+function disgustChange(emotion){
+		var emo = document.getElementById('disgust');
+	
+		if(emotion>=0.9){ emo.src='/static/img/emoticon/d9.png';}
+    	else if(emotion>=0.8){ emo.src='/static/img/emoticon/d8.png';}
+    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/d7.png';}
+    	else if(emotion>=0.6){ emo.src='/static/img/emoticon/d6.png';}
+    	else if(emotion>=0.5){ emo.src='/static/img/emoticon/d5.png';}
+    	else if(emotion>=0.4){ emo.src='/static/img/emoticon/d4.png';}
+    	else if(emotion>=0.3){ emo.src='/static/img/emoticon/d3.png';}
+    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/d2.png';}
+		else if(emotion>=0.1){ emo.src='/static/img/emoticon/d1.png';}
+    	else{ emo.src='/static/img/emoticon/d0.png';}
+}
+
+function fearChange(emotion){
+		var emo = document.getElementById('fear');
+	
+		if(emotion>=0.9){ emo.src='/static/img/emoticon/f9.png';}
+    	else if(emotion>=0.8){ emo.src='/static/img/emoticon/f8.png';}
+    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/f7.png';}
+    	else if(emotion>=0.6){ emo.src='/static/img/emoticon/f6.png';}
+    	else if(emotion>=0.5){ emo.src='/static/img/emoticon/f5.png';}
+    	else if(emotion>=0.4){ emo.src='/static/img/emoticon/f4.png';}
+    	else if(emotion>=0.3){ emo.src='/static/img/emoticon/f3.png';}
+    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/f2.png';}
+		else if(emotion>=0.1){ emo.src='/static/img/emoticon/f1.png';}
+    	else{ emo.src='/static/img/emoticon/f0.png';}
+}
+
+function happinessChange(emotion){
+		var emo = document.getElementById('happiness');
+	
+		if(emotion>=0.9){ emo.src='/static/img/emoticon/h9.png';}
+    	else if(emotion>=0.8){ emo.src='/static/img/emoticon/h8.png';}
+    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/h7.png';}
+    	else if(emotion>=0.6){ emo.src='/static/img/emoticon/h6.png';}
+    	else if(emotion>=0.5){ emo.src='/static/img/emoticon/h5.png';}
+    	else if(emotion>=0.4){ emo.src='/static/img/emoticon/h4.png';}
+    	else if(emotion>=0.3){ emo.src='/static/img/emoticon/h3.png';}
+    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/h2.png';}
+		else if(emotion>=0.1){ emo.src='/static/img/emoticon/h1.png';}
+    	else{ emo.src='/static/img/emoticon/h0.png';}
+}
+
+function neutralChange(emotion){
+		var emo = document.getElementById('neutral');
+	
+		if(emotion>=0.9){ emo.src='/static/img/emoticon/n9.png';}
+    	else if(emotion>=0.8){ emo.src='/static/img/emoticon/n8.png';}
+    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/n7.png';}
+    	else if(emotion>=0.6){ emo.src='/static/img/emoticon/n6.png';}
+    	else if(emotion>=0.5){ emo.src='/static/img/emoticon/n5.png';}
+    	else if(emotion>=0.4){ emo.src='/static/img/emoticon/n4.png';}
+    	else if(emotion>=0.3){ emo.src='/static/img/emoticon/n3.png';}
+    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/n2.png';}
+		else if(emotion>=0.1){ emo.src='/static/img/emoticon/n1.png';}
+    	else{ emo.src='/static/img/emoticon/n0.png';}
+}
+
+function sadnessChange(emotion){
+		var emo = document.getElementById('sadness');
+	
+		if(emotion>=0.9){ emo.src='/static/img/emoticon/s9.png';}
+    	else if(emotion>=0.8){ emo.src='/static/img/emoticon/s8.png';}
+    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/s7.png';}
+    	else if(emotion>=0.6){ emo.src='/static/img/emoticon/s6.png';}
+    	else if(emotion>=0.5){ emo.src='/static/img/emoticon/s5.png';}
+    	else if(emotion>=0.4){ emo.src='/static/img/emoticon/s4.png';}
+    	else if(emotion>=0.3){ emo.src='/static/img/emoticon/s3.png';}
+    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/s2.png';}
+		else if(emotion>=0.1){ emo.src='/static/img/emoticon/s1.png';}
+    	else{ emo.src='/static/img/emoticon/s0.png';}
+}
+
+function surpriseChange(emotion){
+		var emo = document.getElementById('surprise');
+	
+		if(emotion>=0.9){ emo.src='/static/img/emoticon/p9.png';}
+    	else if(emotion>=0.8){ emo.src='/static/img/emoticon/p8.png';}
+    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/p7.png';}
+    	else if(emotion>=0.6){ emo.src='/static/img/emoticon/p6.png';}
+    	else if(emotion>=0.5){ emo.src='/static/img/emoticon/p5.png';}
+    	else if(emotion>=0.4){ emo.src='/static/img/emoticon/p4.png';}
+    	else if(emotion>=0.3){ emo.src='/static/img/emoticon/p3.png';}
+    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/p2.png';}
+		else if(emotion>=0.1){ emo.src='/static/img/emoticon/p1.png';}
+    	else{ emo.src='/static/img/emoticon/p0.png';}
+}

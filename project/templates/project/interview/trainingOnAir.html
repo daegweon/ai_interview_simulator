@@ -477,15 +477,13 @@
                     <button style="border: 1px solid; border-bottom-right-radius: 5px; border-top-right-radius: 5px;" onclick="add();"> 추가 </button>
                 </div>
 
-                <br>
-                <br>
+                <br><br>
 
                 <ul class="list-group" id="ban-word" style="width: 280px ;-webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
                     
                 </ul>
 
-                <br>
-                <br>
+                <br><br>
                 <button type="button" class="btn btn-primary" onclick="reset()">초기화</button>
                 <hr style="border: 0.5px solid;">
             </div>
@@ -494,12 +492,26 @@
     </div>
 
 
-    <div style="width: 20%; height: 700px; float: left; margin-left: 50px; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
-
+    <div style="width: 20%; height: 700px; float: left; margin-left: 50px;">
+            <div id="abc" style="width: 260px;float: left;">
+                <img id="anger" src='{%static "img/emoticon/a9.png"%}'>
+                <img id="contempt" src='{%static "img/emoticon/c9.png"%}'>
+                <img id="disgust" src='{%static "img/emoticon/d9.png"%}'>
+                <img id="fear" src='{%static "img/emoticon/f9.png"%}'>
+                <br>
+                <p style="width: 240px; font-size: 18px; font-weight: bold;"> &nbsp; &nbsp;분노 &nbsp; &nbsp; 경멸 &nbsp; &nbsp; &nbsp;싫음 &nbsp; &nbsp; 공포 </p>
+            </div>
+            <div id ="def" style="width: 260px;float: left;">
+                <img id="happiness" src='{%static "img/emoticon/h9.png"%}'>
+                <img id="neutral" src='{%static "img/emoticon/n9.png"%}'>
+                <img id="sadness" src='{%static "img/emoticon/s9.png"%}'>
+                <img id="surprise" src='{%static "img/emoticon/p9.png"%}'>
+                <p style="width: 240px; font-size: 18px; font-weight: bold;"> &nbsp; &nbsp;행복 &nbsp; &nbsp; 중립 &nbsp; &nbsp; &nbsp;슬픔 &nbsp; &nbsp; 놀람 </p>
+            </div>
     </div>
 
-    <div style="width: 55%; height: 700px; float: left;">
-        <div class="questionArea" style="height: 100px; padding: 10px;">
+    <div style="width: 42%; height: 700px; float: left; margin-left: 20px; margin-right: 20px;">
+        <div class="questionArea" style="height: 100px; padding: 10px; margin: 2px;">
             <p id="question" style="font-size: 20px; text-align: center"> 시작 버튼을 누르시면 질문이 표시됩니다. </p>
         </div>
         <div style="-webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
@@ -543,6 +555,8 @@
                 <img class="emotion_icon" id="icon7" src='{%static "img/icon_sad.png"%}'>
                 <img class="emotion_icon" id="icon8" src='{%static "img/icon_surprised.png"%}'>
             </div>
+            <br><br>
+
         </div>
     </div>
 
@@ -558,13 +572,11 @@
                 closeNav();
                 navBtn.textContent = '환경 설정 ON';
             }
-
         }
 
         /* Set the width of the side navigation to ???px */
         function openNav() {
             document.getElementById("mySidenav").style.width = "310px";
-
         }
 
         /* Set the width of the side navigation to 0 */
@@ -582,6 +594,7 @@
                 }
             });
         });
+        
         var btnCount = 1;
 
         function add() {
