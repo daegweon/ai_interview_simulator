@@ -11,10 +11,10 @@ function setTotalResult() {
         return r;
     }, []);
     var maxEmotionValue1 = totalEmotionFreq.indexOf(Math.max.apply(null, totalEmotionFreq));
-    totalEmotionFreq.splice(maxEmotionValue1, 1);
+    totalEmotionFreq[maxEmotionValue1] = -1;
     var maxEmotionValue2 = totalEmotionFreq.indexOf(Math.max.apply(null, totalEmotionFreq));
     if (Math.max.apply(null, totalEmotionFreq) == 0) { maxEmotionValue2 = -1; }
-    totalEmotionFreq.splice(maxEmotionValue2, 1);
+    else {totalEmotionFreq[maxEmotionValue2] = -1;}
     var maxEmotionValue3 = totalEmotionFreq.indexOf(Math.max.apply(null, totalEmotionFreq));
     if (Math.max.apply(null, totalEmotionFreq) == 0) { maxEmotionValue3 = -1; }
     function emotionFunc(emotionvalue) {
@@ -200,7 +200,7 @@ function setEmotionFrequencyResult() {
 
         //무표정 100% 일 때
         var maxvalue = Math.max.apply(null, emotionFreq[i - 1]);
-        if ((maxvalue > (xAxis[i].length * 0.9)) && (maxvalue == emotionFreq[i - 1][5])) {
+        if ((maxvalue > (xAxis[i].length * 0.8)) && (maxvalue == emotionFreq[i - 1][5])) {
             document.getElementById("ptext" + i).innerHTML += "무표정을 유지하고 계시네요. 조금씩은 웃는 표정을 지어보는게 어떨까요?<br>";
         }
         if ((maxvalue > (xAxis[i].length / 2)) && (maxvalue == emotionFreq[i - 1][4])) {

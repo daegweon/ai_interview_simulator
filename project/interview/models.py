@@ -28,3 +28,6 @@ class tendencyResult(models.Model):
     interview_count = models.IntegerField(default=0)
     tendency = models.TextField()
 
+class InterviewTips(models.Model):
+    content = models.TextField()
+
