@@ -103,34 +103,35 @@ function processImage(data) {
 			
 		
 			if(checkAnger == true){ angerChange(anger); }
-			else{ angerReturn.src = '/static/img/emoticon/a9.png'; }
+			else{ angerReturn.src = '/static/img/emoticon/a4.png'; }
 		
 			if(checkContempt == true){ contemptChange(contempt); }
-			else{ contemptReturn.src = '/static/img/emoticon/c9.png'; }
+			else{ contemptReturn.src = '/static/img/emoticon/c4.png'; }
 		
 			if(checkDisgust == true){ disgustChange(disgust); }
-			else{ disgustReturn.src = '/static/img/emoticon/d9.png'; }
+			else{ disgustReturn.src = '/static/img/emoticon/d4.png'; }
 		
 			if(checkFear == true){ fearChange(fear); }
-			else{ fearReturn.src = '/static/img/emoticon/f9.png'; }
+			else{ fearReturn.src = '/static/img/emoticon/f4.png'; }
 		
 			if(checkHappiness == true){	happinessChange(happiness);	}
-			else{ happinessReturn.src = '/static/img/emoticon/h9.png'; }
+			else{ happinessReturn.src = '/static/img/emoticon/h4.png'; }
 		
 			if(checkNeutral == true){ neutralChange(neutral); }
-			else{ neutralReturn.src = '/static/img/emoticon/n9.png'; }
+			else{ neutralReturn.src = '/static/img/emoticon/n4.png'; }
 		
 			if(checkSadness == true){ sadnessChange(sadness); }
-			else{ sadnessReturn.src = '/static/img/emoticon/s9.png'; }
+			else{ sadnessReturn.src = '/static/img/emoticon/s4.png'; }
 		
 			if(checkSurprise == true){ surpriseChange(surprise); }
-			else{ surpriseReturn.src = '/static/img/emoticon/p9.png'; }
+			else{ surpriseReturn.src = '/static/img/emoticon/p4.png'; }
 		
 
             //if(document.getElementById("checkPose").checked == true){
                 if ((yaw < -15 || yaw > 15) || (roll < -15 || roll > 15)) banPoseToast();
             //}
             
+		/*
             document.getElementById('value1').innerHTML = "화남: "+anger;
             document.getElementById('value2').innerHTML = "경멸: "+contempt;
             document.getElementById('value3').innerHTML = "싫음: "+disgust;
@@ -227,6 +228,7 @@ function processImage(data) {
                 }
             }
             else{ document.getElementById('icon8').style.visibility="hidden"; document.getElementById('value8').style.zoom="110%";}
+		*/
         })
 
         .fail(function (jqXHR, textStatus, errorThrown) {
@@ -244,119 +246,79 @@ function processImage(data) {
 function angerChange(emotion){
 		var emo = document.getElementById('anger');
 	
-		if(emotion>=0.9){ emo.src='/static/img/emoticon/a9.png';}
-    	else if(emotion>=0.8){ emo.src='/static/img/emoticon/a8.png';}
-    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/a7.png';}
-    	else if(emotion>=0.6){ emo.src='/static/img/emoticon/a6.png';}
-    	else if(emotion>=0.5){ emo.src='/static/img/emoticon/a5.png';}
-    	else if(emotion>=0.4){ emo.src='/static/img/emoticon/a4.png';}
-    	else if(emotion>=0.3){ emo.src='/static/img/emoticon/a3.png';}
-    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/a2.png';}
-		else if(emotion>=0.1){ emo.src='/static/img/emoticon/a1.png';}
-    	else{ emo.src='/static/img/emoticon/a0.png';}
+		if(emotion>=0.9){ emo.src='/static/img/emoticon/a4.png'; }
+    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/a3.png'; }
+    	else if(emotion>=0.45){ emo.src='/static/img/emoticon/a2.png'; }
+    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/a1.png'; }
+    	else{ emo.src='/static/img/emoticon/a0.png'; }
 }
 
 function contemptChange(emotion){
 		var emo = document.getElementById('contempt');
 
-		if(emotion>=0.9){ emo.src='/static/img/emoticon/c9.png';}
-    	else if(emotion>=0.8){ emo.src='/static/img/emoticon/c8.png';}
-    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/c7.png';}
-    	else if(emotion>=0.6){ emo.src='/static/img/emoticon/c6.png';}
-    	else if(emotion>=0.5){ emo.src='/static/img/emoticon/c5.png';}
-    	else if(emotion>=0.4){ emo.src='/static/img/emoticon/c4.png';}
-    	else if(emotion>=0.3){ emo.src='/static/img/emoticon/c3.png';}
-    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/c2.png';}
-		else if(emotion>=0.1){ emo.src='/static/img/emoticon/c1.png';}
-    	else{ emo.src='/static/img/emoticon/c0.png';}
+		if(emotion>=0.9){ emo.src='/static/img/emoticon/c4.png'; }
+    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/c3.png'; }
+    	else if(emotion>=0.45){ emo.src='/static/img/emoticon/c2.png'; }
+    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/c1.png'; }
+    	else{ emo.src='/static/img/emoticon/c0.png'; }
 }
 
 function disgustChange(emotion){
 		var emo = document.getElementById('disgust');
 	
-		if(emotion>=0.9){ emo.src='/static/img/emoticon/d9.png';}
-    	else if(emotion>=0.8){ emo.src='/static/img/emoticon/d8.png';}
-    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/d7.png';}
-    	else if(emotion>=0.6){ emo.src='/static/img/emoticon/d6.png';}
-    	else if(emotion>=0.5){ emo.src='/static/img/emoticon/d5.png';}
-    	else if(emotion>=0.4){ emo.src='/static/img/emoticon/d4.png';}
-    	else if(emotion>=0.3){ emo.src='/static/img/emoticon/d3.png';}
-    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/d2.png';}
-		else if(emotion>=0.1){ emo.src='/static/img/emoticon/d1.png';}
-    	else{ emo.src='/static/img/emoticon/d0.png';}
+		if(emotion>=0.9){ emo.src='/static/img/emoticon/d4.png'; }
+    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/d3.png'; }
+    	else if(emotion>=0.45){ emo.src='/static/img/emoticon/d2.png'; }
+    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/d1.png'; }
+    	else{ emo.src='/static/img/emoticon/d0.png'; }
 }
 
 function fearChange(emotion){
 		var emo = document.getElementById('fear');
 	
-		if(emotion>=0.9){ emo.src='/static/img/emoticon/f9.png';}
-    	else if(emotion>=0.8){ emo.src='/static/img/emoticon/f8.png';}
-    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/f7.png';}
-    	else if(emotion>=0.6){ emo.src='/static/img/emoticon/f6.png';}
-    	else if(emotion>=0.5){ emo.src='/static/img/emoticon/f5.png';}
-    	else if(emotion>=0.4){ emo.src='/static/img/emoticon/f4.png';}
-    	else if(emotion>=0.3){ emo.src='/static/img/emoticon/f3.png';}
-    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/f2.png';}
-		else if(emotion>=0.1){ emo.src='/static/img/emoticon/f1.png';}
-    	else{ emo.src='/static/img/emoticon/f0.png';}
+		if(emotion>=0.9){ emo.src='/static/img/emoticon/f4.png'; }
+    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/f3.png'; }
+    	else if(emotion>=0.45){ emo.src='/static/img/emoticon/f2.png'; }
+    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/f1.png'; }
+    	else{ emo.src='/static/img/emoticon/f0.png'; }
 }
 
 function happinessChange(emotion){
 		var emo = document.getElementById('happiness');
 	
-		if(emotion>=0.9){ emo.src='/static/img/emoticon/h9.png';}
-    	else if(emotion>=0.8){ emo.src='/static/img/emoticon/h8.png';}
-    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/h7.png';}
-    	else if(emotion>=0.6){ emo.src='/static/img/emoticon/h6.png';}
-    	else if(emotion>=0.5){ emo.src='/static/img/emoticon/h5.png';}
-    	else if(emotion>=0.4){ emo.src='/static/img/emoticon/h4.png';}
-    	else if(emotion>=0.3){ emo.src='/static/img/emoticon/h3.png';}
-    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/h2.png';}
-		else if(emotion>=0.1){ emo.src='/static/img/emoticon/h1.png';}
-    	else{ emo.src='/static/img/emoticon/h0.png';}
+		if(emotion>=0.9){ emo.src='/static/img/emoticon/h4.png'; }
+    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/h3.png'; }
+    	else if(emotion>=0.45){ emo.src='/static/img/emoticon/h2.png'; }
+    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/h1.png'; }
+    	else{ emo.src='/static/img/emoticon/h0.png'; }
 }
 
 function neutralChange(emotion){
 		var emo = document.getElementById('neutral');
 	
-		if(emotion>=0.9){ emo.src='/static/img/emoticon/n9.png';}
-    	else if(emotion>=0.8){ emo.src='/static/img/emoticon/n8.png';}
-    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/n7.png';}
-    	else if(emotion>=0.6){ emo.src='/static/img/emoticon/n6.png';}
-    	else if(emotion>=0.5){ emo.src='/static/img/emoticon/n5.png';}
-    	else if(emotion>=0.4){ emo.src='/static/img/emoticon/n4.png';}
-    	else if(emotion>=0.3){ emo.src='/static/img/emoticon/n3.png';}
-    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/n2.png';}
-		else if(emotion>=0.1){ emo.src='/static/img/emoticon/n1.png';}
-    	else{ emo.src='/static/img/emoticon/n0.png';}
+		if(emotion>=0.9){ emo.src='/static/img/emoticon/n4.png'; }
+    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/n3.png'; }
+    	else if(emotion>=0.45){ emo.src='/static/img/emoticon/n2.png'; }
+    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/n1.png'; }
+    	else{ emo.src='/static/img/emoticon/n0.png'; }
 }
 
 function sadnessChange(emotion){
 		var emo = document.getElementById('sadness');
 	
-		if(emotion>=0.9){ emo.src='/static/img/emoticon/s9.png';}
-    	else if(emotion>=0.8){ emo.src='/static/img/emoticon/s8.png';}
-    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/s7.png';}
-    	else if(emotion>=0.6){ emo.src='/static/img/emoticon/s6.png';}
-    	else if(emotion>=0.5){ emo.src='/static/img/emoticon/s5.png';}
-    	else if(emotion>=0.4){ emo.src='/static/img/emoticon/s4.png';}
-    	else if(emotion>=0.3){ emo.src='/static/img/emoticon/s3.png';}
-    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/s2.png';}
-		else if(emotion>=0.1){ emo.src='/static/img/emoticon/s1.png';}
-    	else{ emo.src='/static/img/emoticon/s0.png';}
+		if(emotion>=0.9){ emo.src='/static/img/emoticon/s4.png'; }
+    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/s3.png'; }
+    	else if(emotion>=0.45){ emo.src='/static/img/emoticon/s2.png'; }
+    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/s1.png'; }
+    	else{ emo.src='/static/img/emoticon/s0.png'; }
 }
 
 function surpriseChange(emotion){
 		var emo = document.getElementById('surprise');
 	
-		if(emotion>=0.9){ emo.src='/static/img/emoticon/p9.png';}
-    	else if(emotion>=0.8){ emo.src='/static/img/emoticon/p8.png';}
-    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/p7.png';}
-    	else if(emotion>=0.6){ emo.src='/static/img/emoticon/p6.png';}
-    	else if(emotion>=0.5){ emo.src='/static/img/emoticon/p5.png';}
-    	else if(emotion>=0.4){ emo.src='/static/img/emoticon/p4.png';}
-    	else if(emotion>=0.3){ emo.src='/static/img/emoticon/p3.png';}
-    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/p2.png';}
-		else if(emotion>=0.1){ emo.src='/static/img/emoticon/p1.png';}
-    	else{ emo.src='/static/img/emoticon/p0.png';}
+		if(emotion>=0.9){ emo.src='/static/img/emoticon/p4.png'; }
+    	else if(emotion>=0.7){ emo.src='/static/img/emoticon/p3.png'; }
+    	else if(emotion>=0.45){ emo.src='/static/img/emoticon/p2.png'; }
+    	else if(emotion>=0.2){ emo.src='/static/img/emoticon/p1.png'; }
+    	else{ emo.src='/static/img/emoticon/p0.png'; }
 }
