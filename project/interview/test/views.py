@@ -65,8 +65,14 @@ def getTestResultPage(request, ic):
             temp = temp.replace("F", "f")
             temp = temp.replace("T", "t")
             personality = temp
+        '''
+        for headpose in headposeResult:
+            headposeList.append(headpose['headpose'])
+
+        for headpose in headposeList:
+            print(headpose[2])'''
 
         words = exportWord.get_tags(text, noun_count)
-        return render(request,'project/interview/interviewResult.html',{'emotionResult':emotionResult, 'words':words,'username':request.user,'personality': personality, 'questionList':questionList})
+        return render(request,'project/interview/interviewResult.html',{'emotionResult':emotionResult, 'words':words,'username':request.user,'personality': personality, 'questionList':questionList, 'headposeResult': headposeResult})
 
     
