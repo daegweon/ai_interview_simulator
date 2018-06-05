@@ -8,11 +8,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href='{%static "css/interviewResult.css" %}' rel="stylesheet">
+    <script> var infoImgPath = '{%static "img/info.png" %}';</script>
     <script src='{%static "js/interviewResult.js" %}'></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
-    <script src='{%static "js/personality.js" %}'></script>
+    <script src='{%static "js/personality.js" %}?ver=22'></script>
     <script src="https://d3js.org/d3-color.v1.min.js"></script>
     <style>
         .carousel-indicators li {
@@ -88,6 +89,7 @@
     <script>
         //set Data Vlaue for Analyze
         var words = {{ words | safe}};
+        var username = "{{username}}";
         var angerList = [];
         var contemptList = [];
         var disgustList = [];
@@ -273,12 +275,44 @@
                 <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                     <div class="panel-body">
                         <div id="sunburstChart"></div>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                                결과 수치 보기
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="big5Dropdown();">Big5</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="NeedsDropdown();">Needs</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="ValuesDropdown();">Values</a></li>
+                            </ul>
+                        </div>
+                        <table class="table table-bordered" id="personalityTable"></table>
+                        <!-- <div class="container">
+                        <div class="btn-group" role="group">
+                            <button type="button" class = "btn btn-default">Big5</button>
+                            <button type="button" class = "btn btn-default">Needs</button>
+                            <button type="button" class = "btn btn-default">Values</button>
+                        </div> -->
+                        <div class="characteristics" id="characteristics-result"><h3>AIS가 분석한 {{username}}님의 성향은 </h4></div>
+                        <br>
+                        <h4 style="display : inline">Big5&nbsp;<img id="big5Info" data-toggle="tooltip" data-placement="top" title="인간의 성격을 개방성, 성실성, 외향성, 친화성, 감정 기복의 5가지 독립적인 요인들로 설명하는 심리학적 모델"  src='{%static "img/info.png" %}' style="width : 12px; height : 12px" ></h4>
+                        <div class="personalityResult" id="personality-result"></div>
+                        <div class="facetResult" id="facet-result"></div>
+                        <br>
+                        <h4 style="display : inline">Needs&nbsp;<img id="needsInfo" data-toggle="tooltip" data-placement="top" title="행동에 영향을 미칠 수 있는 욕구" src='{%static "img/info.png" %}' style="width : 12px; height : 12px" ></h4>
+                        <div class="needsResult" id="needs-result"></div>
+                        <br>
+                        <h4 style="display : inline">Values&nbsp;<img id="valueInfo" data-toggle="tooltip" data-placement="top" title="삶에서 중요하게 여기는 가치" src='{%static "img/info.png" %}' style="width : 12px; height : 12px"></h4>
+                        <div class="valueResult" id="value-result"></div>
+                        <script>
+                            
+                            var profile = {{ personality | safe }};
+
+                            $(document).ready(function(){
+                                $('[data-toggle="tooltip"]').tooltip();   
+                            });
+                        </script>
                     </div>
-                    <script>
-                        var profile = {{ personality | safe }};
-                        var chart = new PersonalitySunburstChart({ selector: '#sunburstChart', version: 'v3' });
-                        chart.show(profile);
-                    </script>
                 </div>
             </div>
         </div>
@@ -291,5 +325,5 @@
     </div>
     <!-- container -->
 </body>
-
+<script src='{%static "js/personalityDescription.js" %}'></script>
 </html>
