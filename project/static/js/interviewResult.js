@@ -127,7 +127,9 @@ function setEmotionTrendResult() {
         var data = [anger, contempt, disgust, fear, happiness, neutral, sadness, surprise];
         Plotly.newPlot('linechart' + i, data, layout);
         document.getElementById("question" + i).innerHTML = "질문 " + i + '. ' + questionList[i - 1];
-
+        
+        var Xlength = xAxis[i].length;
+        var totalLength = tempidx + xAxis[i].length;
         //질문에 대한 당황 체크
         var temp = happinessList.slice(tempidx, tempidx + 4);
         var value = 0;
@@ -139,22 +141,22 @@ function setEmotionTrendResult() {
         }
 
         //행복도 체크
-        temp = happinessList.slice(tempidx, tempidx + xAxis[i].length);
+        temp = happinessList.slice(tempidx, totalLength);
         value = 0;
         for (var j = 0; j < temp.length; j++) value += 1000 * temp[j];
         if (value > temp.length * 1000 * 0.5) document.getElementById("ltext" + i).innerHTML += "표정에서 행복함이 묻어나 보기 좋아요. 다만 때로는 진지한 모습을 보여주는 것도 좋아요!<br>";
 
         //슬픔 입꼬리 체크
-        temp = sadnessList.slice(tempidx, tempidx + xAxis[i].length);
+        temp = sadnessList.slice(tempidx, totalLength);
         value = 0;
         for (var j = 0; j < temp.length; j++) value += 1000 * temp[j];
         if (value > temp.length * 1000 * 0.1) document.getElementById("ltext" + i).innerHTML += "입꼬리가 내려간 모습은 좋지 않아요. 미소를 지어보는 것은 어떨까요?<br>";
 
         //마무리 할 때 체크
-        temp = happinessList.slice(tempidx + xAxis[i].length - 4, tempidx + xAxis[i].length);
+        temp = happinessList.slice(totalLength - 4, totalLength);
         value = 0;
         for (var j = 0; j < temp.length; j++) value += 1000 * temp[j];
-        temp = neutralList.slice(tempidx + xAxis[i].length - 4, tempidx + xAxis[i].length);
+        temp = neutralList.slice(totalLength - 4, totalLength);
         for (var j = 0; j < temp.length; j++) value += 1000 * temp[j];
         if (2000 > value) {
             document.getElementById("ltext" + i).innerHTML += "답변을 마무리 할 때는 자신감있는 표정을 보이세요!<br>";
@@ -197,20 +199,25 @@ function setEmotionFrequencyResult() {
             title: '감정 빈도',
         }
         Plotly.newPlot('piechart' + i, data, layout);
-
+        var Xlength = xAxis[i].length;
         //무표정 100% 일 때
         var maxvalue = Math.max.apply(null, emotionFreq[i - 1]);
-        if ((maxvalue > (xAxis[i].length * 0.8)) && (maxvalue == emotionFreq[i - 1][5])) {
+        if ((maxvalue > (Xlength * 0.8)) && (maxvalue == emotionFreq[i - 1][5])) {
             document.getElementById("ptext" + i).innerHTML += "무표정을 유지하고 계시네요. 조금씩은 웃는 표정을 지어보는게 어떨까요?<br>";
         }
-        if ((maxvalue > (xAxis[i].length / 2)) && (maxvalue == emotionFreq[i - 1][4])) {
+        if ((maxvalue > (Xlength / 2)) && (maxvalue == emotionFreq[i - 1][4])) {
             document.getElementById("ptext" + i).innerHTML += "웃는 모습이 상당히 보기 좋아요!<br>";
         }
-        if ((maxvalue < (xAxis[i].length / 2)) && (maxvalue >= (xAxis[i].length * 0.35))) {
+        if ((maxvalue < (Xlength / 2)) && (maxvalue >= (Xlength * 0.35))) {
             document.getElementById("ptext" + i).innerHTML += "다양한 감정을 보이고 계시네요. 당신의 감정 표현은 큰 장점이 될 수 있을 것 같아요!<br>";
         }
-        if (maxvalue < (xAxis[i].length * 0.35)) {
+        if (maxvalue < (Xlength * 0.35)) {
             document.getElementById("ptext" + i).innerHTML += "감정 기복이 심한 것 같아요. 조금은 표정 관리를 해보는게 어떨까요?<br>";
+        }
+
+        //고개가 너무 기울어져있을 때 
+        if(headposeFreq[i-1] > Xlength * 0.3){
+            document.getElementById("posetext" + i).innerHTML += "계속 고개가 기울어져 있는 등 자세가 좋지 않아보여요. 허리를 펴고 바른 자세를 유지해봐요!<br>";
         }
     }
 }

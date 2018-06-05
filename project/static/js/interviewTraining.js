@@ -75,9 +75,9 @@ function startTick() {
     document.getElementById("timer").innerHTML = "&nbsp"+pad(minutes, 2) + ":" + pad(seconds, 2)+"&nbsp";
 
     // If the count down is over, write some text 
-    if (distance < 0) {
-      clearInterval(x);
-      //document.getElementById("timer").innerHTML = "EXPIRED";
+    if (minutes >= 10) {
+      toggleRecording();
+      alert('최대 시간을 초과했습니다.');
     }
   }, 1000);
 }

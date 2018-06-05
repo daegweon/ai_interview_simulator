@@ -49,17 +49,19 @@
             border-top: solid 3px;
             text-align: center;
         }
+
         @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
         @import url(http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
-        .totalresult{
-            padding-left:30px;
+        .totalresult {
+            padding-left: 30px;
         }
+
         #usernameSection {
             font-size: 20px;
             font-family: Noto Sans KR;
             font-weight: bold;
             text-align: center;
-            height:30px;
+            height: 30px;
         }
 
         #totalTime {
@@ -101,7 +103,18 @@
         var xAxis = [[],];
         var tempemotionFreq = [0, 0, 0, 0, 0, 0, 0, 0];
         var emotionFreq = [];
+        var headposeFreq = [];
         var questionList = {{ questionList | safe }}
+        {% for headpose in headposeResult %}
+        var headposeList = JSON.parse({{ headpose| safe }}["headpose"]);
+        var length = headposeList.length;
+        var temp = [];
+        var cnt = 0;
+        for (var i = 0; i < length; i++) {
+            if(Math.abs(headposeList[i][1]) > 5 || Math.abs(headposeList[i][2]) > 15) cnt++;
+        }
+        headposeFreq.push(cnt);
+        {% endfor %}
         {% for emotion in emotionResult %}
         var emotionList = JSON.parse({{ emotion| safe }}["emotion"]);
         var length = emotionList.length;
@@ -193,6 +206,8 @@
                                 <div class="panel-body" id="piechart1">
                                     <p class="text-info" id="ptext1"></p>
                                 </div>
+                                <br>
+                                <p class="text-warning" id="posetext1"></p>
                             </div>
 
                             <div class="item">
@@ -205,6 +220,8 @@
                                 <div class="panel-body" id="piechart2">
                                     <p class="text-info" id="ptext2"></p>
                                 </div>
+                                <br>
+                                <p class="text-warning" id="posetext2"></p>
                             </div>
 
                             <div class="item">
@@ -217,6 +234,8 @@
                                 <div class="panel-body" id="piechart3">
                                     <p class="text-info" id="ptext3"></p>
                                 </div>
+                                <br>
+                                <p class="text-warning" id="posetext3"></p>
                             </div>
                             <div class="item">
                                 <div class="panel-body">
@@ -228,6 +247,8 @@
                                 <div class="panel-body" id="piechart4">
                                     <p class="text-info" id="ptext4"></p>
                                 </div>
+                                <br>
+                                <p class="text-warning" id="posetext4"></p>
                             </div>
                             <div class="item">
                                 <div class="panel-body">
@@ -239,10 +260,10 @@
                                 <div class="panel-body" id="piechart5">
                                     <p class="text-info" id="ptext5"></p>
                                 </div>
+                                <br>
+                                <p class="text-warning" id="posetext5"></p>
                             </div>
-                            <br>
-                            <br>
-                            <br>
+                            <br><br><br><br>
                         </div>
 
                         <!-- Left and right controls -->
