@@ -430,7 +430,7 @@ for (var i = sortedFacet.length - 1, count = 0; count < 3 && i >= 0; i--) {
   }
 }
 
-document.getElementById('needs-result').innerHTML += username + "님의 선택들은 <strong>" + needsDict[sortedNeed[sortedNeed.length-1][0]] + "</strong>에 대한 열망에 의해 좌우됩니다.";
+document.getElementById('needs-result').innerHTML += username + "님의 선택들은 <strong>" + needsDict[sortedNeed[sortedNeed.length - 1][0]] + "</strong>에 대한 열망에 의해 좌우됩니다.";
 
 var plusCount = 0;
 var minusCount = 0;
