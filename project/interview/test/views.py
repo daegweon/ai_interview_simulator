@@ -1,4 +1,12 @@
 # -*- coding: utf-8 -*-
+##################################
+# 1. 파일명: views.py
+# 2. 저자 : Human Learning
+# 3. 목적 : 실전면접을 진행할 때 접속하게 되는 하드웨어점검, 면접 진행, 면접 결과 보기 URL로 접속했을 때 각각의 html을 보여주는 기능
+# 4. 참조 : 없음
+# 5. 제한(restriction) : 사용자는 로그인 상태여야 한다.
+##################################
+
 from django.shortcuts import render
 from django.http import Http404
 from project.interview.models import Interview, Question, InterviewCount, tendencyResult
@@ -7,18 +15,11 @@ from random import randint
 from project.interview.processing import exportWord
 # Create your views here.
 
-
 def testInterviewHwCheck(request):
     if request.user.is_authenticated():
         return render(request, 'project/interview/hwcheckOnTest.html', {})
     else: 
-        return render(request,'project/index.html',{'isLogin':0})
-
-def testInterviewPriorInfo(request):
-    if request.user.is_authenticated():    
-        return render(request,'project/priorInfo.html',{})
-    else: 
-        return render(request,'project/index.html',{'isLogin':0})   
+        return render(request,'project/index.html',{'isLogin':0}) 
 
 def testInterviewOnAir(request):
     if not request.user.is_authenticated():
@@ -65,14 +66,8 @@ def getTestResultPage(request, ic):
             temp = temp.replace("F", "f")
             temp = temp.replace("T", "t")
             personality = temp
-        '''
-        for headpose in headposeResult:
-            headposeList.append(headpose['headpose'])
-
-        for headpose in headposeList:
-            print(headpose[2])'''
 
         words = exportWord.get_tags(text, noun_count)
-        return render(request,'project/interview/interviewResult.html',{'emotionResult':emotionResult, 'words':words,'username':request.user,'personality': personality, 'questionList':questionList, 'headposeResult': headposeResult})
+        return render(request,'project/interview/testResult.html',{'emotionResult':emotionResult, 'words':words,'username':request.user,'personality': personality, 'questionList':questionList, 'headposeResult': headposeResult})
 
     
