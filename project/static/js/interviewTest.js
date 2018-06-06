@@ -368,3 +368,21 @@ function btnAgain(){
     btnShow();
 	document.getElementById('again').disabled = true;
 }
+
+function cancelInterview(ic) {
+  var csrftoken = getCookie('csrftoken');
+
+  var formData = new FormData();
+  formData.append('csrfmiddlewaretoken', csrftoken);
+  formData.append('interview_count', ic)
+  $.ajax({
+    url: '/interviews/cancel/',
+    type: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    async: false,
+  }).done(function (data) {
+
+  });
+}
