@@ -263,45 +263,8 @@
                 });
         }
         function tipToast(count) {
-            $.notify({
-                // options
-                icon: 'glyphicon glyphicon-tag',
-                title: '<strong> 무작위 TIP ! </strong>',
-                message: tip[count],
-            }, {
-                    // settings
-                    element: 'body',
-                    position: null,
-                    type: "info",
-                    allow_dismiss: true,
-                    newest_on_top: false,
-                    showProgressbar: false,
-                    placement: {
-                        from: "top",
-                        align: "center"
-                    },
-                    offset: 20,
-                    spacing: 10,
-                    z_index: 1031,
-                    delay: 7000,
-                    timer: 1000,
-                    mouse_over: null,
-                    animate: {
-                        enter: 'animated fadeInDown',
-                        exit: 'animated fadeOutUp'
-                    },
-                    icon_type: 'class',
-                    template: '<div data-notify="container" class="col-xs-11 col-sm-4 alert alert-{0}" role="alert">' +
-                        '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
-                        '<span data-notify="icon"></span> ' +
-                        '<span data-notify="title">{1}</span> ' +
-                        '<span data-notify="message">{2}</span>' +
-                        '<div class="progress" data-notify="progressbar">' +
-                        '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-                        '</div>' +
-                        '<a href="{3}" target="{4}" data-notify="url"></a>' +
-                        '</div>'
-                });
+				document.getElementById("textTitle").textContent = "면접 TIP";
+				document.getElementById("question").textContent = tip[count];
         }
         function banPoseToast() {
             $.notify({
@@ -572,15 +535,21 @@
     </div>
 
 
-    <div style="width: 20%; height: 700px; float: left; margin-left: 50px;">
+    <div style="width: 28%; height: 650px; float: left; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+    	<div id="clip" style="background-image: url('/static/img/clipboard.png'); width: 420px; height: 500px; margin-bottom: 50px; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+    		<div id="text" style="padding: 10px; width: 350px">
+    			<p id="textTitle" style="font-size: 32px; text-align: center"> 면접 질문 </p>
+    			<br><br>
+    			<p id="question" style="font-size: 24px; text-align: center"> 면접이 시작되면 <br> 질문이 표시됩니다. </p>
+    		</div>
+    		
+    	</div>
 
     </div>
 
-    <div style="width: 42%; height: 700px; float: left; margin-left: 20px; margin-right: 20px;">
-        <div class="questionArea" style="height: 100px; padding: 10px; margin: 2px;">
-            <p id="question" style="font-size: 20px; text-align: center"> 시작 버튼을 누르시면 질문이 표시됩니다. </p>
-        </div>
-        <div style="-webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+    <div style="width: 42%; height: 650px; float: left; margin-left: 20px; margin-right: 20px;">
+
+        <div style="margin-top: 50px; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
             <video style="border: 1px solid black; align-items: center;" id="gum" width="660" height="495" autoplay muted></video>
             <canvas id="snapshot" width="660" height="495" style="display: none;"></canvas>
         </div>
@@ -595,7 +564,7 @@
         </div>
     </div>
 
-    <div style="width: 21%; height: 700px; float: left; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+    <div style="width: 21%; height: 650px; float: left; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
         <div id="emotionresult">
             <div id="emotiontitle">
                 <span>실시간 감정</span>
@@ -627,16 +596,6 @@
                 <span class="emotion_value" id="value6">중립: 0</span><br>
                 <span class="emotion_value" id="value7">슬픔: 0</span><br>
                 <span class="emotion_value" id="value8">놀람: 0</span>
-            </div>
-            <div id="emotion_icons">
-                <img class="emotion_icon" id="icon1" src='{%static "img/icon_angry.png"%}'>
-                <img class="emotion_icon" id="icon2" src='{%static "img/icon_disgust.png"%}'>
-                <img class="emotion_icon" id="icon3" src='{%static "img/icon_contempt.png"%}'>
-                <img class="emotion_icon" id="icon4" src='{%static "img/icon_fear.png"%}'>
-                <img class="emotion_icon" id="icon5" src='{%static "img/icon_happy.png"%}'>
-                <img class="emotion_icon" id="icon6" src='{%static "img/icon_neutral.png"%}'>
-                <img class="emotion_icon" id="icon7" src='{%static "img/icon_sad.png"%}'>
-                <img class="emotion_icon" id="icon8" src='{%static "img/icon_surprised.png"%}'>
             </div>
             -->
             <br><br>

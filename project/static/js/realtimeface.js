@@ -81,50 +81,24 @@ function processImage(data) {
                 var roll = data[0]['faceAttributes']['headPose']['roll'];
                 var yaw = data[0]['faceAttributes']['headPose']['yaw'];
                 console.log("R: " + roll + " Y: " + yaw)
-
-                var checkAnger = document.getElementById('checkAnger').checked;
-                var checkContempt = document.getElementById('checkContempt').checked;
-                var checkDisgust = document.getElementById('checkDisgust').checked;
-                var checkFear = document.getElementById('checkFear').checked;
-                var checkHappiness = document.getElementById('checkHappiness').checked;
-                var checkNeutral = document.getElementById('checkNeutral').checked;
-                var checkSadness = document.getElementById('checkSadness').checked;
-                var checkSurprise = document.getElementById('checkSurprise').checked;
-
-                var angerReturn = document.getElementById('anger');
-                var contemptReturn = document.getElementById('contempt');
-                var disgustReturn = document.getElementById('disgust');
-                var fearReturn = document.getElementById('fear');
-                var happinessReturn = document.getElementById('happiness');
-                var neutralReturn = document.getElementById('neutral');
-                var sadnessReturn = document.getElementById('sadness');
-                var surpriseReturn = document.getElementById('surprise');
-
-
-                if (checkAnger == true) { angerChange(anger); if (anger > 0.5) { banEmotionToast("화남"); } }
-                else { angerReturn.src = '/static/img/emoticon/a4.png'; }
-
-                if (checkContempt == true) { contemptChange(contempt); if (contempt > 0.5) { banEmotionToast("경멸"); } }
-                else { contemptReturn.src = '/static/img/emoticon/c4.png'; }
-
-                if (checkDisgust == true) { disgustChange(disgust); if (disgust > 0.5) { banEmotionToast("싫음"); } }
-                else { disgustReturn.src = '/static/img/emoticon/d4.png'; }
-
-                if (checkFear == true) { fearChange(fear); if (fear > 0.5) { banEmotionToast("공포"); } }
-                else { fearReturn.src = '/static/img/emoticon/f4.png'; }
-
-                if (checkHappiness == true) { happinessChange(happiness); if (happiness > 0.5) { banEmotionToast("행복"); } }
-                else { happinessReturn.src = '/static/img/emoticon/h4.png'; }
-
-                if (checkNeutral == true) { neutralChange(neutral); if (neutral > 0.5) { banEmotionToast("중립"); } }
-                else { neutralReturn.src = '/static/img/emoticon/n4.png'; }
-
-                if (checkSadness == true) { sadnessChange(sadness); if (sadness > 0.5) { banEmotionToast("슬픔"); } }
-                else { sadnessReturn.src = '/static/img/emoticon/s4.png'; }
-
-                if (checkSurprise == true) { surpriseChange(surprise); if (surprise > 0.5) { banEmotionToast("놀람"); } }
-                else { surpriseReturn.src = '/static/img/emoticon/p4.png'; }
-
+				
+				angerChange(anger);
+				contemptChange(contempt);
+				disgustChange(disgust);
+				fearChange(fear);
+				happinessChange(happiness);
+				neutralChange(neutral);
+				sadnessChange(sadness);
+				surpriseChange(surprise);
+				
+                if (document.getElementById('checkAnger').checked) {  if (anger > 0.5) { banEmotionToast("화남"); } }
+                if (document.getElementById('checkContempt').checked) { contemptChange(contempt); if (contempt > 0.5) { banEmotionToast("경멸"); } }
+                if (document.getElementById('checkDisgust').checked) { disgustChange(disgust); if (disgust > 0.5) { banEmotionToast("싫음"); } }
+                if (document.getElementById('checkFear').checked) { fearChange(fear); if (fear > 0.5) { banEmotionToast("공포"); } }
+                if (document.getElementById('checkHappiness').checked) { happinessChange(happiness); if (happiness > 0.5) { banEmotionToast("행복"); } }
+                if (document.getElementById('checkNeutral').checked) { neutralChange(neutral); if (neutral > 0.5) { banEmotionToast("중립"); } }
+                if (document.getElementById('checkSadness').checked) { sadnessChange(sadness); if (sadness > 0.5) { banEmotionToast("슬픔"); } }
+                if (document.getElementById('checkSurprise').checked) { surpriseChange(surprise); if (surprise > 0.5) { banEmotionToast("놀람"); } }
 
                 //if(document.getElementById("checkPose").checked == true){
                 if ((yaw < -15 || yaw > 15) || (roll < -15 || roll > 15)) banPoseToast();

@@ -132,7 +132,8 @@ function dataURItoBlob(dataURI) {
 function toggleRecording() {
   if (recordButton.textContent === '면접 시작' || recordButton.textContent === '다음 문제') {
     startSpeechToText();
-    document.getElementById("question").textContent = "질문" + (questionCount + 1) + ". " + ques_text[questionCount];
+	document.getElementById("textTitle").textContent = "질문" + (questionCount + 1);
+    document.getElementById("question").textContent = ques_text[questionCount];
     startTick();
     startRecording();
     StartDetectFace();
@@ -185,6 +186,15 @@ function startRecording() {
   mediaRecorder.ondataavailable = handleDataAvailable;
   mediaRecorder.start(100); // collect 10ms of data
   console.log('MediaRecorder started', mediaRecorder);
+	
+  document.getElementById('anger').src = '/static/img/emoticon/a0.png';
+  document.getElementById('contempt').src = '/static/img/emoticon/c0.png';
+  document.getElementById('disgust').src = '/static/img/emoticon/d0.png';
+  document.getElementById('fear').src = '/static/img/emoticon/f0.png';
+  document.getElementById('happiness').src = '/static/img/emoticon/h0.png';
+  document.getElementById('neutral').src = '/static/img/emoticon/n0.png';
+  document.getElementById('sadness').src = '/static/img/emoticon/s0.png';
+  document.getElementById('surprise').src = '/static/img/emoticon/p0.png';
 }
 
 function stopRecording() {
