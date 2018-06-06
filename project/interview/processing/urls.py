@@ -8,6 +8,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^interviews/video-processing/?$',views.videoProcessing,name='videoProcessing'),
+    url(r'^interviews/processing/?$',views.Processing,name='Processing'),
     url(r'^interviews/getSubKey/?$',views.returnKey,name='returnKey'),
+    url(r'^interviews/cancel/?$',views.cancelInterview,name='cancelInterview'),
 ]

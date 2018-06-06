@@ -19,9 +19,9 @@ var mediaRecorder;
 var sourceBuffer;
 var timer;
 var questionCount = 0;
-var subscriptionKey ="";
-var emotionList=[];
-var headposeList=[];
+var subscriptionKey = "";
+var emotionList = [];
+var headposeList = [];
 var gumVideo = document.querySelector('video#gum');
 
 var recordButton = document.querySelector('button#record');
@@ -124,7 +124,7 @@ function toggleRecording() {
 
   if (recordButton.textContent === '면접 시작' || recordButton.textContent === '다음 문제') {
     startSpeechToText();
-	document.getElementById("textTitle").textContent = "질문" + (questionCount + 1);
+    document.getElementById("textTitle").textContent = "질문" + (questionCount + 1);
     document.getElementById("question").textContent = ques_text[questionCount];
     btnShow();
     startTick();
@@ -156,7 +156,7 @@ function toggleRecording() {
 }
 
 function startRecording() {
-    
+
   var options = { mimeType: 'video/webm;codecs=vp9' };
   if (!MediaRecorder.isTypeSupported(options.mimeType)) {
     console.log(options.mimeType + ' is not Supported');
@@ -211,7 +211,7 @@ function setData() {
 
   var formData = new FormData();
   formData.append('emotionList', JSON.stringify(emotionList));
-  formData.append('headposeList',JSON.stringify(headposeList));
+  formData.append('headposeList', JSON.stringify(headposeList));
   formData.append('csrfmiddlewaretoken', csrftoken);
   formData.append('questionId', ques_id[questionCount - 1]);
   formData.append('questionCount', questionCount);
@@ -221,14 +221,14 @@ function setData() {
   if (questionCount == 5) {
     formData.append('questionList', ques_id);
   }
-  emotionList=[];
-  headposeList=[];
+  emotionList = [];
+  headposeList = [];
   uploadToServer(formData)
 }
 
 function uploadToServer(formData) {
   $.ajax({
-    url: '/interviews/video-processing/',
+    url: '/interviews/processing/',
     type: 'POST',
     data: formData,
     processData: false,
@@ -264,7 +264,7 @@ function StartDetectFace() {
   }, 1000); //set time interval ms
 }
 
-function StopDetectFace(){
+function StopDetectFace() {
   clearInterval(face);
 }
 
@@ -329,7 +329,7 @@ function processImage(data) {
       var pitch = data[0]['faceAttributes']['headPose']['pitch'];
       var roll = data[0]['faceAttributes']['headPose']['roll'];
       var yaw = data[0]['faceAttributes']['headPose']['yaw'];
-      
+
       var temp = [anger, contempt, disgust, fear, happiness, neutral, sadness, surprise];
       var temp2 = [pitch, roll, yaw];
       emotionList.push(temp);
@@ -347,24 +347,42 @@ function processImage(data) {
       alert(errorString);
     });
 };
-      
-function btnShow(){
-    if(showCount == 0){
-		document.getElementById("textTitle").style.display = "block";
-        document.getElementById("question").style.display = "block";
-        setTimeout(btnHide, 7000);
-    }
-    else{
-        //문제 다시보기는 1회만 제공됩니다라고 토스트 띄워주세용 홍홍
-    }
+
+function btnShow() {
+  if (showCount == 0) {
+    document.getElementById("textTitle").style.display = "block";
+    document.getElementById("question").style.display = "block";
+    setTimeout(btnHide, 7000);
+  }
+  else {
+    //문제 다시보기는 1회만 제공됩니다라고 토스트 띄워주세용 홍홍
+  }
 }
 
-function btnHide(){
-	document.getElementById("textTitle").style.display = "none";
-    document.getElementById("question").style.display = "none";
+function btnHide() {
+  document.getElementById("textTitle").style.display = "none";
+  document.getElementById("question").style.display = "none";
 }
 
-function btnAgain(){
-    btnShow();
-    showCount = 1;
+function btnAgain() {
+  btnShow();
+  showCount = 1;
+}
+
+function cancelInterview(ic) {
+  var csrftoken = getCookie('csrftoken');
+
+  var formData = new FormData();
+  formData.append('csrfmiddlewaretoken', csrftoken);
+  formData.append('interview_count', ic)
+  $.ajax({
+    url: '/interviews/cancel/',
+    type: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    async: false,
+  }).done(function (data) {
+
+  });
 }

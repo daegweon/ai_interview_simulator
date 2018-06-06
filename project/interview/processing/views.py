@@ -21,7 +21,7 @@ import json
 @require_http_methods("POST")
 
 #답변 끝날 시 DB저장을 요청받는 함수
-def videoProcessing(request):
+def Processing(request):
     user_id = User.objects.values_list('id', flat=True).get(username=request.user)
     questionId = request.POST["questionId"]
     questionText = request.POST["questionText"]
@@ -58,3 +58,13 @@ def returnKey(request):
     with open("faceKey.txt", 'r') as f:
         key = f.readline().strip()
     return JsonResponse({'subKey' : key}, json_dumps_params = {'ensure_ascii': True})
+
+#Interview 도중 페이지를 나갔을 때 무효처리 하는 함수
+def cancelInterview(request):
+    interview_count = request.POST['interview_count']
+    user_id = User.objects.values_list('id', flat=True).get(username=request.user)
+    Interview.objects.filter(user_id=user_id, interview_count=interview_count).delete()
+    interviewObj = InterviewCount.objects.get(user_id=user_id)
+    interviewObj.interview_count = interviewObj.interview_count-1
+    interviewObj.save()
+    return HttpResponse('cancel')
