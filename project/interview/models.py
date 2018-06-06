@@ -1,4 +1,12 @@
 # -*- coding: utf-8 -*-
+##################################
+# 1. 파일명: models.py
+# 2. 저자 : Human Learning
+# 3. 목적 : Database에 저장될 테이블과 속성들을 설정해준다.
+# 4. 참조 : 없음
+# 5. 제한(restriction) : 없음
+##################################
+
 from django.db import models
 from django.contrib.auth.models import User
 
