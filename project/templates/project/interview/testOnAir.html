@@ -332,6 +332,9 @@
     <script src='{%static "js/interviewTest.js" %}'></script>
     <script>
         getKey();
+        $(window).on('beforeunload', function() {
+    return '이 페이지를 벗어나면 현재 작성중인 내용이 지워집니다.';
+});
     </script>
 
 </body>

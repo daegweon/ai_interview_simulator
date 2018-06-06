@@ -112,8 +112,7 @@
     </div>
   </div>
   <script>
-    //디비에서 받아올 내용 : 그 사용자의 면접 횟수, 면접 타입, 면접 날짜, 링크
-    var interviewTypeList = {{ interviewTypeList| safe}};
+    //디비에서 받아올 내용 : 그 사용자의 면접 횟수, 면접 날짜, 링크
     var dateList = {{ dateList| safe }};
     var count = {{ count }};
     var interviewCountList = {{interviewCountList}};
@@ -129,12 +128,12 @@
       var mediabodydiv2 = document.createElement('div');
       var span2 = document.createElement('span');
 
-      if (interviewTypeList[i] == 1) { //실전면접
-        var testURL = '/interviews/test/result/'+interviewCountList[i];
-        row.setAttribute("data-status", "pendiente");
-        row.setAttribute("onClick","window.location.href='" + testURL + "'");
-        secondcol.innerHTML = "제 " + (i+1) + "회 실전면접"; //어떤 몇회 어떤 타입의 모의 면접인지
-      }
+     
+      var testURL = '/interviews/test/result/'+interviewCountList[i];
+      row.setAttribute("data-status", "pendiente");
+      row.setAttribute("onClick","window.location.href='" + testURL + "'");
+      secondcol.innerHTML = "제 " + (i+1) + "회 실전면접"; //어떤 몇회 어떤 타입의 모의 면접인지
+      
 
       firstcol.width = "20%";
       secondcol.width = "35%";

@@ -1,4 +1,12 @@
 # -*- coding: utf-8 -*-
+
+##################################
+# 1. 파일명: views.py
+# 2. 저자 : Human Learning
+# 3. 목적 : 사용자의 질문당 답변 데이터를 DB에 저장
+# 4. 제한(restriction) : subscription key 필요 및 POST 요청만 처리
+##################################
+
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -12,23 +20,24 @@ import json
 
 @require_http_methods("POST")
 
+#답변 끝날 시 DB저장을 요청받는 함수
 def videoProcessing(request):
-
-    print(request.POST)
-    
-    #print(request.user) #AnonymousUser 로그인안하면 이렇게 출력된다.
     user_id = User.objects.values_list('id', flat=True).get(username=request.user)
     questionId = request.POST["questionId"]
     questionText = request.POST["questionText"]
     interviewObj = InterviewCount.objects.get(user_id=user_id)
+
+    #면접을 시작 했을 시 Interview 횟수 하나 증가
     if request.POST["questionCount"]=="1":
         interviewObj.interview_count += 1 
         interviewObj.save()
+    
     emotionList = request.POST["emotionList"]
     headposeList = request.POST["headposeList"]
     transcription = request.POST["transcription"]
     Interview.objects.create(user_id=user_id,question_id=questionId,emotion=emotionList,speech=transcription,interview_count=interviewObj.interview_count,interview_date = datetime.now(), interview_type = '1', question_text=questionText, headpose = headposeList)
 
+    #모든 질문이 마무리 되었을 때 모든 답변 내용을 총합하여 성향 분석 요청, 실패시 빈값이 return
     if request.POST["questionCount"]=="5":
         allSpeech = ""
         speechResult = Interview.objects.values('speech').filter(user_id = request.user, interview_count=interviewObj.interview_count)
@@ -40,8 +49,10 @@ def videoProcessing(request):
         finally:
             print("성향 분석 단어 부족 error")
             return HttpResponse('good')
+            
     return HttpResponse('good')
 
+#Key를 return하는 함수
 def returnKey(request):
     key = ""
     with open("faceKey.txt", 'r') as f:
