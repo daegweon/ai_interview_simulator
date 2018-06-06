@@ -42,6 +42,7 @@
             width: 1px;
             min-width: 100%;
             *width: 100%;
+			background-color: #ECECEA
         }
 
         .switch input {
@@ -227,6 +228,46 @@
             float:left;
         }
         .glyphicon-tag:before{content:"\e041"}
+		
+		.left-section{
+			width: 28%;
+			height: 650px;
+			float: left;
+			-webkit-box-align:center;
+			-webkit-box-pack:center;
+			display:-webkit-box;
+		}
+		
+		.middle-section{
+			width: 42%;
+			height: 650px;
+			float: left;
+			margin-left: 20px;
+			margin-right: 20px;
+		}
+		
+		.right-section{
+			width: 21%;
+			height: 650px;
+			float: left;
+			-webkit-box-align:center;
+			-webkit-box-pack:center;
+			display:-webkit-box;
+		}
+		
+		.emoticon{
+			width: 260px;
+			float: left;
+			margin-left: 35px;
+			margin-right: 35px;
+		}
+		
+		.footer-section{
+			width: 33.3%;
+			height: 150px;
+			float: left;
+			background-color: rgb(44,62,80);
+		}
     </style>
 
     <script>
@@ -403,7 +444,7 @@
     </script>
 </head>
 
-<body id="page-top" style="background-color: #ECECEA">
+<body id="page-top">
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg" style="height: 75px;background-color: rgb(44,62,80); text-transform: none" id="mainNav">
@@ -535,7 +576,7 @@
     </div>
 
 
-    <div style="width: 28%; height: 650px; float: left; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+    <div class="left-section">
     	<div id="clip" style="background-image: url('/static/img/clipboard.png'); width: 420px; height: 500px; margin-bottom: 50px; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
     		<div id="text" style="padding: 10px; width: 350px">
     			<p id="textTitle" style="font-size: 32px; text-align: center"> 면접 질문 </p>
@@ -547,7 +588,7 @@
 
     </div>
 
-    <div style="width: 42%; height: 650px; float: left; margin-left: 20px; margin-right: 20px;">
+    <div class="middle-section">
 
         <div style="margin-top: 50px; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
             <video style="border: 1px solid black; align-items: center;" id="gum" width="660" height="495" autoplay muted></video>
@@ -564,13 +605,13 @@
         </div>
     </div>
 
-    <div style="width: 21%; height: 650px; float: left; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+    <div class="right-section">
         <div id="emotionresult">
             <div id="emotiontitle">
                 <span>실시간 감정</span>
             </div>
             
-            <div id="emoticon1" style="width: 260px; float: left; margin-left: 35px; margin-right: 35px;">
+            <div class="emoticon" id="emoticon1">
                 <img id="anger" src='{%static "img/emoticon/a4.png"%}'>
                 <img id="contempt" src='{%static "img/emoticon/c4.png"%}'>
                 <img id="disgust" src='{%static "img/emoticon/d4.png"%}'>
@@ -579,27 +620,13 @@
                 <p style="width: 240px; font-size: 18px; font-weight: bold;"> &nbsp; &nbsp;분노 &nbsp; &nbsp; 경멸 &nbsp; &nbsp; &nbsp;싫음 &nbsp; &nbsp; 공포 </p>
             </div>
 
-            <div id ="emoticon2" style="width: 260px; float: left; margin-left: 35px; margin-right: 35px;">
+            <div class="emoticon" id ="emoticon2">
                 <img id="happiness" src='{%static "img/emoticon/h4.png"%}'>
                 <img id="neutral" src='{%static "img/emoticon/n4.png"%}'>
                 <img id="sadness" src='{%static "img/emoticon/s4.png"%}'>
                 <img id="surprise" src='{%static "img/emoticon/p4.png"%}'>
                 <p style="width: 240px; font-size: 18px; font-weight: bold;"> &nbsp; &nbsp;행복 &nbsp; &nbsp; 중립 &nbsp; &nbsp; &nbsp;슬픔 &nbsp; &nbsp; 놀람 </p>
             </div>
-            <!--
-            <div id="emotiondisplay">
-                <span class="emotion_value" id="value1">화남: 0</span><br>
-                <span class="emotion_value" id="value2">경멸: 0</span><br>
-                <span class="emotion_value" id="value3">싫음: 0</span><br>
-                <span class="emotion_value" id="value4">공포: 0</span><br>
-                <span class="emotion_value" id="value5">행복: 0</span><br>
-                <span class="emotion_value" id="value6">중립: 0</span><br>
-                <span class="emotion_value" id="value7">슬픔: 0</span><br>
-                <span class="emotion_value" id="value8">놀람: 0</span>
-            </div>
-            -->
-            <br><br>
-
         </div>
     </div>
 
@@ -664,14 +691,14 @@
 
     <!-- Footer -->
     <div style="text-align: center;">
-        <div style="width: 33.3%; height: 150px; float: left; background-color: rgb(44,62,80);">
+        <div class="footer-section">
             <br>
             <a style="color:white; font-size: 24px; font-weight: bold">Copyright</a>
             <br>
             <br>
             <a style="color: white; font-size: 18px;">&copy; 2018 Human Learning. &nbsp; All Rights Reserved </a>
         </div>
-        <div style="width: 33.3%; height: 150px; float: left; background-color: rgb(44,62,80);">
+        <div class="footer-section">
             <br>
             <a style="color:white; font-size: 24px;  font-weight: bold">About Us&nbsp; </a>
             <br>
@@ -690,7 +717,7 @@
             <br>
             <br>
         </div>
-        <div style="width: 33.3%; height: 150px; float: left; background-color: rgb(44,62,80);">
+        <div class="footer-section">
             <br>
             <a style="color:white; font-size: 24px; font-weight: bold">Contact Us&nbsp; </a>
             <br>
