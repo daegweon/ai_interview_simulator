@@ -32,7 +32,7 @@ var face;
 recordButton.onclick = toggleRecording;
 camOnOffButton.onclick = ToggleWebCam;
 
-var showCount = 0;
+var showCount = 1;
 
 function getCookie(name) {
   var cookieValue = null;
@@ -126,6 +126,7 @@ function toggleRecording() {
     startSpeechToText();
 	document.getElementById("textTitle").textContent = "질문" + (questionCount + 1);
     document.getElementById("question").textContent = ques_text[questionCount];
+	showCount--;
     btnShow();
     startTick();
     startRecording();
