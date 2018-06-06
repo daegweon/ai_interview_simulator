@@ -250,31 +250,35 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
         crossorigin="anonymous">
 
-    <div style="width: 20%; height: 700px; float: left; margin-left: 50px; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+    <div style="width: 28%; height: 650px; float: left; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+    	<div id="clip" style="background-image: url('/static/img/clipboard.png'); width: 420px; height: 500px; margin-bottom: 50px; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+    		<div id="text" style="padding: 10px; width: 350px">
+    			<p id="textTitle" style="font-size: 32px; text-align: center"> 면접 질문 </p>
+    			<br><br>
+    			<p id="question" style="font-size: 24px; text-align: center"> 면접이 시작되면 <br> 질문이 표시됩니다. </p>
+    		</div>
+    		
+    	</div>
 
     </div>
 
-    <div style="width: 42%; height: 700px; float: left;">
-      <br>
-       <div class="questionArea" style="height: 100px; padding: 10px; ">
-           <p id="question" style="font-size: 24px; text-align: center; display: none"> 시작 버튼을 누르시면 질문이 표시됩니다. </p>   
-       </div>
+    <div style="width: 42%; height: 650px; float: left; margin-top: 60px;">
        <div style="-webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
             <video style="border: 1px solid black; align-items: center;" id="gum" width="660" height="495" autoplay muted></video>
             <canvas id="snapshot" width="660" height="495" style="display: none;"></canvas>
        </div>
-        
-        <div style="margin-top: 10px; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+        <div style="-webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+           	<br>
             <button type="button" id="camOnOff" class="btn btn-danger">카메라 OFF</button>
-        <button type="button" id="record" class="btn btn-primary" disabled onclick="modal()">면접 시작</button>
-        <button type="button" class="btn btn-warning" onclick="btnAgain()">문제 다시보기</button>
-        <button type="button" id="finInterview" class="btn btn-success" style="text-align: right; display: none;" onclick="window.location.href='{% url 'testResult' ic=interview_count %}'"
+        	<button type="button" id="record" class="btn btn-primary" disabled onclick="modal()">면접 시작</button>
+        	<button type="button" class="btn btn-warning" onclick="btnAgain()">문제 다시보기</button>
+        	<button type="button" id="finInterview" class="btn btn-success" style="text-align: right; display: none;" onclick="window.location.href='{% url 'testResult' ic=interview_count %}'"
             disabled>결과 보기</button>
             <a id="timer" style="width: 80px; margin-left: 10px; vertical-align: middle; font-size: 24px; font-weight: bold;">&nbsp;00:00&nbsp;</a>
         </div>
     </div>
 
-    <div style="width: 20%; height: 700px; float: left; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+    <div style="width: 20%; height: 650px; float: left; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
 
     </div>
 
