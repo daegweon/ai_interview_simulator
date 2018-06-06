@@ -4,12 +4,11 @@ from django.contrib.auth.models import User
 import pymysql
 # Create your views here.
 
-connection = pymysql.connect(host='localhost', user='root', password='humanroot',db='humandb',charset='utf8')
-
 def getRecordPage(request):
     if not request.user.is_authenticated():
         return render(request,'project/index.html',{'isLogin':0})
     else:    
+        connection = pymysql.connect(host='localhost', user='root', password='humanroot',db='humandb',charset='utf8')
         recordList=[]
         dateList=[]
         interviewTypeList=[]

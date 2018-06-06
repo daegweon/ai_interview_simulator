@@ -5,10 +5,9 @@ import pymysql
 from random import randint
 # Create your views here.
 
-connection = pymysql.connect(host='localhost', user='root', password='humanroot',db='humandb',charset='utf8')
-
 def getInterviewPage(request):
     if request.user.is_authenticated():
+        connection = pymysql.connect(host='localhost', user='root', password='humanroot',db='humandb',charset='utf8')
         count  = InterviewTips.objects.all().count()
         random_idx = randint(1,count)
         print(random_idx)
