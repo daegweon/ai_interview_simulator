@@ -36,7 +36,7 @@ def testInterviewOnAir(request):
                 random_question_text = Question.objects.values_list('question', flat=True).all()[random_idx]
                 ques_text.append(random_question_text)
 
-        return render(request,'project/interview/onAir.html',{'ques_id': ques_id, 'ques_text' : ques_text, 'interview_count':interview_count+1})
+        return render(request,'project/interview/testOnAir.html',{'ques_id': ques_id, 'ques_text' : ques_text, 'interview_count':interview_count+1})
 
 def getTestResultPage(request, ic):
     if not request.user.is_authenticated():
