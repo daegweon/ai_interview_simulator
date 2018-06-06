@@ -22,8 +22,9 @@
     <link href='{%static "vendor/font-awesome/css/font-awesome.min.css" %}' rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
 
-
     <!-- Custom styles for this template -->
+    <link href='{%static "css/trainingOnAir.css" %}' rel="stylesheet">
+    
     <script>
         var ques_id = {{ ques_id | safe }};
         var ques_text = {{ ques_text | safe}};
@@ -32,243 +33,6 @@
 
     <script src='{%static "js/realtimeface.js"%}'></script>
     <script src='{%static "js/stt.js" %}'></script>
-
-    <style>
-        .glyphicon-exclamation-sign:before {
-            content: "\e101"
-        }
-
-        body {
-            width: 1px;
-            min-width: 100%;
-            *width: 100%;
-			background-color: #ECECEA
-        }
-
-        .switch input {
-            display: none;
-        }
-
-        .switch {
-            display: inline-block;
-            width: 60px;
-            height: 30px;
-            margin: 8px;
-            transform: translateY(50%);
-            position: relative;
-        }
-
-        .slider {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            border-radius: 30px;
-            box-shadow: 0 0 0 2px #777, 0 0 4px #777;
-            cursor: pointer;
-            border: 4px solid transparent;
-            overflow: hidden;
-            transition: .4s;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            width: 100%;
-            height: 100%;
-            background: #777;
-            border-radius: 30px;
-            transform: translateX(-30px);
-            transition: .4s;
-        }
-
-        input:checked+.slider:before {
-            transform: translateX(30px);
-            background: Red;
-        }
-
-        input:checked+.slider {
-            box-shadow: 0 0 0 2px Red, 0 0 2px limeGreen;
-        }
-
-        .progress-bar-vertical {
-            width: 20px;
-            min-height: 100px;
-            display: flex;
-            align-items: flex-end;
-            margin-right: 20px;
-            float: left;
-        }
-
-        .progress-bar-vertical .progress-bar {
-            width: 100%;
-            height: 0;
-            -webkit-transition: height 0.02s ease;
-            -o-transition: height 0.02s ease;
-            transition: height 0.02s ease;
-        }
-
-        .entry:not(:first-of-type) {
-            margin-top: 10px;
-        }
-
-        .glyphicon {
-            font-size: 12px;
-        }
-
-        #gum {
-            -o-transform: scaleX(-1);
-            -webkit-transform: scaleX(-1);
-            transform: scaleX(-1);
-            -ms-filter: fliph;
-            /*IE*/
-            filter: fliph;
-            /*IE*/
-        }
-
-        /* The side navigation menu */
-
-        .sidenav {
-            height: 100%;
-            /* 100% Full-height */
-            width: 0;
-            /* 0 width - change this with JavaScript */
-            position: fixed;
-            /* Stay in place */
-            z-index: 1;
-            /* Stay on top */
-            top: 0;
-            /* Stay at the top */
-            left: 0;
-            background-color: #111;
-            /* Black*/
-            overflow-x: hidden;
-            /* Disable horizontal scroll */
-            padding-top: 60px;
-            /* Place content 60px from the top */
-            transition: 0.1s;
-            /* 0.5 second transition effect to slide in the sidenav */
-        }
-
-        /* The navigation menu links */
-
-        .sidenav a {
-            padding: 8px 8px 8px 32px;
-            text-decoration: none;
-            font-size: 25px;
-            color: #818181;
-            display: block;
-            transition: 0.3s;
-        }
-
-        /* When you mouse over the navigation links, change their color */
-
-        .sidenav a:hover {
-            color: #f1f1f1;
-        }
-
-        /* Position and style the close button (top right corner) */
-
-        .sidenav .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
-        }
-
-        /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-
-        #main {
-            transition: margin-left .5s;
-            padding: 20px;
-        }
-
-        /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-
-        @media screen and (max-height: 450px) {
-            .sidenav {
-                padding-top: 15px;
-            }
-            .sidenav a {
-                font-size: 18px;
-            }
-        }
-        @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
-        @import url(http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
-        .emotion_icon {
-            visibility: hidden;
-        }
-        #emotiontitle{
-            font-size:20px;
-            font-family: Noto Sans KR;
-            font-weight: bold;
-            text-align: center;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            border-bottom:2px solid #000080;
-        }
-        #emotion_icons{
-            position: relative;
-            width:30%;
-            float: left;
-            padding-left: 20px;
-        }
-        #emotiondisplay{
-            position: relative;
-            font-size: 18px;
-            font-family: Nanum Myeongjo;
-            margin : 0px;
-            padding-left:20px;
-            width:70%;
-            height:330px;
-            line-height: 40px;
-            float:left;
-        }
-        .glyphicon-tag:before{content:"\e041"}
-		
-		.left-section{
-			width: 28%;
-			height: 650px;
-			float: left;
-			-webkit-box-align:center;
-			-webkit-box-pack:center;
-			display:-webkit-box;
-		}
-		
-		.middle-section{
-			width: 42%;
-			height: 650px;
-			float: left;
-			margin-left: 20px;
-			margin-right: 20px;
-		}
-		
-		.right-section{
-			width: 21%;
-			height: 650px;
-			float: left;
-			-webkit-box-align:center;
-			-webkit-box-pack:center;
-			display:-webkit-box;
-		}
-		
-		.emoticon{
-			width: 260px;
-			float: left;
-			margin-left: 35px;
-			margin-right: 35px;
-		}
-		
-		.footer-section{
-			width: 33.3%;
-			height: 150px;
-			float: left;
-			background-color: rgb(44,62,80);
-		}
-    </style>
 
     <script>
         getKey();
@@ -480,8 +244,9 @@
     <div id="mySidenav" class="sidenav" style="background-color: rgba(255,255,255,1); width: inherit;">
         <a href="javascript:void(0)" class="closebtn" onclick="nav()">&times;</a>
         <hr style="margin-bottom: -5px; border: 0.5px solid;">
+        
         <!-- Emotion Control Section -->
-        <div id="emotionControl" style="height: 350px; padding: 10px; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+        <div class="mid" id="emotionControl" style="height: 350px; padding: 10px;">
             <div class="container2">
                 <a style="font-size: 24px; font-weight: bold;"> &nbsp; &nbsp;감정 ON / OFF</a>
 
@@ -548,10 +313,8 @@
         <hr style="margin-top: -10px;border: 0.5px solid;">
 
         <!-- Ban Wrod Section -->
-        <div style="-webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
-
+        <div class="mid">
             <div style=" height: 578px; text-align: center;">
-
                 <a style="font-size: 24px; font-weight: bold;">금지 단어</a>
                 <br>
 
@@ -563,7 +326,7 @@
 
                 <br><br>
 
-                <ul class="list-group" id="ban-word" style="width: 280px ;-webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+                <ul class="list-group mid" id="ban-word" style="width: 280px;">
 
                 </ul>
 
@@ -572,40 +335,33 @@
                 <hr style="border: 0.5px solid;">
             </div>
         </div>
-
     </div>
 
-
-    <div class="left-section">
-    	<div id="clip" style="background-image: url('/static/img/clipboard.png'); width: 420px; height: 500px; margin-bottom: 50px; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+    <div class="left-section mid">
+    	<div class="mid" id="clip" style="background-image: url('/static/img/clipboard.png'); width: 420px; height: 500px; margin-bottom: 50px;">
     		<div id="text" style="padding: 10px; width: 350px">
     			<p id="textTitle" style="font-size: 32px; text-align: center"> 면접 질문 </p>
     			<br><br>
     			<p id="question" style="font-size: 24px; text-align: center"> 면접이 시작되면 <br> 질문이 표시됩니다. </p>
-    		</div>
-    		
+    		</div>	
     	</div>
-
     </div>
 
     <div class="middle-section">
-
-        <div style="margin-top: 50px; -webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+        <div class="mid" style="margin-top: 50px;">
             <video style="border: 1px solid black; align-items: center;" id="gum" width="660" height="495" autoplay muted></video>
             <canvas id="snapshot" width="660" height="495" style="display: none;"></canvas>
         </div>
-        <div style="-webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
+        <div class="mid">
             <br>
             <button type="button" id="setting" class="btn btn-danger" onclick="nav();">환경 설정 ON</button>
-
             <button type="button" id="record" class="btn btn-primary" disabled>면접 시작</button>
-
             <button type="button" id="finInterview" class="btn btn-success" style="display: none;" onclick="getTrainingResult(banWordList,banWordCount,banEmotionList,banEmotionCount)" disabled>연습 종료</button>
             <a id="timer" style="width: 80px; margin-left: 10px; vertical-align: middle; font-size: 24px; font-weight: bold;">&nbsp;00:00&nbsp;</a>
         </div>
     </div>
 
-    <div class="right-section">
+    <div class="right-section mid">
         <div id="emotionresult">
             <div id="emotiontitle">
                 <span>실시간 감정</span>
@@ -619,7 +375,6 @@
                 <br>
                 <p style="width: 240px; font-size: 18px; font-weight: bold;"> &nbsp; &nbsp;분노 &nbsp; &nbsp; 경멸 &nbsp; &nbsp; &nbsp;싫음 &nbsp; &nbsp; 공포 </p>
             </div>
-
             <div class="emoticon" id ="emoticon2">
                 <img id="happiness" src='{%static "img/emoticon/h4.png"%}'>
                 <img id="neutral" src='{%static "img/emoticon/n4.png"%}'>
@@ -629,65 +384,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function nav() {
-            var navBtn = document.querySelector('button#setting');
-
-            if (navBtn.textContent == '환경 설정 ON') {
-                openNav();
-                navBtn.textContent = '환경 설정 OFF';
-            }
-            else if (navBtn.textContent == '환경 설정 OFF') {
-                closeNav();
-                navBtn.textContent = '환경 설정 ON';
-            }
-        }
-
-        /* Set the width of the side navigation to ???px */
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "310px";
-        }
-
-        /* Set the width of the side navigation to 0 */
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-        }
-
-    </script>
-
-    <script>
-        $(document).ready(function () {
-            $("#word").keypress(function (e) {
-                if (e.which == 13) {
-                    add();  // 실행할 이벤트
-                }
-            });
-        });
-        
-        var btnCount = 1;
-
-        function add() {
-            var word = $("#word").val();
-            var li = document.createElement("li");
-            li.className = "list-group-item";
-            li.style = "width: 80%";
-            li.id = "word" + btnCount;
-            li.innerHTML = word;
-            banWordList.push(word);
-            $("#ban-word").append(li)
-            $("#word").val("");
-            var len = banWordList.length;
-            banWordCount[len-1]=0;
-        }
-
-        function reset() {
-            $("#ban-word").empty();
-            btnCount = 1;
-            banWordList = [];
-            banWordCount = [];
-        }
-    </script>
 
     <!-- Footer -->
     <div style="text-align: center;">
@@ -726,6 +422,63 @@
         </div>
     </div>
 
+    <script>
+        function nav() {
+            var navBtn = document.querySelector('button#setting');
+
+            if (navBtn.textContent == '환경 설정 ON') {
+                openNav();
+                navBtn.textContent = '환경 설정 OFF';
+            }
+            else if (navBtn.textContent == '환경 설정 OFF') {
+                closeNav();
+                navBtn.textContent = '환경 설정 ON';
+            }
+        }
+
+        /* Set the width of the side navigation to ???px */
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "310px";
+        }
+
+        /* Set the width of the side navigation to 0 */
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+   
+    <script>
+        $(document).ready(function () {
+            $("#word").keypress(function (e) {
+                if (e.which == 13) {
+                    add();  // 실행할 이벤트
+                }
+            });
+        });
+        
+        var btnCount = 1;
+
+        function add() {
+            var word = $("#word").val();
+            var li = document.createElement("li");
+            li.className = "list-group-item";
+            li.style = "width: 80%";
+            li.id = "word" + btnCount;
+            li.innerHTML = word;
+            banWordList.push(word);
+            $("#ban-word").append(li)
+            $("#word").val("");
+            var len = banWordList.length;
+            banWordCount[len-1]=0;
+        }
+
+        function reset() {
+            $("#ban-word").empty();
+            btnCount = 1;
+            banWordList = [];
+            banWordCount = [];
+        }
+    </script>
 
     <!-- Bootstrap core JavaScript -->
     <script src='{%static "vendor/jquery/jquery.min.js" %}'></script>
