@@ -16,11 +16,15 @@
     <!-- Custom fonts for this template -->
     <link href='{%static "vendor/font-awesome/css/font-awesome.min.css" %}' rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-
+    
     <!-- Custom styles for this template -->
     <link href='{%static "css/agency.min.css" %}' rel="stylesheet">
     <link href='{%static "css/login.css" %}' rel="stylesheet">
     <link href='{%static "css/login_status.css" %}' rel="stylesheet">
+    <link href='{%static "css/carousel.css" %}' rel="stylesheet">
+    
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
         @import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
         #typedtext {
@@ -68,7 +72,7 @@
                         <a class="nav-link js-scroll-trigger" href="#interview">Interview</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#records">Records</a>
+                        <a class="nav-link js-scroll-trigger" href="#Feature">Feature</a>
                     </li>
 
                     <li class="nav-item">
@@ -113,10 +117,10 @@
                             <h2 style="color: #0069d9;"><strong>A.I.S</strong></h2>
                             <br>
                             <h4>인공지능을 활용하여 저렴한 비용으로 최적의 모의 면접 환경을 제공합니다.</h4><br> 
-                            <h4><span style="color: #ff3333;">실제 면접에 사용되는 질문 </span><span class="text-muted">데이터베이스 활용</span></h4><br>
-                            <h4><span style="color: #ff3333;">실시간 피드백</span><span class="text-muted">을 통한 면접 연습</span></h4><br>
-                            <h4><span class="text-muted">모의 면접에 대한 </span><span style="color: #ff3333;">빠르고 객관적인 분석과 개선 방향 제시</span></h4><br>
-                            <h4><span class="text-muted"> 내역을 통해 자신의 </span><span style="color: #ff3333;">성장하는 과정을 확인</span><span class="text-muted">하는 것 까지,</span></h4><br>
+                            <h4><span style="color: #ff4d4d;">실제 면접에 사용되는 질문 </span><span class="text-muted">데이터베이스 활용</span></h4><br>
+                            <h4><span style="color: #ff4d4d;">실시간 피드백</span><span class="text-muted">을 통한 면접 연습</span></h4><br>
+                            <h4><span class="text-muted">모의 면접에 대한 </span><span style="color: #ff4d4d;">빠르고 객관적인 분석과 개선 방향 제시</span></h4><br>
+                            <h4><span class="text-muted"> 내역을 통해 자신의 </span><span style="color: #ff4d4d;">성장하는 과정을 확인</span><span class="text-muted">하는 것 까지,</span></h4><br>
                             <h4> 언제! 어디서나! <span style="color: #0069d9;">AIS</span>와 함께! 면접 능력을 마음껏 향상해보세요!</h4><br>                    
                 </div>
             </div>
@@ -140,8 +144,8 @@
                             <i class="fa fa-user fa-stack-1x fa-inverse"></i>
                         </span>
                         <h4 class="service-heading">연습 면접</h4>
-                        <p class="text-muted">인공지능 면접을 연습할 수 있습니다!
-                            <br> 여러분의 감정과 음성이 실시간으로 인식되며 관리하고 싶은 감정, 금지 단어를 설정하여 인공지능 면접을 대비해보세요!
+                        <p class="text-muted">인공지능을 통해 면접을 연습할 수 있습니다!
+                            <br> 여러분의 감정과 음성이 실시간으로 인식되며 관리하고 싶은 감정, 금지 단어를 설정하여 면접을 대비해보세요!
                         </p>
                     </div>
 
@@ -151,63 +155,83 @@
                             <i class="fa fa-users fa-stack-1x fa-inverse"></i>
                         </span>
                         <h4 class="service-heading">실전 면접</h4>
-                        <p class="text-muted">연습 면접을 통해 인공지능 면접과 친해지셨다구요?
-                            <br> 이번에는 실제 면접장의 분위기가 조성된 실전 면접 기능을 이용해보시는게 어떨까요?</p>
+                        <p class="text-muted">연습 면접을 통해 충분한 연습이 되셨나요?
+                            <br> 이번에는 실제 면접장과 비슷한 분위기로 조성된 <br>실전 면접 기능을 이용해보시는게 어떨까요?
+                            <br> 인공지능이 당신의 면접 상태를 빠르고 객관적으로 분석해드립니다!</p>
                     </div>
                 </div>
             </div>
     </section>
 
-    <!-- Records -->
-    <section id="records">
+    <!-- Feature -->
+    <section id="Feature">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading text-uppercase">Record</h2>
+                    <h2 class="section-heading text-uppercase">Feature</h2>
                     <h3 class="section-subheading text-muted"></h3>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12">
-                    <ul class="timeline">
-                        <li>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>1.</h4>
-                                    <h4 class="subheading">내역 페이지 접속</h4>
+                <div class="col-sm-6">
+                    <h4><span class="subheading">실시간 피드백</span></h4>
+                    <p class="text-muted" style="padding:10px;">설정한 감정, 금지 단어에 대한 실시간 피드백을 받으며 면접을 연습할 수 있습니다.</p>   
+                </div>
+                <div class="col-sm-6">
+                    <img src="{%static 'img/training.png' %}" style="width: 100%; height: 100%;">
+                </div>
+            </div>
+            <br><br><br><br>      
+            <div class="row">
+                <div class="col-sm-6">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators">
+                                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                                </ol>
+        
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner">
+                                    <div class="item active">
+                                        <img src="{%static 'img/result1.png' %}" style="width: 100%; height: 100%;">
+                                    </div>
+        
+                                    <div class="item">
+                                            <img src="{%static 'img/result2.png' %}"style="width: 100%; height: 100%;">
+                                    </div>
+        
+                                    <div class="item">
+                                            <img src="{%static 'img/result3.png' %}"style="width: 100%; height: 100%;">
+                                    </div>
+                                    <br><br><br><br>
                                 </div>
-                                <img src="{%static 'img/record_intro1.png' %}">
-                                <div class="timeline-body">
-                                    <p class="text-muted">내역 페이지에 접속하시면 다음과 같이 현재까지 완료한 모의면접 내역을 확인하실 수 있습니다! </p>
-                                </div>
+        
+                                <!-- Left and right controls -->
+                                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
                             </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>2.</h4>
-                                    <h4 class="subheading">편리한 내역 정렬 기능</h4>
-                                </div>
-                                <img src="{%static 'img/record_intro2.png' %}">
-                                <div class="timeline-body">
-                                    <p class="text-muted">내역이 너~무 길어서 이전 기록을 확인하기 힘드시다구요? 우측 상단에 위치한 정렬 기능을 이용해보세요! 연습면접 버튼을 클릭하면 연습면접결과만! 실전면접
-                                        버튼을 클릭하면 실전면접결과만 확인하실 수 있습니다. 다시 모든 결과를 확인하시려면 전체 버튼을 눌러주세요.</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>3.</h4>
-                                    <h4 class="subheading">이전 결과 확인하기</h4>
-                                </div>
-                                <img src="{%static 'img/record_intro3.png' %}">
-                                <div class="timeline-body">
-                                    <p class="text-muted">다시 확인하고 싶은 내역을 클릭하면 상세 분석 결과를 다시 확인해보실 수 있습니다.</p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                </div>
+                <div class="col-sm-6">
+                    <h4><span class="subheading">모의 면접 분석</span></h4>
+                    <p class="text-muted" style="padding:10px;">인공지능이 분석한 자신의 면접 상태를 확인해보세요!<br>분석한 결과를 토대로 면접 능력을 향상 할 수 있도록 도와드립니다</p>  
+                </div>
+            </div>
+            <br><br><br><br> 
+            <div class="row">
+                <div class="col-sm-6">
+                    <h4><span class="subheading">결과 내역</span></h4>
+                    <p class="text-muted" style="padding:10px;">다시 확인하고 싶은 내역을 클릭하면 상세 분석 결과를 다시 확인해보실 수 있습니다.<br>그동안 자신이 어떻게 향상되어왔는지 확인해보세요!</p>   
+                </div>
+                <div class="col-sm-6">
+                    <img src="{%static 'img/record_intro1.png' %}"style="width: 100%; height: 100%;">
                 </div>
             </div>
         </div>
