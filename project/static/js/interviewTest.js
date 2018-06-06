@@ -32,7 +32,6 @@ var face;
 recordButton.onclick = toggleRecording;
 camOnOffButton.onclick = ToggleWebCam;
 
-var showCount = 1;
 
 function getCookie(name) {
   var cookieValue = null;
@@ -126,8 +125,9 @@ function toggleRecording() {
     startSpeechToText();
 	document.getElementById("textTitle").textContent = "질문" + (questionCount + 1);
     document.getElementById("question").textContent = ques_text[questionCount];
-	showCount--;
+
     btnShow();
+
     startTick();
     startRecording();
     StartDetectFace();
@@ -350,22 +350,21 @@ function processImage(data) {
 };
       
 function btnShow(){
-    if(showCount == 0){
+		recordButton.disabled = true;
+		document.getElementById('again').disabled = false;
 		document.getElementById("textTitle").style.display = "block";
         document.getElementById("question").style.display = "block";
-        setTimeout(btnHide, 7000);
-    }
-    else{
+        setTimeout(btnHide, 5000);
         //문제 다시보기는 1회만 제공됩니다라고 토스트 띄워주세용 홍홍
-    }
 }
 
 function btnHide(){
 	document.getElementById("textTitle").style.display = "none";
     document.getElementById("question").style.display = "none";
+	recordButton.disabled = false;
 }
 
 function btnAgain(){
     btnShow();
-    showCount = 1;
+	document.getElementById('again').disabled = true;
 }
