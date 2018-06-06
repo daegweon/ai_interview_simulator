@@ -124,7 +124,8 @@ function toggleRecording() {
 
   if (recordButton.textContent === '면접 시작' || recordButton.textContent === '다음 문제') {
     startSpeechToText();
-    document.getElementById("question").textContent = "질문" + (questionCount + 1) + ". " + ques_text[questionCount];
+	document.getElementById("textTitle").textContent = "질문" + (questionCount + 1);
+    document.getElementById("question").textContent = ques_text[questionCount];
     btnShow();
     startTick();
     startRecording();
@@ -349,6 +350,7 @@ function processImage(data) {
       
 function btnShow(){
     if(showCount == 0){
+		document.getElementById("textTitle").style.display = "block";
         document.getElementById("question").style.display = "block";
         setTimeout(btnHide, 7000);
     }
@@ -358,6 +360,7 @@ function btnShow(){
 }
 
 function btnHide(){
+	document.getElementById("textTitle").style.display = "none";
     document.getElementById("question").style.display = "none";
 }
 
