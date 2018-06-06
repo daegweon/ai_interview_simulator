@@ -271,7 +271,7 @@
            	<br>
             <button type="button" id="camOnOff" class="btn btn-danger">카메라 OFF</button>
         	<button type="button" id="record" class="btn btn-primary" disabled onclick="modal()">면접 시작</button>
-        	<button type="button" class="btn btn-warning" onclick="btnAgain()">문제 다시보기</button>
+        	<button type="button" id="again" class="btn btn-warning" onclick="btnAgain()">문제 다시보기</button>
         	<button type="button" id="finInterview" class="btn btn-success" style="text-align: right; display: none;" onclick="window.location.href='{% url 'testResult' ic=interview_count %}'"
             disabled>결과 보기</button>
             <a id="timer" style="width: 80px; margin-left: 10px; vertical-align: middle; font-size: 24px; font-weight: bold;">&nbsp;00:00&nbsp;</a>
