@@ -1,4 +1,12 @@
 # -*- coding: utf-8 -*-
+##################################
+# 1. 파일명: views.py
+# 2. 저자 : Human Learning
+# 3. 목적 : 연습면접을 진행할 때 접속하게 되는 하드웨어점검, 면접 진행, 면접 결과 보기 URL로 접속했을 때 각각의 html을 보여주는 기능
+# 4. 참조 : 없음
+# 5. 제한(restriction) : 사용자는 로그인 상태여야 한다.
+##################################
+
 from django.shortcuts import render
 from project.interview.models import Question, InterviewCount, InterviewTips
 from random import randint
@@ -7,12 +15,6 @@ from random import randint
 def trainingInterviewHwCheck(request):
     if request.user.is_authenticated():
         return render(request, 'project/interview/hwcheckOnTraining.html', {})
-    else: 
-        return render(request,'project/index.html',{'isLogin':0})
-    
-def trainingInterviewPriorInfo(request):
-    if request.user.is_authenticated():
-        return render(request,'project/priorInfo.html',{}) 
     else: 
         return render(request,'project/index.html',{'isLogin':0})
 
@@ -43,7 +45,7 @@ def trainingInterviewOnAir(request):
             if random_tip not in tip:
                 tip.append(random_tip)
 
-        return render(request,'project/interview/trainingOnAir.html',{'ques_id': ques_id, 'ques_text' : ques_text, 'interview_count':interview_count+1,'tip':tip})
+        return render(request,'project/interview/trainingOnAir.html',{'ques_id': ques_id, 'ques_text' : ques_text, 'tip':tip})
         
 class ban:
     global banwordlist
