@@ -1,3 +1,11 @@
+/*****************************************************************************************
+1. 파일명: interviewResult.js
+2. 저자 : Human Learning
+3. 목적 : 실전 연습 면접 종료 이후 결과창에서 보여주는 종합 분석 결과, 감정 분석 결과의 선형 차트, 원형 차트 생성, 조언을 보여준다.
+4. 참조 : 선형 차트, 원형 차트를 생성에 plot.ly library를 활용하였다. (https://plot.ly/)
+5. 제한(restriction) : 데이터베이스에 면접에 대한 정보가 저장되어 있어야 한다. 
+******************************************************************************************/
+
 function setTotalResult() {
     var totaltime = xAxis[5].length + xAxis[1].length + xAxis[2].length + xAxis[3].length + xAxis[4].length;
     var minute = parseInt(totaltime / 60);

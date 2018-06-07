@@ -23,8 +23,6 @@
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-  <style>
-  </style>
 </head>
 
 
@@ -112,55 +110,11 @@
     </div>
   </div>
   <script>
-    //디비에서 받아올 내용 : 그 사용자의 면접 횟수, 면접 날짜, 링크
     var dateList = {{ dateList| safe }};
     var count = {{ count }};
-    var interviewCountList = {{interviewCountList}};
-    var tablebody = document.getElementById("tablebody");
-
-    for (var i = 0; i < count; i++) {
-      var row = document.createElement('tr');
-      var firstcol = document.createElement('td');
-      var secondcol = document.createElement('td');
-      var thirdcol = document.createElement('td');
-      var firstatag = document.createElement('a');
-      var mediadiv2 = document.createElement('div');
-      var mediabodydiv2 = document.createElement('div');
-      var span2 = document.createElement('span');
-
-     
-      var testURL = '/interviews/test/result/'+interviewCountList[i];
-      row.setAttribute("data-status", "pendiente");
-      row.setAttribute("onClick","window.location.href='" + testURL + "'");
-      secondcol.innerHTML = "제 " + (i+1) + "회 실전면접"; //어떤 몇회 어떤 타입의 모의 면접인지
-      
-
-      firstcol.width = "20%";
-      secondcol.width = "35%";
-      thirdcol.width = "45%";
-      firstcol.style.textAlign="center";
-      secondcol.style.textAlign="center";
-      thirdcol.style.textAlign="center";
-
-      /* 테이블 column에 대한 설정 */
-      firstatag.innerHTML = i+1; //몇 회 인지
-      firstcol.appendChild(firstatag);
-      mediadiv2.className = "media";
-      mediabodydiv2.className = "media-body";
-      span2.className = "media-meta";
-
-      span2.innerHTML = dateList[i]; //면접 날짜 
-      mediabodydiv2.appendChild(span2);
-      mediadiv2.appendChild(mediabodydiv2);
-      thirdcol.appendChild(mediadiv2);
-      row.appendChild(firstcol);
-      row.appendChild(secondcol);
-      row.appendChild(thirdcol);
-      tablebody.appendChild(row);
-    }
+    var interviewCountList = {{ interviewCountList }};
   </script>
 </body>
-<script> $(window).load(function () { $('#exampleModalCenter').modal('show'); }); </script>
 
 <!-- Bootstrap core JavaScript -->
 <script src='{%static "vendor/jquery/jquery.min.js" %}'></script>
