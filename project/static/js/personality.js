@@ -1,7 +1,7 @@
 /*****************************************************************************************
  1. 파일명: personality.js
  2. 저자 : Human Learning
- 3. 목적 : 홈페이지에서 성향 분석 결과 수치를 테이블로 정리하여 보여줌.
+ 3. 목적 : 홈페이지에서 성향 분석 결과 수치를 테이블로 정리하여 보여줌. 
  4. 참조 : IBM Watson Personality Insights Documents 모델 설명(https://console.bluemix.net/docs/services/personality-insights/models.html#models)
  5. 제한(restriction) : DB에 성향 분석 결과가 JSON형태로 profile 변수에 저장되어 있어야 함.
                         infoImgPath가 이미 선언되어 있어야 함.
