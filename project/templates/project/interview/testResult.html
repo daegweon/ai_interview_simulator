@@ -13,79 +13,7 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
     <script src='{%static "js/personality.js" %}?ver=10'></script>
-    <style>
-        .carousel-indicators li {
-            border: 1px solid #000000;
-        }
 
-        .glyphicon-chevron-right:before {
-            color: #000000;
-            content: "\e080";
-        }
-
-        .glyphicon-chevron-left:before {
-            color: #000000;
-            content: "\e079";
-        }
-
-        .carousel-control.right {
-            background-image: linear-gradient(to right, rgba(0, 0, 0, .0001) 0, rgba(255, 255, 255, 0.5) 100%);
-        }
-
-        .carousel-control.left {
-            background-image: linear-gradient(to right, rgba(0, 0, 0, .0001) 0, rgba(255, 255, 255, 0.5) 100%);
-        }
-
-        hr.title {
-            border-color: #fff;
-            margin: 15px auto 15px;
-            margin-left: 0px;
-            margin-top: 5px;
-            padding: 0;
-            max-width: 100%;
-            border: 0;
-            border-top: solid 3px;
-            text-align: center;
-        }
-
-        @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
-        @import url(http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
-        .totalresult {
-            padding-left: 30px;
-        }
-
-        #usernameSection {
-            font-size: 20px;
-            font-family: Noto Sans KR;
-            font-weight: bold;
-            text-align: center;
-            height: 30px;
-        }
-
-        #totalTime {
-            font-size: 16px;
-            font-family: Nanum Myeongjo;
-            text-align: center;
-        }
-
-        #questionTime {
-            font-size: 16px;
-            font-family: Nanum Myeongjo;
-            text-align: center;
-        }
-
-        #questionContent {
-            font-size: 16px;
-            font-family: Nanum Myeongjo;
-            text-align: center;
-        }
-
-        #best {
-            font-size: 16px;
-            font-family: Nanum Myeongjo;
-            text-align: center;
-        }
-    </style>
     <script>
         //set Data Vlaue for Analyze
         var words = {{ words | safe}};

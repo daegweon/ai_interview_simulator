@@ -346,50 +346,13 @@
     <!-- Custom scripts for this template -->
     <script src='{%static "js/agency.min.js" %}'></script>
     <script src='{%static "js/authentication.js" %}'></script>
+    <script src='{%static "js/typewriter.js" %}'></script>
     <script>
         var login_status = {{ isLogin }}
         if (login_status == 0) {
             alert("로그인이 필요한 서비스입니다.");
             window.location.replace('/');
         }
-    </script>
-    <script>
-        // set up text to print, each item in array is new line
-        var aText = new Array(
-            "A.I Interview Simulator",
-            "Project by Human Learning Team"
-        );
-        var iSpeed = 100; // time delay of print out
-        var iIndex = 0; // start printing array at this posision
-        var iArrLength = aText[0].length; // the length of the text array
-        var iScrollAt = 20; // start scrolling up at this many lines
-
-        var iTextPos = 0; // initialise text position
-        var sContents = ''; // initialise contents variable
-        var iRow; // initialise current row
-
-        function typewriter() {
-            sContents = ' ';
-            iRow = Math.max(0, iIndex - iScrollAt);
-            var destination = document.getElementById("typedtext");
-
-            while (iRow < iIndex) {
-                sContents += aText[iRow++] + '<br />';
-            }
-            destination.innerHTML = sContents + aText[iIndex].substring(0, iTextPos) + "_";
-            if (iTextPos++ == iArrLength) {
-                iTextPos = 0;
-                iIndex++;
-                if (iIndex != aText.length) {
-                    iArrLength = aText[iIndex].length;
-                    setTimeout("typewriter()", 500);
-                }
-            } else {
-                setTimeout("typewriter()", iSpeed);
-            }
-        }
-
-        typewriter();
     </script>
 </body>
 
