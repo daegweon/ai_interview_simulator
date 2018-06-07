@@ -1,3 +1,11 @@
+/*****************************************************************************************
+ 1. 파일명: personalityDescription.js
+ 2. 저자 : Human Learning
+ 3. 목적 : 홈페이지에서 성향 분석 결과를 이해하기 쉽게 요약하여 제공
+ 4. 참조 : IBM Watson Personality Insights Demo(https://personality-insights-demo.ng.bluemix.net/)
+ 5. 제한(restriction) : DB에 성향 분석 결과가 JSON형태로 profile 변수에 저장되어 있어야 함.
+******************************************************************************************/
+
 var personalityList = profile["personality"];
 var needsList = profile["needs"];
 var valuesList = profile["values"];
@@ -386,12 +394,10 @@ var sortedValue = sortProperties(valuePercentage);
 var validPersonality = 0;
 for (var key in personalityFlagList) {
   if (0.5 - personalityPercentages[key] < -0.18) {
-    //document.getElementById("personality-result").innerHTML += (personalityList[i]["percentile"] + "<br>");
     personalityFlagList[key] = 1;
     validPersonality += 1;
   }
   else if (0.5 - personalityPercentages[key] > 0.18) {
-    //document.getElementById("personality-result").innerHTML += (personalityList[i]["percentile"] + "<br>");
     personalityFlagList[key] = -1;
     validPersonality += 1;
   }
