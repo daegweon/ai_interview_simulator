@@ -161,6 +161,24 @@ input:checked + .slider {
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 @import url(http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
 
+.emoticon {
+	width: 260px;
+	float: left;
+	margin-left: 35px;
+	margin-right: 35px;
+}
+
+#emoticon-name{
+	width: 240px;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#emotion{
+	width: 90px;
+	float: left;
+}
+
 #emotiontitle {
 	font-size: 20px;
 	font-family: Noto Sans KR;
@@ -170,13 +188,6 @@ input:checked + .slider {
 	padding-bottom: 10px;
 	margin-bottom: 20px;
 	border-bottom: 2px solid #000080;
-}
-
-.emoticon {
-	width: 260px;
-	float: left;
-	margin-left: 35px;
-	margin-right: 35px;
 }
 
 .left-section {
@@ -216,4 +227,29 @@ input:checked + .slider {
 	width: inherit;
 	height: 500px;
 	text-align: center;
+}
+
+.clip{
+	background-image: url('/static/img/clipboard.png');
+	width: 420px;
+	height: 500px;
+	margin-bottom: 50px;
+}
+
+#footer-title{
+	color:white;
+	font-size: 24px;
+	font-weight: bold
+}
+
+#footer-content{
+	color: white;
+	font-size: 18px;
+}
+
+#timer{
+	width: 80px;
+	margin-left: 10px;
+	vertical-align: middle;
+	font-size: 24px; font-weight: bold;
 }

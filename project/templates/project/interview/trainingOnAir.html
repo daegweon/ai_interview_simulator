@@ -247,21 +247,21 @@
             <div class="container2">
                 <a style="font-size: 24px; font-weight: bold;"> &nbsp; &nbsp;감정 ON / OFF</a>
 
-                <div style="width: 90px; float: left;">
+                <div id="emotion">
                     <label class="switch">
                         <input type="checkbox" id="checkAnger">
                         <span class="slider"></span>
                     </label>
                     <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">분노</a>
                 </div>
-                <div style="width: 90px; float: left;">
+                <div id="emotion">
                     <label class="switch">
                         <input type="checkbox" id="checkContempt">
                         <span class="slider"></span>
                     </label>
                     <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">경멸</a>
                 </div>
-                <div style="width: 90px; float: left;">
+                <div id="emotion">
                     <label class="switch">
                         <input type="checkbox" id="checkDisgust">
                         <span class="slider"></span>
@@ -269,35 +269,35 @@
                     <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">싫음</a>
                 </div>
                 <br>
-                <div style="width: 90px; float: left;">
+                <div id="emotion">
                     <label class="switch">
                         <input type="checkbox" id="checkFear">
                         <span class="slider"></span>
                     </label>
                     <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">공포</a>
                 </div>
-                <div style="width: 90px; float: left;">
+                <div id="emotion">
                     <label class="switch">
                         <input type="checkbox" id="checkHappiness">
                         <span class="slider"></span>
                     </label>
                     <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">행복</a>
                 </div>
-                <div style="width: 90px; float: left;">
+                <div id="emotion">
                     <label class="switch">
                         <input type="checkbox" id="checkNeutral">
                         <span class="slider"></span>
                     </label>
                     <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">중립</a>
                 </div>
-                <div style="width: 90px; float: left;">
+                <div id="emotion">
                     <label class="switch">
                         <input type="checkbox" id="checkSadness">
                         <span class="slider"></span>
                     </label>
                     <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">슬픔</a>
                 </div>
-                <div style="width: 90px; float: left;">
+                <div id="emotion">
                     <label class="switch">
                         <input type="checkbox" id="checkSurprise">
                         <span class="slider"></span>
@@ -308,7 +308,7 @@
         </div>
         <br>
         
-        <hr style="margin-top: -10px;border: 0.5px solid;">
+        <hr style="margin-top: -10px; border: 0.5px solid;">
 
         <!-- Ban Wrod Section -->
         <div class="mid">
@@ -335,7 +335,7 @@
     </div>
 
     <div class="left-section mid">
-    	<div class="mid" id="clip" style="background-image: url('/static/img/clipboard.png'); width: 420px; height: 500px; margin-bottom: 50px;">
+    	<div class="mid clip" id="clip">
     		<div id="text" style="padding: 10px; width: 350px">
     			<p id="textTitle" style="font-size: 32px; text-align: center"> 면접 질문 </p>
     			<br><br>
@@ -354,7 +354,7 @@
             <button type="button" id="setting" class="btn btn-danger" onclick="nav();">환경 설정 ON</button>
             <button type="button" id="record" class="btn btn-primary" disabled>면접 시작</button>
             <button type="button" id="finInterview" class="btn btn-success" style="display: none;" onclick="getTrainingResult(banWordList,banWordCount,banEmotionList,banEmotionCount)" disabled>연습 종료</button>
-            <a id="timer" style="width: 80px; margin-left: 10px; vertical-align: middle; font-size: 24px; font-weight: bold;">&nbsp;00:00&nbsp;</a>
+            <a id="timer">&nbsp;00:00&nbsp;</a>
         </div>
     </div>
 
@@ -369,7 +369,7 @@
                 <img id="contempt" src='{%static "img/emoticon/c4.png"%}'>
                 <img id="disgust" src='{%static "img/emoticon/d4.png"%}'>
                 <img id="fear" src='{%static "img/emoticon/f4.png"%}'>
-                <p style="width: 240px; font-size: 18px; font-weight: bold;"> &nbsp; &nbsp;분노 &nbsp; &nbsp; 경멸 &nbsp; &nbsp; &nbsp;싫음 &nbsp; &nbsp; 공포 </p>
+                <p id="emoticon-name"> &nbsp; &nbsp;분노 &nbsp; &nbsp; 경멸 &nbsp; &nbsp; &nbsp;싫음 &nbsp; &nbsp; 공포 </p>
             </div>
 
             <div class="emoticon" id ="emoticon2">
@@ -377,7 +377,7 @@
                 <img id="neutral" src='{%static "img/emoticon/n4.png"%}'>
                 <img id="sadness" src='{%static "img/emoticon/s4.png"%}'>
                 <img id="surprise" src='{%static "img/emoticon/p4.png"%}'>
-                <p style="width: 240px; font-size: 18px; font-weight: bold;"> &nbsp; &nbsp;행복 &nbsp; &nbsp; 중립 &nbsp; &nbsp; &nbsp;슬픔 &nbsp; &nbsp; 놀람 </p>
+                <p id="emoticon-name"> &nbsp; &nbsp;행복 &nbsp; &nbsp; 중립 &nbsp; &nbsp; &nbsp;슬픔 &nbsp; &nbsp; 놀람 </p>
             </div>
         </div>
     </div>
@@ -386,14 +386,14 @@
     <div style="text-align: center;">
         <div class="footer-section">
             <br>
-            <a style="color:white; font-size: 24px; font-weight: bold">Copyright</a>
+            <a id="footer-title">Copyright</a>
             <br><br>
-            <a style="color: white; font-size: 18px;">&copy; 2018 Human Learning. &nbsp; All Rights Reserved </a>
+            <a id="footer-content">&copy; 2018 Human Learning. &nbsp; All Rights Reserved </a>
         </div>
         
         <div class="footer-section">
             <br>
-            <a style="color:white; font-size: 24px;  font-weight: bold">About Us&nbsp; </a>
+            <a id="footer-title">About Us&nbsp; </a>
             <br><br>
             <a href="https://github.com/daegweon/ai_interview_simulator">
                 <i style="color: white; font-size:30px" class="fa">&#xf09b;</i>
@@ -410,9 +410,9 @@
         
         <div class="footer-section">
             <br>
-            <a style="color:white; font-size: 24px; font-weight: bold">Contact Us&nbsp; </a>
+            <a id="footer-title">Contact Us&nbsp; </a>
 			<br><br>
-            <a style="color: white; font-size: 18px;">quwieo@ajou.ac.kr</a>
+            <a id="footer-content">quwieo@ajou.ac.kr</a>
         </div>
     </div>
 
