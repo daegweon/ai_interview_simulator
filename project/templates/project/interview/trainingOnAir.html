@@ -161,6 +161,7 @@
                     }
                 });
         }
+		
         var banWordList = [];
         var banWordCount=[];
         var final_transcript = "";
@@ -191,11 +192,6 @@
                                 }
                             }
                         }
-                        console.log("final_transcript=" + final_transcript);
-                        //annyang.trigger(final_transcript); //If the sentence is "final" for the Web Speech API, we can try to trigger the sentence
-                    } else {
-                        interim_transcript += event.results[i][0].transcript;
-                        console.log("interim_transcript=" + interim_transcript);
                     }
                 }
             };
@@ -243,6 +239,7 @@
 
     <div id="mySidenav" class="sidenav" style="background-color: rgba(255,255,255,1); width: inherit;">
         <a href="javascript:void(0)" class="closebtn" onclick="nav()">&times;</a>
+        
         <hr style="margin-bottom: -5px; border: 0.5px solid;">
         
         <!-- Emotion Control Section -->
@@ -310,13 +307,14 @@
             </div>
         </div>
         <br>
+        
         <hr style="margin-top: -10px;border: 0.5px solid;">
 
         <!-- Ban Wrod Section -->
         <div class="mid">
-            <div style=" height: 578px; text-align: center;">
+            <div class="banword">
                 <a style="font-size: 24px; font-weight: bold;">금지 단어</a>
-                <br>
+				<br>
 
                 <div>
                     <input id="word" type="text" style="width: 160px; margin-right: -5px; border: 1px solid; border-top-left-radius: 5px;border-bottom-left-radius: 5px;"
@@ -327,7 +325,6 @@
                 <br><br>
 
                 <ul class="list-group mid" id="ban-word" style="width: 280px;">
-
                 </ul>
 
                 <br><br>
@@ -372,9 +369,9 @@
                 <img id="contempt" src='{%static "img/emoticon/c4.png"%}'>
                 <img id="disgust" src='{%static "img/emoticon/d4.png"%}'>
                 <img id="fear" src='{%static "img/emoticon/f4.png"%}'>
-                <br>
                 <p style="width: 240px; font-size: 18px; font-weight: bold;"> &nbsp; &nbsp;분노 &nbsp; &nbsp; 경멸 &nbsp; &nbsp; &nbsp;싫음 &nbsp; &nbsp; 공포 </p>
             </div>
+
             <div class="emoticon" id ="emoticon2">
                 <img id="happiness" src='{%static "img/emoticon/h4.png"%}'>
                 <img id="neutral" src='{%static "img/emoticon/n4.png"%}'>
@@ -390,15 +387,14 @@
         <div class="footer-section">
             <br>
             <a style="color:white; font-size: 24px; font-weight: bold">Copyright</a>
-            <br>
-            <br>
+            <br><br>
             <a style="color: white; font-size: 18px;">&copy; 2018 Human Learning. &nbsp; All Rights Reserved </a>
         </div>
+        
         <div class="footer-section">
             <br>
             <a style="color:white; font-size: 24px;  font-weight: bold">About Us&nbsp; </a>
-            <br>
-            <br>
+            <br><br>
             <a href="https://github.com/daegweon/ai_interview_simulator">
                 <i style="color: white; font-size:30px" class="fa">&#xf09b;</i>
             </a>
@@ -410,14 +406,12 @@
             <a href="#">
                 <i style="color: white; font-size:30px;" class="fa">&#xf0d5;</i>
             </a>
-            <br>
-            <br>
         </div>
+        
         <div class="footer-section">
             <br>
             <a style="color:white; font-size: 24px; font-weight: bold">Contact Us&nbsp; </a>
-            <br>
-            <br>
+			<br><br>
             <a style="color: white; font-size: 18px;">quwieo@ajou.ac.kr</a>
         </div>
     </div>
