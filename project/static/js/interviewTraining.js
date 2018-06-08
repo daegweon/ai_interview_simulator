@@ -1,4 +1,11 @@
 /*
+1. 파일명: InterviewTraining.js
+2. 저자 : Human Learning
+3. 목적 : 연습 면접 진행. 사용자의 웹캠으로 부터 영상 및 음성 데이터 추출 
+4. 참조 : MediaSource , mediaRecorder
+*/
+
+/*
 *  Copyright (c) 2015 The WebRTC project authors. All Rights Reserved.
 *
 *  Use of this source code is governed by a BSD-style license
@@ -6,36 +13,30 @@
 *  tree.
 */
 
-// This code is adapted from
-// https://rawgit.com/Miguelao/demos/master/mediarecorder.html
-
 'use strict';
-
-/* globals MediaRecorder */
 
 var mediaSource = new MediaSource();
 mediaSource.addEventListener('sourceopen', handleSourceOpen, false);
 var mediaRecorder;
-var recordedBlobs;
 var sourceBuffer;
 var timer;
 var face;
 var questionCount = 0;
 
-var gumVideo = document.querySelector('video#gum');
-
+var webCam = document.querySelector('video#webCam');
 var recordButton = document.querySelector('button#record');
 var snapshotCanvas = document.getElementById('snapshot');
 var context = snapshot.getContext('2d');
+
 recordButton.onclick = toggleRecording;
 
+//token을 만들기 위해 쿠키를 얻는 함수
 function getCookie(name) {
   var cookieValue = null;
   if (document.cookie && document.cookie != '') {
     var cookies = document.cookie.split(';');
     for (var i = 0; i < cookies.length; i++) {
       var cookie = jQuery.trim(cookies[i]);
-      // Does this cookie string begin with the name we want?
       if (cookie.substring(0, name.length + 1) == (name + '=')) {
         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
         break;
@@ -45,36 +46,32 @@ function getCookie(name) {
   return cookieValue;
 }
 
+//스트림 설정
 var constraints = {
   audio: true,
   video: true
 };
 
+//타이머 두자리수 표시
 function pad(n, width) {
   n = n + '';
   return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
 }
 
+//타이머 시작
 function startTick() {
   var countDownDate = new Date().getTime();
 
-  // Update the count down every 1 second
   timer = setInterval(function () {
 
-    // Get todays date and time
     var now = new Date().getTime();
-
-    // Find the distance between now an the count down date
     var distance = now - countDownDate;
-
-    // Time calculations for days, hours, minutes and seconds
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // Output the result in an element with id="timer"
-    document.getElementById("timer").innerHTML = "&nbsp"+pad(minutes, 2) + ":" + pad(seconds, 2)+"&nbsp";
+    document.getElementById("timer").innerHTML = "&nbsp" + pad(minutes, 2) + ":" + pad(seconds, 2) + "&nbsp";
 
-    // If the count down is over, write some text 
+    // 10분 초과시 자동 종료
     if (minutes >= 10) {
       toggleRecording();
       alert('최대 시간을 초과했습니다.');
@@ -82,40 +79,31 @@ function startTick() {
   }, 1000);
 }
 
+//타이머 멈춤
 function stopTick() {
   clearInterval(timer)
 }
 
+//비디오 권한을 획득했을 때
 function handleSuccess(stream) {
   recordButton.disabled = false;
-  console.log('getUserMedia() got stream: ', stream);
   window.stream = stream;
-  gumVideo.srcObject = stream;
+  webCam.srcObject = stream;
 }
 
+//비디오 권한 획득에 에러발생시
 function handleError(error) {
-  console.log('navigator.getUserMedia error: ', error);
+  console.log('getUserMedia error: ', error);
 }
 
 navigator.mediaDevices.getUserMedia(constraints).
   then(handleSuccess).catch(handleError);
 
 function handleSourceOpen(event) {
-  console.log('MediaSource opened');
   sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8"');
-  console.log('Source buffer: ', sourceBuffer);
 }
 
-function handleStop(event) {
-  console.log('Recorder stopped: ', event);
-}
-
-function handleDataAvailable(event) {
-  if (event.data && event.data.size > 0) {
-    //recordedBlobs.push(event.data);
-  }
-}
-
+//URL 형태의 이미지 파일을 Blob 형태로 변환
 function dataURItoBlob(dataURI) {
   var byteString = atob(dataURI.split(',')[1]);
   var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
@@ -129,11 +117,12 @@ function dataURItoBlob(dataURI) {
   return bb;
 }
 
+//면접 시작 버튼 함수
 function toggleRecording() {
   if (recordButton.textContent === '면접 시작' || recordButton.textContent === '다음 문제') {
     startSpeechToText();
-	document.getElementById("textTitle").textContent = "질문" + (questionCount + 1);
-    document.getElementById("question").textContent = ques_text[questionCount];
+    document.getElementById("textTitle").textContent = "질문" + (questionCount + 1); 
+    document.getElementById("question").textContent = ques_text[questionCount];    
     startTick();
     startRecording();
     StartDetectFace();
@@ -142,7 +131,7 @@ function toggleRecording() {
     stopTick();
     stopRecording();
     StopDetectFace();
-    tipToast(questionCount);
+    tipToast(questionCount);  //답변 완료시 면접에 관련된 팁 표시
     questionCount += 1;
     if (questionCount == 5) {
       questionCount = 0;
@@ -157,8 +146,8 @@ function toggleRecording() {
   }
 }
 
+//영상 녹화 시작
 function startRecording() {
-  recordedBlobs = [];
   var options = { mimeType: 'video/webm;codecs=vp9' };
   if (!MediaRecorder.isTypeSupported(options.mimeType)) {
     console.log(options.mimeType + ' is not Supported');
@@ -174,19 +163,14 @@ function startRecording() {
   }
   try {
     mediaRecorder = new MediaRecorder(window.stream, options);
-  } catch (e) {
-    console.error('Exception while creating MediaRecorder: ' + e);
-    alert('Exception while creating MediaRecorder: '
-      + e + '. mimeType: ' + options.mimeType);
+  } catch (error) {
+    console.error('creating MediaRecorder error: ' + error);
     return;
   }
-  console.log('Created MediaRecorder', mediaRecorder, 'with options', options);
   recordButton.textContent = '답변 종료';
-  mediaRecorder.onstop = handleStop;
-  mediaRecorder.ondataavailable = handleDataAvailable;
-  mediaRecorder.start(100); // collect 10ms of data
-  console.log('MediaRecorder started', mediaRecorder);
-	
+  mediaRecorder.start();
+
+  //감정 이모티콘 기본이미지로 설정
   document.getElementById('anger').src = '/static/img/emoticon/a0.png';
   document.getElementById('contempt').src = '/static/img/emoticon/c0.png';
   document.getElementById('disgust').src = '/static/img/emoticon/d0.png';
@@ -197,50 +181,37 @@ function startRecording() {
   document.getElementById('surprise').src = '/static/img/emoticon/p0.png';
 }
 
+//영상 녹화 중단
 function stopRecording() {
   mediaRecorder.stop();
 }
 
+//영상으로 부터 이미지를 추출해 감정 분석에 요청
 function StartDetectFace() {
   face = setInterval(function () {
-    // Draw the video frame to the canvas.
-    context.drawImage(gumVideo, 0, 0, snapshotCanvas.width,
+    context.drawImage(webCam, 0, 0, snapshotCanvas.width,
       snapshotCanvas.height);
     var dataUrl = snapshotCanvas.toDataURL('image/png');
     var blob = dataURItoBlob(dataUrl);
     processImage(blob)
-  }, 500); //set time interval ms
+  }, 500); //0.5초마다 수행
 }
 
-function StopDetectFace(){
+//감정 분석 요청 중지
+function StopDetectFace() {
   clearInterval(face);
 }
 
-function uploadToServer(formData) {
-  $.ajax({
-    url: '/interviews/video-processing/',
-    type: 'POST',
-    data: formData,
-    processData: false,
-    contentType: false,
-    async: true,
-    success: function (data) {
-      if (data === 'good') alert('complete');
-      else alert('??');
-    }
-  });
-  return false;
-}
-
-function getTrainingResult(banwordlist,banwordcount,banEmotionList,banEmotionCount){
+//연습 결과 요청
+function getTrainingResult(banwordlist, banwordcount, banEmotionList, banEmotionCount) {
   var csrftoken = getCookie('csrftoken');
 
   var formData = new FormData();
   formData.append('csrfmiddlewaretoken', csrftoken);
-  formData.append('banwordlist',banwordlist);
-  formData.append('banwordcount',banwordcount);
-  formData.append('banemotionlist',banEmotionList);
-  formData.append('banemotioncount',banEmotionCount);
+  formData.append('banwordlist', banwordlist);
+  formData.append('banwordcount', banwordcount);
+  formData.append('banemotionlist', banEmotionList);
+  formData.append('banemotioncount', banEmotionCount);
 
   $.ajax({
     type: "POST",
@@ -248,7 +219,7 @@ function getTrainingResult(banwordlist,banwordcount,banEmotionList,banEmotionCou
     data: formData,
     processData: false,
     contentType: false,
-    success : function(data){
+    success: function (data) {
       window.location.href = "/interviews/training/result/";
     }
   });
