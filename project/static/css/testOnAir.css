@@ -80,7 +80,7 @@ input:checked + .slider {
 	margin-top: 10px;
 }
 
-#gum {
+#webCam {
 	-o-transform: scaleX(-1);
 	-webkit-transform: scaleX(-1);
 	transform: scaleX(-1);
