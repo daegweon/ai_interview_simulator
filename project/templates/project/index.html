@@ -65,6 +65,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
+                    {% if request.user.is_staff %}
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="/admin/">Admin Page</a>
+                    </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="#introduction">Introduction</a>
                     </li>
