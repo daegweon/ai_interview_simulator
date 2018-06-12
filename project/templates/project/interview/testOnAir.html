@@ -172,7 +172,7 @@
     <script>
         getKey();
         $(window).on('beforeunload', function() {
-            if(questionCount < 5) cancelInterview({{interview_count}});
+            if(questionCount < 5 && questionCount >= 1) cancelInterview({{interview_count}});
         });
     </script>
 
