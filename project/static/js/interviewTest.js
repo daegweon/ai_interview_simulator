@@ -2,15 +2,7 @@
 1. 파일명: InterviewTest.js
 2. 저자 : Human Learning
 3. 목적 : 실전 면접 진행. 사용자의 웹캠으로 부터 영상 및 음성 데이터 추출 
-4. 참조 : MediaSource , mediaRecorder
-*/
-
-/*
-*  Copyright (c) 2015 The WebRTC project authors. All Rights Reserved.
-*
-*  Use of this source code is governed by a BSD-style license
-*  that can be found in the LICENSE file in the root of the source
-*  tree.
+4. 참조 : WebRTC, MediaSource , mediaRecorder
 */
 
 'use strict';

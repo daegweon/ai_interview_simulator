@@ -184,12 +184,8 @@
                         for (var j = 0; j < banLength; j++) {
                             if (event.results[i][0].transcript.indexOf(banWordList[j]) != -1) {
                                 banWordToast(banWordList[j]);
-                            }
-                            var final_transcript_words = final_transcript.split(" ");
-                            for(var k=0; k<final_transcript_words.length; k++){
-                                if(final_transcript_words[k]==banWordList[j]){
-                                    banWordCount[j]+=1;
-                                }
+                                var final_transcript_words = final_transcript.split(banWordList[j]);
+                                banWordCount[j]+=final_transcript_words.length-1;
                             }
                         }
                     }
