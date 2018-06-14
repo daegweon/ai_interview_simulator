@@ -232,9 +232,9 @@ function uploadToServer(formData) {
 function ToggleWebCam() {
   if (camOnOffButton.textContent === '카메라 OFF') {
     camOnOffButton.textContent = '카메라 ON';
-    document.getElementById("gum").style.visibility = "hidden";
+    document.getElementById("webCam").style.visibility = "hidden";
   } else {
-    document.getElementById("gum").style.visibility = "";
+    document.getElementById("webCam").style.visibility = "";
     camOnOffButton.textContent = '카메라 OFF';
   }
 }
