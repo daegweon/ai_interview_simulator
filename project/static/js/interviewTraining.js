@@ -5,6 +5,11 @@
 4. 참조 : WebRTC, MediaSource , mediaRecorder
 */
 
+/*
+This source code contains copyrighted source code under BSD-style license.
+Copyright (c) 2015 The WebRTC project authors. 
+*/
+
 'use strict';
 
 var mediaSource = new MediaSource();
