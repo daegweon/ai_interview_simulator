@@ -4,173 +4,235 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-    <title>AIS - A.I Interview Simulator</title>
+	<title>AIS - A.I Interview Simulator</title>
 
-    <!-- jQuery Import -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
-    <!-- Bootstrap core CSS -->
-    <link href='{%static "vendor/bootstrap/css/bootstrap.min.css" %}' rel="stylesheet">
+	<!-- jQuery Import -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <!-- Custom fonts for this template -->
-    <link href='{%static "vendor/font-awesome/css/font-awesome.min.css" %}' rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+	<!-- Bootstrap core CSS -->
+	<link href='{%static "vendor/bootstrap/css/bootstrap.min.css" %}' rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href='{%static "css/agency.min.css" %}' rel="stylesheet">
+	<!-- Custom fonts for this template -->
+	<link href='{%static "vendor/font-awesome/css/font-awesome.min.css" %}' rel="stylesheet" type="text/css">
+	<link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
 
-    <!-- Auto Modal -->
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link href='{%static "css/mainMenu.css" %}' rel="stylesheet">    
+	<!-- Custom styles for this template -->
+	<link href='{%static "css/agency.min.css" %}' rel="stylesheet">
+
+	<!-- Auto Modal -->
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<link href='{%static "css/mainMenu.css" %}' rel="stylesheet">
+
+	<style>
+		.modal-pop {
+			border: 1px solid #e5e5e6;
+			border-radius: 10px;
+			width: 175px;
+			height: 280px;
+			float: left;
+			text-align: center;
+			margin: 10px;
+		}
+
+		.modal-pop:hover{
+			border-color: black;
+		}
+		
+		.popup-title {
+			font-size: 32px;
+			font-weight: bold;
+			color: #2c8ef8 !important;
+		}
+
+		.popup-content {
+			font-size: 12px;
+			font-weight: bold;
+			color: #2c8ef8 !important;
+		}
+
+		#exampleModalLongTitle {
+			font-size: 24px;
+			font-weight: 900;
+			color: #2c8ef8;
+			margin: 0 auto;
+			text-align: center;
+		}
+
+	</style>
 </head>
 
 <body id="page-top">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg" style="height: 75px;background-color: rgb(44,62,80); text-transform: none" id="mainNav">
-        <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top" style="color: white;" onclick="window.location.replace('/');">AIS</a>
-            <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg" style="height: 75px;background-color: rgb(44,62,80); text-transform: none" id="mainNav">
+		<div class="container">
+			<a class="navbar-brand js-scroll-trigger" href="#page-top" style="color: white;" onclick="window.location.replace('/');">AIS</a>
+			<button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fa fa-bars"></i>
         </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive" style="background-color: rgb(44,62,80);">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/interviews/training/hw-check/">Practice</a>
-                    </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/interviews/test/hw-check/">Test</a>
-                    </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/interviews/record">Record</a>
-                    </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/member/logout/">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+			<div class="collapse navbar-collapse" id="navbarResponsive" style="background-color: rgb(44,62,80);">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item mx-0 mx-lg-1">
+						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/interviews/training/hw-check/">Practice</a>
+					</li>
+					<li class="nav-item mx-0 mx-lg-1">
+						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/interviews/test/hw-check/">Test</a>
+					</li>
+					<li class="nav-item mx-0 mx-lg-1">
+						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/interviews/record">Record</a>
+					</li>
+					<li class="nav-item mx-0 mx-lg-1">
+						<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/member/logout/">Logout</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
-    <!-- Menu Select -->
-    <div class="container-fluid" style="margin-top: 30px; margin-bottom: 30px">
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 project project-1 wow animated fadeInLeft">
-            <div class="project-hover">
-                <h2>면접 TIP</h2>
-                <hr />
-                <br><br><br>
-                <p>{{content}}</p>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 project project-2 wow animated animated3 fadeInLeft">
-            <div class="project-hover">
-                <h2>연습 면접</h2>
-                <hr />
-                <br><br>
-                <p>면접을 연습할 수 있는 환경을 제공합니다. <br>실시간으로 자신의 표정과 자세, 언어적 <br>습관을 지켜보면서 연습할 수 있어요. </p>
-                <br>
-                <a href="/interviews/training/hw-check/">시작하기</a>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 project project-3 wow animated animated2 fadeInLeft">
-            <div class="project-hover">
-                <h2>실전 면접</h2>
-                <hr />
-                <br><br>
-                <p>실제와 같은 면접 환경을 제공합니다. <br>각 질문에 대해 분석한 결과를 통해 당신의 면접 상태를 알려주고 개선 방향을 제시해드립니다.</p>
-                <br>
-                <a href="/interviews/test/hw-check/">시작하기</a>
-            </div>
-        </div>
+	<!-- Menu Select -->
+	<div class="container-fluid" style="margin-top: 30px; margin-bottom: 30px">
+		<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 project project-1 wow animated fadeInLeft">
+			<div class="project-hover">
+				<h2>면접 TIP</h2>
+				<hr />
+				<br><br><br>
+				<p>{{content}}</p>
+			</div>
+		</div>
+		<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 project project-2 wow animated animated3 fadeInLeft">
+			<div class="project-hover">
+				<h2>연습 면접</h2>
+				<hr />
+				<br><br>
+				<p>면접을 연습할 수 있는 환경을 제공합니다. <br>실시간으로 자신의 표정과 자세, 언어적 <br>습관을 지켜보면서 연습할 수 있어요. </p>
+				<br>
+				<a href="/interviews/training/hw-check/">시작하기</a>
+			</div>
+		</div>
+		<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 project project-3 wow animated animated2 fadeInLeft">
+			<div class="project-hover">
+				<h2>실전 면접</h2>
+				<hr />
+				<br><br>
+				<p>실제와 같은 면접 환경을 제공합니다. <br>각 질문에 대해 분석한 결과를 통해 당신의 면접 상태를 알려주고 개선 방향을 제시해드립니다.</p>
+				<br>
+				<a href="/interviews/test/hw-check/">시작하기</a>
+			</div>
+		</div>
 
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 project project-4 wow animated animated4 fadeInLeft">
-            <div class="project-hover">
-                <h2>결과 내역</h2>
-                <hr />
-                <br><br>
-                <p>지금까지 진행한 면접의 결과를 제공합니다. <br>지나간 면접을 통해 자신이 어떻게 성장해왔는지 확인해보세요.</p>
-                <br>
-                <a href="/interviews/record">확인하기</a>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-    </div>
+		<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 project project-4 wow animated animated4 fadeInLeft">
+			<div class="project-hover">
+				<h2>결과 내역</h2>
+				<hr />
+				<br><br>
+				<p>지금까지 진행한 면접의 결과를 제공합니다. <br>지나간 면접을 통해 자신이 어떻게 성장해왔는지 확인해보세요.</p>
+				<br>
+				<a href="/interviews/record">확인하기</a>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+ 
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="margin-left: 0 auto !important;">
+		<div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 800px;">
+			<div class="modal-content" style="width: auto;">
+				<div class="modal-header">
+					<p class="modal-title" id="exampleModalLongTitle" style="font-size: 30px;"> &nbsp;면접 유의 사항</p>
+					<a style="font-size: 32px; font-weight: bold;" href="javascript:void(0)" data-dismiss="modal">&times;</a>
+				</div>
 
-    <!-- Modal -->
-    <div class="modal fade in" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header" style="-webkit-box-align:center; -webkit-box-pack:center; display:-webkit-box;">
-                    <h5 class="modal-title" style="font-size: 24px; font-weight: bold;" id="exampleModalLongTitle"> &nbsp;면접 유의 사항</h5>
-                </div>
-                <div class="modal-body">
+				<div class="modal-body" style="width: 800px;">
+					<div class="modal-pop" style="margin-left: 5px;">
+						<br>
+						<a class="popup-title">①</a>
+						<br><br>
+						<img src="../../static/img/popup/camera.png">
+						<br><br>
+						<a class="popup-content">내장 카메라가 없다면<br>외부 카메라를 연결해주세요.</a>
+					</div>
+					<div class="modal-pop">
+						<br>
+						<a class="popup-title">②</a>
+						<br><br>
+						<img src="../../static/img/popup/mic.png">
+						<br><br>
+						<a class="popup-content">헤드셋 또는 마이크를<br>연결해주세요.</a>
+					</div>
+					<div class="modal-pop">
+						<br>
+						<a class="popup-title">③</a>
+						<br><br>
+						<img src="../../static/img/popup/chrome.png">
+						<br><br>
+						<a class="popup-content">면접은 크롬 브라우저를<br>통해서만 진행할 수 있습니다.</a>
+					</div>
+					<div class="modal-pop" style="margin-right: 5px;">
+						<br>
+						<a class="popup-title">④</a>
+						<br><br>
+						<img src="../../static/img/popup/noise.png">
+						<br><br>
+						<a class="popup-content">주변 소음이 크면 면접 결과가<br>부정확할 수 있습니다.</a>
+					</div>
+				</div>
 
-                    <p style="margin-left: 10px; font-size: 20px">1. 카메라 준비!</p>
-                    <p> &nbsp; &nbsp; : 내장 카메라가 없다면 외부 카메라를 연결해주세요.</p>
-                    <br>
-                    <p style="margin-left: 10px; font-size: 20px">2. 마이크 준비!</p>
-                    <p> &nbsp; &nbsp; : 헤드셋 또는 마이크를 연결해주세요.</p>
-                    <br>
-                    <p style="margin-left: 10px; font-size: 20px">3. 크롬 브라우저 사용!</p>
-                    <p> &nbsp; &nbsp; : 면접은 크롬브라우저를 통해서만 진행할 수 있습니다.</p>
-                    <br>
-                    <p style="margin-left: 10px; font-size: 20px">4. 조용한 환경!</p>
-                    <p> &nbsp; &nbsp; : 주변 소음이 크면 면접 결과가 부정확할 수 있습니다.</p>
+				<div class="modal-footer"></div>
+			</div>
+		</div>
+	</div>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                </div>
-            </div>
-        </div>
-    </div>
+	<!-- Footer -->
+	<div style="text-align: center;">
+		<div style="width: 33.3%; height: 150px; float: left; background-color: rgb(44,62,80);">
+			<br>
+			<a style="color:white; font-size: 24px; font-weight: bold">Copyright</a>
+			<br><br>
+			<a style="color: white; font-size: 18px;">&copy; 2018 Human Learning. &nbsp; All Rights Reserved </a>
+		</div>
+		<div style="width: 33.3%; height: 150px; float: left; background-color: rgb(44,62,80);">
+			<br>
+			<a style="color:white; font-size: 24px;  font-weight: bold">About Us&nbsp; </a>
+			<br><br>
+			<a href="https://github.com/daegweon/ai_interview_simulator"> <i style="color: white; font-size:30px" class="fa">&#xf09b;</i> </a>
+			<a> &nbsp; &nbsp; </a>
+			<a> <i style="color: white; font-size:30px;" class="fa">&#xf08c;</i> </a>
+			<a> &nbsp; &nbsp; </a>
+			<a href="#"> <i style="color: white; font-size:30px;" class="fa">&#xf0d5;</i> </a>
+			<br><br>
+		</div>
+		<div style="width: 33.3%; height: 150px; float: left; background-color: rgb(44,62,80);">
+			<br>
+			<a style="color:white; font-size: 24px; font-weight: bold">Contact Us&nbsp; </a>
+			<br><br>
+			<a style="color: white; font-size: 18px;">quwieo@ajou.ac.kr</a>
+		</div>
+	</div>
 
-    <!-- Footer -->
-    <div style="text-align: center;">
-        <div style="width: 33.3%; height: 150px; float: left; background-color: rgb(44,62,80);">
-            <br>
-            <a style="color:white; font-size: 24px; font-weight: bold">Copyright</a>
-            <br><br>
-            <a style="color: white; font-size: 18px;">&copy; 2018 Human Learning. &nbsp; All Rights Reserved </a>
-        </div>
-        <div style="width: 33.3%; height: 150px; float: left; background-color: rgb(44,62,80);">
-            <br>
-            <a style="color:white; font-size: 24px;  font-weight: bold">About Us&nbsp; </a>
-            <br><br>
-            <a href="https://github.com/daegweon/ai_interview_simulator"> <i style="color: white; font-size:30px" class="fa">&#xf09b;</i> </a>
-            <a> &nbsp; &nbsp; </a>
-            <a> <i style="color: white; font-size:30px;" class="fa">&#xf08c;</i> </a>
-            <a> &nbsp; &nbsp; </a>
-            <a href="#"> <i style="color: white; font-size:30px;" class="fa">&#xf0d5;</i> </a>
-            <br><br>
-        </div>
-        <div style="width: 33.3%; height: 150px; float: left; background-color: rgb(44,62,80);">
-            <br>
-            <a style="color:white; font-size: 24px; font-weight: bold">Contact Us&nbsp; </a>
-            <br><br>
-            <a style="color: white; font-size: 18px;">quwieo@ajou.ac.kr</a>
-        </div>
-    </div>
+	<script>
+		$(window).load(function() {
+			$('#exampleModalCenter').modal('show');
+		});
 
-    <script> $(window).load(function() { $('#exampleModalCenter').modal('show'); }); </script>
+	</script>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src='{%static "vendor/jquery/jquery.min.js" %}'></script>
-    <script src='{%static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}'></script>
+	<!-- Bootstrap core JavaScript -->
+	<script src='{%static "vendor/jquery/jquery.min.js" %}'></script>
+	<script src='{%static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}'></script>
 
-    <!-- Plugin JavaScript -->
-    <script src='{%static "vendor/jquery-easing/jquery.easing.min.js" %}'></script>
+	<!-- Plugin JavaScript -->
+	<script src='{%static "vendor/jquery-easing/jquery.easing.min.js" %}'></script>
 
-    <!-- Custom scripts for this template -->
-    <script src='{%static "js/agency.min.js" %}'></script>
+	<!-- Custom scripts for this template -->
+	<script src='{%static "js/agency.min.js" %}'></script>
 
 </body>
 
