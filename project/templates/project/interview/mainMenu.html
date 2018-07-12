@@ -23,10 +23,15 @@
 
 	<!-- Custom styles for this template -->
 	<link href='{%static "css/agency.min.css" %}' rel="stylesheet">
+	<link href='{%static "css/mainMenu.css" %}' rel="stylesheet">
 
 	<!-- Auto Modal -->
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-	<link href='{%static "css/mainMenu.css" %}' rel="stylesheet">
+
+	<style>
+
+
+	</style>
 
 </head>
 
@@ -61,50 +66,51 @@
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
-	<!-- Menu Select -->
-	<div class="container-fluid" style="margin-top: 30px; margin-bottom: 30px">
-		<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 project project-1 wow animated fadeInLeft">
-			<div class="project-hover">
-				<h2>면접 TIP</h2>
-				<hr />
-				<br><br><br>
-				<p>{{content}}</p>
+	<!--Menu Select-->
+	<div style="height: 620px; -webkit-box-align: center; -webkit-box-pack: center; display: -webkit-box;">
+		<div id="panel">
+			<div class="project wow animated fadeInLeft" style="background-image: url('../../static/img/panel1.png'); ">
+				<div class="project-hover" style="background-image: url('../../static/img/panel1-2.png');">
+					<p style="font-size: 32px; font-weight: bold;">면접 TIP</p>
+					<hr />
+					<br><br><br>
+					<p>{{content}}</p>
+				</div>
+			</div>
+			<div class="project wow animated fadeInLeft" style="background-image: url('../../static/img/panel2.png');">
+				<div class="project-hover" style="background-image: url('../../static/img/panel2-2.png');">
+					<p style="font-size: 32px; font-weight: bold;">연습 면접</p>
+					<hr />
+					<br><br>
+					<p>면접을 연습할 수 있는 환경을 제공합니다. <br>실시간으로 자신의 표정과 자세, 언어적 <br>습관을 지켜보면서 연습할 수 있어요. </p>
+					<br>
+					<a href="/interviews/training/hw-check/">시작하기</a>
+				</div>
+			</div>
+			<div class="project wow animated fadeInLeft" style="background-image: url('../../static/img/panel3.png');}">
+				<div class="project-hover" style="background-image: url('../../static/img/panel3-2.png');">
+					<p style="font-size: 32px; font-weight: bold;">실전 면접</p>
+					<hr />
+					<br><br>
+					<p>실제와 같은 면접 환경을 제공합니다. <br>각 질문에 대해 분석한 결과를 통해 당신의 면접 상태를 알려주고 개선 방향을 제시해드립니다.</p>
+					<br>
+					<a href="/interviews/test/hw-check/">시작하기</a>
+				</div>
+			</div>
+			<div class="project wow animated fadeInLeft" style="background-image: url('../../static/img/panel4.png');">
+				<div class="project-hover" style="background-image: url('../../static/img/panel4-2.png');">
+					<p style="font-size: 32px; font-weight: bold;">결과 내역</p>
+					<hr />
+					<br><br>
+					<p>지금까지 진행한 면접의 결과를 제공합니다. <br>지나간 면접을 통해 자신이 어떻게 성장해왔는지 확인해보세요.</p>
+					<br>
+					<a href="/interviews/record">확인하기</a>
+				</div>
 			</div>
 		</div>
-		<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 project project-2 wow animated animated3 fadeInLeft">
-			<div class="project-hover">
-				<h2>연습 면접</h2>
-				<hr />
-				<br><br>
-				<p>면접을 연습할 수 있는 환경을 제공합니다. <br>실시간으로 자신의 표정과 자세, 언어적 <br>습관을 지켜보면서 연습할 수 있어요. </p>
-				<br>
-				<a href="/interviews/training/hw-check/">시작하기</a>
-			</div>
-		</div>
-		<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 project project-3 wow animated animated2 fadeInLeft">
-			<div class="project-hover">
-				<h2>실전 면접</h2>
-				<hr />
-				<br><br>
-				<p>실제와 같은 면접 환경을 제공합니다. <br>각 질문에 대해 분석한 결과를 통해 당신의 면접 상태를 알려주고 개선 방향을 제시해드립니다.</p>
-				<br>
-				<a href="/interviews/test/hw-check/">시작하기</a>
-			</div>
-		</div>
-
-		<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 project project-4 wow animated animated4 fadeInLeft">
-			<div class="project-hover">
-				<h2>결과 내역</h2>
-				<hr />
-				<br><br>
-				<p>지금까지 진행한 면접의 결과를 제공합니다. <br>지나간 면접을 통해 자신이 어떻게 성장해왔는지 확인해보세요.</p>
-				<br>
-				<a href="/interviews/record">확인하기</a>
-			</div>
-		</div>
-		<div class="clearfix"></div>
 	</div>
- 
+
+
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 800px;">
