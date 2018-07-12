@@ -29,8 +29,31 @@
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 	<style>
+		.btn-start{
+			width: 180px;
+			height: 70px;
+			border: 2px solid #ffffff;
+			border-radius: 10px;
+			color: white;
+			background-color: rgba(255, 255, 255, 0.1);
+			font-size: 20px;
+			font-weight: bold;
+		}
+		
+		.btn-start:hover{
+			background-color: rgba(255, 255, 255, 0.7);
+			color: #959799;
+		}
 
-
+		.panel-title{
+			font-size: 32px;
+			font-weight: bold;
+		}
+		
+		.panel-content{
+			font-size: 18px;
+			font-weight: bold;
+		}
 	</style>
 
 </head>
@@ -71,7 +94,7 @@
 		<div id="panel">
 			<div class="project wow animated fadeInLeft" style="background-image: url('../../static/img/panel1.png'); ">
 				<div class="project-hover" style="background-image: url('../../static/img/panel1-2.png');">
-					<p style="font-size: 32px; font-weight: bold;">면접 TIP</p>
+					<p class="panel-title">면접 TIP</p>
 					<hr />
 					<br><br><br>
 					<p>{{content}}</p>
@@ -79,32 +102,32 @@
 			</div>
 			<div class="project wow animated fadeInLeft" style="background-image: url('../../static/img/panel2.png');">
 				<div class="project-hover" style="background-image: url('../../static/img/panel2-2.png');">
-					<p style="font-size: 32px; font-weight: bold;">연습 면접</p>
+					<p class="panel-title">연습 면접</p>
 					<hr />
 					<br><br>
-					<p>면접을 연습할 수 있는 환경을 제공합니다. <br>실시간으로 자신의 표정과 자세, 언어적 <br>습관을 지켜보면서 연습할 수 있어요. </p>
-					<br>
-					<a href="/interviews/training/hw-check/">시작하기</a>
+					<p class="panel-content">실시간으로 제공되는 피드백<br>(표정, 자세, 언어 습관)을 통해<br>면접을 연습할 수 있습니다. </p>
+					<br><br><br>
+					<button class="btn-start" onclick = "location.href='/interviews/training/hw-check'"> 시작하기 </button>
 				</div>
 			</div>
 			<div class="project wow animated fadeInLeft" style="background-image: url('../../static/img/panel3.png');}">
 				<div class="project-hover" style="background-image: url('../../static/img/panel3-2.png');">
-					<p style="font-size: 32px; font-weight: bold;">실전 면접</p>
+					<p class="panel-title">실전 면접</p>
 					<hr />
 					<br><br>
-					<p>실제와 같은 면접 환경을 제공합니다. <br>각 질문에 대해 분석한 결과를 통해 당신의 면접 상태를 알려주고 개선 방향을 제시해드립니다.</p>
-					<br>
-					<a href="/interviews/test/hw-check/">시작하기</a>
+					<p class="panel-content">실제처럼 진행되는 면접으로 <br>사용자의 면접 상태를 분석하여 <br> 개선 방향을 제시해드립니다.</p>
+					<br><br><br>
+					<button class="btn-start" onclick = "location.href='/interviews/test/hw-check/'"> 시작하기 </button>
 				</div>
 			</div>
 			<div class="project wow animated fadeInLeft" style="background-image: url('../../static/img/panel4.png');">
 				<div class="project-hover" style="background-image: url('../../static/img/panel4-2.png');">
-					<p style="font-size: 32px; font-weight: bold;">결과 내역</p>
+					<p class="panel-title">결과 내역</p>
 					<hr />
 					<br><br>
-					<p>지금까지 진행한 면접의 결과를 제공합니다. <br>지나간 면접을 통해 자신이 어떻게 성장해왔는지 확인해보세요.</p>
-					<br>
-					<a href="/interviews/record">확인하기</a>
+					<p class="panel-content">지금까지 진행한 면접의<br>결과를 보면서 자신이 어떻게<br>성장했는지 확인할 수 있습니다.</p>
+					<br><br><br>
+					<button class="btn-start" onclick = "location.href='/interviews/record'"> 확인하기 </button>
 				</div>
 			</div>
 		</div>

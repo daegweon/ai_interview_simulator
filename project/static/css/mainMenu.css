@@ -4,20 +4,11 @@ body {
 	*width: 100%;
 }
 
-.title-arch {
-	text-align: center;
-	margin: 50px 0;
-	font-size: 22px;
-	letter-spacing: 2px;
-	text-transform: uppercase;
-}
-
 .project {
 	width: 320px;
 	height: 480px;
 	background-size: cover;
 	background-position: center;
-	float: left;
 	margin: 20px;
 	float: left;
 }
@@ -51,13 +42,13 @@ body {
 
 .project-hover a {
 	color: rgba(255, 255, 255, 1);
-	padding: 2px 22px;
-	line-height: 40px;
-	border: 2px solid rgba(255, 255, 255, 1);
+	width: 180px;
+/*
 	-webkit-transition: all 0.5s ease-in-out;
 	-moz-transition: all 0.5s ease-in-out;
 	-o-transition: all 0.5s ease-in-out;
 	transition: all 0.5s ease-in-out;
+*/
 }
 
 .project-hover a:hover {
