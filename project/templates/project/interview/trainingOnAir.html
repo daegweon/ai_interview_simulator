@@ -34,6 +34,9 @@
     <script src='{%static "js/realtimeface.js"%}'></script>
     <script src='{%static "js/stt.js" %}'></script>
 
+	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+   
     <script>
         getKey();
         var tip = {{ tip | safe}};
@@ -202,15 +205,19 @@
     <style>
 		.onoff{
 			width: 45px;
-			font-weight: bold;
-			outline: none;
+			line-height: 36px;
 			padding: 0;
-			border: 0;
+			margin: 0;
+			outline: none;
+			border: 1px solid #2c8ef8;
+			font-size: 18px;
+			font-weight: bold;
 		}
 		
 		.onoff:focus{
 			outline: none;
 		}
+		
 	</style>
 </head>
 
@@ -365,6 +372,15 @@
         </div>
         <div class="mid">
             <br>
+            
+            
+            <div class="btn-group" style="width: 130px; height: 36px;">
+            	<a style="font-size: 18px; font-weight: bold; width: 36px; line-height: 36px; margin-right: 4px; padding: 0;">분노</a>
+  				<button type="button" id="btnOn" class="onoff" style="border-top-left-radius: 8px; border-bottom-left-radius: 8px; background-color: #efe9e9; color: #9c9b9b;" onclick="detectOn('btnOn', 'btnOff', 'test')">ON</button>
+  				<button type="button" id="btnOff" class="onoff" style="border-top-right-radius: 8px; border-bottom-right-radius:  8px; background-color: #2c8ef8; color: #ffffff" onclick="detectOff('btnOn', 'btnOff', 'test')">OFF</button>
+  				<input type="checkbox" id="test" hidden>
+			</div>
+            
             <a id="timer">&nbsp;00:00&nbsp;</a>
             <button type="button" id="record" class="btn btn-primary" disabled>면접 시작</button>
             <button type="button" id="setting" class="btn btn-danger" onclick="nav();">환경 설정 <i class="fa fa-gear" style="font-size: 16px"></i></button>
@@ -430,27 +446,32 @@
         </div>
     </div>
     
+    <!-- Emotion checkbox checking -->
     <script>
-		var btnOn = document.querySelector('#btnOn');
-		var btnOff = document.querySelector('#btnOff');
-		
-		//button 이름에 따른 감정 변화 가능하게
-		function detectOn(){
+		function detectOn(btnOn, btnOff, checkbox){
+			var btnOn = document.getElementById(btnOn);
+			var btnOff = document.getElementById(btnOff);
+			var checkbox = document.getElementById(checkbox);
 			btnOn.style.backgroundColor="#2c8ef8";
 			btnOn.style.color="#ffffff";
 			btnOn.disabled = true;
 			btnOff.disabled = false;
-			btnOff.style.backgroundColor="#e8dcdc";
-			btnOff.style.color="#423630";
+			btnOff.style.backgroundColor="#efe9e9";
+			btnOff.style.color="#9c9b9b";
+			checkbox.checked = true;
 		}
 		
-		function detectOff(){
+		function detectOff(btnOn, btnOff){
+			var btnOn = document.getElementById(btnOn);
+			var btnOff = document.getElementById(btnOff);
+			var checkbox = document.getElementById(checkbox);
 			btnOff.style.backgroundColor="#2c8ef8";
 			btnOff.style.color="#ffffff";
 			btnOff.disabled = true;
 			btnOn.disabled = false;
-			btnOn.style.backgroundColor="#e8dcdc";
-			btnOn.style.color="#423630";
+			btnOn.style.backgroundColor="#efe9e9";
+			btnOn.style.color="#9c9b9b";
+			checkbox.checked = false;
 		}
 	</script>
 
