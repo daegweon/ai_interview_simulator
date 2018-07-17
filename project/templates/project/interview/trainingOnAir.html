@@ -198,6 +198,20 @@
         }
 
     </script>
+    
+    <style>
+		.onoff{
+			width: 45px;
+			font-weight: bold;
+			outline: none;
+			padding: 0;
+			border: 0;
+		}
+		
+		.onoff:focus{
+			outline: none;
+		}
+	</style>
 </head>
 
 <body id="page-top">
@@ -232,6 +246,8 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
         crossorigin="anonymous">
+        
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <div id="mySidenav" class="sidenav" style="background-color: rgba(255,255,255,1); width: inherit;">
         <a href="javascript:void(0)" class="closebtn" onclick="nav()">&times;</a>
@@ -328,6 +344,8 @@
                 <hr style="border: 0.5px solid;">
             </div>
         </div>
+        
+
     </div>
 
     <div class="left-section mid">
@@ -347,17 +365,17 @@
         </div>
         <div class="mid">
             <br>
-            <button type="button" id="setting" class="btn btn-danger" onclick="nav();">환경 설정 ON</button>
-            <button type="button" id="record" class="btn btn-primary" disabled>면접 시작</button>
-            <button type="button" id="finInterview" class="btn btn-success" style="display: none;" onclick="getTrainingResult(banWordList,banWordCount,banEmotionList,banEmotionCount)" disabled>연습 종료</button>
             <a id="timer">&nbsp;00:00&nbsp;</a>
+            <button type="button" id="record" class="btn btn-primary" disabled>면접 시작</button>
+            <button type="button" id="setting" class="btn btn-danger" onclick="nav();">환경 설정 <i class="fa fa-gear" style="font-size: 16px"></i></button>
+            <button type="button" id="finInterview" class="btn btn-success" style="display: none;" onclick="getTrainingResult(banWordList,banWordCount,banEmotionList,banEmotionCount)" disabled>연습 종료</button>
         </div>
     </div>
 
     <div class="right-section mid">
         <div id="emotionresult">
             <div id="emotiontitle">
-                <span>실시간 감정</span>
+                <span>실시간 표정</span>
             </div>
             
             <div class="emoticon" id="emoticon1">
@@ -411,30 +429,59 @@
             <a id="footer-content">quwieo@ajou.ac.kr</a>
         </div>
     </div>
+    
+    <script>
+		var btnOn = document.querySelector('#btnOn');
+		var btnOff = document.querySelector('#btnOff');
+		
+		//button 이름에 따른 감정 변화 가능하게
+		function detectOn(){
+			btnOn.style.backgroundColor="#2c8ef8";
+			btnOn.style.color="#ffffff";
+			btnOn.disabled = true;
+			btnOff.disabled = false;
+			btnOff.style.backgroundColor="#e8dcdc";
+			btnOff.style.color="#423630";
+		}
+		
+		function detectOff(){
+			btnOff.style.backgroundColor="#2c8ef8";
+			btnOff.style.color="#ffffff";
+			btnOff.disabled = true;
+			btnOn.disabled = false;
+			btnOn.style.backgroundColor="#e8dcdc";
+			btnOn.style.color="#423630";
+		}
+	</script>
 
     <script>
+		var count = 0;
+		
         function nav() {
             var navBtn = document.querySelector('button#setting');
+			
 
-            if (navBtn.textContent == '환경 설정 ON') {
-                openNav();
-                navBtn.textContent = '환경 설정 OFF';
+            if (count == 0) {
+                document.getElementById("mySidenav").style.width = "310px";
+				count = 1;
+                //navBtn.textContent = '환경 설정 OFF';
             }
-            else if (navBtn.textContent == '환경 설정 OFF') {
-                closeNav();
-                navBtn.textContent = '환경 설정 ON';
+            else {
+                 document.getElementById("mySidenav").style.width = "0px";
+				count = 0;
+                //navBtn.textContent = '환경 설정 ON';
             }
         }
 
-        /* Set the width of the side navigation to ???px */
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "310px";
-        }
-
-        /* Set the width of the side navigation to 0 */
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-        }
+//        /* Set the width of the side navigation to ???px */
+//        function openNav() {
+//            document.getElementById("mySidenav").style.width = "310px";
+//        }
+//
+//        /* Set the width of the side navigation to 0 */
+//        function closeNav() {
+//            document.getElementById("mySidenav").style.width = "0";
+//        }
     </script>
    
     <script>
