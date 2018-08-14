@@ -71,7 +71,7 @@
                 });
         }
         function tipToast(count) {
-				document.getElementById("textTitle").textContent = "면접 TIP";
+				document.getElementById("textTitle").textContent = "Tip. ";
 				document.getElementById("question").textContent = tip[count];
         }
         function banPoseToast() {
@@ -225,8 +225,9 @@
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg" style="height: 75px;background-color: rgb(44,62,80); text-transform: none" id="mainNav">
-        <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="/interviews/" style="color: white;">AIS</a>
+        <div class="container" style="margin: 0; width: 100%;">
+            <a class="navbar-brand js-scroll-trigger" href="/interviews/" style="color: white;">AIS | </a>
+            <a style="color: #b0b0b0; font-size: 18px; font-weight: 400;">AI Interview Simulator</a>
             <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
@@ -352,68 +353,118 @@
             </div>
         </div>
         
-
     </div>
 
+	<div style="width: 100%; padding-top: 20px; padding-left: 30px;">
+		<a id="timer" style="margin-right: 10px; border-radius: 5px; padding: 3px; color: #2c8ef8;">&nbsp;00:00&nbsp;</a>
+        <button type="button" id="record" class="btn btn-primary" style="margin-right: 10px; box-shadow: 0 4px 2px -2px gray;" disabled>면접 시작</button>
+        <button type="button" id="setting" class="btn btn-danger" style="box-shadow: 0 4px 2px -2px gray;" onclick="nav();">환경 설정 <i class="fa fa-gear"></i></button>
+        <button type="button" id="finInterview" class="btn btn-success" style="display: none;" onclick="getTrainingResult(banWordList,banWordCount,banEmotionList,banEmotionCount)" disabled>연습 종료</button>
+        <br><br>
+        
+        <div style="width: 54%; background-color: #eff1f3; line-height: 50px; border-radius: 10px; padding-left: 20px;">
+    		<a id="textTitle" style="font-size: 22px; font-weight: bold; color: #2c8ef8;">Q. </a>
+        	<a id="question" style="font-size: 22px; font-weight: bold; color: #2c8ef8;">면접이 시작되면 질문이 표시됩니다.</a>
+    	</div>
+	</div>  
+   
+
+   
+<!--
     <div class="left-section mid">
     	<div class="mid clip" id="clip">
     		<div id="text" style="padding: 10px; width: 350px">
-    			<p id="textTitle" style="font-size: 32px; text-align: center"> 면접 질문 </p>
+    			
     			<br><br>
-    			<p id="question" style="font-size: 24px; text-align: center"> 면접이 시작되면 <br> 질문이 표시됩니다. </p>
+    			
     		</div>	
     	</div>
     </div>
+-->
 
     <div class="middle-section">
-        <div class="mid" style="margin-top: 50px;">
-            <video style="border: 1px solid black; align-items: center;" id="webCam" width="660" height="495" autoplay muted></video>
-            <canvas id="snapshot" width="660" height="495" style="display: none;"></canvas>
+        <div style="margin-top: 20px; text-align: center;">
+            <video style="border: 1px solid black; align-items: center;" id="webCam" width="720" height="540" autoplay muted></video>
+            <canvas id="snapshot" width="720" height="540" style="display: none;"></canvas>
         </div>
+	</div>
+<!--
         <div class="mid">
-            <br>
-            
-            
+            <br>    
+ 새로운 토글 버튼
             <div class="btn-group" style="width: 130px; height: 36px;">
             	<a style="font-size: 18px; font-weight: bold; width: 36px; line-height: 36px; margin-right: 4px; padding: 0;">분노</a>
   				<button type="button" id="btnOn" class="onoff" style="border-top-left-radius: 8px; border-bottom-left-radius: 8px; background-color: #efe9e9; color: #9c9b9b;" onclick="detectOn('btnOn', 'btnOff', 'test')">ON</button>
   				<button type="button" id="btnOff" class="onoff" style="border-top-right-radius: 8px; border-bottom-right-radius:  8px; background-color: #2c8ef8; color: #ffffff" onclick="detectOff('btnOn', 'btnOff', 'test')">OFF</button>
   				<input type="checkbox" id="test" hidden>
 			</div>
-            
-            <a id="timer">&nbsp;00:00&nbsp;</a>
-            <button type="button" id="record" class="btn btn-primary" disabled>면접 시작</button>
-            <button type="button" id="setting" class="btn btn-danger" onclick="nav();">환경 설정 <i class="fa fa-gear" style="font-size: 16px"></i></button>
-            <button type="button" id="finInterview" class="btn btn-success" style="display: none;" onclick="getTrainingResult(banWordList,banWordCount,banEmotionList,banEmotionCount)" disabled>연습 종료</button>
         </div>
     </div>
+-->
 
-    <div class="right-section mid">
-        <div id="emotionresult">
-            <div id="emotiontitle">
-                <span>실시간 표정</span>
-            </div>
-            
+    <div class="right-section">
+        <div id="emotionresult" style="margin-top: 10px;">
+
+            <a style="line-height: 40px; font-size: 18px; font-family: Noto Sans KR; font-weight: bold; color: #2c8ef8;">● 실시간 표정</a>
+
             <div class="emoticon" id="emoticon1">
-                <img id="anger" src='{%static "img/emoticon/a4.png"%}'>
-                <img id="contempt" src='{%static "img/emoticon/c4.png"%}'>
-                <img id="disgust" src='{%static "img/emoticon/d4.png"%}'>
-                <img id="fear" src='{%static "img/emoticon/f4.png"%}'>
-                <p id="emoticon-name"> &nbsp; &nbsp;분노 &nbsp; &nbsp; 경멸 &nbsp; &nbsp; &nbsp;싫음 &nbsp; &nbsp; 공포 </p>
-            </div>
+            	<div style="width: 60px; float: left; margin-left: 3px; margin-right: 3px;">
+               		<img id="anger" src='{%static "img/emoticon/a4.png"%}' title="Anger">
+               		<p style="font-size: 18px; line-height: 28px; text-align: center; margin: 0;">분노</p>
+				</div>
+				<div style="width: 60px; float: left; margin-left: 3px; margin-right: 3px;">
+               		<img id="contempt" src='{%static "img/emoticon/c4.png"%}'>
+               		<p style="font-size: 18px; line-height: 28px; text-align: center; margin: 0;">경멸</p>
+				</div>
+				<div style="width: 60px; float: left; margin-left: 3px; margin-right: 3px;">
+               		<img id="disgust" src='{%static "img/emoticon/d4.png"%}'>
+               		<p style="font-size: 18px; line-height: 28px; text-align: center; margin: 0;">싫음</p>
+				</div>
+				<div style="width: 60px; float: left; margin-left: 3px; margin-right: 3px;">
+                	<img id="fear" src='{%static "img/emoticon/f4.png"%}'>
+               		<p style="font-size: 18px; line-height: 28px; text-align: center; margin: 0;">공포</p>
+				</div>
+				<div style="width: 60px; float: left; margin-left: 3px; margin-right: 3px;">
+                	<img id="happiness" src='{%static "img/emoticon/h4.png"%}'>
+               		<p style="font-size: 18px; line-height: 28px; text-align: center; margin: 0;">행복</p>
+				</div>
+				<div style="width: 60px; float: left; margin-left: 3px; margin-right: 3px;">
+                	<img id="neutral" src='{%static "img/emoticon/n4.png"%}'>
+               		<p style="font-size: 18px; line-height: 28px;  text-align: center; margin: 0;">중립</p>
+				</div>
+				<div style="width: 60px; float: left; margin-left: 3px; margin-right: 3px;">
+                	<img id="sadness" src='{%static "img/emoticon/s4.png"%}'>
+               		<p style="font-size: 18px; line-height: 28px; text-align: center; margin: 0;">슬픔</p>
+				</div>
+				<div style="width: 60px; float: left; margin-left: 3px; margin-right: 3px;">
+                	<img id="surprise" src='{%static "img/emoticon/p4.png"%}'>
+               		<p style="font-size: 18px; line-height: 28px; text-align: center; margin: 0;">놀람</p>
+				</div>
+			</div>
+          	
+           	<a style="line-height: 40px; font-size: 18px; font-family: Noto Sans KR; font-weight: bold; color: #2c8ef8;">● 실시간 알림</a>
+           
+            <div id="notification" style="width: 550px; height: 360px; background-color: #dddddd; align-content: center; padding: 20px;">
+            	<div id="noti1" style="width: 100%; height: 52px; background-color: #ffffff; border-radius: 10px; vertical-align: middle;">
+            		<a style="width: 100%; line-height: 50px; margin-left: 20px; font-size: 18px; font-weight: bold;">얼굴 인식에 실패하였습니다.</a>
+            	</div>
+            	<div id="noti2" style="width: 100%; height: 52px; background-color: #ffffff; border-radius: 10px; margin-top: 15px;">
+            		<a style="width: 100%; line-height: 50px; margin-left: 20px; font-size: 18px; font-weight: bold;">얼굴이 기울어진 상태입니다.</a>
+            	</div>
+            	<div id="noti3" style="width: 100%; height: 52px; background-color: #ffffff; border-radius: 10px; margin-top: 15px;">
+            		<a style="width: 100%; line-height: 50px; margin-left: 20px; font-size: 18px; font-weight: bold;">금지 감정이 감지되었습니다!</a>
+            	</div>
+            	<div id="noti4" style="width: 100%; height: 52px; background-color: #ffffff; border-radius: 10px; margin-top: 15px;">
+            		<a style="width: 100%; line-height: 50px; margin-left: 20px; font-size: 18px; font-weight: bold;">금지 단어가 감지되었습니다!</a>
+            	</div>
 
-            <div class="emoticon" id ="emoticon2">
-                <img id="happiness" src='{%static "img/emoticon/h4.png"%}'>
-                <img id="neutral" src='{%static "img/emoticon/n4.png"%}'>
-                <img id="sadness" src='{%static "img/emoticon/s4.png"%}'>
-                <img id="surprise" src='{%static "img/emoticon/p4.png"%}'>
-                <p id="emoticon-name"> &nbsp; &nbsp;행복 &nbsp; &nbsp; 중립 &nbsp; &nbsp; &nbsp;슬픔 &nbsp; &nbsp; 놀람 </p>
             </div>
-        </div>
-    </div>
+		</div>
+	</div>
 
+   
     <!-- Footer -->
-    <div style="text-align: center;">
+	<div style="text-align: center;">
         <div class="footer-section">
             <br>
             <a id="footer-title">Copyright</a>
@@ -445,10 +496,11 @@
             <a id="footer-content">quwieo@ajou.ac.kr</a>
         </div>
     </div>
+
     
     <!-- Emotion checkbox checking -->
     <script>
-		function detectOn(btnOn, btnOff, checkbox){
+		function detectOn(btnOn, btnOff, checkbox){			
 			var btnOn = document.getElementById(btnOn);
 			var btnOff = document.getElementById(btnOff);
 			var checkbox = document.getElementById(checkbox);
