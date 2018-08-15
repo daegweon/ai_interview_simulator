@@ -169,12 +169,18 @@ input:checked + .slider {
 
 .emoticon {
 	width: 550px;
-	height: 100px;
-	margin-bottom: 10px;
+	height: 80px;
+	margin-bottom: 40px;
 	border: 2px solid #dddddd;
+	border-radius: 5px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.emoticon > img {
+	margin-left: 3px;
+	margin-right: 3px;
 }
 
 /*

@@ -369,7 +369,6 @@
 	</div>  
    
 
-   
 <!--
     <div class="left-section mid">
     	<div class="mid clip" id="clip">
@@ -384,7 +383,7 @@
 
     <div class="middle-section">
         <div style="margin-top: 20px; text-align: center;">
-            <video style="border: 1px solid black; align-items: center;" id="webCam" width="720" height="540" autoplay muted></video>
+            <video style="border: 1px solid black;" id="webCam" width="720" height="540" autoplay muted></video>
             <canvas id="snapshot" width="720" height="540" style="display: none;"></canvas>
         </div>
 	</div>
@@ -405,46 +404,24 @@
     <div class="right-section">
         <div id="emotionresult" style="margin-top: 10px;">
 
-            <a style="line-height: 40px; font-size: 18px; font-family: Noto Sans KR; font-weight: bold; color: #2c8ef8;">● 실시간 표정</a>
+            <a style="line-height: 35px; font-size: 18px; font-family: Noto Sans KR; font-weight: bold; color: #2c8ef8;">● 실시간 표정</a>
 
             <div class="emoticon" id="emoticon1">
-            	<div style="width: 60px; float: left; margin-left: 3px; margin-right: 3px;">
-               		<img id="anger" src='{%static "img/emoticon/a4.png"%}' title="Anger">
-               		<p style="font-size: 18px; line-height: 28px; text-align: center; margin: 0;">분노</p>
-				</div>
-				<div style="width: 60px; float: left; margin-left: 3px; margin-right: 3px;">
-               		<img id="contempt" src='{%static "img/emoticon/c4.png"%}'>
-               		<p style="font-size: 18px; line-height: 28px; text-align: center; margin: 0;">경멸</p>
-				</div>
-				<div style="width: 60px; float: left; margin-left: 3px; margin-right: 3px;">
-               		<img id="disgust" src='{%static "img/emoticon/d4.png"%}'>
-               		<p style="font-size: 18px; line-height: 28px; text-align: center; margin: 0;">싫음</p>
-				</div>
-				<div style="width: 60px; float: left; margin-left: 3px; margin-right: 3px;">
-                	<img id="fear" src='{%static "img/emoticon/f4.png"%}'>
-               		<p style="font-size: 18px; line-height: 28px; text-align: center; margin: 0;">공포</p>
-				</div>
-				<div style="width: 60px; float: left; margin-left: 3px; margin-right: 3px;">
-                	<img id="happiness" src='{%static "img/emoticon/h4.png"%}'>
-               		<p style="font-size: 18px; line-height: 28px; text-align: center; margin: 0;">행복</p>
-				</div>
-				<div style="width: 60px; float: left; margin-left: 3px; margin-right: 3px;">
-                	<img id="neutral" src='{%static "img/emoticon/n4.png"%}'>
-               		<p style="font-size: 18px; line-height: 28px;  text-align: center; margin: 0;">중립</p>
-				</div>
-				<div style="width: 60px; float: left; margin-left: 3px; margin-right: 3px;">
-                	<img id="sadness" src='{%static "img/emoticon/s4.png"%}'>
-               		<p style="font-size: 18px; line-height: 28px; text-align: center; margin: 0;">슬픔</p>
-				</div>
-				<div style="width: 60px; float: left; margin-left: 3px; margin-right: 3px;">
-                	<img id="surprise" src='{%static "img/emoticon/p4.png"%}'>
-               		<p style="font-size: 18px; line-height: 28px; text-align: center; margin: 0;">놀람</p>
-				</div>
+	
+             	<img id="anger" src='{%static "img/emoticon/a4.png"%}' data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="분노(Anger)">
+               	<img id="contempt" src='{%static "img/emoticon/c4.png"%}' data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="경멸(Contempt)">
+               	<img id="disgust" src='{%static "img/emoticon/d4.png"%}' data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="싫음(Disgust)">
+                <img id="fear" src='{%static "img/emoticon/f4.png"%}' data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="공포(Fear)">
+                <img id="happiness" src='{%static "img/emoticon/h4.png"%}' data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="행복(Happiness)">
+                <img id="neutral" src='{%static "img/emoticon/n4.png"%}' data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="중립(Neutral)">
+                <img id="sadness" src='{%static "img/emoticon/s4.png"%}' data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="슬픔(Sadness)">
+                <img id="surprise" src='{%static "img/emoticon/p4.png"%}' data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="놀람(Surprise)">
+                	
 			</div>
           	
-           	<a style="line-height: 40px; font-size: 18px; font-family: Noto Sans KR; font-weight: bold; color: #2c8ef8;">● 실시간 알림</a>
+           	<a style="line-height: 36px; font-size: 18px; font-family: Noto Sans KR; font-weight: bold; color: #2c8ef8;">● 실시간 알림</a>
            
-            <div id="notification" style="width: 550px; height: 360px; background-color: #dddddd; align-content: center; padding: 20px;">
+            <div id="notification" style="width: 550px; height: 360px; background-color: #dddddd; padding: 20px; border-radius: 5px;">
             	<div id="noti1" style="width: 100%; height: 52px; background-color: #ffffff; border-radius: 10px; vertical-align: middle;">
             		<a style="width: 100%; line-height: 50px; margin-left: 20px; font-size: 18px; font-weight: bold;">얼굴 인식에 실패하였습니다.</a>
             	</div>
@@ -564,6 +541,8 @@
                     add();  // 실행할 이벤트
                 }
             });
+			
+			$('[data-toggle="popover"]').popover(); // Emoticon Popover
         });
         
         var btnCount = 1;
@@ -588,7 +567,8 @@
             banWordList = [];
             banWordCount = [];
         }
-    </script>
+		
+	</script>
 
     <!-- Bootstrap core JavaScript -->
     <script src='{%static "vendor/jquery/jquery.min.js" %}'></script>
