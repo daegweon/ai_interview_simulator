@@ -113,10 +113,12 @@ input:checked + .slider {
 	/* Black*/
 	overflow-x: hidden;
 	/* Disable horizontal scroll */
-	padding-top: 60px;
+	padding-top: 30px;
 	/* Place content 60px from the top */
 	transition: 0.1s;
 	/* 0.5 second transition effect to slide in the sidenav */
+	
+	/* 보더 색 넣어서 추가하기 */
 }
 
 /* The navigation menu links */
@@ -173,6 +175,7 @@ input:checked + .slider {
 	margin-bottom: 40px;
 	border: 2px solid #dddddd;
 	border-radius: 5px;
+	box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.3), 0 2px 5px 0 rgba(0, 0, 0, 0.3);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -282,3 +285,13 @@ input:checked + .slider {
 	font-size: 24px;
 	font-weight: bold;
 }
+
+.emotionTitle {
+	font-size: 16px;
+	font-weight: bold;
+	width: 36px;
+	line-height: 36px;
+	margin-right: 4px;
+	padding: 0;
+}
+
