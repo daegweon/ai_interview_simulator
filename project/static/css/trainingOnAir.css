@@ -255,8 +255,10 @@ input:checked + .slider {
 }
 
 .banword {
-	width: inherit;
-	height: 500px;
+	width: 420px;
+	height: 300px;
+	padding-top: 10px;
+	border: 1px solid #a9b0b7;
 	text-align: center;
 }
 
