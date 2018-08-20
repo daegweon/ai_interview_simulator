@@ -155,12 +155,14 @@ function processImage(data) {
 
             } catch (exception) {
                 errorToast();   // 얼굴 인식 오류시 에러 알림
+				console.log("456");
             }
 
         })
 
         .fail(function (jqXHR, textStatus, errorThrown) {
             errorToast();   // 기타 연결 오류시 에러 알림
+			console.log("123");
         });
 };
 
