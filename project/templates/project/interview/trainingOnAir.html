@@ -205,8 +205,8 @@
     <style>
 		.btn-toggle{
 			width: 45px;
-			height: 36px;
-			line-height: 36px;
+			height: 32px;
+			line-height: 32px;
 			padding: 0;
 			margin: 0;
 			outline: none;
@@ -271,175 +271,110 @@
         
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <div id="mySidenav" class="sidenav" style="background-color: rgba(255,255,255,1); width: inherit;">
-        <a href="javascript:void(0)" class="closebtn" onclick="nav()">&times;</a>
+	<div id="mySidenav" class="sidenav" style="background-color: rgba(255,255,255,1); width: inherit;">
+        <a href="javascript:void(0)" class="closebtn" onclick="nav()" style="text-decoration: none;">&times;</a>
         
-        <div style="width: 100%; text-align: center; margin-bottom: 10px;">
-        	<img id="explanation" src='{%static "img/explanation.png"%}' width="250" height="220">	
+        <div id="image-section" style="width: 100%; text-align: center; margin-bottom: 30px;">
+        	<img id="explanation" src='{%static "img/explanation.png"%}' width="220" height="160">	
         </div>
         
-		<a style="margin-left: 10px; padding: 0; font-size: 20px;">● 금지 표정 설정</a>
+		<a style="margin-left: 10px; padding: 0; font-family: Noto Sans KR; font-size: 20px; font-weight: bold; color: #2c8ef8;">● 금지 표정 설정</a>
         
         <!-- Emotion Control Section -->
-        <div class="mid" id="emotionControl" style="padding: 5px; margin-bottom: 20px;">
-
-            <div class="container2" style="width: 420px; padding-top: 20px; padding-bottom: 20px; border: 1px solid #a9b0b7; border-radius: 5px; text-align: center;">
-<!--
-                <a style="font-size: 24px; font-weight: bold;"> &nbsp; &nbsp;감정 ON / OFF</a>
-
-                <div id="emotion">
-                    <label class="switch">
-                        <input type="checkbox" id="checkAnger">
-                        <span class="slider"></span>
-                    </label>
-                    <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">분노</a>
-                </div>
-                <div id="emotion">
-                    <label class="switch">
-                        <input type="checkbox" id="checkContempt">
-                        <span class="slider"></span>
-                    </label>
-                    <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">경멸</a>
-                </div>
-                <div id="emotion">
-                    <label class="switch">
-                        <input type="checkbox" id="checkDisgust">
-                        <span class="slider"></span>
-                    </label>
-                    <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">싫음</a>
-                </div>
-                <br>
-                <div id="emotion">
-                    <label class="switch">
-                        <input type="checkbox" id="checkFear">
-                        <span class="slider"></span>
-                    </label>
-                    <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">공포</a>
-                </div>
-                <div id="emotion">
-                    <label class="switch">
-                        <input type="checkbox" id="checkHappiness">
-                        <span class="slider"></span>
-                    </label>
-                    <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">행복</a>
-                </div>
-                <div id="emotion">
-                    <label class="switch">
-                        <input type="checkbox" id="checkNeutral">
-                        <span class="slider"></span>
-                    </label>
-                    <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">중립</a>
-                </div>
-                <div id="emotion">
-                    <label class="switch">
-                        <input type="checkbox" id="checkSadness">
-                        <span class="slider"></span>
-                    </label>
-                    <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">슬픔</a>
-                </div>
-                <div id="emotion">
-                    <label class="switch">
-                        <input type="checkbox" id="checkSurprise">
-                        <span class="slider"></span>
-                    </label>
-                    <a style="font-size: 18px; font-weight: bold; margin-left: -10px; max-width: 80px">놀람</a>
-                </div>
--->
-
-            <div class="btn-group" style="width: 135px;">
-            	<a style="font-size: 16px; font-weight: 800; line-height: 36px; padding: 0; margin-left: 4px; margin-right: 4px; display: inline-block;">분노</a>
-            	<input type="checkbox" id="checkAnger" hidden>
-  				<button id="btnOn1" class="btn-toggle btnOn" onclick="detectOn('btnOn1', 'btnOff', 'checkAnger')">ON</button>
-  				<button id="btnOff1" class="btn-toggle btnOff" onclick="detectOff('btnOn1', 'btnOff', 'checkAnger')">OFF</button>
-			</div>
+		<div class="mid" id="emotionControl" style="padding: 5px; margin-bottom: 30px;">
+            <div class="emotionToggle">
+				<div class="btn-group" style="width: 135px;">
+            		<a style="font-size: 16px; font-weight: 800; line-height: 32px; padding: 0; margin-left: 4px; margin-right: 4px; display: inline-block;">분노</a>
+            		<input type="checkbox" id="checkAnger" hidden>
+  					<button id="btnOn1" class="btn-toggle btnOn" onclick="detectOn('btnOn1', 'btnOff', 'checkAnger')">ON</button>
+  					<button id="btnOff1" class="btn-toggle btnOff" onclick="detectOff('btnOn1', 'btnOff', 'checkAnger')">OFF</button>
+				</div>
           
-            <div class="btn-group" style="width: 135px;">
-            	<a style="font-size: 16px; font-weight: 800; line-height: 36px; padding: 0; margin-left: 4px; margin-right: 4px; display: inline-block;">경멸</a>
-            	<input type="checkbox" id="checkContempt" hidden>
-  				<button id="btnOn2" class="btn-toggle btnOn" onclick="detectOn('btnOn2', 'btnOff2', 'checkContempt')">ON</button>
-  				<button id="btnOff2" class="btn-toggle btnOff" onclick="detectOff('btnOn2', 'btnOff2', 'checkContempt')">OFF</button>
-			</div>
+            	<div class="btn-group" style="width: 135px;">
+            		<a style="font-size: 16px; font-weight: 800; line-height: 32px; padding: 0; margin-left: 4px; margin-right: 4px; display: inline-block;">경멸</a>
+            		<input type="checkbox" id="checkContempt" hidden>
+  					<button id="btnOn2" class="btn-toggle btnOn" onclick="detectOn('btnOn2', 'btnOff2', 'checkContempt')">ON</button>
+  					<button id="btnOff2" class="btn-toggle btnOff" onclick="detectOff('btnOn2', 'btnOff2', 'checkContempt')">OFF</button>
+				</div>
            
-            <div class="btn-group" style="width: 135px;">
-            	<a style="font-size: 16px; font-weight: 800; line-height: 36px; padding: 0; margin-left: 4px; margin-right: 4px; display: inline-block;">싫음</a>
-            	<input type="checkbox" id="checkDisgust" hidden>
-  				<button id="btnOn3" class="btn-toggle btnOn" onclick="detectOn('btnOn3', 'btnOff3', 'checkDisgust')">ON</button>
-  				<button id="btnOff3" class="btn-toggle btnOff" onclick="detectOff('btnOn3', 'btnOff3', 'checkDisgust')">OFF</button>
-			</div>
+            	<div class="btn-group" style="width: 135px;">
+	            	<a style="font-size: 16px; font-weight: 800; line-height: 32px; padding: 0; margin-left: 4px; margin-right: 4px; display: inline-block;">싫음</a>
+    	        	<input type="checkbox" id="checkDisgust" hidden>
+	  				<button id="btnOn3" class="btn-toggle btnOn" onclick="detectOn('btnOn3', 'btnOff3', 'checkDisgust')">ON</button>
+	  				<button id="btnOff3" class="btn-toggle btnOff" onclick="detectOff('btnOn3', 'btnOff3', 'checkDisgust')">OFF</button>
+				</div>
           	
-           	<p style="width: 100%; line-height: 25px; padding: 0; margin: 0;"> 　</p>
+        	   	<p style="width: 100%; line-height: 25px; padding: 0; margin: 0;"> 　</p>
            	
-            <div class="btn-group" style="width: 135px;">
-            	<a style="font-size: 16px; font-weight: 800; line-height: 36px; padding: 0; margin-left: 4px; margin-right: 4px; display: inline-block;">공포</a>
-            	<input type="checkbox" id="checkFear" hidden>
-  				<button id="btnOn4" class="btn-toggle btnOn" onclick="detectOn('btnOn4', 'btnOff4', 'checkFear')">ON</button>
-  				<button id="btnOff4" class="btn-toggle btnOff" onclick="detectOff('btnOn4', 'btnOff4', 'checkFear')">OFF</button>
-			</div>
+	            <div class="btn-group" style="width: 135px;">
+    	        	<a style="font-size: 16px; font-weight: 800; line-height: 32px; padding: 0; margin-left: 4px; margin-right: 4px; display: inline-block;">공포</a>
+        	    	<input type="checkbox" id="checkFear" hidden>
+  					<button id="btnOn4" class="btn-toggle btnOn" onclick="detectOn('btnOn4', 'btnOff4', 'checkFear')">ON</button>
+  					<button id="btnOff4" class="btn-toggle btnOff" onclick="detectOff('btnOn4', 'btnOff4', 'checkFear')">OFF</button>
+				</div>
           
-            <div class="btn-group" style="width: 135px;">
-            	<a style="font-size: 16px; font-weight: 800; line-height: 36px; padding: 0; margin-left: 4px; margin-right: 4px; display: inline-block;">행복</a>
-            	<input type="checkbox" id="checkHappiness" hidden>
-  				<button id="btnOn5" class="btn-toggle btnOn" onclick="detectOn('btnOn5', 'btnOff5', 'checkHappiness')">ON</button>
-  				<button id="btnOff5" class="btn-toggle btnOff" onclick="detectOff('btnOn5', 'btnOff5', 'checkHappiness')">OFF</button>
-			</div>
+            	<div class="btn-group" style="width: 135px;">
+            		<a style="font-size: 16px; font-weight: 800; line-height: 32px; padding: 0; margin-left: 4px; margin-right: 4px; display: inline-block;">행복</a>
+            		<input type="checkbox" id="checkHappiness" hidden>
+  					<button id="btnOn5" class="btn-toggle btnOn" onclick="detectOn('btnOn5', 'btnOff5', 'checkHappiness')">ON</button>
+  					<button id="btnOff5" class="btn-toggle btnOff" onclick="detectOff('btnOn5', 'btnOff5', 'checkHappiness')">OFF</button>
+				</div>
            
-            <div class="btn-group" style="width: 135px;">
-            	<a style="font-size: 16px; font-weight: 800; line-height: 36px; padding: 0; margin-left: 4px; margin-right: 4px; display: inline-block;">중립</a>
-            	<input type="checkbox" id="checkNuetral" hidden>
-  				<button id="btnOn6" class="btn-toggle btnOn" onclick="detectOn('btnOn6', 'btnOff6', 'checkNuetral')">ON</button>
-  				<button id="btnOff6" class="btn-toggle btnOff" onclick="detectOff('btnOn6', 'btnOff6', 'checkNuetral')">OFF</button>
-			</div>
+            	<div class="btn-group" style="width: 135px;">
+            		<a style="font-size: 16px; font-weight: 800; line-height: 32px; padding: 0; margin-left: 4px; margin-right: 4px; display: inline-block;">중립</a>
+            		<input type="checkbox" id="checkNeutral" hidden>
+  					<button id="btnOn6" class="btn-toggle btnOn" onclick="detectOn('btnOn6', 'btnOff6', 'checkNeutral')">ON</button>
+  					<button id="btnOff6" class="btn-toggle btnOff" onclick="detectOff('btnOn6', 'btnOff6', 'checkNeutral')">OFF</button>
+				</div>
           
-          	<p style="width: 100%; line-height: 25px; padding: 0; margin: 0;"> 　</p>
+          		<p style="width: 100%; line-height: 25px; padding: 0; margin: 0;"> 　</p>
           
-            <div class="btn-group" style="width: 135px; float: left;">
-            	<a style="font-size: 16px; font-weight: 800; line-height: 36px; padding: 0; margin-left: 4px; margin-right: 4px; display: inline-block;">슬픔</a>
-            	<input type="checkbox" id="checkSadness" hidden>
-  				<button id="btnOn7" class="btn-toggle btnOn" onclick="detectOn('btnOn7', 'btnOff7', 'checkSadness')">ON</button>
-  				<button id="btnOff7" class="btn-toggle btnOff" onclick="detectOff('btnOn7', 'btnOff7', 'checkSadness')">OFF</button>
-			</div>
+            	<div class="btn-group" style="width: 135px; float: left;">
+            		<a style="font-size: 16px; font-weight: 800; line-height: 32px; padding: 0; margin-left: 4px; margin-right: 4px; display: inline-block;">슬픔</a>
+            		<input type="checkbox" id="checkSadness" hidden>
+  					<button id="btnOn7" class="btn-toggle btnOn" onclick="detectOn('btnOn7', 'btnOff7', 'checkSadness')">ON</button>
+  					<button id="btnOff7" class="btn-toggle btnOff" onclick="detectOff('btnOn7', 'btnOff7', 'checkSadness')">OFF</button>
+				</div>
           
-            <div class="btn-group" style="width: 135px; float: left;">
-            	<a style="font-size: 16px; font-weight: 800; line-height: 36px; padding: 0; margin-left: 4px; margin-right: 4px; display: inline-block;">놀람</a>
-            	<input type="checkbox" id="checkSurprise" hidden>
-  				<button id="btnOn8" class="btn-toggle btnOn" onclick="detectOn('btnOn8', 'btnOff8', 'checkSurprise')">ON</button>
-  				<button id="btnOff8" class="btn-toggle btnOff" onclick="detectOff('btnOn8', 'btnOff8', 'checkSurprise')">OFF</button>
-			</div>
+            	<div class="btn-group" style="width: 135px; float: left;">
+            		<a style="font-size: 16px; font-weight: 800; line-height: 32px; padding: 0; margin-left: 4px; margin-right: 4px; display: inline-block;">놀람</a>
+            		<input type="checkbox" id="checkSurprise" hidden>
+  					<button id="btnOn8" class="btn-toggle btnOn" onclick="detectOn('btnOn8', 'btnOff8', 'checkSurprise')">ON</button>
+  					<button id="btnOff8" class="btn-toggle btnOff" onclick="detectOff('btnOn8', 'btnOff8', 'checkSurprise')">OFF</button>
+				</div>
            
-            </div>
-        </div>
-        
-        <!--<hr style="margin-top: -10px; border: 0.5px solid;">-->
+        	</div>
+		</div>
+
 
         <!-- Ban Wrod Section -->
-        
-        <a style="font-size: 20px; margin-left: 10px; padding: 0;">● 금지 단어 설정</a>
+        <a style="font-family: Noto Sans KR; font-size: 20px; font-weight: bold; margin-left: 10px; padding: 0; color: #2c8ef8;">● 금지 단어 설정</a>
         <div class="mid" style="padding: 5px;">
-            <div class="banword">
+            <div class="banword-section">
 
-               <div style="width: 100%; height: 36px; margin-top: 10px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center;">
-					<input id="word" style="width: 200px; line-height: 32px; margin-right: -6px; border: 1px solid #a9b0b7; border-top-left-radius: 5px;border-bottom-left-radius: 5px; float: left;"/>
-                	<button class="btn btn-primary" style="width: 60px; height: 36px; border: 0; border-bottom-right-radius: 5px; border-top-right-radius: 5px; background-color: #007bff; color: #ffffff; float: left;" onclick="add();"> 추가 </button>
-					<button class="btn btn-primary" style="height: 36px; margin-left: 20px; float: left;" onclick="reset()">초기화</button>               	
+               <div class="banword">
+					<input id="word" style="width: 200px; line-height: 36px; margin-right: -6px; border: 1px solid #a9b0b7; border-top-left-radius: 5px; border-bottom-left-radius: 5px; float: left; padding-left: 10px;"/>
+                	<button class="btn btn-primary" style="width: 60px; height: 40px; border: 0; border-bottom-right-radius: 5px; border-top-right-radius: 5px; background-color: #007bff; color: #ffffff; float: left;" onclick="add();"> 추가 </button>
+					<button class="btn btn-primary" style="height: 40px; margin-left: 20px; float: left;" onclick="reset()">초기화</button>
                </div>
 
                 <ul class="list-group mid" id="ban-word" style="width: 280px; padding: 0;">
                 </ul>
 
- 
+           		<a style="border: 1px solid #2c8ef8; border-radius: 10%; display: inline-block; padding: 4px 5px 4px 5px; font-size: 20px;">사실 <span class="badge badge-dark">&times;</span></a>
             </div>
         </div>
         
     </div>
 
-	<div style="width: 100%; padding-top: 20px; padding-left: 30px;">
+	<div style="width: 95%; padding-top: 20px; padding-left: 30px;">
 		<a id="timer" style="margin-right: 10px; border-radius: 5px; padding: 3px; color: #2c8ef8;">&nbsp;00:00&nbsp;</a>
-        <button type="button" id="record" class="btn btn-primary" style="margin-right: 10px; box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.3), 0 2px 3px 0 rgba(0, 0, 0, 0.3);" disabled>면접 시작</button>
-        <button type="button" id="setting" class="btn btn-danger" style="box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.3), 0 2px 3px 0 rgba(0, 0, 0, 0.3);" onclick="nav();">환경 설정 <i class="fa fa-gear"></i></button>
-        <button type="button" id="finInterview" class="btn btn-success" style="display: none;" onclick="getTrainingResult(banWordList,banWordCount,banEmotionList,banEmotionCount)" disabled>연습 종료</button>
+        <button id="record" class="btn btn-primary shadows" style="margin-right: 10px;" disabled>면접 시작</button>
+        <button id="setting" class="btn btn-danger shadows" onclick="nav();">환경 설정 <i class="fa fa-gear"></i></button>
+        <button id="finInterview" class="btn btn-success" style="display: none;" onclick="getTrainingResult(banWordList,banWordCount,banEmotionList,banEmotionCount)" disabled>연습 종료</button>
         <br><br>
         
-        <div style="width: 54%; background-color: #eff1f3; line-height: 50px; border-radius: 10px; padding-left: 20px; box-shadow: 0 4px 2px -5px rgba(0, 0, 0, 0.3), 0 2px 5px 0 rgba(0, 0, 0, 0.3);">
+        <div class="shadows" style="width: 54%; background-color: #eff1f3; line-height: 50px; border-radius: 10px; padding-left: 20px; margin-left: 20px;">
     		<a id="textTitle" style="font-size: 22px; font-weight: bold; color: #2c8ef8;">Q. </a>
         	<a id="question" style="font-size: 22px; font-weight: bold; color: #2c8ef8;">면접이 시작되면 질문이 표시됩니다.</a>
     	</div>
@@ -473,7 +408,6 @@
             <a style="line-height: 35px; font-size: 18px; font-family: Noto Sans KR; font-weight: bold; color: #2c8ef8;">● 실시간 표정</a>
 
             <div class="emoticon" id="emoticon1">
-	
              	<img id="anger" src='{%static "img/emoticon/a4.png"%}' data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="분노(Anger)">
                	<img id="contempt" src='{%static "img/emoticon/c4.png"%}' data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="경멸(Contempt)">
                	<img id="disgust" src='{%static "img/emoticon/d4.png"%}' data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="싫음(Disgust)">
@@ -481,13 +415,12 @@
                 <img id="happiness" src='{%static "img/emoticon/h4.png"%}' data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="행복(Happiness)">
                 <img id="neutral" src='{%static "img/emoticon/n4.png"%}' data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="중립(Neutral)">
                 <img id="sadness" src='{%static "img/emoticon/s4.png"%}' data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="슬픔(Sadness)">
-                <img id="surprise" src='{%static "img/emoticon/p4.png"%}' data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="놀람(Surprise)">
-                	
+                <img id="surprise" src='{%static "img/emoticon/p4.png"%}' data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="놀람(Surprise)">    	
 			</div>
           	
            	<a style="line-height: 36px; font-size: 18px; font-family: Noto Sans KR; font-weight: bold; color: #2c8ef8;">● 실시간 알림</a>
            
-            <div id="notification" style="width: 550px; height: 360px; background-color: #dddddd; padding: 20px; border-radius: 5px; box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.5), 0 2px 5px 0 rgba(0, 0, 0, 0.5);">
+            <div id="notification" class="noti-section shadows">
             	<div id="noti1" style="width: 100%; height: 52px; background-color: #ffffff; border-radius: 10px; vertical-align: middle;">
             		<a style="width: 100%; line-height: 50px; margin-left: 20px; font-size: 18px; font-weight: bold;">얼굴 인식에 실패하였습니다.</a>
             	</div>
@@ -506,7 +439,6 @@
 	</div>
 
   
-   
     <!-- Footer -->
 	<div style="text-align: center;">
         <div class="footer-section">
@@ -569,9 +501,7 @@
 			btnOn.style.color="#9c9b9b";
 			checkbox.checked = false;
 		}
-	</script>
 
-    <script>
 		var count = 0;
 		
         function nav() {
@@ -581,24 +511,13 @@
             if (count == 0) {
                 document.getElementById("mySidenav").style.width = "450px";
 				count = 1;
-                //navBtn.textContent = '환경 설정 OFF';
             }
             else {
-                 document.getElementById("mySidenav").style.width = "0px";
+                document.getElementById("mySidenav").style.width = "0px";
 				count = 0;
-                //navBtn.textContent = '환경 설정 ON';
             }
         }
 
-//        /* Set the width of the side navigation to ???px */
-//        function openNav() {
-//            document.getElementById("mySidenav").style.width = "310px";
-//        }
-//
-//        /* Set the width of the side navigation to 0 */
-//        function closeNav() {
-//            document.getElementById("mySidenav").style.width = "0";
-//        }
     </script>
    
     <script>
