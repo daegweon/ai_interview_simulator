@@ -24,18 +24,18 @@
 
     <!-- Custom styles for this template -->
     <link href='{%static "css/trainingOnAir.css" %}' rel="stylesheet">
-    
-    <script>
-        var ques_id = {{ ques_id | safe }};
-        var ques_text = {{ ques_text | safe}};
-    </script>
-    
+       
     <link href='{%static "css/agency.min.css" %}' rel="stylesheet">
     <script src='{%static "js/realtimeface.js"%}'></script>
     <script src='{%static "js/stt.js" %}'></script>
 
 	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+   
+    <script>
+        var ques_id = {{ ques_id | safe }};
+        var ques_text = {{ ques_text | safe}};
+    </script>
    
     <script>
         getKey();
@@ -232,6 +232,29 @@
 			background-color: #2c8ef8;
 			color: #ffffff;
 		}
+		
+		.words {
+			border: 1px solid #2c8ef8 !important;
+			border-radius: 10% !important;
+			margin-right: 10px !important;
+			margin-bottom: 5px !important;
+			display: inline-block !important;
+			padding: 0px 5px 0px 5px !important;
+			font-size: 20px !important;
+			line-height: 30px !important;
+		}
+		
+		.words > button{
+			border: 0;
+			margin: 0;
+			outline: 0;
+			border-radius: 5px;
+			width: 18px;
+			width: 18px;
+			padding: 0;
+			line-height: 18px;
+			cursor: pointer;
+		}
 	</style>
 </head>
 
@@ -274,14 +297,14 @@
 	<div id="mySidenav" class="sidenav" style="background-color: rgba(255,255,255,1); width: inherit;">
         <a href="javascript:void(0)" class="closebtn" onclick="nav()" style="text-decoration: none;">&times;</a>
         
-        <div id="image-section" style="width: 100%; text-align: center; margin-bottom: 30px;">
+        <div id="image-section" style="width: 100%; text-align: center; margin-bottom: 50px;">
         	<img id="explanation" src='{%static "img/explanation.png"%}' width="220" height="160">	
         </div>
         
 		<a style="margin-left: 10px; padding: 0; font-family: Noto Sans KR; font-size: 20px; font-weight: bold; color: #2c8ef8;">● 금지 표정 설정</a>
         
         <!-- Emotion Control Section -->
-		<div class="mid" id="emotionControl" style="padding: 5px; margin-bottom: 30px;">
+		<div class="mid" id="emotionControl" style="padding: 5px; margin-bottom: 50px;">
             <div class="emotionToggle">
 				<div class="btn-group" style="width: 135px;">
             		<a style="font-size: 16px; font-weight: 800; line-height: 32px; padding: 0; margin-left: 4px; margin-right: 4px; display: inline-block;">분노</a>
@@ -350,7 +373,7 @@
         <!-- Ban Wrod Section -->
         <a style="font-family: Noto Sans KR; font-size: 20px; font-weight: bold; margin-left: 10px; padding: 0; color: #2c8ef8;">● 금지 단어 설정</a>
         <div class="mid" style="padding: 5px;">
-            <div class="banword-section">
+            <div class="banword-section" id="banword-section">
 
                <div class="banword">
 					<input id="word" style="width: 200px; line-height: 36px; margin-right: -6px; border: 1px solid #a9b0b7; border-top-left-radius: 5px; border-bottom-left-radius: 5px; float: left; padding-left: 10px;"/>
@@ -360,8 +383,8 @@
 
                 <ul class="list-group mid" id="ban-word" style="width: 280px; padding: 0;">
                 </ul>
-
-           		<a style="border: 1px solid #2c8ef8; border-radius: 10%; display: inline-block; padding: 4px 5px 4px 5px; font-size: 20px;">사실 <span class="badge badge-dark">&times;</span></a>
+                
+           		<p id="fake" style="visibility: hidden;"></p>
             </div>
         </div>
         
@@ -507,7 +530,6 @@
         function nav() {
             var navBtn = document.querySelector('button#setting');
 			
-
             if (count == 0) {
                 document.getElementById("mySidenav").style.width = "450px";
 				count = 1;
@@ -532,26 +554,47 @@
         });
         
         var btnCount = 1;
+		var wordCount = 1;
+		var words = new Array();
 
         function add() {
             var word = $("#word").val();
-            var li = document.createElement("li");
-            li.className = "list-group-item";
-            li.style = "width: 80%, height: 40px";
-            li.id = "word" + btnCount;
-            li.innerHTML = word;
-            banWordList.push(word);
-            $("#ban-word").append(li)
-            $("#word").val("");
-            var len = banWordList.length;
-            banWordCount[len-1]=0;
+//            var li = document.createElement("li");
+//            li.className = "list-group-item";
+//            li.style = "width: 80%, height: 40px";
+//            li.id = "word" + btnCount;
+//            li.innerHTML = word;
+//            banWordList.push(word);
+//            $("#ban-word").append(li)
+//            $("#word").val("");
+//            var len = banWordList.length;
+//            banWordCount[len-1]=0;
+			
+			$("#fake").before("<a class='words' id='word"+wordCount+"'>"+word+" <button onclick='del("+wordCount+")'>&times;</button></a>");
+			wordCount++;
+			words.push(word);
+			$("#word").val("");
         }
 
+		function del(number){
+			var del = document.getElementById("word"+number);
+			del.parentNode.removeChild(del);
+			var index = words.splice(number, 1);
+		}
+		
         function reset() {
-            $("#ban-word").empty();
-            btnCount = 1;
-            banWordList = [];
-            banWordCount = [];
+//            $("#ban-word").empty();
+//            btnCount = 1;
+//            banWordList = [];
+//            banWordCount = [];
+			
+			for(var i=1; i<wordCount; i++){
+				var del = document.getElementById("word"+i);
+				del.parentNode.removeChild(del);
+				console.log(words[i-1]);
+			}
+			words = new Array();
+			wordCount = 0;
         }
 		
 	</script>

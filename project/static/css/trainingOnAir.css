@@ -117,7 +117,8 @@ input:checked + .slider {
 	/* Place content 60px from the top */
 	transition: 0.1s;
 	/* 0.5 second transition effect to slide in the sidenav */
-	/* 보더 색 넣어서 추가하기 */
+		
+	border-right: 1px solid #2c8ef8;
 }
 
 /* The navigation menu links */
@@ -154,13 +155,14 @@ input:checked + .slider {
 	.sidenav {
 		padding-top: 15px;
 	}
+
 	.sidenav a {
 		font-size: 18px;
 	}
 }
 
-@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
-@import url(http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
+@import url(http: //fonts.googleapis.com/earlyaccess/notosanskr.css);
+@import url(http: //fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
 
 .emoticon {
 	width: 550px;
@@ -223,7 +225,7 @@ input:checked + .slider {
 
 .banword-section {
 	width: 420px;
-	height: 300px;
+	height: 200px;
 	padding-top: 10px;
 	border: 1px solid #a9b0b7;
 	text-align: center;
@@ -293,4 +295,16 @@ input:checked + .slider {
 	background-color: #dddddd;
 	padding: 20px;
 	border-radius: 5px;
+}
+
+#word1 > button, #word2 > button, #word3 > button, #word4 > button, #word5 > button {
+	border: 0;
+	margin: 0;
+	outline: 0;
+	border-radius: 5px;
+	width: 18px;
+	width: 18px;
+	padding: 0;
+	line-height: 18px;
+	cursor: pointer;
 }
