@@ -110,59 +110,72 @@ function processImage(data) {
 
                 //금지 감정 선택시, 해당 감정이 감지되었을 때 알림 및 결과 누적
                 if (document.getElementById('checkAnger').checked && anger > emotionThreshold) {
-                    banEmotionToast("화남");
+                    //banEmotionToast("화남");
+					notification(3, "화남");
                     banEmotionCount[0] += 1;
                     if (banEmotionCount[0] == 1) banEmotionList.push('화남');
                 }
                 if (document.getElementById('checkContempt').checked && contempt > emotionThreshold) {
-                    banEmotionToast("경멸");
+                    //banEmotionToast("경멸");
+					notification(3, "경멸");
                     banEmotionCount[1] += 1;
                     if (banEmotionCount[1] == 1) banEmotionList.push('경멸');
                 }
                 if (document.getElementById('checkDisgust').checked && disgust > emotionThreshold) {
-                    banEmotionToast("싫음");
+                    //banEmotionToast("싫음");
+					notification(3, "싫음");
                     banEmotionCount[2] += 1;
                     if (banEmotionCount[2] == 1) banEmotionList.push('싫음');
                 }
                 if (document.getElementById('checkFear').checked && fear > emotionThreshold) {
-                    banEmotionToast("공포");
+                    //banEmotionToast("공포");
+					notification(3, "공포");
                     banEmotionCount[3] += 1;
                     if (banEmotionCount[3] == 1) banEmotionList.push('공포');
                 }
                 if (document.getElementById('checkHappiness').checked && happiness > emotionThreshold) {
-                    banEmotionToast("행복");
+                    //banEmotionToast("행복");
+					notification(3, "행복");
                     banEmotionCount[4] += 1;
                     if (banEmotionCount[4] == 1) banEmotionList.push('행복');
                 }
                 if (document.getElementById('checkNeutral').checked && neutral > emotionThreshold) {
-                    banEmotionToast("중립");
+                    //banEmotionToast("중립");
+					notification(3, "중립");
                     banEmotionCount[5] += 1;
                     if (banEmotionCount[5] == 1) banEmotionList.push('중립');
                 }
                 if (document.getElementById('checkSadness').checked && sadness > emotionThreshold) {
-                    banEmotionToast("슬픔");
+                    //banEmotionToast("슬픔");
+					notification(3, "슬픔");
                     banEmotionCount[6] += 1;
                     if (banEmotionCount[6] == 1) banEmotionList.push('슬픔');
                 }
                 if (document.getElementById('checkSurprise').checked && surprise > emotionThreshold) {
-                    banEmotionToast("놀람");
+                    //banEmotionToast("놀람");
+					notification(3, "놀람");
                     banEmotionCount[7] += 1;
                     if (banEmotionCount[7] == 1) banEmotionList.push('놀람');
                 }
 
                 //고개가 일정 기준 이상 기울어져 있을 때 알림
-                if (yaw > Math.abs(headposeThreshold) || roll > Math.abs(headposeThreshold)) banPoseToast();
+                if (yaw > Math.abs(headposeThreshold) || roll > Math.abs(headposeThreshold)){
+					//banPoseToast();
+					notification(2);
+				} 
 
             } catch (exception) {
-                errorToast();   // 얼굴 인식 오류시 에러 알림
-				console.log("456");
+                // 얼굴 인식 오류시 에러 알림
+				// errorToast();
+				notification(1);
             }
 
         })
 
         .fail(function (jqXHR, textStatus, errorThrown) {
-            errorToast();   // 기타 연결 오류시 에러 알림
-			console.log("123");
+        	// 기타 연결 오류시 에러 알림    
+			//errorToast();
+			notification(1);
         });
 };
 

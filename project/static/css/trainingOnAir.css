@@ -117,7 +117,7 @@ input:checked + .slider {
 	/* Place content 60px from the top */
 	transition: 0.1s;
 	/* 0.5 second transition effect to slide in the sidenav */
-		
+
 	border-right: 1px solid #2c8ef8;
 }
 
@@ -297,14 +297,49 @@ input:checked + .slider {
 	border-radius: 5px;
 }
 
-#word1 > button, #word2 > button, #word3 > button, #word4 > button, #word5 > button {
-	border: 0;
-	margin: 0;
-	outline: 0;
-	border-radius: 5px;
-	width: 18px;
-	width: 18px;
-	padding: 0;
-	line-height: 18px;
-	cursor: pointer;
+.notification {
+	width: 100%;
+	height: 52px;
+	background-color: #ffffff;
+	border: 1px solid #2c8ef8;
+	border-radius: 10px;
+	margin-top: 15px;
+}
+
+.notification > a {
+	width: 100%;
+	line-height: 50px;
+	margin-left: 30px;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.notification > a > span {
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	display: inline-block;
+}
+
+.circles{
+	width: 500px;
+	height: 30px;
+	margin-top: 20px;
+	margin-right: 10px;
+	text-align: right;
+}
+
+.circles > a {
+	width: 100%;
+	line-height: 30px;
+	margin-left: 20px;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.circles > a > span {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	display: inline-block;
 }
