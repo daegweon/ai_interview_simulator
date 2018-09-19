@@ -185,11 +185,12 @@
                 for (var i = event.resultIndex; i < event.results.length; ++i) {
                     if (event.results[i].isFinal) {
                         final_transcript += event.results[i][0].transcript;
-                        var banLength = banWordList.length;
+                        var banLength = words.length;
                         for (var j = 0; j < banLength; j++) {
-                            if (event.results[i][0].transcript.indexOf(banWordList[j]) != -1) {
-                                banWordToast(banWordList[j]);
-                                var final_transcript_words = final_transcript.split(banWordList[j]);
+                            if (event.results[i][0].transcript.indexOf(words[j]) != -1) {
+                                //banWordToast(banWordList[j]);
+								notification(4, ""+words[j]);
+                                var final_transcript_words = final_transcript.split(words[j]);
                                 banWordCount[j]+=final_transcript_words.length-1;
                             }
                         }
@@ -396,7 +397,7 @@
 		<a id="timer" style="margin-right: 10px; border-radius: 5px; padding: 3px; color: #2c8ef8;">&nbsp;00:00&nbsp;</a>
         <button id="record" class="btn btn-primary shadows" style="margin-right: 10px;" disabled>면접 시작</button>
         <button id="setting" class="btn btn-danger shadows" onclick="nav();">환경 설정 <i class="fa fa-gear"></i></button>
-        <button id="finInterview" class="btn btn-success" style="display: none;" onclick="getTrainingResult(banWordList,banWordCount,banEmotionList,banEmotionCount)" disabled>연습 종료</button>
+        <button id="finInterview" class="btn btn-success" style="display: none;" onclick="getTrainingResult(words,banWordCount,banEmotionList,banEmotionCount)" disabled>연습 종료</button>
         <br><br>
         
         <div class="shadows" style="width: 54%; background-color: #eff1f3; line-height: 50px; border-radius: 10px; padding-left: 20px; margin-left: 20px;">
@@ -579,6 +580,8 @@
 			$("#fake").before("<a class='words' id='word"+wordCount+"'>"+word+" <button onclick='del("+wordCount+")'>&times;</button></a>");
 			wordCount++;
 			words.push(word);
+			var len = words.length;
+			banWordCount[len-1]=0;
 			$("#word").val("");
         }
 
@@ -608,7 +611,8 @@
 			$("#noti"+type).css('background-color', '#2c8ef8');
 			
 			if(type > 2){
-				$("#hidden"+type).text(ban);	
+				$("#hidden"+type).text(ban);
+				console.log(ban);
 			}
 			
 			setTimeout(function(){
