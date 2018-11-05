@@ -186,14 +186,6 @@ input:checked + .slider {
 	float: left;
 }
 
-/*
-.left-section {
-	width: 28%;
-	height: 650px;
-	float: left;
-}
-*/
-
 .middle-section {
 	width: 815px;
 	height: 600px;
@@ -239,13 +231,6 @@ input:checked + .slider {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-}
-
-.clip {
-	background-image: url('/static/img/clipboard.png');
-	width: 420px;
-	height: 500px;
-	margin-bottom: 50px;
 }
 
 #footer-title {
