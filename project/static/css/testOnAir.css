@@ -12,19 +12,6 @@ body {
 	content: "\e101"
 }
 
-.switch input {
-	display: none;
-}
-
-.switch {
-	display: inline-block;
-	width: 60px;
-	height: 30px;
-	margin: 8px;
-	transform: translateY(50%);
-	position: relative;
-}
-
 .slider {
 	position: absolute;
 	top: 0;
@@ -159,23 +146,16 @@ input:checked + .slider {
 	}
 }
 
-.left-section {
-	width: 28%;
-	height: 650px;
-	float: left;
-}
-
 .middle-section {
-	width: 42%;
-	height: 650px;
+	width: 44%;
+	height: 560px;
 	float: left;
-	margin-left: 20px;
-	margin-right: 20px;
+	margin-left: 23%;
 }
 
 .right-section {
-	width: 21%;
-	height: 650px;
+	width: 7%;
+	height: 560px;
 	float: left;
 }
 
@@ -192,11 +172,8 @@ input:checked + .slider {
 	display: -webkit-box;
 }
 
-.clip{
-	background-image: url('/static/img/clipboard.png');
-	width: 420px;
-	height: 500px;
-	margin-bottom: 50px;
+.shadows {
+	box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.3), 0 2px 3px 0 rgba(0, 0, 0, 0.3);
 }
 
 #footer-title{

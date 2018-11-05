@@ -109,7 +109,7 @@ function toggleRecording() {
   if (recordButton.textContent === '면접 시작' || recordButton.textContent === '다음 문제') {
     startSpeechToText();
     
-    document.getElementById("textTitle").textContent = "질문" + (questionCount + 1);
+    document.getElementById("textTitle").textContent = "Q" + (questionCount + 1) + ". ";
     document.getElementById("question").textContent = ques_text[questionCount];
 
     btnShow();
@@ -225,14 +225,14 @@ function uploadToServer(formData) {
   return false;
 }
 
-//카메라 On/Off 기능
+//화면 On/Off 기능
 function ToggleWebCam() {
-  if (camOnOffButton.textContent === '카메라 OFF') {
-    camOnOffButton.textContent = '카메라 ON';
+  if (camOnOffButton.textContent === '화면 OFF') {
+    camOnOffButton.textContent = '화면 ON';
     document.getElementById("webCam").style.visibility = "hidden";
   } else {
     document.getElementById("webCam").style.visibility = "";
-    camOnOffButton.textContent = '카메라 OFF';
+    camOnOffButton.textContent = '화면 OFF';
   }
 }
 
@@ -337,15 +337,15 @@ function processImage(data) {
 function btnShow(){
 		recordButton.disabled = true;
 		document.getElementById('again').disabled = false;
-		document.getElementById("textTitle").style.display = "block";
-        document.getElementById("question").style.display = "block";
+		document.getElementById("textTitle").style.visibility = "visible";
+        document.getElementById("question").style.visibility = "visible";
         setTimeout(btnHide, 5000);
 }
 
 //문제 숨김
 function btnHide(){
-	document.getElementById("textTitle").style.display = "none";
-    document.getElementById("question").style.display = "none";
+	document.getElementById("textTitle").style.visibility = "hidden";
+    document.getElementById("question").style.visibility = "hidden";
 	recordButton.disabled = false;
 }
 
@@ -358,10 +358,10 @@ function btnAgain(){
 //면접 중단
 function cancelInterview(ic) {
   var csrftoken = getCookie('csrftoken');
-
   var formData = new FormData();
+
   formData.append('csrfmiddlewaretoken', csrftoken);
-  formData.append('interview_count', ic)
+  formData.append('interview_count', ic);
   $.ajax({
     url: '/interviews/cancel/',
     type: 'POST',
