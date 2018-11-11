@@ -25,7 +25,7 @@ SECRET_KEY = '!cp9%v6hbqwg4es4d(oal^$=@5s(4k*pr@r4xql09=ctu3+d&y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'ec2-13-125-217-227.ap-northeast-2.compute.amazonaws.com', '.pythonanywhere.com', '13.125.217.227','humanlearning.tk', 'www.humanlearning.tk']
+ALLOWED_HOSTS = ['127.0.0.1', 'ec2-13-125-217-33.ap-northeast-2.compute.amazonaws.com', '.pythonanywhere.com', '13.125.217.33','humanlearning.tk', 'www.humanlearning.tk']
 #CSRF_COOKIE_SECURE = True
 #SESSION_COOKIE_SECURE = True
 
